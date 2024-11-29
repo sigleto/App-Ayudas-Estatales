@@ -34,7 +34,7 @@ const App = () => {
           }}
         >
           <Drawer.Screen
-            name="Inicio"
+            name="Principal"
             component={PrincipalStack}
             options={{
               drawerIcon: ({ color, size }) => (
@@ -46,7 +46,7 @@ const App = () => {
                           
 
           <Drawer.Screen
-            name="Responsabilidad"
+            name="DescargoResponsabilidad"
             component={DescargoResponsabilidad}
             options={{
               drawerIcon: ({ color, size }) => (
@@ -57,7 +57,7 @@ const App = () => {
           />
           
           <Drawer.Screen
-            name="Política de Privacidad"
+            name="PoliticaPrivacidad"
             component={PoliticaPrivacidad}
             options={{
               drawerIcon: ({ color, size }) => (

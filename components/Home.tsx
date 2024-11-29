@@ -31,7 +31,7 @@ const Home: React.FC = () => {
       />
       <Image source={require('../assets/images/LogoJuan.png')} style={styles.logo} />
       <Image source={require('../assets/images/icon.png')} style={styles.burocraciaImage} />
-      <Text style={styles.titulo}>Bienvenido a Cita Previa</Text>
+      <Text style={styles.titulo}>Bienvenido a Ayudas Públicas</Text>
       <Text style={styles.descripcion}>
         Coordina citas con diferentes organismos de forma eficiente 
         y gestiona tus eventos y notas en una agenda personalizada
@@ -42,7 +42,7 @@ const Home: React.FC = () => {
       </Text>
 
       <TouchableOpacity onPress={() => navigation.navigate('ListadoAyudas')}>
-        <Text style={styles.organismos}>ACCEDE A LOS DISTINTOS ORGANISMOS</Text>
+        <Text style={styles.organismos}>ACCEDE A LAS DISTINTAS AYUDAS</Text>
       </TouchableOpacity>
       
    

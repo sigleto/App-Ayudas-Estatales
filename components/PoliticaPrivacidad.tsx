@@ -6,7 +6,7 @@ import { SharedElement } from "react-navigation-shared-element";
 const PoliticaPrivacidad: React.FC = () => {
   const navegacion = useNavigation();
 
-  const salto = () => { navegacion.navigate("Home" as never) }
+  const salto = () => { navegacion.navigate("Principal" as never) }
 
   return (
     <ScrollView style={styles.container}>

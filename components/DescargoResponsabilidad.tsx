@@ -1,12 +1,22 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { SharedElement } from "react-navigation-shared-element";
 
-const DescargoResponsabilidad: React.FC = () => {
-  const navegacion = useNavigation();
+// Definir el tipo para las rutas de navegación
+type RootDrawerParamList = {
+  Home: undefined;
+  ListadoAyudas: undefined;
+  Principal: undefined
+};
 
-  const salto = () => { navegacion.navigate("Home" as never) }
+type DescargoScreenNavigationProp = DrawerNavigationProp<RootDrawerParamList, 'Principal'>;
+
+const DescargoResponsabilidad: React.FC = () => {
+  const navigation = useNavigation<DescargoScreenNavigationProp>();
+
+
 
   return (
     <ScrollView style={styles.container}>
@@ -20,7 +30,7 @@ const DescargoResponsabilidad: React.FC = () => {
         </Text>
       </SharedElement>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.skipButton} onPress={salto}>
+        <TouchableOpacity style={styles.skipButton} onPress={() => navigation.navigate('Principal' as never)}>
           <Text style={styles.buttonText}>SALTAR</Text>
         </TouchableOpacity>
       </View>

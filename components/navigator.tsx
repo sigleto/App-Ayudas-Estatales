@@ -102,18 +102,18 @@ export function PrincipalStack(){
           options={{  headerShown: false}}
         />
         <Stack.Screen
-          name="Organismos"
+          name="ListadoAyudas"
           component={AyudasStack}
           options={{  headerShown: false }}
         />
       
         <Stack.Screen
-          name="Descargo"
+          name="DescargoResponsabilidad"
           component={DescargoResponsabilidad}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Politica"
+          name="PoliticaPrivacidad"
           component={PoliticaPrivacidad}
           options={{ headerShown: false }}
         />
