@@ -4,6 +4,7 @@ import { ScrollView, View, Text, StyleSheet } from 'react-native';
 const SubsidiosPorDesempleo = () => {
   return (
     <ScrollView style={styles.container}>
+         <View style={styles.card}>
       <Text style={styles.title}>Subsidios por Desempleo</Text>
       
       <View style={styles.section}>
@@ -39,6 +40,7 @@ const SubsidiosPorDesempleo = () => {
           - Orden ESS/393/2018 que regula los procedimientos de solicitud y concesión.
         </Text>
       </View>
+      </View>
     </ScrollView>
   );
 };
@@ -46,28 +48,40 @@ const SubsidiosPorDesempleo = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
-    padding: 16,
+    backgroundColor: '#e8f4f8', // Fondo suave
+  },
+  card: {
+    backgroundColor: '#ffffff',
+    margin: 20,
+    padding: 20,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#2a9d8f',
     marginBottom: 16,
-    color: '#333',
   },
   section: {
-    marginBottom: 16,
+    marginBottom: 20,
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: '600',
+    color: '#264653',
     marginBottom: 8,
-    color: '#444',
   },
   text: {
     fontSize: 16,
-    color: '#555',
-    lineHeight: 22,
+    lineHeight: 26,
+    color: '#6c757d',
+    textAlign: 'justify',
   },
 });
 

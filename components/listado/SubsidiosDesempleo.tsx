@@ -1,23 +1,18 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-// Definir los tipos para las rutas de navegación
-type RutasNavegacion = 'PrestacionContributiva' | 'SubsidiosPorDesempleo' | 'AyudasExtraordinarias'; // Añade aquí otras rutas si las hay
+type RutasNavegacion = 'PrestacionContributiva' | 'SubsidiosPorDesempleo' | 'AyudasExtraordinarias';
 
-// Definir el tipo para los parámetros de la pila de navegación
 type RootStackParamList = {
   PrestacionContributiva: undefined;
   SubsidiosPorDesempleo: undefined;
   AyudasExtraordinarias: undefined;
-  // Añade aquí otros apartados si los hay
 };
 
-// Tipo para la propiedad de navegación
 type NavigationProp = StackNavigationProp<RootStackParamList>;
 
-// Definir el tipo para los apartados
 type Apartado = {
   nombre: string;
   ruta: RutasNavegacion;
@@ -29,22 +24,44 @@ const SubsidiosDesempleo = () => {
   const apartados: Apartado[] = [
     { nombre: 'Prestación Contributiva', ruta: 'PrestacionContributiva' },
     { nombre: 'Subsidios por desempleo', ruta: 'SubsidiosPorDesempleo' },
-    { nombre: 'AyudasExtraordinarias', ruta: 'AyudasExtraordinarias' },
-    // Añade otros apartados si los hay
+    { nombre: 'Ayudas Extraordinarias', ruta: 'AyudasExtraordinarias' },
   ];
+
+  // Estado para controlar el efecto de animación
+  const [scale] = useState(new Animated.Value(1));
+
+  // Función para aplicar la animación
+  const handlePressIn = () => {
+    Animated.spring(scale, {
+      toValue: 1.05,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const handlePressOut = () => {
+    Animated.spring(scale, {
+      toValue: 1,
+      useNativeDriver: true,
+    }).start();
+  };
 
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Subsidios por Desempleo</Text>
       <View style={styles.list}>
         {apartados.map((apartado) => (
-          <TouchableOpacity
+          <Animated.View
             key={apartado.ruta}
-            style={styles.item}
-            onPress={() => navigation.navigate(apartado.ruta)}
+            style={[styles.item, { transform: [{ scale }] }]} // Aplicar la animación de escala
           >
-            <Text style={styles.itemText}>{apartado.nombre}</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPressIn={handlePressIn}
+              onPressOut={handlePressOut}
+              onPress={() => navigation.navigate(apartado.ruta)}
+            >
+              <Text style={styles.itemText}>{apartado.nombre}</Text>
+            </TouchableOpacity>
+          </Animated.View>
         ))}
       </View>
     </ScrollView>
@@ -54,31 +71,39 @@ const SubsidiosDesempleo = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#F0F8FF', // Color de fondo suave
     padding: 16,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 16,
-    color: '#333',
+    color: '#1E3A8A', // Color más fuerte para el título
+    textAlign: 'center',
+    marginBottom: 24,
+    textTransform: 'uppercase',
+    letterSpacing: 1.5,
   },
   list: {
     marginTop: 16,
   },
   item: {
-    padding: 16,
-    marginVertical: 8,
-    backgroundColor: '#fff',
-    borderRadius: 8,
+    padding: 18,
+    marginVertical: 10,
+    backgroundColor: '#4CAF50', // Color verde vibrante
+    borderRadius: 12,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 5,
+    elevation: 8,
+    alignItems: 'center',
   },
   itemText: {
-    fontSize: 18,
-    color: '#333',
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#FFFFFF',
+    textAlign: 'center',
+    textTransform: 'capitalize',
   },
 });
 

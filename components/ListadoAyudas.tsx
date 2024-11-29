@@ -3,10 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-nati
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-// Definición de los tipos para las rutas de navegación
 type RutasNavegacion = 'SubsidiosDesempleo' | 'PrestacionesJubilacion' | 'AyudasVivienda' | 'FamiliasNumerosas' | 'BecasEstudio' | 'Emprendedores' | 'Discapacidad';
 
-// Definición del tipo para los parámetros de la pila de navegación
 type RootStackParamList = {
   SubsidiosDesempleo: undefined;
   PrestacionesJubilacion: undefined;
@@ -17,10 +15,8 @@ type RootStackParamList = {
   Discapacidad: undefined;
 };
 
-// Tipo para la propiedad de navegación
 type NavigationProp = StackNavigationProp<RootStackParamList>;
 
-// Array de ayudas con tipos explícitos
 const ayudas: { id: number; nombre: string; ruta: RutasNavegacion }[] = [
   { id: 1, nombre: 'Subsidios por desempleo', ruta: 'SubsidiosDesempleo' },
   { id: 2, nombre: 'Prestaciones por jubilación', ruta: 'PrestacionesJubilacion' },
@@ -41,7 +37,7 @@ export default function ListadoAyudas() {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.titulo}>¿En qué ayuda estás interesado?</Text>
-      
+
       <View style={styles.ayudas}>
         {ayudas.map((ayuda) => (
           <TouchableOpacity
@@ -60,30 +56,42 @@ export default function ListadoAyudas() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
-    padding: 10,
+    backgroundColor: '#E5F5FE',
+    padding: 20,
   },
   titulo: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
+    color: '#0077B6',
+    textTransform: 'uppercase',
+    letterSpacing: 1.2,
   },
   ayudas: {
     marginTop: 10,
   },
   item: {
-    padding: 15,
-    marginVertical: 8,
-    backgroundColor: '#ffffff',
-    borderRadius: 8,
+    padding: 20,
+    marginVertical: 10,
+    backgroundColor: '#0077B6',
+    borderRadius: 12,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 6,
+    alignItems: 'center',
+    transform: [{ scale: 1 }],
+  },
+  itemHovered: {
+    transform: [{ scale: 1.03 }],
   },
   texto: {
     fontSize: 18,
-    color: '#333',
+    fontWeight: '600',
+    color: '#FFFFFF',
+    textAlign: 'center',
+    textTransform: 'capitalize',
   },
 });
