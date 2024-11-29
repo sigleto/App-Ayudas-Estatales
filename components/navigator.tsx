@@ -1,7 +1,10 @@
 // navigator.jsx
 import React from 'react';
+
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { enableScreens } from 'react-native-screens';
+
+
 import ListadoAyudas from './ListadoAyudas';
 import SubsidiosDesempleo from './listado/SubsidiosDesempleo';
 import PrestacionesJubilacion from './listado/PrestacionesJubilacion';
@@ -31,18 +34,23 @@ import JovenesEmprendedores from './desgloseAyudas/Emprendedores/JovenesEmprende
 import KitDigital from './desgloseAyudas/Emprendedores/KitDigital';
 import LineasICO from './desgloseAyudas/Emprendedores/LineasICO';
 import PymeInvierte from './desgloseAyudas/Emprendedores/PymeInvierte';
+import Home from './Home';
+import DescargoResponsabilidad from './DescargoResponsabilidad';
+import PoliticaPrivacidad from './PoliticaPrivacidad';
 
 
-
-
-
+enableScreens();
 
 
 const Stack = createStackNavigator();
 
-const Navigator = () => {
-    return (
-      <Stack.Navigator initialRouteName="ListadoAyudas">
+
+
+
+export function AyudasStack  () {
+  return (
+  <Stack.Navigator>
+     
         <Stack.Screen name="ListadoAyudas" component={ListadoAyudas} />
         <Stack.Screen name="SubsidiosDesempleo" component={SubsidiosDesempleo} />
         <Stack.Screen name="PrestacionContributiva" component={PrestacionContributiva} />
@@ -73,11 +81,46 @@ const Navigator = () => {
         <Stack.Screen name="KitDigital" component={KitDigital} />
         <Stack.Screen name="LineasICO" component={LineasICO} />
         <Stack.Screen name="PymeInvierte" component={PymeInvierte} />
-        
-        
-        {/* Puedes agregar más pantallas para otras ayudas */}
-      </Stack.Navigator>
-    );
-  };
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="DescargoResponsabilidad" component={DescargoResponsabilidad} />
+        <Stack.Screen name="PoliticaPrivacidad" component={PoliticaPrivacidad} />
 
-export default Navigator;
+
+
+        </Stack.Navigator>
+);
+}
+
+export function PrincipalStack(){
+  return (
+   
+      <Stack.Navigator>
+        
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{  headerShown: false}}
+        />
+        <Stack.Screen
+          name="Organismos"
+          component={AyudasStack}
+          options={{  headerShown: false }}
+        />
+      
+        <Stack.Screen
+          name="Descargo"
+          component={DescargoResponsabilidad}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Politica"
+          component={PoliticaPrivacidad}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+   
+  );
+};
+
+
+
