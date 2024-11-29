@@ -25,6 +25,18 @@ import AyudasNacimientoAdopcion from './desgloseAyudas/Discapacidad/AyudasNacimi
 import IngresoMinimoVital from './desgloseAyudas/Discapacidad/IngresoMinimoVital';
 import PensionNoContributiva from './desgloseAyudas/Discapacidad/PensionNoContributiva';
 import SubsidiosEspecificos from './desgloseAyudas/Discapacidad/SubsidiosEspecificos';
+import PrestacionHijoDiscapacidad from './desgloseAyudas/FamiliaNumerosa/PrestacionHijoDiscapacidad';
+import EnisaEmprendedores from './desgloseAyudas/Emprendedores/EnisaEmprendedores';
+import JovenesEmprendedores from './desgloseAyudas/Emprendedores/JovenesEmprendedores';
+import KitDigital from './desgloseAyudas/Emprendedores/KitDigital';
+import LineasICO from './desgloseAyudas/Emprendedores/LineasICO';
+import PymeInvierte from './desgloseAyudas/Emprendedores/PymeInvierte';
+
+
+
+
+
+
 
 const Stack = createStackNavigator();
 
@@ -54,6 +66,13 @@ const Navigator = () => {
         <Stack.Screen name="IngresoMinimoVital" component={IngresoMinimoVital} />
         <Stack.Screen name="PensionNoContributiva" component={PensionNoContributiva} />
         <Stack.Screen name="SubsidiosEspecificos" component={SubsidiosEspecificos} />
+        <Stack.Screen name="AyudaNacimientoAdopcion" component={AyudasNacimientoAdopcion} />
+        <Stack.Screen name="PrestacionHijoDiscapacidad" component={PrestacionHijoDiscapacidad} />
+        <Stack.Screen name="EnisaEmprendedores" component={EnisaEmprendedores} />
+        <Stack.Screen name="JovenesEmprendedores" component={JovenesEmprendedores} />
+        <Stack.Screen name="KitDigital" component={KitDigital} />
+        <Stack.Screen name="LineasICO" component={LineasICO} />
+        <Stack.Screen name="PymeInvierte" component={PymeInvierte} />
         
         
         {/* Puedes agregar más pantallas para otras ayudas */}
