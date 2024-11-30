@@ -25,7 +25,7 @@ import BecaGeneral from './desgloseAyudas/Educación/BecaGeneral';
 import BecaApoyoEducativo from './desgloseAyudas/Educación/BecaApoyoEducativo';
 import BecaResidencia from './desgloseAyudas/Educación/BecaResidencia';
 import AyudasNacimientoAdopcion from './desgloseAyudas/Discapacidad/AyudasNacimientoAdopcion';
-import IngresoMinimoVital from './desgloseAyudas/Discapacidad/IngresoMinimoVital';
+import IngresoMinimoVital from './desgloseAyudas/Sociales/IngresoMinimoVital';
 import PensionNoContributiva from './desgloseAyudas/Discapacidad/PensionNoContributiva';
 import SubsidiosEspecificos from './desgloseAyudas/Discapacidad/SubsidiosEspecificos';
 import PrestacionHijoDiscapacidad from './desgloseAyudas/FamiliaNumerosa/PrestacionHijoDiscapacidad';
@@ -37,6 +37,9 @@ import PymeInvierte from './desgloseAyudas/Emprendedores/PymeInvierte';
 import Home from './Home';
 import DescargoResponsabilidad from './DescargoResponsabilidad';
 import PoliticaPrivacidad from './PoliticaPrivacidad';
+import AyudasSociales from './listado/AyudasSociales';
+import BonoJovenAlquiler from './desgloseAyudas/Sociales/BonoJovenAlquiler';
+import LeyDependencia from './desgloseAyudas/Sociales/LeyDependencia';
 
 
 enableScreens();
@@ -84,6 +87,9 @@ export function AyudasStack  () {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="DescargoResponsabilidad" component={DescargoResponsabilidad} />
         <Stack.Screen name="PoliticaPrivacidad" component={PoliticaPrivacidad} />
+        <Stack.Screen name="AyudasSociales" component={AyudasSociales} />
+        <Stack.Screen name="BonoJovenAlquiler" component={BonoJovenAlquiler} />
+        <Stack.Screen name="LeyDependencia" component={LeyDependencia} />
 
 
 

@@ -1,7 +1,19 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Linking } from 'react-native';
 
 const PrestacionContributiva = () => {
+  const openSEPEPortal = () => {
+    Linking.openURL('https://www.sepe.es/HomeSepe/prestaciones-desempleo/prestacion-contributiva/prestacion-contributiva-mas-de-un-anyo.html');
+  };
+
+  const openInfoPDF = () => {
+    Linking.openURL('https://drive.google.com/file/d/1e2TtAsTZnnAsYw4cs7mJwU_pxU1x5I21/view?usp=drive_link'); // URL del PDF de hoja informativa
+  };
+
+  const openSolicitudPDF = () => {
+    Linking.openURL('https://drive.google.com/file/d/1ylmtyS5SJWwHCD-QIzIitfo_dk7oWZEB/view?usp=drive_link'); // URL del PDF del modelo de solicitud
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
@@ -33,7 +45,7 @@ const PrestacionContributiva = () => {
           <Text style={styles.text}>1. Inscribirse como demandante de empleo en el SEPE.</Text>
           <Text style={styles.text}>
             2. Presentar la solicitud dentro de los 15 días hábiles posteriores al cese de la relación laboral.
-          </Text>
+            Puedes descargar el modelo de solicitud</Text><Text style={styles.link} onPress={openSolicitudPDF}><Text style={styles.link}>AQUÍ</Text></Text>
           <Text style={styles.text}>3. Adjuntar la documentación necesaria: DNI, certificado de empresa, y justificantes de cotización.</Text>
           <Text style={styles.text}>4. El SEPE revisará la solicitud y notificará la resolución.</Text>
         </View>
@@ -42,13 +54,24 @@ const PrestacionContributiva = () => {
         <View style={styles.section}>
           <Text style={styles.subtitle}>Normativa</Text>
           <Text style={styles.text}>
-            La prestación contributiva está regulada por el Texto Refundido de la Ley General de la Seguridad Social (Real Decreto Legislativo 8/2015) y sus disposiciones reglamentarias. Puedes consultar más detalles en el portal del SEPE.
+            La prestación contributiva está regulada por el Texto Refundido de la Ley General de la Seguridad Social (Real Decreto Legislativo 8/2015) y sus disposiciones reglamentarias. Puedes consultar más detalles en el{' '}
+            <Text style={styles.link} onPress={openSEPEPortal}>
+              portal del SEPE
+            </Text>.
           </Text>
+          <Text style={styles.text}>
+            También puedes descargar el siguiente documento relacionado:
+          </Text>
+          <Text style={styles.link} onPress={openInfoPDF}>
+            • Hoja informativa (PDF)
+          </Text>
+          
         </View>
       </View>
     </ScrollView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -94,6 +117,10 @@ const styles = StyleSheet.create({
     color: '#6c757d',
     marginLeft: 16,
     marginVertical: 4,
+  },
+  link: {
+    color: '#007AFF', // Color azul para el enlace
+    textDecorationLine: 'underline', // Subrayado para simular un enlace
   },
 });
 

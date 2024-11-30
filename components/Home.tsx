@@ -33,8 +33,7 @@ const Home: React.FC = () => {
       <Image source={require('../assets/images/icon.png')} style={styles.burocraciaImage} />
       <Text style={styles.titulo}>Bienvenido a Ayudas Públicas</Text>
       <Text style={styles.descripcion}>
-        Coordina citas con diferentes organismos de forma eficiente 
-        y gestiona tus eventos y notas en una agenda personalizada
+      Encuentra ayudas públicas para vivienda, discapacidad, empleo y más, con información clara y accesible
       </Text>
 
       <Text style={styles.descargo}>

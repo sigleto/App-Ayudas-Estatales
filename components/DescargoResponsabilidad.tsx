@@ -23,11 +23,12 @@ const DescargoResponsabilidad: React.FC = () => {
       <SharedElement id="elementId">
         <Text style={styles.titulo}>Aviso de Descargo de Responsabilidad:</Text>
         <Text style={styles.parrafo}>
-          {"Esta aplicación tiene como objetivo facilitar la gestión de citas previas con diversas entidades, tanto públicas como privadas. Queremos destacar que no somos una entidad pública ni estamos afiliados a ninguna. Somos un servicio independiente que recopila información de fuentes públicas para proporcionar una interfaz conveniente para agendar citas.\n\n" +
-          "La información que ofrecemos se basa en la disponibilidad y políticas de las entidades correspondientes. No asumimos ninguna responsabilidad por cambios en los horarios, políticas o cualquier otro aspecto de las entidades para las cuales se realizan citas.\n\n" +
-          "Por favor, tenga en cuenta que esta aplicación no representa ni pretende representar a ninguna entidad pública. La información proporcionada debe ser verificada directamente con las entidades correspondientes para garantizar su autenticidad.\n\n" +
-          "Gracias por utilizar nuestra aplicación."}
-        </Text>
+      {"Esta aplicación tiene como objetivo facilitar el acceso a información sobre ayudas públicas disponibles en diversas áreas, como vivienda, discapacidad, desempleo, estudios, emprendimiento y más. Queremos aclarar que no somos una entidad pública ni estamos afiliados a ninguna institución gubernamental o privada. Somos un servicio independiente que organiza y presenta información obtenida de fuentes públicas.\n\n" +
+       "La información proporcionada en esta aplicación se basa en datos disponibles públicamente y puede estar sujeta a cambios o actualizaciones. No asumimos responsabilidad por errores, omisiones o modificaciones realizadas por las instituciones que gestionan dichas ayudas.\n\n" +
+        "Por favor, tenga en cuenta que esta aplicación no representa ni pretende representar a ninguna entidad pública o privada. Recomendamos verificar directamente con las entidades correspondientes para confirmar la autenticidad y vigencia de la información proporcionada.\n\n" +
+        "Gracias por utilizar nuestra aplicación."}
+</Text>
+
       </SharedElement>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.skipButton} onPress={() => navigation.navigate('Principal' as never)}>

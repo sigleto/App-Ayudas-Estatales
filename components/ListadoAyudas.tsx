@@ -3,11 +3,11 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-nati
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-type RutasNavegacion = 'SubsidiosDesempleo' | 'PrestacionesJubilacion' | 'AyudasVivienda' | 'FamiliasNumerosas' | 'BecasEstudio' | 'Emprendedores' | 'Discapacidad';
+type RutasNavegacion = 'SubsidiosDesempleo' | 'AyudasSociales' | 'AyudasVivienda' | 'FamiliasNumerosas' | 'BecasEstudio' | 'Emprendedores' | 'Discapacidad';
 
 type RootStackParamList = {
   SubsidiosDesempleo: undefined;
-  PrestacionesJubilacion: undefined;
+  AyudasSociales: undefined;
   AyudasVivienda: undefined;
   FamiliasNumerosas: undefined;
   BecasEstudio: undefined;
@@ -19,7 +19,7 @@ type NavigationProp = StackNavigationProp<RootStackParamList>;
 
 const ayudas: { id: number; nombre: string; ruta: RutasNavegacion }[] = [
   { id: 1, nombre: 'Subsidios por desempleo', ruta: 'SubsidiosDesempleo' },
-  { id: 2, nombre: 'Prestaciones por jubilación', ruta: 'PrestacionesJubilacion' },
+  { id: 2, nombre: 'Ayudas sociales', ruta: 'AyudasSociales' },  
   { id: 3, nombre: 'Ayudas para vivienda', ruta: 'AyudasVivienda' },
   { id: 4, nombre: 'Apoyo a familias numerosas', ruta: 'FamiliasNumerosas' },
   { id: 5, nombre: 'Becas y ayudas al estudio', ruta: 'BecasEstudio' },
