@@ -1,34 +1,61 @@
 import React from 'react';
-import { View, Text, StyleSheet,ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking } from 'react-native';
 
 export default function AyudasAlAlquiler() {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
-      <Text style={styles.title}>Ayudas al Alquiler</Text>
+        {/* Título principal */}
+        <Text style={styles.title}>Ayudas al Alquiler</Text>
 
-      <Text style={styles.subtitle}>Descripción</Text>
-      <Text style={styles.content}>
-        Ayudas económicas para personas con ingresos limitados, destinadas a sufragar hasta el 50% del coste mensual del alquiler.
-      </Text>
+        {/* Sección: Descripción */}
+        <Text style={styles.subtitle}>Descripción</Text>
+        <Text style={styles.content}>
+          Ayudas económicas para personas con ingresos limitados, destinadas a sufragar hasta el 50% del coste mensual del alquiler.
+        </Text>
 
-      <Text style={styles.subtitle}>Requisitos</Text>
-      <Text style={styles.content}>
-        - No superar el límite de ingresos establecido.{"\n"}
-        - Contrato de alquiler vigente y estar al corriente de pagos.{"\n"}
-        - Vivienda habitual y permanente.
-      </Text>
+        {/* Sección: Requisitos */}
+        <Text style={styles.subtitle}>Requisitos</Text>
+        <Text style={styles.content}>
+          - <Text style={styles.bold}>Vivienda habitual y permanente</Text>
+          {'\n\n'}- <Text style={styles.bold}>Límite de ingresos:</Text>
+          {'\n'}  - 3 IPREM
+          {'\n'}  - 4 IPREM: familia numerosa general y personas con discapacidad
+          {'\n'}  - 5 IPREM: familia numerosa especial y personas con determinados grados de discapacidad
+          {'\n\n'}- <Text style={styles.bold}>Límite de la renta al alquiler:</Text>
+          {'\n'}  - Con carácter general: 600 euros/mes
+          {'\n'}  - 900 euros/mes en determinados ámbitos a definir por las comunidades autónomas
+        </Text>
 
-      <Text style={styles.subtitle}>Proceso de Solicitud</Text>
-      <Text style={styles.content}>
-        Presentar la solicitud en las oficinas autonómicas con documentos de identificación, contrato de alquiler y justificantes de pago.
-      </Text>
+        {/* Sección: Cuantías */}
+        <Text style={styles.subtitle}>Cuantías</Text>
+        <Text style={styles.content}>
+          - <Text style={styles.bold}>Con carácter general:</Text> hasta el 40% de la renta mensual
+          {'\n'}- <Text style={styles.bold}>Mayores de 65 años:</Text> hasta el 50% de la renta mensual
+          {'\n'}- <Text style={styles.bold}>Alquiler en el tramo comprendido entre 601 y 900 euros:</Text> ayuda hasta el 30% en determinados ámbitos a definir por las comunidades autónomas
+        </Text>
 
-      <Text style={styles.subtitle}>Normativa</Text>
-      <Text style={styles.content}>
-        Plan Estatal de Vivienda 2022-2025.
-      </Text>
-    </View>
+        {/* Sección: Proceso de Solicitud */}
+        <Text style={styles.subtitle}>Proceso de Solicitud</Text>
+        <Text style={styles.content}>
+          Las solicitudes deben gestionarse en las{' '}
+          <Text
+            style={styles.link}
+            onPress={() =>
+              Linking.openURL(
+                'https://www.mivau.gob.es/arquitectura-vivienda-y-suelo/politica-de-vivienda/enlaces-comunidades-autonomas-ceuta-y-melilla'
+              )
+            }
+          >
+            oficinas de vivienda
+          </Text>{' '}
+          de cada comunidad autónoma, adjuntando documentación personal, contrato de alquiler y justificantes de pago.
+        </Text>
+
+        {/* Sección: Normativa */}
+        <Text style={styles.subtitle}>Normativa</Text>
+        <Text style={styles.content}>Plan Estatal de Vivienda 2022-2025.</Text>
+      </View>
     </ScrollView>
   );
 }
@@ -68,5 +95,12 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     color: '#6c757d',
     textAlign: 'justify',
+  },
+  link: {
+    color: '#2a9d8f',
+    textDecorationLine: 'underline',
+  },
+  bold: {
+    fontWeight: 'bold',
   },
 });

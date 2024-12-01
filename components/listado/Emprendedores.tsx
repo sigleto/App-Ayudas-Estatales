@@ -3,10 +3,9 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated } from '
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-type RutasNavegacion = 'EnisaEmprendedores' | 'JovenesEmprendedores' | 'KitDigital' | 'LineasICO' | 'PymeInvierte';
+type RutasNavegacion = 'EnisaEmprendedores'  | 'KitDigital' | 'LineasICO' | 'PymeInvierte';
 type RootStackParamList = {
   EnisaEmprendedores: undefined;
-  JovenesEmprendedores: undefined;
   KitDigital: undefined;
   LineasICO: undefined;
   PymeInvierte: undefined;
@@ -23,7 +22,6 @@ const Emprendedores = () => {
 
   const apartados: Apartado[] = [
     { nombre: 'ENISA - Emprendedores', ruta: 'EnisaEmprendedores' },
-    { nombre: 'Jóvenes Emprendedores', ruta: 'JovenesEmprendedores' },
     { nombre: 'Kit Digital', ruta: 'KitDigital' },
     { nombre: 'Líneas ICO', ruta: 'LineasICO' },
     { nombre: 'Pyme Invierte', ruta: 'PymeInvierte' },

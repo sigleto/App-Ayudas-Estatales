@@ -3,12 +3,12 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated } from '
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-type RutasNavegacion = 'PrestacionContributiva' | 'SubsidiosPorDesempleo' | 'AyudasExtraordinarias';
+type RutasNavegacion = 'PrestacionContributiva' | 'SubsidiosPorDesempleo';
 
 type RootStackParamList = {
   PrestacionContributiva: undefined;
   SubsidiosPorDesempleo: undefined;
-  AyudasExtraordinarias: undefined;
+  
 };
 
 type NavigationProp = StackNavigationProp<RootStackParamList>;
@@ -24,7 +24,7 @@ const SubsidiosDesempleo = () => {
   const apartados: Apartado[] = [
     { nombre: 'Prestación Contributiva', ruta: 'PrestacionContributiva' },
     { nombre: 'Subsidios por desempleo', ruta: 'SubsidiosPorDesempleo' },
-    { nombre: 'Ayudas Extraordinarias', ruta: 'AyudasExtraordinarias' },
+    
   ];
 
   // Estado para controlar el efecto de animación

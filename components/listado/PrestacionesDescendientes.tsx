@@ -17,7 +17,7 @@ type Apartado = {
   ruta: RutasNavegacion;
 };
 
-const FamiliasNumerosas = () => {
+const AyudaDescendientes = () => {
   const navigation = useNavigation<NavigationProp>();
 
   const apartados: Apartado[] = [
@@ -45,7 +45,7 @@ const FamiliasNumerosas = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>Ayudas a Familias Numerosas</Text>
+      <Text style={styles.title}>Ayudas por descendientes</Text>
       <View style={styles.list}>
         {apartados.map((apartado) => (
           <Animated.View
@@ -105,4 +105,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FamiliasNumerosas;
+export default AyudaDescendientes;

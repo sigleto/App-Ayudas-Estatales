@@ -3,13 +3,12 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated } from '
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-type RutasNavegacion = 'AyudasParaJovenes' | 'AyudasFamiliasNumerosas' | 'AyudasAlAlquiler' | 'Aval20PorCiento' | 'PrestamosICO';
+type RutasNavegacion = 'AyudasParaJovenes' | 'AyudasAlAlquiler' | 'Aval20PorCiento';
 type RootStackParamList = {
   AyudasParaJovenes: undefined;
-  AyudasFamiliasNumerosas: undefined;
   AyudasAlAlquiler: undefined;
   Aval20PorCiento: undefined;
-  PrestamosICO: undefined;
+ 
 };
 type NavigationProp = StackNavigationProp<RootStackParamList>;
 
@@ -23,10 +22,9 @@ const AyudasVivienda = () => {
 
   const apartados: Apartado[] = [
     { nombre: 'Ayuda para jóvenes', ruta: 'AyudasParaJovenes' },
-    { nombre: 'Ayuda a Familias Numerosas', ruta: 'AyudasFamiliasNumerosas' },
     { nombre: 'Ayudas al alquiler', ruta: 'AyudasAlAlquiler' },
-    { nombre: 'Aval del 20% de la hipoteca', ruta: 'Aval20PorCiento' },
-    { nombre: 'Préstamos ICO', ruta: 'PrestamosICO' },
+    { nombre: 'Aval del 20% de la hipoteca (ICO)', ruta: 'Aval20PorCiento' },
+    
   ];
 
   // Estado para controlar el efecto de animación

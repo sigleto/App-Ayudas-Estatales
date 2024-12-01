@@ -21,7 +21,7 @@ const AyudasSociales = () => {
 
   const apartados: Apartado[] = [
     { nombre: 'Ingreso Mínimo Vital', ruta: 'IngresoMinimoVital' },
-    { nombre: 'Bono Joven Alquiler', ruta: 'BonoJovenAlquiler' },
+    { nombre: 'Bono Alquiler Joven', ruta: 'BonoJovenAlquiler' },
     { nombre: 'Ley de Dependencia', ruta: 'LeyDependencia' },
   ];
 

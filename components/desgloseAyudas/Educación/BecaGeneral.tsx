@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking } from 'react-native';
 
 const BecaGeneral: React.FC = () => {
   return (
@@ -21,10 +21,29 @@ const BecaGeneral: React.FC = () => {
           - No superar los umbrales de renta establecidos.{"\n"}
           - Alcanzar el rendimiento académico mínimo exigido.
         </Text>
+        <Text style={styles.subtitle}>Cuantías</Text>
+<Text style={styles.content}>
+  <Text style={styles.bold}>Cantidad fija:</Text> Es un importe establecido anualmente en la convocatoria, que se otorga si se cumplen los requisitos generales, económicos y académicos. No se puede recibir junto con la beca básica si se tiene beca ligada a la renta. Los componentes de la beca fija son:
+  {"\n"}{"\n"}
+  - **Básica**: 300 € (350 € en FP de Grado Básico).
+  {"\n"}
+  - **Por renta familiar**: 1.700 €.
+  {"\n"}
+  - **Por cambio de residencia durante el curso**: 2.500 €.
+  {"\n"}
+  - **Por excelencia académica**: 50 € - 125 €.
+  {"\n"}{"\n"}
+
+  <Text style={styles.bold}>Cantidad variable:</Text> Se distribuye entre quienes ya han recibido la cantidad fija, usando una fórmula que considera la nota media y la renta familiar. El mínimo para la cantidad variable es de 60 €, si se solicita para estudios específicos como idiomas, FP de Grado Básico o acceso a la universidad para mayores de 25 años.
+</Text>
 
         <Text style={styles.subtitle}>Proceso de Solicitud</Text>
         <Text style={styles.content}>
-          1. Accede a la sede electrónica del Ministerio de Educación.{"\n"}
+          1. Accede a la <Text 
+            style={styles.link} 
+            onPress={() => Linking.openURL('https://sede.educacion.gob.es/portada.html')}>
+            Sede Electrónica
+          </Text> del Ministerio de Educación.{"\n"}
           2. Rellena el formulario en línea con los datos personales y académicos.{"\n"}
           3. Adjunta la documentación requerida.{"\n"}
           4. Envía la solicitud antes del 10 de mayo de 2024.
@@ -75,6 +94,13 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     color: '#6c757d',
     textAlign: 'justify',
+  },
+  link: {
+    color: '#2a9d8f',
+    textDecorationLine: 'underline',
+  },
+  bold: {
+    fontWeight: 'bold',
   },
 });
 

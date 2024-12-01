@@ -1,12 +1,18 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Linking } from 'react-native';
 
 const EnisaEmprendedores = () => {
+  const openGuide = () => {
+    Linking.openURL(
+      'https://cdn.enisa.es/EcommerceProduct/A26A3E77A791B4425D993E31DF6B70B6/ATTACHMENT/EF3ED5EACB22250177894E31C245A4AE/03badae274b297612d3da5679fcdb0183b6237a5.pdf'
+    );
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
         <Text style={styles.title}>Programa Enisa para Emprendedores</Text>
-        
+
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Descripción</Text>
           <Text style={styles.text}>
@@ -17,16 +23,26 @@ const EnisaEmprendedores = () => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Requisitos</Text>
           <Text style={styles.text}>
-            - Empresas con un máximo de 24 meses de antigüedad.{"\n"}
-            - Proyectos viables con modelos de negocio innovadores.{"\n"}
-            - Aportación mínima del 50% del capital solicitado por los socios.
+            - Ser una pyme, conforme a la definición de la Unión Europea.{'\n'}
+            - Tener personalidad jurídica propia, como sociedad mercantil, independiente de la de los socios o partícipes de la empresa.{'\n'}
+            - La sociedad deberá haber sido constituida, como máximo, durante los 24 meses anteriores a la solicitud.{'\n'}
+            - Desarrollar la actividad principal y tener el domicilio social en el territorio nacional.{'\n'}
+            - El modelo de negocio será innovador, novedoso o con claras ventajas competitivas.{'\n'}
+            - Cofinanciar las necesidades financieras asociadas al proyecto empresarial.{'\n'}
+            - Los fondos propios han de ser, como mínimo, equivalentes a la cuantía del préstamo.{'\n'}
+            - El proyecto empresarial deberá mostrar una estructura financiera equilibrada y profesionalidad en la gestión, mostrando viabilidad técnica y económica.{'\n'}
+            - Las cuentas del último ejercicio cerrado habrán de estar depositadas en el Registro Mercantil o en otro registro público que proceda.{'\n'}
+            - Quedan excluidos los sectores inmobiliario y financiero.
           </Text>
         </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Proceso de Solicitud</Text>
           <Text style={styles.text}>
-            La solicitud se realiza a través de la web de ENISA, adjuntando el plan de negocio y la documentación financiera.
+            La solicitud se realiza a través de la web de ENISA, adjuntando el plan de negocio y la documentación financiera. Aquí puedes descargar{' '}
+            <Text style={styles.link} onPress={openGuide}>
+              la guía para la solicitud
+            </Text>.
           </Text>
         </View>
 
@@ -40,7 +56,6 @@ const EnisaEmprendedores = () => {
     </ScrollView>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -78,6 +93,10 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     color: '#6c757d',
     textAlign: 'justify',
+  }, 
+  link: {
+    color: '#007BFF',
+    textDecorationLine: 'underline',
   },
 });
 

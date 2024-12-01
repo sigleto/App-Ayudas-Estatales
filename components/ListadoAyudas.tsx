@@ -3,13 +3,13 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-nati
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-type RutasNavegacion = 'SubsidiosDesempleo' | 'AyudasSociales' | 'AyudasVivienda' | 'FamiliasNumerosas' | 'BecasEstudio' | 'Emprendedores' | 'Discapacidad';
+type RutasNavegacion = 'SubsidiosDesempleo' | 'AyudasSociales' | 'AyudasVivienda' | 'AyudaDescendientes' | 'BecasEstudio' | 'Emprendedores' | 'Discapacidad';
 
 type RootStackParamList = {
   SubsidiosDesempleo: undefined;
   AyudasSociales: undefined;
   AyudasVivienda: undefined;
-  FamiliasNumerosas: undefined;
+  AyudaDescendientes: undefined;
   BecasEstudio: undefined;
   Emprendedores: undefined;
   Discapacidad: undefined;
@@ -21,7 +21,7 @@ const ayudas: { id: number; nombre: string; ruta: RutasNavegacion }[] = [
   { id: 1, nombre: 'Subsidios por desempleo', ruta: 'SubsidiosDesempleo' },
   { id: 2, nombre: 'Ayudas sociales', ruta: 'AyudasSociales' },  
   { id: 3, nombre: 'Ayudas para vivienda', ruta: 'AyudasVivienda' },
-  { id: 4, nombre: 'Apoyo a familias numerosas', ruta: 'FamiliasNumerosas' },
+  { id: 4, nombre: 'Ayudas por descendientes', ruta: 'AyudaDescendientes' },
   { id: 5, nombre: 'Becas y ayudas al estudio', ruta: 'BecasEstudio' },
   { id: 6, nombre: 'Ayudas para emprendedores', ruta: 'Emprendedores' },
   { id: 7, nombre: 'Ayudas para la discapacidad', ruta: 'Discapacidad' },

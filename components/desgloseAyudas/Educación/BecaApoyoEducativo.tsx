@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking } from 'react-native';
 
 const BecaApoyoEducativo: React.FC = () => {
   return (
@@ -14,18 +14,29 @@ const BecaApoyoEducativo: React.FC = () => {
         </Text>
 
         <Text style={styles.subtitle}>Requisitos</Text>
+        <Text style={styles.content}>• Tener 2 años o más a 31 de diciembre del año anterior para alumnado con discapacidad, trastorno grave de conducta, trastorno grave de la comunicación o del lenguaje o trastorno del espectro autista.</Text>
+        <Text style={styles.content}>• Estar escolarizado en un centro específico de educación especial o en un centro ordinario que tenga unidades de educación especial o que esté autorizado para escolarizar a alumnos con necesidades educativas especiales.</Text>
+        <Text style={styles.content}>• Tener 6 años o más a 31 de diciembre del año en curso para alumnado con altas capacidades.</Text>
+        <Text style={styles.content}>• Estar matriculado en alguno de los estudios para los que se puede pedir esta ayuda.</Text>
+        <Text style={styles.content}>• Certificado que acredite la circunstancia especial del menor.</Text>
+        <Text style={styles.content}>• No superar los umbrales de renta familiar.</Text>
+
+        <Text style={styles.subtitle}>Tipos de ayudas</Text>
         <Text style={styles.content}>
-          - Acreditar una discapacidad igual o superior al 25%.{"\n"}
-          - Estar matriculado en centros educativos específicos o integradores.{"\n"}
-          - No superar los umbrales de renta familiar.
+          Se pueden recibir distintos tipos de ayudas o subsidios, en función de las circunstancias específicas de cada caso.{' '}
+          <Text
+            style={styles.link}
+            onPress={() => Linking.openURL('https://www.becaseducacion.gob.es/becas-y-ayudas/ayudas-apoyo-educativo/tipos-de-becas.html')}
+          >
+            AQUÍ
+          </Text>{' '}
+          podrás consultarlas.
         </Text>
 
         <Text style={styles.subtitle}>Proceso de Solicitud</Text>
-        <Text style={styles.content}>
-          1. Accede al portal del Ministerio de Educación y rellena el formulario online.{"\n"}
-          2. Proporciona certificados médicos o informes psicopedagógicos.{"\n"}
-          3. Presenta la solicitud antes de la fecha límite.
-        </Text>
+        <Text style={styles.content}>1. Accede al portal del Ministerio de Educación y rellena el formulario online.</Text>
+        <Text style={styles.content}>2. Proporciona certificados médicos o informes psicopedagógicos.</Text>
+        <Text style={styles.content}>3. Presenta la solicitud antes de la fecha límite.</Text>
 
         <Text style={styles.subtitle}>Normativa</Text>
         <Text style={styles.content}>
@@ -71,6 +82,10 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     color: '#6c757d',
     textAlign: 'justify',
+  },
+  link: {
+    color: '#2a9d8f',
+    textDecorationLine: 'underline',
   },
 });
 

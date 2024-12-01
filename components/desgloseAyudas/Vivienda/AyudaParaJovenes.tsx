@@ -1,29 +1,66 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking } from 'react-native';
 
 export default function AyudasParaJovenes() {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
+        {/* Título principal */}
         <Text style={styles.title}>Ayudas para Jóvenes</Text>
 
+        {/* Sección: Descripción */}
         <Text style={styles.subtitle}>Descripción</Text>
         <Text style={styles.content}>
-          Ayudas para jóvenes menores de 35 años que desean adquirir una vivienda habitual y permanente en municipios con menos de 10,000 habitantes. Esta ayuda puede cubrir hasta el 20% del precio de la vivienda con un máximo de 10,800 €.
+          Ayudas para jóvenes menores de 35 años para facilitar el disfrute de una vivienda ya sea en régimen de alquiler 
+          o mediante una ayuda directa a la adquisición de viviendas localizadas en municipios de menos de 5.000 habitantes.
         </Text>
 
+        {/* Sección: Requisitos */}
         <Text style={styles.subtitle}>Requisitos</Text>
         <Text style={styles.content}>
-          - Ser menor de 35 años.{"\n"}
-          - No tener propiedades en España.{"\n"}
-          - Ingresos anuales no superiores a tres veces el IPREM.
+          <Text style={styles.bold}>Ayuda al alquiler:</Text>
+          {'\n'}- Vivienda habitual y permanente
+          {'\n'}- Ingresos en la unidad de convivencia inferiores a:
+          {'\n'}  - 3IPREM de forma general
+          {'\n'}  - 4IPREM si se trata de familias numerosas generales y personas con discapacidad
+          {'\n'}  - 5IPREM familias numerosas especiales y personas con determinados grados de discapacidad
+          {'\n'}- Alquiler mensual máximo de 600 euros
+          {'\n'}- Alquiler mensual máximo de 900 euros en determinados ámbitos definidos por las comunidades autónomas
+          
+          {'\n\n'}<Text style={styles.bold}>Ayuda a la adquisición:</Text>
+          {'\n'}- Vivienda habitual y permanente
+          {'\n'}- Ingresos en la unidad de convivencia inferiores a:
+          {'\n'}  - 3IPREM de forma general
+          {'\n'}  - 4IPREM si se trata de familias numerosas generales y personas con discapacidad
+          {'\n'}  - 5IPREM familias numerosas especiales y personas con determinados grados de discapacidad
+          {'\n'}- Precio de adquisición inferior a 100.000€
         </Text>
 
+        {/* Sección: Cuantías */}
+        <Text style={styles.subtitle}>Cuantías</Text>
+        <Text style={styles.content}>
+          <Text style={styles.bold}>Ayuda al alquiler:</Text>
+          {'\n'}- Hasta 50% del alquiler mensual
+          {'\n'}- Hasta 30% en el tramo entre 601 y 900 euros
+          
+          {'\n\n'}<Text style={styles.bold}>Ayuda a la adquisición:</Text>
+          {'\n'}- Hasta 10.800 euros con un límite del 20% del precio de adquisición (inferior a 100.000 euros).
+        </Text>
+
+        {/* Sección: Proceso de Solicitud */}
         <Text style={styles.subtitle}>Proceso de Solicitud</Text>
         <Text style={styles.content}>
-          Las solicitudes deben gestionarse en las oficinas de vivienda de cada comunidad autónoma, adjuntando documentación personal, fiscal y de la vivienda.
+          Las solicitudes deben gestionarse en las{' '}
+          <Text 
+            style={styles.link} 
+            onPress={() => Linking.openURL('https://www.mivau.gob.es/arquitectura-vivienda-y-suelo/politica-de-vivienda/enlaces-comunidades-autonomas-ceuta-y-melilla')}
+          >
+            oficinas de vivienda
+          </Text>{' '}
+          de cada comunidad autónoma, adjuntando documentación personal, fiscal y de la vivienda.
         </Text>
 
+        {/* Sección: Normativa */}
         <Text style={styles.subtitle}>Normativa</Text>
         <Text style={styles.content}>
           Plan Estatal de Vivienda 2022-2025 (BOE-A-2021-19809).
@@ -68,5 +105,12 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     color: '#6c757d',
     textAlign: 'justify',
+  },
+  link: {
+    color: '#2a9d8f',
+    textDecorationLine: 'underline',
+  },
+  bold: {
+    fontWeight: 'bold',
   },
 });

@@ -16,7 +16,29 @@ export default function LeyDependencia() {
         <Text style={styles.content}>
           - Estar en situación de dependencia.{"\n"}
           - Ser residente en España.{"\n"}
-          - Cumplir con el baremo de dependencia establecido por la ley.
+          - Cumplir con el baremo de dependencia establecido por la ley:{"\n"}
+          {"    "}• Grado I: Dependencia moderada (25-49 puntos){"\n"}
+          {"    "}• Grado II: Dependencia severa (50-74 puntos){"\n"}
+          {"    "}• Grado III: Gran dependencia (75-100 puntos){"\n"}
+          {"\n"}
+          Aplica desde los 3 años y evalúa niveles según autonomía e intensidad del cuidado requerido.
+        </Text>
+
+        <Text style={styles.subtitle}>Prestaciones Económicas</Text>
+        <Text style={styles.content}>
+          <Text style={styles.bold}>Cuidados en el entorno familiar:</Text>{"\n"}
+          {"    "}• Grado I: hasta 180 €/mes{"\n"}
+          {"    "}• Grado II: hasta 315 €/mes{"\n"}
+          {"    "}• Grado III: hasta 455 €/mes{"\n"}
+          {"\n"}
+          <Text style={styles.bold}>Asistencia personal:</Text>{"\n"}
+          {"    "}• Grado I: hasta 313,50 €/mes{"\n"}
+          {"    "}• Grados II y III: hasta 742,25 €/mes{"\n"}
+          {"\n"}
+          <Text style={styles.bold}>Servicios específicos:</Text>{"\n"}
+          {"    "}• Grado I: hasta 313,50 €/mes{"\n"}
+          {"    "}• Grado II: hasta 445 €/mes{"\n"}
+          {"    "}• Grado III: hasta 747 €/mes
         </Text>
 
         <Text style={styles.subtitle}>Proceso de Solicitud</Text>
@@ -68,5 +90,8 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     color: '#6c757d',
     textAlign: 'justify',
+  },
+   bold: {
+    fontWeight: 'bold',
   },
 });

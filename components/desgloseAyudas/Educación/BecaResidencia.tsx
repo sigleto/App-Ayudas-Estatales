@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView,Linking} from 'react-native';
 
 const BecaResidencia: React.FC = () => {
   return (
@@ -15,14 +15,20 @@ const BecaResidencia: React.FC = () => {
 
         <Text style={styles.subtitle}>Requisitos</Text>
         <Text style={styles.content}>
+          - El importe máximo es de 2.500 euros{"\n"}
           - Estar matriculado en estudios postobligatorios o universitarios.{"\n"}
           - Residencia habitual alejada del centro de estudios.{"\n"}
+          - Está destinada a estudios presenciales y con matrícula completa{"\n"}
           - No superar el umbral de renta familiar correspondiente.
         </Text>
 
         <Text style={styles.subtitle}>Proceso de Solicitud</Text>
         <Text style={styles.content}>
-          1. Rellenar la solicitud en línea en la sede del Ministerio.{"\n"}
+          1. Rellenar la solicitud en línea en la  <Text 
+            style={styles.link} 
+            onPress={() => Linking.openURL('https://sede.educacion.gob.es/sede/login/inicio.jjsp?idConvocatoria=2076')}>
+            simulador de la Seguridad Social
+          </Text>.sede del Ministerio.{"\n"}
           2. Aportar un contrato de alquiler o certificado de residencia.{"\n"}
           3. Completar antes de la fecha límite.
         </Text>
@@ -72,6 +78,10 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     color: '#6c757d',
     textAlign: 'justify',
+  },
+  link: {
+    color: '#2a9d8f',
+    textDecorationLine: 'underline',
   },
 });
 
