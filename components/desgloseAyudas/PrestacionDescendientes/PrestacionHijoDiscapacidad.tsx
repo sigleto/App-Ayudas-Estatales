@@ -27,7 +27,7 @@ const SectionDescripcion = () => (
       Ayuda destinada a familias con hijos menores de 18 años con una discapacidad igual o superior al 33% o mayor de dicha edad con discapacidad igual o superior al 65%.
     </Text>
   </View>
-);
+); 
 
 // Sección: Requisitos
 const SectionRequisitos = () => (
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f2f5f7',
   },
   card: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f9f1b9',
     margin: 20,
     padding: 20,
     borderRadius: 10,
@@ -125,13 +125,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: '600',
-    color: '#457b9d',
+    color: '#1f5ef8',
     marginBottom: 8,
   },
   text: {
-    fontSize: 16,
+    fontSize: 20,
     lineHeight: 26,
     color: '#6c757d',
     textAlign: 'justify',

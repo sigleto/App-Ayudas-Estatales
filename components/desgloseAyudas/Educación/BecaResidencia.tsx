@@ -27,8 +27,8 @@ const BecaResidencia: React.FC = () => {
           1. Rellenar la solicitud en línea en la  <Text 
             style={styles.link} 
             onPress={() => Linking.openURL('https://sede.educacion.gob.es/sede/login/inicio.jjsp?idConvocatoria=2076')}>
-            simulador de la Seguridad Social
-          </Text>.sede del Ministerio.{"\n"}
+            sede electrónica
+          </Text>{"\n"}
           2. Aportar un contrato de alquiler o certificado de residencia.{"\n"}
           3. Completar antes de la fecha límite.
         </Text>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e8f4f8',
   },
   card: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f9f1b9',
     margin: 20,
     padding: 20,
     borderRadius: 10,
@@ -67,14 +67,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   subtitle: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: '600',
-    color: '#264653',
+    color: '#1f5ef8',
     marginTop: 20,
     marginBottom: 5,
   },
   content: {
-    fontSize: 16,
+    fontSize: 20,
     lineHeight: 26,
     color: '#6c757d',
     textAlign: 'justify',

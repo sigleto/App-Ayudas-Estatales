@@ -24,13 +24,13 @@ const Home: React.FC = () => {
   return (
     <View style={styles.container}>
       <MaterialCommunityIcons 
-        name="menu"
+        name="menu" 
         size={30}
         style={styles.menuIcon}
         onPress={openMenu}
       />
       <Image source={require('../assets/images/LogoJuan.png')} style={styles.logo} />
-      <Image source={require('../assets/images/icon.png')} style={styles.burocraciaImage} />
+      <Image source={require('../assets/images/icono.png')} style={styles.burocraciaImage} />
       <Text style={styles.titulo}>Bienvenido a Ayudas Públicas</Text>
       <Text style={styles.descripcion}>
       Encuentra ayudas públicas para vivienda, discapacidad, empleo y más, con información clara y accesible
@@ -61,12 +61,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   logo: {
-    width: '67%',
+    width: '75%',
     height: '20%',
     marginTop: 55,
   },
   burocraciaImage: {
-    width: '67%',
+    width: '75%',
     height: '20%',
   },
   titulo: {

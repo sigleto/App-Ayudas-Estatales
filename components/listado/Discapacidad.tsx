@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-type RutasNavegacion = 'AyudasNacimientoAdopcion' | 'IngresoMinimoVital' | 'PensionNoContributiva' | 'SubsidiosEspecificos';
+type RutasNavegacion =  'PensionNoContributiva' | 'SubsidiosEspecificos';
 type RootStackParamList = {
-  AyudasNacimientoAdopcion: undefined;
-  IngresoMinimoVital: undefined;
+ 
+  
   PensionNoContributiva: undefined;
   SubsidiosEspecificos: undefined;
 };
@@ -21,8 +21,7 @@ const Discapacidad = () => {
   const navigation = useNavigation<NavigationProp>();
 
   const apartados: Apartado[] = [
-    { nombre: 'Ayudas por nacimiento o adopción', ruta: 'AyudasNacimientoAdopcion' },
-    { nombre: 'Ingreso Mínimo Vital', ruta: 'IngresoMinimoVital' },
+  
     { nombre: 'Pensión no contributiva por discapacidad', ruta: 'PensionNoContributiva' },
     { nombre: 'Subsidios Específicos', ruta: 'SubsidiosEspecificos' },
   ];
@@ -47,6 +46,7 @@ const Discapacidad = () => {
 
   return (
     <ScrollView style={styles.container}>
+       <Image source={require('../../assets/images/Discapacidad.png')} style={styles.logo} />
       <Text style={styles.title}>Prestaciones económicas por discapacidad</Text>
       <View style={styles.list}>
         {apartados.map((apartado) => (
@@ -104,6 +104,13 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     textAlign: 'center',
     textTransform: 'capitalize',
+  },
+  logo: {
+    width: '70%',
+    height: '35%',
+    marginTop: 55,
+    marginLeft:'16%',
+    marginBottom:20,
   },
 });
 

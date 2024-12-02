@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated,Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
@@ -45,6 +45,7 @@ const AyudasSociales = () => {
 
   return (
     <ScrollView style={styles.container}>
+       <Image source={require('../../assets/images/Sociales.png')} style={styles.logo} />
       <Text style={styles.title}>Ayudas Sociales</Text>
       <View style={styles.list}>
         {apartados.map((apartado) => (
@@ -102,6 +103,13 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     textAlign: 'center',
     textTransform: 'capitalize',
+  },
+  logo: {
+    width: '70%',
+    height: '35%',
+    marginTop: 55,
+    marginLeft:'16%',
+    marginBottom:20,
   },
 });
 

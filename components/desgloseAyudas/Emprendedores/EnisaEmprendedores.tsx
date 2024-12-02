@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e8f4f8', // Fondo suave
   },
   card: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f9f1b9',
     margin: 20,
     padding: 20,
     borderRadius: 10,
@@ -83,13 +83,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: '600',
-    color: '#264653',
+    color: '#1f5ef8',
     marginBottom: 8,
   },
   text: {
-    fontSize: 16,
+    fontSize: 20,
     lineHeight: 26,
     color: '#6c757d',
     textAlign: 'justify',

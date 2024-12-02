@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e8f4f8',
   },
   card: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f9f1b9',
     margin: 20,
     padding: 20,
     borderRadius: 10,
@@ -67,14 +67,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   subtitle: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: '600',
-    color: '#264653',
+    color: '#1f5ef8',
     marginTop: 20,
     marginBottom: 5,
   },
   content: {
-    fontSize: 16,
+    fontSize: 20,
     lineHeight: 26,
     color: '#6c757d',
     textAlign: 'justify',

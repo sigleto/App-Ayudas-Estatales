@@ -2,8 +2,16 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-type RutasNavegacion = 'SubsidiosDesempleo' | 'AyudasSociales' | 'AyudasVivienda' | 'AyudaDescendientes' | 'BecasEstudio' | 'Emprendedores' | 'Discapacidad';
+type RutasNavegacion =
+  | 'SubsidiosDesempleo'
+  | 'AyudasSociales'
+  | 'AyudasVivienda'
+  | 'AyudaDescendientes'
+  | 'BecasEstudio'
+  | 'Emprendedores'
+  | 'Discapacidad';
 
 type RootStackParamList = {
   SubsidiosDesempleo: undefined;
@@ -17,14 +25,18 @@ type RootStackParamList = {
 
 type NavigationProp = StackNavigationProp<RootStackParamList>;
 
-const ayudas: { id: number; nombre: string; ruta: RutasNavegacion }[] = [
-  { id: 1, nombre: 'Subsidios por desempleo', ruta: 'SubsidiosDesempleo' },
-  { id: 2, nombre: 'Ayudas sociales', ruta: 'AyudasSociales' },  
-  { id: 3, nombre: 'Ayudas para vivienda', ruta: 'AyudasVivienda' },
-  { id: 4, nombre: 'Ayudas por descendientes', ruta: 'AyudaDescendientes' },
-  { id: 5, nombre: 'Becas y ayudas al estudio', ruta: 'BecasEstudio' },
-  { id: 6, nombre: 'Ayudas para emprendedores', ruta: 'Emprendedores' },
-  { id: 7, nombre: 'Ayudas para la discapacidad', ruta: 'Discapacidad' },
+type IconName = React.ComponentProps<typeof MaterialCommunityIcons>['name'];
+
+
+
+const ayudas: { id: number; nombre: string; ruta: RutasNavegacion; color: string; icono: IconName }[] = [
+  { id: 1, nombre: 'Subsidios por desempleo', ruta: 'SubsidiosDesempleo', color: '#FF6F61', icono: 'briefcase-outline' },
+  { id: 2, nombre: 'Ayudas sociales', ruta: 'AyudasSociales', color: '#FFD700', icono: 'hand-heart' },
+  { id: 3, nombre: 'Ayudas para vivienda', ruta: 'AyudasVivienda', color: '#6A5ACD', icono: 'home-outline' },
+  { id: 4, nombre: 'Ayudas por descendientes', ruta: 'AyudaDescendientes', color: '#32CD32', icono: 'baby-face-outline' },
+  { id: 5, nombre: 'Becas y ayudas al estudio', ruta: 'BecasEstudio', color: '#FF4500', icono: 'school-outline' },
+  { id: 6, nombre: 'Ayudas para emprendedores', ruta: 'Emprendedores', color: '#1E90FF', icono: 'lightbulb-on-outline' },
+  { id: 7, nombre: 'Ayudas para la discapacidad', ruta: 'Discapacidad', color: '#C71585', icono: 'wheelchair-accessibility' },
 ];
 
 export default function ListadoAyudas() {
@@ -37,7 +49,6 @@ export default function ListadoAyudas() {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.titulo}>¿En qué ayuda estás interesado?</Text>
-
       <View style={styles.ayudas}>
         {ayudas.map((ayuda) => (
           <TouchableOpacity
@@ -45,6 +56,7 @@ export default function ListadoAyudas() {
             style={styles.item}
             onPress={() => navigateToAyuda(ayuda.ruta)}
           >
+            <MaterialCommunityIcons name={ayuda.icono} size={30} color="#FFFFFF" style={styles.icono} />
             <Text style={styles.texto}>{ayuda.nombre}</Text>
           </TouchableOpacity>
         ))}
@@ -72,6 +84,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   item: {
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 20,
     marginVertical: 10,
     backgroundColor: '#0077B6',
@@ -81,17 +95,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 6,
-    alignItems: 'center',
-    transform: [{ scale: 1 }],
   },
-  itemHovered: {
-    transform: [{ scale: 1.03 }],
+  icono: {
+    marginRight: 15,
   },
   texto: {
     fontSize: 18,
     fontWeight: '600',
     color: '#FFFFFF',
-    textAlign: 'center',
+    textAlign: 'left',
     textTransform: 'capitalize',
   },
 });

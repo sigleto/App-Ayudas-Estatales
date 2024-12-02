@@ -21,7 +21,6 @@ import AyudasAlAlquiler from './desgloseAyudas/Vivienda/AyudasAlAlquiler';
 import BecaGeneral from './desgloseAyudas/Educación/BecaGeneral';
 import BecaApoyoEducativo from './desgloseAyudas/Educación/BecaApoyoEducativo';
 import BecaResidencia from './desgloseAyudas/Educación/BecaResidencia';
-import AyudasNacimientoAdopcion from './desgloseAyudas/Discapacidad/AyudasNacimientoAdopcion';
 import AyudaNacimientoAdopcion from './desgloseAyudas/PrestacionDescendientes/AyudaNacimientoAdopcion';
 import IngresoMinimoVital from './desgloseAyudas/Sociales/IngresoMinimoVital';
 import PensionNoContributiva from './desgloseAyudas/Discapacidad/PensionNoContributiva';
@@ -51,38 +50,37 @@ export function AyudasStack  () {
   return (
   <Stack.Navigator>
      
-        <Stack.Screen name="ListadoAyudas" component={ListadoAyudas} />
-        <Stack.Screen name="SubsidiosDesempleo" component={SubsidiosDesempleo} />
-        <Stack.Screen name="PrestacionContributiva" component={PrestacionContributiva} />
-        <Stack.Screen name="SubsidiosPorDesempleo" component={SubsidiosPorDesempleo} />    
-        <Stack.Screen name="PrestacionesJubilacion" component={PrestacionesJubilacion} />
-        <Stack.Screen name="AyudasVivienda" component={AyudasVivienda} />
-        <Stack.Screen name="AyudaDescendientes" component={AyudaDescendientes} />
-        <Stack.Screen name="BecasEstudio" component={BecasEstudio} />
-        <Stack.Screen name="Emprendedores" component={Emprendedores} />
-        <Stack.Screen name="Discapacidad" component={Discapacidad} />
-        <Stack.Screen name="Aval20PorCiento" component={Aval20PorCiento} />
-        <Stack.Screen name="AyudasParaJovenes" component={AyudasParaJovenes} />
-        <Stack.Screen name="AyudasAlAlquiler" component={AyudasAlAlquiler} />
-        <Stack.Screen name="BecaGeneral" component={BecaGeneral} />
-        <Stack.Screen name="BecaApoyoEducativo" component={BecaApoyoEducativo} />
-        <Stack.Screen name="BecaResidencia" component={BecaResidencia} />
-        <Stack.Screen name="AyudasNacimientoAdopcion" component={AyudasNacimientoAdopcion} />
-        <Stack.Screen name="IngresoMinimoVital" component={IngresoMinimoVital} />
-        <Stack.Screen name="PensionNoContributiva" component={PensionNoContributiva} />
-        <Stack.Screen name="SubsidiosEspecificos" component={SubsidiosEspecificos} />
-        <Stack.Screen name="AyudaNacimientoAdopcion" component={AyudaNacimientoAdopcion} />
-        <Stack.Screen name="PrestacionHijoDiscapacidad" component={PrestacionHijoDiscapacidad} />
-        <Stack.Screen name="EnisaEmprendedores" component={EnisaEmprendedores} />
-        <Stack.Screen name="KitDigital" component={KitDigital} />
-        <Stack.Screen name="LineasICO" component={LineasICO} />
-        <Stack.Screen name="PymeInvierte" component={PymeInvierte} />
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="DescargoResponsabilidad" component={DescargoResponsabilidad} />
-        <Stack.Screen name="PoliticaPrivacidad" component={PoliticaPrivacidad} />
-        <Stack.Screen name="AyudasSociales" component={AyudasSociales} />
-        <Stack.Screen name="BonoJovenAlquiler" component={BonoJovenAlquiler} />
-        <Stack.Screen name="LeyDependencia" component={LeyDependencia} />
+        <Stack.Screen name="ListadoAyudas" component={ListadoAyudas}options={{ headerShown: false }} />
+        <Stack.Screen name="SubsidiosDesempleo" component={SubsidiosDesempleo}options={{ headerShown: false }} />
+        <Stack.Screen name="PrestacionContributiva" component={PrestacionContributiva}options={{ headerShown: false }} />
+        <Stack.Screen name="SubsidiosPorDesempleo" component={SubsidiosPorDesempleo}options={{ headerShown: false }} />    
+        <Stack.Screen name="PrestacionesJubilacion" component={PrestacionesJubilacion}options={{ headerShown: false }} />
+        <Stack.Screen name="AyudasVivienda" component={AyudasVivienda}options={{ headerShown: false }} />
+        <Stack.Screen name="AyudaDescendientes" component={AyudaDescendientes}options={{ headerShown: false }} />
+        <Stack.Screen name="BecasEstudio" component={BecasEstudio}options={{ headerShown: false }} />
+        <Stack.Screen name="Emprendedores" component={Emprendedores}options={{ headerShown: false }} />
+        <Stack.Screen name="Discapacidad" component={Discapacidad}options={{ headerShown: false }} />
+        <Stack.Screen name="Aval20PorCiento" component={Aval20PorCiento}options={{ headerShown: false }} />
+        <Stack.Screen name="AyudasParaJovenes" component={AyudasParaJovenes}options={{ headerShown: false }} />
+        <Stack.Screen name="AyudasAlAlquiler" component={AyudasAlAlquiler}options={{ headerShown: false }} />
+        <Stack.Screen name="BecaGeneral" component={BecaGeneral}options={{ headerShown: false }} />
+        <Stack.Screen name="BecaApoyoEducativo" component={BecaApoyoEducativo}options={{ headerShown: false }} />
+        <Stack.Screen name="BecaResidencia" component={BecaResidencia}options={{ headerShown: false }} />
+        <Stack.Screen name="IngresoMinimoVital" component={IngresoMinimoVital}options={{ headerShown: false }} />
+        <Stack.Screen name="PensionNoContributiva" component={PensionNoContributiva}options={{ headerShown: false }} />
+        <Stack.Screen name="SubsidiosEspecificos" component={SubsidiosEspecificos}options={{ headerShown: false }} />
+        <Stack.Screen name="AyudaNacimientoAdopcion" component={AyudaNacimientoAdopcion}options={{ headerShown: false }} />
+        <Stack.Screen name="PrestacionHijoDiscapacidad" component={PrestacionHijoDiscapacidad}options={{ headerShown: false }} />
+        <Stack.Screen name="EnisaEmprendedores" component={EnisaEmprendedores}options={{ headerShown: false }} />
+        <Stack.Screen name="KitDigital" component={KitDigital}options={{ headerShown: false }} />
+        <Stack.Screen name="LineasICO" component={LineasICO}options={{ headerShown: false }} />
+        <Stack.Screen name="PymeInvierte" component={PymeInvierte}options={{ headerShown: false }} />
+        <Stack.Screen name="Home" component={Home}options={{ headerShown: false }} />
+        <Stack.Screen name="DescargoResponsabilidad" component={DescargoResponsabilidad}options={{ headerShown: false }} />
+        <Stack.Screen name="PoliticaPrivacidad" component={PoliticaPrivacidad}options={{ headerShown: false }} />
+        <Stack.Screen name="AyudasSociales" component={AyudasSociales}options={{ headerShown: false }} />
+        <Stack.Screen name="BonoJovenAlquiler" component={BonoJovenAlquiler}options={{ headerShown: false }} />
+        <Stack.Screen name="LeyDependencia" component={LeyDependencia}options={{ headerShown: false }} />
 
 
 
