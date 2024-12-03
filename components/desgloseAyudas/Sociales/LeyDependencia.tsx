@@ -1,7 +1,18 @@
+// LeyDependencia.tsx
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Necesario para la navegación
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
+
+type RootStackParamList = {
+  SimuladorLeyDeDependencia: undefined;
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 export default function LeyDependencia() {
+  const navigation = useNavigation<NavigationProp>();
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
@@ -50,6 +61,9 @@ export default function LeyDependencia() {
         <Text style={styles.content}>
           Ley 39/2006, de 14 de diciembre, de Promoción de la Autonomía Personal y Atención a las Personas en Situación de Dependencia.
         </Text>
+
+        {/* Botón para navegar al simulador */}
+        <Button title="Simular Ley de Dependencia" onPress={() => navigation.navigate('SimuladorLeyDeDependencia')} />
       </View>
     </ScrollView>
   );
@@ -91,7 +105,7 @@ const styles = StyleSheet.create({
     color: '#6c757d',
     textAlign: 'justify',
   },
-   bold: {
+  bold: {
     fontWeight: 'bold',
   },
 });

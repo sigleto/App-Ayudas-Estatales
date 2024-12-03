@@ -1,7 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Linking } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking,Button} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+// Definición de los tipos para las rutas
+type RootStackParamList = {
+  SimuladorBecaApoyoEducativo: undefined;
+  // Agrega aquí otras rutas si las tienes
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
 
 const BecaApoyoEducativo: React.FC = () => {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
@@ -42,6 +54,14 @@ const BecaApoyoEducativo: React.FC = () => {
         <Text style={styles.content}>
           Basada en la Orden EDU/947/2024 y las actualizaciones anuales del Ministerio.
         </Text>
+        <Text style={styles.subtitle}>Simulador</Text>
+        <Text style={styles.content}>
+          ¿Quieres saber si tienes derecho al bono? Puedes probar nuestro simulador aquí:
+        </Text>
+        <Button 
+          title="Ir al simulador" 
+          onPress={() => navigation.navigate('SimuladorBecaApoyoEducativo')} 
+        />
       </View>
     </ScrollView>
   );

@@ -1,7 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Linking } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking,Button} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+// Definición de los tipos para las rutas
+type RootStackParamList = {
+  SimuladorBecaGeneral: undefined;
+  // Agrega aquí otras rutas si las tienes
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const BecaGeneral: React.FC = () => {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
@@ -54,6 +65,13 @@ const BecaGeneral: React.FC = () => {
           Regulado por el Real Decreto 1721/2007 y las convocatorias anuales del Ministerio 
           de Educación y Formación Profesional.
         </Text>
+        <Text style={styles.content}>
+          ¿Quieres saber si tienes derecho al bono? Puedes probar nuestro simulador aquí:
+        </Text>
+        <Button 
+          title="Ir al simulador" 
+          onPress={() => navigation.navigate('SimuladorBecaGeneral')} 
+        />
       </View>
     </ScrollView>
   );

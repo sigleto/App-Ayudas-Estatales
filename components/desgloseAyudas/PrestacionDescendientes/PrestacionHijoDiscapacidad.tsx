@@ -1,23 +1,19 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet, Linking } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Linking, Button} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+// Definición de los tipos para las rutas
+type RootStackParamList = {
+  SimuladorPrestacionHijoDiscapacidad: undefined;
+  // Agrega aquí otras rutas si las tienes
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const PrestacionHijoDiscapacidad = () => {
-  return (
-    <ScrollView style={styles.container}>
-      <View style={styles.card}>
-        <Text style={styles.title}>
-          Prestación Económica por Hijo a Cargo con Discapacidad
-        </Text>
-
-        <SectionDescripcion />
-        <SectionRequisitos />
-        <SectionCuantia />
-        <SectionProcesoSolicitud />
-        <SectionNormativa />
-      </View>
-    </ScrollView>
-  );
-};
+  const navigation = useNavigation<NavigationProp>();
+ 
 
 // Sección: Descripción
 const SectionDescripcion = () => (
@@ -98,6 +94,32 @@ const SectionNormativa = () => (
     </Text>
   </View>
 );
+
+return (
+  <ScrollView style={styles.container}>
+    <View style={styles.card}>
+      <Text style={styles.title}>
+        Prestación Económica por Hijo a Cargo con Discapacidad
+      </Text>
+
+      <SectionDescripcion />
+      <SectionRequisitos />
+      <SectionCuantia />
+      <SectionProcesoSolicitud />
+      <SectionNormativa />
+      <Text style={styles.content}>
+        ¿Quieres saber si tienes derecho al bono? Puedes probar nuestro simulador aquí:
+      </Text>
+      <Button 
+        title="Ir al simulador" 
+        onPress={() => navigation.navigate('SimuladorPrestacionHijoDiscapacidad')} 
+      />
+    </View>
+    
+  </ScrollView>
+);
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -139,6 +161,12 @@ const styles = StyleSheet.create({
   link: {
     color: '#007BFF',
     textDecorationLine: 'underline',
+  },
+  content: {
+    fontSize: 20,
+    lineHeight: 26,
+    color: '#6c757d',
+    textAlign: 'justify',
   },
 });
 

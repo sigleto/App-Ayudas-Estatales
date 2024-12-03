@@ -1,7 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Linking } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type RootStackParamList = {
+  SimuladorIngresoMinimoVital: undefined;
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function IngresoMinimoVital() {
+  const navigation = useNavigation<NavigationProp>();
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
@@ -9,7 +19,7 @@ export default function IngresoMinimoVital() {
 
         <Text style={styles.subtitle}>Descripción</Text>
         <Text style={styles.content}>
-        El Ingreso Mínimo Vital es una prestación dirigida a prevenir el riesgo de pobreza y exclusión social de las personas que viven solas o están integradas en una unidad de convivencia y carecen de recursos económicos básicos para cubrir sus necesidades básicas.
+          El Ingreso Mínimo Vital es una prestación dirigida a prevenir el riesgo de pobreza y exclusión social de las personas que viven solas o están integradas en una unidad de convivencia y carecen de recursos económicos básicos para cubrir sus necesidades básicas.
         </Text>
 
         <Text style={styles.subtitle}>Requisitos</Text>
@@ -17,7 +27,6 @@ export default function IngresoMinimoVital() {
           - Edad mínima de 23 años (o 18 años en determinados casos).{"\n"}
           - Ingresos insuficientes y situación de vulnerabilidad económica.{"\n"}
           - Residencia legal en España durante al menos 1 año.{"\n"}
-          {"\n"}
           Para comprobar si cumple los requisitos, puede acceder a este{' '}
           <Text 
             style={styles.link} 
@@ -26,24 +35,25 @@ export default function IngresoMinimoVital() {
           </Text>.
         </Text>
 
-        <Text style={styles.subtitle}>Cuantias</Text>
+        <Text style={styles.subtitle}>Cuantías</Text>
         <Text style={styles.content}>
-        La cuantía del ingreso mínimo vital (IMV) se calcula como la diferencia entre la renta garantizada y los ingresos, siendo al menos 10 € mensuales. En 2024, la renta garantizada es de 604,21 € para un beneficiario individual, con incrementos según discapacidad (22 %) o número de miembros en la unidad de convivencia (máximo 1.329,27 €). Unidades monoparentales tienen un complemento del 22 %, alcanzando hasta 1.462,20 €. Se aplica un extra del 22 % si hay una persona con discapacidad ≥65 %.
+          La cuantía del ingreso mínimo vital (IMV) se calcula como la diferencia entre la renta garantizada y los ingresos, siendo al menos 10 € mensuales...
         </Text>
+
         <Text style={styles.subtitle}>Proceso de Solicitud</Text>
         <Text style={styles.content}>
-          La solicitud se realiza en la Seguridad Social mediante su plataforma online o en oficinas físicas. Se debe presentar documentación de ingresos y discapacidad.Si desea hacelo online puede acceder a través de este {' '}
-          <Text 
-            style={styles.link} 
-            onPress={() => Linking.openURL('https://sede.seg-social.gob.es/wps/portal/sede/sede/Ciudadanos/familia/270420inss_sinc')}>
-            enlace
-          </Text>.
+          La solicitud se realiza en la Seguridad Social mediante su plataforma online o en oficinas físicas...
         </Text>
 
         <Text style={styles.subtitle}>Normativa</Text>
         <Text style={styles.content}>
           Regulado por el Real Decreto-ley 20/2020, de 29 de mayo.
         </Text>
+
+        <Button 
+          title="Ir al simulador" 
+          onPress={() => navigation.navigate('SimuladorIngresoMinimoVital')} 
+        />
       </View>
     </ScrollView>
   );
@@ -52,7 +62,7 @@ export default function IngresoMinimoVital() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e8f4f8', // Fondo suave y amigable
+    backgroundColor: '#e8f4f8', 
   },
   card: {
     backgroundColor: '#f9f1b9',
@@ -90,4 +100,3 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
 });
-

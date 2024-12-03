@@ -1,7 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView,Linking } from 'react-native';
+import { View, Text, StyleSheet, ScrollView,Linking, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+// Definición de los tipos para las rutas
+type RootStackParamList = {
+  SimuladorPensionNoContributiva: undefined;
+  // Agrega aquí otras rutas si las tienes
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function PensionNoContributiva() {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
@@ -46,6 +57,14 @@ Incremento 50%	10.875,90 €	776,85 €
         <Text style={styles.content}>
           Regulada por el Real Decreto Legislativo 1/2013, de 29 de noviembre.
         </Text>
+        <Text style={styles.subtitle}>Simulador</Text>
+        <Text style={styles.content}>
+          ¿Quieres saber si tienes derecho al bono? Puedes probar nuestro simulador aquí:
+        </Text>
+        <Button 
+          title="Ir al simulador" 
+          onPress={() => navigation.navigate('SimuladorPensionNoContributiva')} 
+        />
       </View>
     </ScrollView>
   );

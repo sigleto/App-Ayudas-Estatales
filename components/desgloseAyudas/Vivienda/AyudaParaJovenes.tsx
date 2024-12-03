@@ -1,7 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Linking } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking,Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+// Definición de los tipos para las rutas
+type RootStackParamList = {
+  SimuladorAyudaJovenesAlquiler: undefined;
+  SimuladorAyudaJovenesAdquisicion: undefined;
+  // Agrega aquí otras rutas si las tienes
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function AyudasParaJovenes() {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
@@ -65,6 +77,17 @@ export default function AyudasParaJovenes() {
         <Text style={styles.content}>
           Plan Estatal de Vivienda 2022-2025 (BOE-A-2021-19809).
         </Text>
+        <Text style={styles.content}>
+          ¿Quieres saber si tienes derecho al bono? Puedes probar nuestro simulador aquí:
+        </Text>
+        <Button 
+          title="Ir al simulador alquiler" 
+          onPress={() => navigation.navigate('SimuladorAyudaJovenesAlquiler')} 
+        />
+        <Button 
+          title="Ir al simulador adquisicion" 
+          onPress={() => navigation.navigate('SimuladorAyudaJovenesAdquisicion')} 
+        />
       </View>
     </ScrollView>
   );

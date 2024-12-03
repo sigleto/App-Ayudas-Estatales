@@ -1,7 +1,18 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet, Linking } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Linking,Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+// Definición de los tipos para las rutas
+type RootStackParamList = {
+  SimuladorAyudaNacimiento: undefined;
+  // Agrega aquí otras rutas si las tienes
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const AyudaNacimientoAdopcion = () => {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
@@ -59,8 +70,15 @@ const AyudaNacimientoAdopcion = () => {
           <Text style={styles.sectionTitle}>Normativa</Text>
           <Text style={styles.text}>
             Esta prestación está regulada por la Ley del Impuesto sobre la Renta de las Personas Físicas (IRPF). La normativa específica puede variar según actualizaciones legislativas.
-          </Text>
+          </Text>          
         </View>
+        <Text style={styles.content}>
+          ¿Quieres saber si tienes derecho al bono? Puedes probar nuestro simulador aquí:
+        </Text>
+        <Button 
+          title="Ir al simulador" 
+          onPress={() => navigation.navigate('SimuladorAyudaNacimiento')} 
+        />
       </View>
     </ScrollView>
   );
@@ -108,6 +126,12 @@ const styles = StyleSheet.create({
   link: {
     color: '#007BFF',
     textDecorationLine: 'underline',
+  },
+  content: {
+    fontSize: 20,
+    lineHeight: 26,
+    color: '#6c757d',
+    textAlign: 'justify',
   },
 });
 

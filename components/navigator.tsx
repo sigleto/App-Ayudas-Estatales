@@ -37,6 +37,21 @@ import AyudasSociales from './listado/AyudasSociales';
 import BonoJovenAlquiler from './desgloseAyudas/Sociales/BonoJovenAlquiler';
 import LeyDependencia from './desgloseAyudas/Sociales/LeyDependencia';
 
+import SimuladorBonoJoven from './Simuladores/SimuladorBonoJovenAlquiler';
+import SimuladorIngresoMinimoVital from './Simuladores/SimuladorIngresoMinimoVital';
+import SimuladorLeyDeDependencia from './Simuladores/SimuladorLeyDeDependencia';
+import SimuladorPensionNoContributiva from './Simuladores/SimuladorPensionNoContributiva';
+import SimuladorSubsidioMovilidad from './Simuladores/SimuladorSubsidioMovilidad';
+import SimuladorAsistenciaSanitaria from './Simuladores/SimuladorAsistenciaSanitaria';
+import SimuladorBecaApoyoEducativo from './Simuladores/SimuladorBecaApoyoEducativo';
+import SimuladorBecaGeneral from './Simuladores/SimuladorBecaGeneral';
+import SimuladorBecaResidencia from './Simuladores/SimuladorBecaResidencia';
+import SimuladorAyudaNacimiento from './Simuladores/SimuladorAyudaNacimiento';
+import SimuladorPrestacionHijoDiscapacidad from './Simuladores/SimuladorPrestacionHijoDiscapacidad';
+import SimuladorAyudaJovenesAlquiler from './Simuladores/SimuladorAyudaJovenesAlquiler';
+import SimuladorAyudaJovenesAdquisicion from './Simuladores/SimuladorAyudaJovenesAdquisivion';
+
+
 
 enableScreens();
 
@@ -83,7 +98,22 @@ export function AyudasStack  () {
         <Stack.Screen name="LeyDependencia" component={LeyDependencia}options={{ headerShown: false }} />
 
 
-
+        <Stack.Screen name="SimuladorBonoJoven" component={SimuladorBonoJoven}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorIngresoMinimoVital" component={SimuladorIngresoMinimoVital}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorLeyDeDependencia" component={SimuladorLeyDeDependencia}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorPensionNoContributiva" component={SimuladorPensionNoContributiva}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorSubsidioMovilidad" component={SimuladorSubsidioMovilidad}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorAsistenciaSanitaria" component={SimuladorAsistenciaSanitaria}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorBecaApoyoEducativo" component={SimuladorBecaApoyoEducativo}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorBecaGeneral" component={SimuladorBecaGeneral}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorBecaResidencia" component={SimuladorBecaResidencia}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorAyudaNacimiento" component={SimuladorAyudaNacimiento}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorPrestacionHijoDiscapacidad" component={SimuladorPrestacionHijoDiscapacidad}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorAyudaJovenesAlquiler" component={SimuladorAyudaJovenesAlquiler}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorAyudaJovenesAdquisicion" component={SimuladorAyudaJovenesAdquisicion}options={{ headerShown: false }} />
+       
+       
+       
         </Stack.Navigator>
 );
 }

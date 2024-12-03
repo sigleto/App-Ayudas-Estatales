@@ -1,7 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView,Linking} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+// Definición de los tipos para las rutas
+type RootStackParamList = {
+  SimuladorBonoJoven: undefined;
+  // Agrega aquí otras rutas si las tienes
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function BonoJovenAlquiler() {
+  const navigation = useNavigation<NavigationProp>();
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
@@ -16,18 +28,21 @@ export default function BonoJovenAlquiler() {
         <Text style={styles.content}>
           - Tener entre 18 y 35 años.{"\n"}
           - Acreditar rentas de trabajo.{"\n"}
-          - Que tus ingresos anuales sean,con carácter general, inferiores a 3 veces el IPREM.
-          - La  renta mensual vivienda ebe ser como máximo de hasta 600€/mes, hasta 300€/mes si el alquiler es de una habitación
+          - Que tus ingresos anuales sean, con carácter general, inferiores a 3 veces el IPREM.{"\n"}
+          - La renta mensual vivienda debe ser como máximo de hasta 600€/mes, hasta 300€/mes si el alquiler es de una habitación
             o hasta 900€/mes o 450€/mes en alquiler de habitación, previo acuerdo de la Comisión de Seguimiento.
         </Text>
-        <Text style={styles.subtitle}>Cuantias y plazos</Text>
+
+        <Text style={styles.subtitle}>Cuantías y plazos</Text>
         <Text style={styles.content}>        
-          La cuantía es de 250 al mes, se concede por 2 años por un maximo total de 6000€ a razón de 250€/mes
+          La cuantía es de 250€ al mes, se concede por 2 años por un máximo total de 6000€ a razón de 250€/mes.
         </Text>
+
         <Text style={styles.subtitle}>Proceso de Solicitud</Text>
         <Text style={styles.content}>
-          Al ser una ayuda concertada con las distintas Comunidades Autónomas, se debe presentar en las sedes de la COnsejería de vivienda correspondiente a ti comunidad.{"\n"}
-          Si deseas presentarla de forma online, puedes usar este  <Text 
+          Al ser una ayuda concertada con las distintas Comunidades Autónomas, se debe presentar en las sedes de la Consejería de vivienda correspondiente a tu comunidad.{"\n"}
+          Si deseas presentarla de forma online, puedes usar este{' '}
+          <Text 
             style={styles.link} 
             onPress={() => Linking.openURL('https://www.mivau.gob.es/vivienda/bono-alquiler-joven')}>
             enlace
@@ -38,6 +53,15 @@ export default function BonoJovenAlquiler() {
         <Text style={styles.content}>
           El bono joven está regulado por el Real Decreto 42/2021, de 15 de febrero, de ayudas al alquiler.
         </Text>
+
+        <Text style={styles.subtitle}>Simulador</Text>
+        <Text style={styles.content}>
+          ¿Quieres saber si tienes derecho al bono? Puedes probar nuestro simulador aquí:
+        </Text>
+        <Button 
+          title="Ir al simulador" 
+          onPress={() => navigation.navigate('SimuladorBonoJoven')} 
+        />
       </View>
     </ScrollView>
   );

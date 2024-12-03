@@ -1,7 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Linking } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking,Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+// Definición de los tipos para las rutas
+type RootStackParamList = {
+  SimuladorSubsidioMovilidad: undefined;
+  SimuladorAsistenciaSanitaria:undefined
+  // Agrega aquí otras rutas si las tienes
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
+
 
 export default function SubsidiosEspecificos() {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
@@ -46,6 +60,18 @@ export default function SubsidiosEspecificos() {
         <Text style={styles.content}>
           Reguladas por la Ley General de Derechos de las Personas con Discapacidad y su Inclusión Social.
         </Text>
+        <Text style={styles.subtitle}>Simulador</Text>
+        <Text style={styles.content}>
+          ¿Quieres saber si tienes derecho al bono? Puedes probar nuestro simulador aquí:
+        </Text>
+        <Button 
+          title="Simulador subs. Movilidad" 
+          onPress={() => navigation.navigate('SimuladorSubsidioMovilidad')} 
+        />
+        <Button 
+          title="Simulador asist. Sanitaria" 
+          onPress={() => navigation.navigate('SimuladorAsistenciaSanitaria')} 
+        />
       </View>
     </ScrollView>
   );
