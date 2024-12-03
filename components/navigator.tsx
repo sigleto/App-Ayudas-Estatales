@@ -49,8 +49,8 @@ import SimuladorBecaResidencia from './Simuladores/SimuladorBecaResidencia';
 import SimuladorAyudaNacimiento from './Simuladores/SimuladorAyudaNacimiento';
 import SimuladorPrestacionHijoDiscapacidad from './Simuladores/SimuladorPrestacionHijoDiscapacidad';
 import SimuladorAyudaJovenesAlquiler from './Simuladores/SimuladorAyudaJovenesAlquiler';
+import SimuladorAyudasAlquiler from './Simuladores/SimuladorAyudasAlquiler';
 import SimuladorAyudaJovenesAdquisicion from './Simuladores/SimuladorAyudaJovenesAdquisivion';
-
 
 
 enableScreens();
@@ -111,6 +111,7 @@ export function AyudasStack  () {
         <Stack.Screen name="SimuladorPrestacionHijoDiscapacidad" component={SimuladorPrestacionHijoDiscapacidad}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorAyudaJovenesAlquiler" component={SimuladorAyudaJovenesAlquiler}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorAyudaJovenesAdquisicion" component={SimuladorAyudaJovenesAdquisicion}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorAyudasAlquiler" component={SimuladorAyudasAlquiler}options={{ headerShown: false }} />
        
        
        
