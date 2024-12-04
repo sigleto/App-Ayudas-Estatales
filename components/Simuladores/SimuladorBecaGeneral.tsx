@@ -1,42 +1,60 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, TextInput, Button, Text, StyleSheet, ScrollView, Alert } from 'react-native';
 
 const SimuladorBecaGeneral: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
-  const [ciudadania, setCiudadania] = useState<boolean | null>(null);
-  const [matriculado, setMatriculado] = useState<boolean | null>(null);
+  const [ciudadania, setCiudadania] = useState<string>(''); // S o N
+  const [matriculado, setMatriculado] = useState<string>(''); // S o N
   const [ingresos, setIngresos] = useState<string>('');
-  const [rendimiento, setRendimiento] = useState<boolean | null>(null);
+  const [rendimiento, setRendimiento] = useState<string>(''); // S o N
   const [resultado, setResultado] = useState<string>('');
 
   const handleSimulacion = () => {
-    const edadNum = parseInt(edad);
+    // Convertir valores
+    const edadNum = parseInt(edad, 10);
     const ingresosNum = parseFloat(ingresos);
-    const umbralRenta = 20000; // Umbral de renta aproximado
 
-    if (
-      isNaN(edadNum) ||
-      edadNum < 16 ||
-      ciudadania === null ||
-      matriculado === null ||
-      rendimiento === null ||
-      isNaN(ingresosNum)
-    ) {
-      setResultado('Por favor, completa todos los campos correctamente.');
+    // Validaciones iniciales
+    if (!edad || !ciudadania || !matriculado || !ingresos || !rendimiento) {
+      setResultado('Por favor, completa todos los campos.');
       return;
     }
 
-    if (
-      ciudadania &&
-      matriculado &&
-      ingresosNum <= umbralRenta &&
-      rendimiento
-    ) {
-      setResultado('Cumples con los requisitos para solicitar la Beca General.');
-    } else {
-      setResultado('No cumples con los requisitos para esta beca.');
+    if (isNaN(edadNum) || isNaN(ingresosNum)) {
+      setResultado('Asegúrate de ingresar valores numéricos válidos para edad e ingresos.');
+      return;
     }
+
+    if (!['S', 'N'].includes(ciudadania.toUpperCase()) ||
+        !['S', 'N'].includes(matriculado.toUpperCase()) ||
+        !['S', 'N'].includes(rendimiento.toUpperCase())) {
+      setResultado('Las respuestas deben ser S o N en las preguntas de ciudadanía, matrícula y rendimiento.');
+      return;
+    }
+
+    // Lógica de la beca
+    const umbralRenta = 20000;
+    const cumpleRequisitos =
+      edadNum >= 16 &&
+      ciudadania.toUpperCase() === 'S' &&
+      matriculado.toUpperCase() === 'S' &&
+      ingresosNum <= umbralRenta &&
+      rendimiento.toUpperCase() === 'S';
+
+    setResultado(
+      cumpleRequisitos
+        ? 'Cumples con los requisitos para solicitar la Beca General.'
+        : 'No cumples con los requisitos para esta beca.'
+    );
   };
+
+  useEffect(() => {
+    Alert.alert(
+      'Aviso importante',
+      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.',
+      [{ text: 'Entendido' }]
+    );
+  }, []);
 
   return (
     <ScrollView style={styles.container}>
@@ -51,22 +69,22 @@ const SimuladorBecaGeneral: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>¿Es ciudadano español o tiene residencia legal? (Sí: 1, No: 0)</Text>
+      <Text>¿Es ciudadano español o tiene residencia legal? (S/N):</Text>
       <TextInput
-        value={ciudadania !== null ? (ciudadania ? '1' : '0') : ''}
-        onChangeText={(text) => setCiudadania(text === '1')}
-        keyboardType="numeric"
-        placeholder="Ingresa 1 o 0"
+        value={ciudadania}
+        onChangeText={setCiudadania}
+        placeholder="Ingresa S o N"
         style={styles.input}
+        maxLength={1}
       />
 
-      <Text>¿Está matriculado en un curso completo o mínimo de asignaturas? (Sí: 1, No: 0)</Text>
+      <Text>¿Está matriculado en un curso completo o mínimo de asignaturas? (S/N):</Text>
       <TextInput
-        value={matriculado !== null ? (matriculado ? '1' : '0') : ''}
-        onChangeText={(text) => setMatriculado(text === '1')}
-        keyboardType="numeric"
-        placeholder="Ingresa 1 o 0"
+        value={matriculado}
+        onChangeText={setMatriculado}
+        placeholder="Ingresa S o N"
         style={styles.input}
+        maxLength={1}
       />
 
       <Text>Ingresos familiares (€):</Text>
@@ -78,18 +96,18 @@ const SimuladorBecaGeneral: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>¿Cumple con el rendimiento académico mínimo exigido? (Sí: 1, No: 0)</Text>
+      <Text>¿Cumple con el rendimiento académico mínimo exigido? (S/N):</Text>
       <TextInput
-        value={rendimiento !== null ? (rendimiento ? '1' : '0') : ''}
-        onChangeText={(text) => setRendimiento(text === '1')}
-        keyboardType="numeric"
-        placeholder="Ingresa 1 o 0"
+        value={rendimiento}
+        onChangeText={setRendimiento}
+        placeholder="Ingresa S o N"
         style={styles.input}
+        maxLength={1}
       />
 
       <Button title="Simular" onPress={handleSimulacion} />
 
-      {resultado && <Text style={styles.result}>{resultado}</Text>}
+      {resultado ? <Text style={styles.result}>{resultado}</Text> : null}
     </ScrollView>
   );
 };
@@ -112,12 +130,14 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     padding: 10,
     fontSize: 16,
+    borderRadius: 5,
   },
   result: {
     marginTop: 20,
     fontSize: 18,
     color: '#4caf50',
     textAlign: 'center',
+    fontWeight: 'bold',
   },
 });
 

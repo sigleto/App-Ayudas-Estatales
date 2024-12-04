@@ -50,7 +50,7 @@ import SimuladorAyudaNacimiento from './Simuladores/SimuladorAyudaNacimiento';
 import SimuladorPrestacionHijoDiscapacidad from './Simuladores/SimuladorPrestacionHijoDiscapacidad';
 import SimuladorAyudaJovenesAlquiler from './Simuladores/SimuladorAyudaJovenesAlquiler';
 import SimuladorAyudasAlquiler from './Simuladores/SimuladorAyudasAlquiler';
-import SimuladorAyudaJovenesAdquisicion from './Simuladores/SimuladorAyudaJovenesAdquisivion';
+import SimuladorAyudaJovenesAdquisicion from './Simuladores/SimuladorAyudaJovenesAdquisicion';
 
 
 enableScreens();

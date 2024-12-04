@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
 
 const SimuladorBonoJoven: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
   const [ingresos, setIngresos] = useState<string>('');
   const [alquiler, setAlquiler] = useState<string>('');
+  const [rentasTrabajo, setRentasTrabajo] = useState<string>(''); // S o N
   const [resultado, setResultado] = useState<string>('');
 
   const handleSubmit = () => {
@@ -12,8 +13,14 @@ const SimuladorBonoJoven: React.FC = () => {
     const ingresosNum = parseFloat(ingresos);
     const alquilerNum = parseFloat(alquiler);
 
-    if (isNaN(edadNum) || isNaN(ingresosNum) || isNaN(alquilerNum)) {
+    // Validaciones de entrada
+    if (isNaN(edadNum) || isNaN(ingresosNum) || isNaN(alquilerNum) || !rentasTrabajo) {
       setResultado('Por favor, ingresa todos los datos correctamente.');
+      return;
+    }
+
+    if (!['S', 'N'].includes(rentasTrabajo.toUpperCase())) {
+      setResultado('La respuesta para rentas del trabajo debe ser S o N.');
       return;
     }
 
@@ -21,13 +28,22 @@ const SimuladorBonoJoven: React.FC = () => {
     const edadRequerida = edadNum >= 18 && edadNum <= 35;
     const ingresosRequeridos = ingresosNum <= 24000; // Ajustar según los criterios oficiales
     const alquilerRequerido = alquilerNum <= 600; // Ajustar según los criterios oficiales
+    const rentasTrabajoRequeridas = rentasTrabajo.toUpperCase() === 'S';
 
-    if (edadRequerida && ingresosRequeridos && alquilerRequerido) {
+    if (edadRequerida && ingresosRequeridos && alquilerRequerido && rentasTrabajoRequeridas) {
       setResultado('¡Tienes derecho al Bono Joven por Alquiler!');
     } else {
       setResultado('No tienes derecho al Bono Joven por Alquiler.');
     }
   };
+
+  React.useEffect(() => {
+    Alert.alert(
+      'Aviso importante',
+      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.',
+      [{ text: 'Entendido' }]
+    );
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -60,6 +76,15 @@ const SimuladorBonoJoven: React.FC = () => {
         style={styles.input}
       />
 
+      <Text>¿Obtienes rentas del trabajo? (S/N):</Text>
+      <TextInput
+        value={rentasTrabajo}
+        onChangeText={setRentasTrabajo}
+        placeholder="Ingresa S o N"
+        style={styles.input}
+        maxLength={1}
+      />
+
       <Button title="Verificar" onPress={handleSubmit} />
 
       {resultado && <Text style={styles.result}>{resultado}</Text>}
@@ -88,8 +113,9 @@ const styles = StyleSheet.create({
   result: {
     marginTop: 20,
     fontSize: 18,
-    color: '#6c757d',
+    color: '#4caf50',
     textAlign: 'center',
+    fontWeight: 'bold',
   },
 });
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ScrollView, Alert } from 'react-native';
 
 const SimuladorAyudasAlquiler: React.FC = () => {
   const [ingresos, setIngresos] = useState<string>('');
-  const [esFamiliaNumerosa, setEsFamiliaNumerosa] = useState<boolean | null>(null);
+  const [esFamiliaNumerosa, setEsFamiliaNumerosa] = useState<string>(''); // Cambiado para 'S' o 'N'
   const [gradoDiscapacidad, setGradoDiscapacidad] = useState<string>('');
   const [rentaAlquiler, setRentaAlquiler] = useState<string>('');
   const [edad, setEdad] = useState<string>('');
@@ -19,7 +19,7 @@ const SimuladorAyudasAlquiler: React.FC = () => {
     if (
       isNaN(ingresosNum) ||
       isNaN(rentaAlquilerNum) ||
-      esFamiliaNumerosa === null ||
+      esFamiliaNumerosa === '' ||
       (gradoDiscapacidad && isNaN(gradoDiscapacidadNum)) ||
       isNaN(edadNum)
     ) {
@@ -27,8 +27,11 @@ const SimuladorAyudasAlquiler: React.FC = () => {
       return;
     }
 
+    // Convertir la respuesta 'S' o 'N' a booleano
+    const esFamiliaNumerosaBool = esFamiliaNumerosa === 'S';
+
     let limiteIngresos: number;
-    if (esFamiliaNumerosa) {
+    if (esFamiliaNumerosaBool) {
       limiteIngresos =
         gradoDiscapacidadNum >= 33
           ? 5 * iprem
@@ -53,6 +56,14 @@ const SimuladorAyudasAlquiler: React.FC = () => {
     }
   };
 
+  React.useEffect(() => {
+    Alert.alert(
+      'Aviso importante',
+      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.',
+      [{ text: 'Entendido' }]
+    );
+  }, []);
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Simulador Ayudas al Alquiler</Text>
@@ -66,12 +77,11 @@ const SimuladorAyudasAlquiler: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>¿Eres familia numerosa? (Sí: 1, No: 0):</Text>
+      <Text>¿Eres familia numerosa? (S: Sí, N: No):</Text>
       <TextInput
-        value={esFamiliaNumerosa !== null ? (esFamiliaNumerosa ? '1' : '0') : ''}
-        onChangeText={(text) => setEsFamiliaNumerosa(text === '1')}
-        keyboardType="numeric"
-        placeholder="Ingresa 1 o 0"
+        value={esFamiliaNumerosa}
+        onChangeText={setEsFamiliaNumerosa}
+        placeholder="Ingresa 'S' o 'N'"
         style={styles.input}
       />
 
@@ -134,7 +144,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#28a745',
+    color: '#4caf50',
   },
 });
 

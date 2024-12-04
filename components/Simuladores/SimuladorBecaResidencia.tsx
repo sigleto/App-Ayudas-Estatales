@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
 
 const SimuladorBecaResidencia: React.FC = () => {
-  const [matriculado, setMatriculado] = useState<boolean | null>(null);
-  const [residenciaLejana, setResidenciaLejana] = useState<boolean | null>(null);
-  const [estudiosPresenciales, setEstudiosPresenciales] = useState<boolean | null>(null);
+  const [matriculado, setMatriculado] = useState<string>('');
+  const [residenciaLejana, setResidenciaLejana] = useState<string>('');
+  const [estudiosPresenciales, setEstudiosPresenciales] = useState<string>('');
   const [ingresos, setIngresos] = useState<string>('');
   const [resultado, setResultado] = useState<string>('');
 
@@ -12,10 +12,15 @@ const SimuladorBecaResidencia: React.FC = () => {
     const ingresosNum = parseFloat(ingresos);
     const umbralRenta = 25000; // Umbral de renta familiar aproximado
 
+    // Validar que las respuestas sean solo 'S' o 'N'
+    const esMatriculado = matriculado.toUpperCase() === 'S';
+    const esResidenciaLejana = residenciaLejana.toUpperCase() === 'S';
+    const esEstudiosPresenciales = estudiosPresenciales.toUpperCase() === 'S';
+
     if (
-      matriculado === null ||
-      residenciaLejana === null ||
-      estudiosPresenciales === null ||
+      !['S', 'N'].includes(matriculado.toUpperCase()) ||
+      !['S', 'N'].includes(residenciaLejana.toUpperCase()) ||
+      !['S', 'N'].includes(estudiosPresenciales.toUpperCase()) ||
       isNaN(ingresosNum)
     ) {
       setResultado('Por favor, completa todos los campos correctamente.');
@@ -23,9 +28,9 @@ const SimuladorBecaResidencia: React.FC = () => {
     }
 
     if (
-      matriculado &&
-      residenciaLejana &&
-      estudiosPresenciales &&
+      esMatriculado &&
+      esResidenciaLejana &&
+      esEstudiosPresenciales &&
       ingresosNum <= umbralRenta
     ) {
       setResultado('Cumples con los requisitos para solicitar la Beca de Residencia.');
@@ -34,34 +39,42 @@ const SimuladorBecaResidencia: React.FC = () => {
     }
   };
 
+  React.useEffect(() => {
+    Alert.alert(
+      'Aviso importante',
+      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.',
+      [{ text: 'Entendido' }]
+    );
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Simulador Beca de Residencia</Text>
 
-      <Text>¿Estás matriculado en estudios postobligatorios o universitarios? (Sí: 1, No: 0)</Text>
+      <Text>¿Estás matriculado en estudios postobligatorios o universitarios? (S/N):</Text>
       <TextInput
-        value={matriculado !== null ? (matriculado ? '1' : '0') : ''}
-        onChangeText={(text) => setMatriculado(text === '1')}
-        keyboardType="numeric"
-        placeholder="Ingresa 1 o 0"
+        value={matriculado}
+        onChangeText={setMatriculado}
+        maxLength={1} // Solo permite un carácter
+        placeholder="Ingresa S o N"
         style={styles.input}
       />
 
-      <Text>¿Tu residencia habitual está lejos del centro de estudios? (Sí: 1, No: 0)</Text>
+      <Text>¿Tu residencia habitual está lejos del centro de estudios? (S/N):</Text>
       <TextInput
-        value={residenciaLejana !== null ? (residenciaLejana ? '1' : '0') : ''}
-        onChangeText={(text) => setResidenciaLejana(text === '1')}
-        keyboardType="numeric"
-        placeholder="Ingresa 1 o 0"
+        value={residenciaLejana}
+        onChangeText={setResidenciaLejana}
+        maxLength={1} // Solo permite un carácter
+        placeholder="Ingresa S o N"
         style={styles.input}
       />
 
-      <Text>¿Estás cursando estudios presenciales y con matrícula completa? (Sí: 1, No: 0)</Text>
+      <Text>¿Estás cursando estudios presenciales y con matrícula completa? (S/N):</Text>
       <TextInput
-        value={estudiosPresenciales !== null ? (estudiosPresenciales ? '1' : '0') : ''}
-        onChangeText={(text) => setEstudiosPresenciales(text === '1')}
-        keyboardType="numeric"
-        placeholder="Ingresa 1 o 0"
+        value={estudiosPresenciales}
+        onChangeText={setEstudiosPresenciales}
+        maxLength={1} // Solo permite un carácter
+        placeholder="Ingresa S o N"
         style={styles.input}
       />
 
@@ -103,8 +116,9 @@ const styles = StyleSheet.create({
   result: {
     marginTop: 20,
     fontSize: 18,
-    color: '#6c757d',
+    color: '#4caf50',
     textAlign: 'center',
+    fontWeight: 'bold',
   },
 });
 

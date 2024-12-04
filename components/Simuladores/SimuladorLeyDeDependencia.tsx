@@ -1,6 +1,6 @@
 // SimuladorLeyDeDependencia.tsx
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
 
 const SimuladorLeyDeDependencia: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
@@ -16,21 +16,49 @@ const SimuladorLeyDeDependencia: React.FC = () => {
       return;
     }
 
-    let prestaciones = 0;
-    if (gradoNum === 1) {
-      prestaciones = 180; // Grado I
-    } else if (gradoNum === 2) {
-      prestaciones = 315; // Grado II
-    } else if (gradoNum === 3) {
-      prestaciones = 455; // Grado III
+    // Verificar si la persona está en situación de dependencia
+    if (edadNum < 3) {
+      setResultado('No tienes derecho a la Ley de Dependencia, ya que no cumples con la edad mínima de 3 años.');
+      return;
     }
 
-    if (edadNum >= 18 && prestaciones > 0) {
-      setResultado(`Tienes derecho a la prestación económica. Cuantía estimada: €${prestaciones}/mes`);
+    // Verificar el grado de dependencia y asignar las prestaciones
+    let prestaciones = 0;
+    let mensaje = '';
+
+    switch (gradoNum) {
+      case 1: // Grado I: Dependencia moderada
+        prestaciones = 180; 
+        mensaje = 'Grado I: Dependencia moderada';
+        break;
+      case 2: // Grado II: Dependencia severa
+        prestaciones = 315;
+        mensaje = 'Grado II: Dependencia severa';
+        break;
+      case 3: // Grado III: Gran dependencia
+        prestaciones = 455;
+        mensaje = 'Grado III: Gran dependencia';
+        break;
+      default:
+        setResultado('Por favor, ingresa un grado de dependencia válido (1, 2 o 3).');
+        return;
+    }
+
+    // Evaluar si la persona tiene derecho a la ayuda (conforme a los criterios de la ley)
+    if (edadNum >= 3) {
+      setResultado(`Tienes derecho a la prestación económica (${mensaje}). Cuantía estimada: €${prestaciones}/mes`);
     } else {
       setResultado('No tienes derecho a la prestación económica según la Ley de Dependencia.');
     }
   };
+
+  React.useEffect(() => {
+    Alert.alert(
+      'Aviso importante',
+      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.',
+      [{ text: 'Entendido' }]
+    );
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -45,12 +73,12 @@ const SimuladorLeyDeDependencia: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>Grado de Dependencia:</Text>
+      <Text>Grado de Dependencia (1, 2 o 3):</Text>
       <TextInput
         value={gradoDependencia}
         onChangeText={setGradoDependencia}
         keyboardType="numeric"
-        placeholder="Grado (1, 2 o 3)"
+        placeholder="Grado de dependencia"
         style={styles.input}
       />
 
@@ -82,8 +110,9 @@ const styles = StyleSheet.create({
   result: {
     marginTop: 20,
     fontSize: 18,
-    color: '#6c757d',
+    color: '#4caf50',
     textAlign: 'center',
+    fontWeight:'bold'
   },
 });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, StyleSheet,Linking } from 'react-native';
 
 const PymeInvierte = () => {
   return (
@@ -25,7 +25,15 @@ const PymeInvierte = () => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Proceso de Solicitud</Text>
           <Text style={styles.text}>
-            Las solicitudes se presentan en la web del ICEX, acompañadas del plan de internacionalización.
+            Las solicitudes se presentan en la web del<Text
+              style={styles.link}
+              onPress={() =>
+                Linking.openURL(
+                  'https://www.icex.es/es/todos-nuestros-servicios/financiacion-para-la-internacionalizacion/programa-pyme-invierte'
+                )
+              }
+            > ICEX
+            </Text>, acompañadas del plan de internacionalización.
           </Text>
         </View>
 
@@ -77,6 +85,10 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     color: '#6c757d',
     textAlign: 'justify',
+  },
+  link: {
+    color: '#007BFF',
+    textDecorationLine: 'underline',
   },
 });
 

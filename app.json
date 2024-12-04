@@ -4,7 +4,7 @@
     "slug": "Ayudas",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/Icono1.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,10 +13,11 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/Icono4.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.sigleto.Ayudas"
+      "package": "com.sigleto.Ayudas",
+      "versionCode": 1
     },
     "web": {
       "bundler": "metro",

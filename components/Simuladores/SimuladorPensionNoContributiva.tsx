@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet,Alert} from 'react-native';
 
 const SimuladorPensionNoContributiva: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
@@ -28,6 +28,13 @@ const SimuladorPensionNoContributiva: React.FC = () => {
       setResultado('No cumples los requisitos para solicitar la pensión no contributiva.');
     }
   };
+  React.useEffect(() => {
+    Alert.alert(
+      'Aviso importante',
+      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.',
+      [{ text: 'Entendido' }]
+    );
+  }, []);
 
   return (
     <View style={styles.container}>

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
 
 const SimuladorBecaApoyoEducativo: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
-  const [escolarizado, setEscolarizado] = useState<boolean | null>(null);
-  const [certificado, setCertificado] = useState<boolean | null>(null);
+  const [escolarizado, setEscolarizado] = useState<string>('');
+  const [certificado, setCertificado] = useState<string>('');
   const [ingresos, setIngresos] = useState<string>('');
   const [resultado, setResultado] = useState<string>('');
 
@@ -12,10 +12,14 @@ const SimuladorBecaApoyoEducativo: React.FC = () => {
     const edadNum = parseInt(edad);
     const ingresosNum = parseFloat(ingresos);
 
+    // Validar que las respuestas sean solo 'S' o 'N'
+    const esEscolarizado = escolarizado.toUpperCase() === 'S';
+    const esCertificado = certificado.toUpperCase() === 'S';
+
     if (
       isNaN(edadNum) ||
-      escolarizado === null ||
-      certificado === null ||
+      !['S', 'N'].includes(escolarizado.toUpperCase()) ||
+      !['S', 'N'].includes(certificado.toUpperCase()) ||
       isNaN(ingresosNum)
     ) {
       setResultado('Por favor, completa todos los campos correctamente.');
@@ -26,8 +30,8 @@ const SimuladorBecaApoyoEducativo: React.FC = () => {
 
     if (
       ((edadNum >= 2 && edadNum <= 5) || (edadNum >= 6)) &&
-      escolarizado &&
-      certificado &&
+      esEscolarizado &&
+      esCertificado &&
       ingresosNum <= umbralRenta
     ) {
       setResultado('Cumples con los requisitos para solicitar la beca.');
@@ -35,6 +39,14 @@ const SimuladorBecaApoyoEducativo: React.FC = () => {
       setResultado('No cumples con los requisitos para esta beca.');
     }
   };
+
+  React.useEffect(() => {
+    Alert.alert(
+      'Aviso importante',
+      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.',
+      [{ text: 'Entendido' }]
+    );
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -49,21 +61,21 @@ const SimuladorBecaApoyoEducativo: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>¿Está escolarizado en un centro adecuado? (Sí: 1, No: 0)</Text>
+      <Text>¿Está escolarizado en un centro adecuado? (S/N):</Text>
       <TextInput
-        value={escolarizado !== null ? (escolarizado ? '1' : '0') : ''}
-        onChangeText={(text) => setEscolarizado(text === '1')}
-        keyboardType="numeric"
-        placeholder="Ingresa 1 o 0"
+        value={escolarizado}
+        onChangeText={setEscolarizado}
+        maxLength={1}
+        placeholder="Ingresa S o N"
         style={styles.input}
       />
 
-      <Text>¿Cuenta con el certificado requerido? (Sí: 1, No: 0)</Text>
+      <Text>¿Cuenta con el certificado requerido? (S/N):</Text>
       <TextInput
-        value={certificado !== null ? (certificado ? '1' : '0') : ''}
-        onChangeText={(text) => setCertificado(text === '1')}
-        keyboardType="numeric"
-        placeholder="Ingresa 1 o 0"
+        value={certificado}
+        onChangeText={setCertificado}
+        maxLength={1}
+        placeholder="Ingresa S o N"
         style={styles.input}
       />
 
@@ -105,8 +117,9 @@ const styles = StyleSheet.create({
   result: {
     marginTop: 20,
     fontSize: 18,
-    color: '#6c757d',
+    color: '#4caf50',
     textAlign: 'center',
+    fontWeight: 'bold',
   },
 });
 

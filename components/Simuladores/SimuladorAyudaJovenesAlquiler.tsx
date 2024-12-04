@@ -1,34 +1,65 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet,Alert} from 'react-native';
 
 const SimuladorAyudaJovenesAlquiler: React.FC = () => {
   const [ingresos, setIngresos] = useState<string>('');
   const [alquiler, setAlquiler] = useState<string>('');
+  const [edad, setEdad] = useState<string>('');
   const [resultado, setResultado] = useState<string>('');
 
   const handleSimulacion = () => {
     const ingresosNum = parseFloat(ingresos);
     const alquilerNum = parseFloat(alquiler);
+    const edadNum = parseInt(edad, 10);
+    const IPREM = 6000; // Indicador Público de Renta de Efectos Múltiples aproximado
 
-    if (isNaN(ingresosNum) || isNaN(alquilerNum)) {
-      setResultado('Por favor, ingresa valores válidos para ingresos y alquiler.');
+    if (isNaN(ingresosNum) || isNaN(alquilerNum) || isNaN(edadNum)) {
+      setResultado('Por favor, ingresa valores válidos para ingresos, edad y alquiler.');
       return;
     }
 
-    if (ingresosNum <= 3 * 6000 && alquilerNum <= 600) {
-      const ayuda = alquilerNum * 0.5;
-      setResultado(`Cumples los requisitos. Ayuda estimada: ${ayuda.toFixed(2)} € mensuales.`);
-    } else if (ingresosNum <= 3 * 6000 && alquilerNum > 600 && alquilerNum <= 900) {
-      const ayuda = 300 + (alquilerNum - 600) * 0.3;
-      setResultado(`Cumples los requisitos. Ayuda estimada: ${ayuda.toFixed(2)} € mensuales.`);
+    // Validaciones de edad
+    if (edadNum < 18 || edadNum > 35) {
+      setResultado('No cumples con la edad requerida (18-35 años).');
+      return;
+    }
+
+    // Validación de ingresos
+    if (ingresosNum > 3 * IPREM) {
+      setResultado('Tus ingresos superan el límite de 3 veces el IPREM.');
+      return;
+    }
+
+    // Validaciones de alquiler
+    if (alquilerNum <= 600) {
+      setResultado('Cumples los requisitos. Ayuda estimada: 250 € mensuales.');
+    } else if (alquilerNum > 600 && alquilerNum <= 900) {
+      setResultado(
+        'Cumples los requisitos. La ayuda dependerá de un acuerdo de la Comisión de Seguimiento. Estimación: 250 € mensuales.'
+      );
     } else {
-      setResultado('No cumples con los requisitos para esta ayuda.');
+      setResultado('El alquiler supera el límite permitido para esta ayuda.');
     }
   };
-
+  React.useEffect(() => {
+    Alert.alert(
+      'Aviso importante',
+      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.',
+      [{ text: 'Entendido' }]
+    );
+  }, []);
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Simulador Ayuda al Alquiler</Text>
+      <Text style={styles.title}>Simulador Bono Alquiler Joven</Text>
+
+      <Text>Edad (años):</Text>
+      <TextInput
+        value={edad}
+        onChangeText={setEdad}
+        keyboardType="numeric"
+        placeholder="Ingresa tu edad"
+        style={styles.input}
+      />
 
       <Text>Ingresos anuales (€):</Text>
       <TextInput
@@ -85,3 +116,4 @@ const styles = StyleSheet.create({
 });
 
 export default SimuladorAyudaJovenesAlquiler;
+

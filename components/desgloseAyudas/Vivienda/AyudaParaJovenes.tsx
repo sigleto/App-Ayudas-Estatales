@@ -30,12 +30,13 @@ export default function AyudasParaJovenes() {
         {/* Sección: Requisitos */}
         <Text style={styles.subtitle}>Requisitos</Text>
         <Text style={styles.content}>
-          <Text style={styles.bold}>Ayuda al alquiler:</Text>
+          <Text style={styles.bold}>Ayuda al alquiler (Bono Alquiler Joven):</Text>
           {'\n'}- Vivienda habitual y permanente
+          {'\n'}- Acreditar rentas del trabajo
           {'\n'}- Ingresos en la unidad de convivencia inferiores a:
           {'\n'}  - 3IPREM de forma general
-          {'\n'}  - 4IPREM si se trata de familias numerosas generales y personas con discapacidad
-          {'\n'}  - 5IPREM familias numerosas especiales y personas con determinados grados de discapacidad
+          {'\n'} - 4IPREM si se trata de familias numerosas generales y personas con discapacidad
+          {'\n'} - 5IPREM familias numerosas especiales y personas con determinados grados de discapacidad
           {'\n'}- Alquiler mensual máximo de 600 euros
           {'\n'}- Alquiler mensual máximo de 900 euros en determinados ámbitos definidos por las comunidades autónomas
           
@@ -45,16 +46,14 @@ export default function AyudasParaJovenes() {
           {'\n'}  - 3IPREM de forma general
           {'\n'}  - 4IPREM si se trata de familias numerosas generales y personas con discapacidad
           {'\n'}  - 5IPREM familias numerosas especiales y personas con determinados grados de discapacidad
-          {'\n'}- Precio de adquisición inferior a 100.000€
+          {'\n'}- Precio de adquisición inferior a 120.000€
         </Text>
 
         {/* Sección: Cuantías */}
         <Text style={styles.subtitle}>Cuantías</Text>
         <Text style={styles.content}>
           <Text style={styles.bold}>Ayuda al alquiler:</Text>
-          {'\n'}- Hasta 50% del alquiler mensual
-          {'\n'}- Hasta 30% en el tramo entre 601 y 900 euros
-          
+          {'\n'}- 250 euros al mes          
           {'\n\n'}<Text style={styles.bold}>Ayuda a la adquisición:</Text>
           {'\n'}- Hasta 10.800 euros con un límite del 20% del precio de adquisición (inferior a 100.000 euros).
         </Text>
