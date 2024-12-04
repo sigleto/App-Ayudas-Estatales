@@ -1,7 +1,7 @@
 // navigator.jsx
 import React from 'react';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator,CardStyleInterpolators } from '@react-navigation/stack';
 import { enableScreens } from 'react-native-screens';
 
 
@@ -36,6 +36,7 @@ import PoliticaPrivacidad from './PoliticaPrivacidad';
 import AyudasSociales from './listado/AyudasSociales';
 import BonoJovenAlquiler from './desgloseAyudas/Sociales/BonoJovenAlquiler';
 import LeyDependencia from './desgloseAyudas/Sociales/LeyDependencia';
+import Presentacion1 from './Presentacion/Presentacion1';
 
 import SimuladorBonoJoven from './Simuladores/SimuladorBonoJovenAlquiler';
 import SimuladorIngresoMinimoVital from './Simuladores/SimuladorIngresoMinimoVital';
@@ -118,6 +119,44 @@ export function AyudasStack  () {
         </Stack.Navigator>
 );
 }
+
+export function PresentacionStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Presentacion1"
+      screenOptions={{
+        headerShown: false,
+        gestureEnabled: true,
+        gestureDirection: "horizontal",
+        transitionSpec: {
+          open: { animation: "timing", config: { duration: 500 } },
+          close: { animation: "timing", config: { duration: 500 } },
+        },
+        cardStyleInterpolator: ({ current: { progress } }) => {
+          return {
+            cardStyle: {
+              opacity: progress,
+            },
+          };
+        },
+      }}
+    >
+      <Stack.Screen
+        name="Presentacion1"
+        component={Presentacion1}
+        options={() => ({headerShown: false,cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        })}
+      />
+    
+    </Stack.Navigator>
+  );
+}
+
+
+
+
+
+
 
 export function PrincipalStack(){
   return (

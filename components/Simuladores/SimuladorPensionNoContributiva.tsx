@@ -95,8 +95,9 @@ const styles = StyleSheet.create({
   result: {
     marginTop: 20,
     fontSize: 18,
-    color: '#6c757d',
+    fontWeight: 'bold',
     textAlign: 'center',
+    color: '#28a745',
   },
 });
 

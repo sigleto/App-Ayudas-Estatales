@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet,Alert} from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 
 const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
   const [discapacidad, setDiscapacidad] = useState<string>('');
-  const [residencia, setResidencia] = useState<boolean | null>(null);
+  const [residencia, setResidencia] = useState<string>(''); // 'S' o 'N'
   const [ingresos, setIngresos] = useState<string>('');
   const [resultado, setResultado] = useState<string>('');
 
@@ -13,22 +13,23 @@ const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
     const discapacidadNum = parseFloat(discapacidad);
     const ingresosNum = parseFloat(ingresos);
     const limiteIngresos = 15000; // Límite aproximado de ingresos anuales para menores de 18 años.
+    const residenciaBool = residencia.toUpperCase() === 'S';
 
     if (
       isNaN(edadNum) ||
       isNaN(discapacidadNum) ||
-      residencia === null ||
+      (residencia.toUpperCase() !== 'S' && residencia.toUpperCase() !== 'N') ||
       (edadNum < 18 && isNaN(ingresosNum))
     ) {
       setResultado('Por favor, completa todos los campos correctamente.');
       return;
     }
 
-    if (edadNum < 18 && discapacidadNum >= 33 && residencia && ingresosNum <= limiteIngresos) {
+    if (edadNum < 18 && discapacidadNum >= 33 && residenciaBool && ingresosNum <= limiteIngresos) {
       setResultado(
         'Cumples los requisitos para la prestación. Cuantía estimada: 1.000,00 € anuales (83,33 € mensuales).'
       );
-    } else if (edadNum >= 18 && discapacidadNum >= 65 && residencia) {
+    } else if (edadNum >= 18 && discapacidadNum >= 65 && residenciaBool) {
       setResultado(
         'Cumples los requisitos para la prestación. Cuantía estimada: 5.647,20 € anuales (470,60 € mensuales).'
       );
@@ -36,6 +37,7 @@ const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
       setResultado('No cumples con los requisitos para esta prestación.');
     }
   };
+
   React.useEffect(() => {
     Alert.alert(
       'Aviso importante',
@@ -43,6 +45,7 @@ const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
       [{ text: 'Entendido' }]
     );
   }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Simulador Prestación por Hijo con Discapacidad</Text>
@@ -65,12 +68,11 @@ const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>¿Resides legalmente en España? (Sí: 1, No: 0)</Text>
+      <Text>¿Resides legalmente en España? (S/N):</Text>
       <TextInput
-        value={residencia !== null ? (residencia ? '1' : '0') : ''}
-        onChangeText={(text) => setResidencia(text === '1')}
-        keyboardType="numeric"
-        placeholder="Ingresa 1 o 0"
+        value={residencia}
+        onChangeText={setResidencia}
+        placeholder="Escribe 'S' o 'N'"
         style={styles.input}
       />
 
