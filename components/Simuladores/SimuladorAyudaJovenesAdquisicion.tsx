@@ -6,7 +6,7 @@ const SimuladorAyudaJovenesAdquisicion: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
   const [ingresos, setIngresos] = useState<string>('');
   const [precioVivienda, setPrecioVivienda] = useState<string>('');
-  const [esPropietario, setEsPropietario] = useState<string>(''); // 'sí' o 'no'
+  const [esPropietario, setEsPropietario] = useState<string>(''); // 'S' o 'N'
   const [poblacion, setPoblacion] = useState<string>(''); // población del municipio
   const [resultado, setResultado] = useState<string>('');
   const navegacion = useNavigation();
@@ -16,14 +16,14 @@ const SimuladorAyudaJovenesAdquisicion: React.FC = () => {
     const ingresosNum = parseFloat(ingresos);
     const precioNum = parseFloat(precioVivienda);
     const poblacionNum = parseInt(poblacion);
-    const esPropietarioBool = esPropietario.toLowerCase() === 'sí';
+    const esPropietarioBool = esPropietario.toUpperCase() === 'S';
 
     if (
       isNaN(edadNum) ||
       isNaN(ingresosNum) ||
       isNaN(precioNum) ||
       isNaN(poblacionNum) ||
-      (esPropietario.toLowerCase() !== 'sí' && esPropietario.toLowerCase() !== 'no')
+      (esPropietario.toUpperCase() !== 'S' && esPropietario.toUpperCase() !== 'N')
     ) {
       setResultado('Por favor, completa todos los campos correctamente.');
       return;
@@ -90,11 +90,11 @@ const SimuladorAyudaJovenesAdquisicion: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>¿Eres propietario o usufructuario de otra vivienda? (sí/no):</Text>
+      <Text>¿Eres propietario o usufructuario de otra vivienda? (S/N):</Text>
       <TextInput
         value={esPropietario}
         onChangeText={setEsPropietario}
-        placeholder="Escribe 'sí' o 'no'"
+        placeholder="Escribe 'S' o 'N'"
         style={styles.input}
       />
 

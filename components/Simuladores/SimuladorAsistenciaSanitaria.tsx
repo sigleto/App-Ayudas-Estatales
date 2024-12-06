@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { View, TextInput, Button, Text, StyleSheet, Alert,TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+=======
+import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
+>>>>>>> 63ca339c67c45a3b1fee7c691024f133bff5fd95
 
 const SimuladorAsistenciaSanitaria: React.FC = () => {
   const [discapacidad, setDiscapacidad] = useState<string>('');
   const [seguroSocial, setSeguroSocial] = useState<string>('');
+<<<<<<< HEAD
+=======
+  const [sistemaSocial, setSistemaSocial] = useState<string>('');
+>>>>>>> 63ca339c67c45a3b1fee7c691024f133bff5fd95
   const [resultado, setResultado] = useState<string>('');
   const navegacion = useNavigation();
 
@@ -13,16 +21,33 @@ const SimuladorAsistenciaSanitaria: React.FC = () => {
 
     if (
       isNaN(discapacidadNum) ||
+<<<<<<< HEAD
       (seguroSocial !== 'S' && seguroSocial !== 'N')
+=======
+      !['S', 'N'].includes(seguroSocial.toUpperCase()) ||
+      !['S', 'N'].includes(sistemaSocial.toUpperCase())
+>>>>>>> 63ca339c67c45a3b1fee7c691024f133bff5fd95
     ) {
       setResultado('Por favor, completa todos los campos correctamente.');
       return;
     }
 
+<<<<<<< HEAD
     if (discapacidadNum >= 33 && seguroSocial === 'N') {
       setResultado(
         'Cumples con los requisitos para recibir asistencia sanitaria.'
       );
+=======
+    const tieneSeguroSocial = seguroSocial.toUpperCase() === 'S';
+    const incluidoSistemaSocial = sistemaSocial.toUpperCase() === 'S';
+
+    if (
+      discapacidadNum >= 33 &&
+      !tieneSeguroSocial &&
+      !incluidoSistemaSocial
+    ) {
+      setResultado('Cumples con los requisitos para recibir asistencia sanitaria.');
+>>>>>>> 63ca339c67c45a3b1fee7c691024f133bff5fd95
     } else {
       setResultado('No cumples con los requisitos para esta asistencia.');
     }
@@ -49,13 +74,30 @@ const SimuladorAsistenciaSanitaria: React.FC = () => {
         style={styles.input}
       />
 
+<<<<<<< HEAD
       <Text>¿Tienes seguro social? (S: Sí, N: No)</Text>
       <TextInput
         value={seguroSocial}
         onChangeText={(text) => setSeguroSocial(text.toUpperCase().trim())}
         maxLength={1}
+=======
+      <Text>¿Tienes seguro social? (S/N):</Text>
+      <TextInput
+        value={seguroSocial}
+        onChangeText={setSeguroSocial}
+>>>>>>> 63ca339c67c45a3b1fee7c691024f133bff5fd95
         placeholder="Ingresa S o N"
         style={styles.input}
+        maxLength={1}
+      />
+
+      <Text>¿Estás incluido en el sistema de la Seguridad Social? (S/N):</Text>
+      <TextInput
+        value={sistemaSocial}
+        onChangeText={setSistemaSocial}
+        placeholder="Ingresa S o N"
+        style={styles.input}
+        maxLength={1}
       />
 
       <Button title="Simular" onPress={handleSimulacion} />
@@ -100,7 +142,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+<<<<<<< HEAD
     color: '#4caf50',
+=======
+    color: '#28a745',
+>>>>>>> 63ca339c67c45a3b1fee7c691024f133bff5fd95
   },
   boton: {
     backgroundColor: '#c13855', // Color de fondo llamativo

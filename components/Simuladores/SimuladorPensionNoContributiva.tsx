@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   result: {
     marginTop: 20,
     fontSize: 18,
-    color: '#6c757d',
+    fontWeight: 'bold',
     textAlign: 'center',
   },  boton: {
     backgroundColor: '#c13855', // Color de fondo llamativo
@@ -122,7 +122,9 @@ const styles = StyleSheet.create({
     fontSize:20,
     fontWeight:'bold',
   },
-  letra:{fontSize:16, color:'white',fontWeight:'bold'}
+  letra:{fontSize:16, color:'white',fontWeight:'bold'
+    
+  },
 });
 
 export default SimuladorPensionNoContributiva;

@@ -79,4 +79,8 @@ const styles = StyleSheet.create({
   },
 });
 
+<<<<<<< HEAD
 export default Presentacion1;
+=======
+export default Presentacion1;
+>>>>>>> 63ca339c67c45a3b1fee7c691024f133bff5fd95

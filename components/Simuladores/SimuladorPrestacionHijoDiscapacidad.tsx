@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert,TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
   const [discapacidad, setDiscapacidad] = useState<string>('');
-  const [residencia, setResidencia] = useState<string>('');
+  const [residencia, setResidencia] = useState<string>(''); // 'S' o 'N'
   const [ingresos, setIngresos] = useState<string>('');
   const [resultado, setResultado] = useState<string>('');
   const navegacion = useNavigation();
@@ -15,24 +15,23 @@ const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
     const discapacidadNum = parseFloat(discapacidad);
     const ingresosNum = parseFloat(ingresos);
     const limiteIngresos = 15000; // Límite aproximado de ingresos anuales para menores de 18 años.
+    const residenciaBool = residencia.toUpperCase() === 'S';
 
     if (
       isNaN(edadNum) ||
       isNaN(discapacidadNum) ||
-      !['S', 'N'].includes(residencia.toUpperCase()) ||
+      (residencia.toUpperCase() !== 'S' && residencia.toUpperCase() !== 'N') ||
       (edadNum < 18 && isNaN(ingresosNum))
     ) {
       setResultado('Por favor, completa todos los campos correctamente.');
       return;
     }
 
-    const residenciaValida = residencia.toUpperCase() === 'S';
-
-    if (edadNum < 18 && discapacidadNum >= 33 && residenciaValida && ingresosNum <= limiteIngresos) {
+    if (edadNum < 18 && discapacidadNum >= 33 && residenciaBool && ingresosNum <= limiteIngresos) {
       setResultado(
         'Cumples los requisitos para la prestación. Cuantía estimada: 1.000,00 € anuales (83,33 € mensuales).'
       );
-    } else if (edadNum >= 18 && discapacidadNum >= 65 && residenciaValida) {
+    } else if (edadNum >= 18 && discapacidadNum >= 65 && residenciaBool) {
       setResultado(
         'Cumples los requisitos para la prestación. Cuantía estimada: 5.647,20 € anuales (470,60 € mensuales).'
       );
@@ -71,11 +70,11 @@ const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>¿Resides legalmente en España? (S para Sí, N para No):</Text>
+      <Text>¿Resides legalmente en España? (S/N):</Text>
       <TextInput
         value={residencia}
         onChangeText={setResidencia}
-        placeholder="Ingresa S o N"
+        placeholder="Escribe 'S' o 'N'"
         style={styles.input}
       />
 

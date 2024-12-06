@@ -15,8 +15,26 @@ const SimuladorSubsidioMovilidad: React.FC = () => {
     const edadNum = parseInt(edad);
     const discapacidadNum = parseInt(discapacidad);
     const ingresosNum = parseFloat(ingresos);
-    const usaTransporte = usaTransporteColectivo.toLowerCase() === 'no';
-    const puedeSalir = puedeSalirDeCasa.toLowerCase() === 'si';
+
+    // Validaciones para S o N
+    if (
+      usaTransporteColectivo.toUpperCase() !== 'S' &&
+      usaTransporteColectivo.toUpperCase() !== 'N'
+    ) {
+      setResultado('Por favor, responde "S" o "N" para la dificultad de usar transporte colectivo.');
+      return;
+    }
+
+    if (
+      puedeSalirDeCasa.toUpperCase() !== 'S' &&
+      puedeSalirDeCasa.toUpperCase() !== 'N'
+    ) {
+      setResultado('Por favor, responde "S" o "N" para si puedes desplazarte fuera de casa.');
+      return;
+    }
+
+    const usaTransporte = usaTransporteColectivo.toUpperCase() === 'S';
+    const puedeSalir = puedeSalirDeCasa.toUpperCase() === 'S';
 
     if (
       isNaN(edadNum) ||
@@ -43,6 +61,7 @@ const SimuladorSubsidioMovilidad: React.FC = () => {
       setResultado('No cumples con los requisitos para este subsidio.');
     }
   };
+
   React.useEffect(() => {
     Alert.alert(
       'Aviso importante',
@@ -50,6 +69,7 @@ const SimuladorSubsidioMovilidad: React.FC = () => {
       [{ text: 'Entendido' }]
     );
   }, []);
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Simulador Subsidio Movilidad</Text>
@@ -81,19 +101,19 @@ const SimuladorSubsidioMovilidad: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>¿Tienes dificultad para usar transporte colectivo? (sí/no):</Text>
+      <Text>¿Tienes dificultad para usar transporte colectivo? (S/N):</Text>
       <TextInput
         value={usaTransporteColectivo}
         onChangeText={setUsaTransporteColectivo}
-        placeholder="Responde sí o no"
+        placeholder="Responde S o N"
         style={styles.input}
       />
 
-      <Text>¿Puedes desplazarte fuera de casa? (sí/no):</Text>
+      <Text>¿Puedes desplazarte fuera de casa? (S/N):</Text>
       <TextInput
         value={puedeSalirDeCasa}
         onChangeText={setPuedeSalirDeCasa}
-        placeholder="Responde sí o no"
+        placeholder="Responde S o N"
         style={styles.input}
       />
 
@@ -137,7 +157,7 @@ const styles = StyleSheet.create({
   result: {
     marginTop: 20,
     fontSize: 18,
-    color: '#6c757d',
+    fontWeight: 'bold',
     textAlign: 'center',
   },  boton: {
     backgroundColor: '#c13855', // Color de fondo llamativo
