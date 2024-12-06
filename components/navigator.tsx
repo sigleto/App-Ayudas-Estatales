@@ -1,7 +1,7 @@
 // navigator.jsx
 import React from 'react';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator,CardStyleInterpolators } from '@react-navigation/stack';
 import { enableScreens } from 'react-native-screens';
 
 
@@ -36,6 +36,8 @@ import PoliticaPrivacidad from './PoliticaPrivacidad';
 import AyudasSociales from './listado/AyudasSociales';
 import BonoJovenAlquiler from './desgloseAyudas/Sociales/BonoJovenAlquiler';
 import LeyDependencia from './desgloseAyudas/Sociales/LeyDependencia';
+import Presentacion1 from './Presentacion/Presentacion1';
+import FormularioGeneral from './SimuladorGeneral/FormularioGeneral';
 
 import SimuladorBonoJoven from './Simuladores/SimuladorBonoJovenAlquiler';
 import SimuladorIngresoMinimoVital from './Simuladores/SimuladorIngresoMinimoVital';
@@ -52,16 +54,12 @@ import SimuladorAyudaJovenesAlquiler from './Simuladores/SimuladorAyudaJovenesAl
 import SimuladorAyudasAlquiler from './Simuladores/SimuladorAyudasAlquiler';
 import SimuladorAyudaJovenesAdquisicion from './Simuladores/SimuladorAyudaJovenesAdquisicion';
 
-
 enableScreens();
-
 
 const Stack = createStackNavigator();
 
 
-
-
-export function AyudasStack  () {
+    export function AyudasStack  () {
   return (
   <Stack.Navigator>
      
@@ -96,8 +94,7 @@ export function AyudasStack  () {
         <Stack.Screen name="AyudasSociales" component={AyudasSociales}options={{ headerShown: false }} />
         <Stack.Screen name="BonoJovenAlquiler" component={BonoJovenAlquiler}options={{ headerShown: false }} />
         <Stack.Screen name="LeyDependencia" component={LeyDependencia}options={{ headerShown: false }} />
-
-
+       
         <Stack.Screen name="SimuladorBonoJoven" component={SimuladorBonoJoven}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorIngresoMinimoVital" component={SimuladorIngresoMinimoVital}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorLeyDeDependencia" component={SimuladorLeyDeDependencia}options={{ headerShown: false }} />
@@ -112,21 +109,78 @@ export function AyudasStack  () {
         <Stack.Screen name="SimuladorAyudaJovenesAlquiler" component={SimuladorAyudaJovenesAlquiler}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorAyudaJovenesAdquisicion" component={SimuladorAyudaJovenesAdquisicion}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorAyudasAlquiler" component={SimuladorAyudasAlquiler}options={{ headerShown: false }} />
-       
-       
-       
-        </Stack.Navigator>
+       </Stack.Navigator>
 );
+}
+
+    export function FormularioGeneralStack(){
+  return (
+    <Stack.Navigator
+      initialRouteName="FormularioGeneral"
+     screenOptions={{ headerShown: false }} >
+    
+        <Stack.Screen name="FormularioGeneral" component={FormularioGeneral}options={{ headerShown: false }} />
+         <Stack.Screen name="SimuladorBonoJoven" component={SimuladorBonoJoven}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorIngresoMinimoVital" component={SimuladorIngresoMinimoVital}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorLeyDeDependencia" component={SimuladorLeyDeDependencia}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorPensionNoContributiva" component={SimuladorPensionNoContributiva}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorSubsidioMovilidad" component={SimuladorSubsidioMovilidad}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorAsistenciaSanitaria" component={SimuladorAsistenciaSanitaria}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorBecaApoyoEducativo" component={SimuladorBecaApoyoEducativo}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorBecaGeneral" component={SimuladorBecaGeneral}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorBecaResidencia" component={SimuladorBecaResidencia}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorAyudaNacimiento" component={SimuladorAyudaNacimiento}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorPrestacionHijoDiscapacidad" component={SimuladorPrestacionHijoDiscapacidad}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorAyudaJovenesAlquiler" component={SimuladorAyudaJovenesAlquiler}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorAyudaJovenesAdquisicion" component={SimuladorAyudaJovenesAdquisicion}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorAyudasAlquiler" component={SimuladorAyudasAlquiler}options={{ headerShown: false }} />
+      </Stack.Navigator>
+  );
+}
+
+    export function PresentacionStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Presentacion1"
+      screenOptions={{
+        headerShown: false,
+        gestureEnabled: true,
+        gestureDirection: "horizontal",
+        transitionSpec: {
+          open: { animation: "timing", config: { duration: 500 } },
+          close: { animation: "timing", config: { duration: 500 } },
+        },
+        cardStyleInterpolator: ({ current: { progress } }) => {
+          return {
+            cardStyle: {
+              opacity: progress,
+            },
+          };
+        },
+      }}
+    >
+      <Stack.Screen
+        name="Presentacion1"
+        component={Presentacion1}
+        options={() => ({headerShown: false,cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        })}
+      />
+    
+    </Stack.Navigator>
+  );
 }
 
 export function PrincipalStack(){
   return (
-   
       <Stack.Navigator>
-        
-        <Stack.Screen
+                <Stack.Screen
           name="Home"
           component={Home}
+          options={{  headerShown: false}}
+        />
+        <Stack.Screen
+          name="FormularioGeneral"
+          component={FormularioGeneralStack}
           options={{  headerShown: false}}
         />
         <Stack.Screen
@@ -149,6 +203,5 @@ export function PrincipalStack(){
    
   );
 };
-
 
 

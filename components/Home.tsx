@@ -8,10 +8,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 type RootDrawerParamList = {
   Home: undefined;
   ListadoAyudas: undefined;
+  FormularioGeneral:undefined;
   
 };
 
-type HomeScreenNavigationProp = DrawerNavigationProp<RootDrawerParamList, 'Home'>;
+type HomeScreenNavigationProp = DrawerNavigationProp<RootDrawerParamList, 'Home'|'FormularioGeneral'>;
 
 const Home: React.FC = () => {
   
@@ -42,6 +43,10 @@ const Home: React.FC = () => {
 
       <TouchableOpacity onPress={() => navigation.navigate('ListadoAyudas')}>
         <Text style={styles.organismos}>ACCEDE A LAS DISTINTAS AYUDAS</Text>
+      </TouchableOpacity>
+      
+      <TouchableOpacity onPress={() => navigation.navigate('FormularioGeneral')}>
+        <Text style={styles.organismos}>SIMULADOR GENERAL</Text>
       </TouchableOpacity>
       
    

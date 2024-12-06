@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet,Alert} from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
   const [discapacidad, setDiscapacidad] = useState<string>('');
-  const [residencia, setResidencia] = useState<boolean | null>(null);
+  const [residencia, setResidencia] = useState<string>('');
   const [ingresos, setIngresos] = useState<string>('');
   const [resultado, setResultado] = useState<string>('');
+  const navegacion = useNavigation();
 
   const handleSimulacion = () => {
     const edadNum = parseInt(edad, 10);
@@ -17,18 +19,20 @@ const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
     if (
       isNaN(edadNum) ||
       isNaN(discapacidadNum) ||
-      residencia === null ||
+      !['S', 'N'].includes(residencia.toUpperCase()) ||
       (edadNum < 18 && isNaN(ingresosNum))
     ) {
       setResultado('Por favor, completa todos los campos correctamente.');
       return;
     }
 
-    if (edadNum < 18 && discapacidadNum >= 33 && residencia && ingresosNum <= limiteIngresos) {
+    const residenciaValida = residencia.toUpperCase() === 'S';
+
+    if (edadNum < 18 && discapacidadNum >= 33 && residenciaValida && ingresosNum <= limiteIngresos) {
       setResultado(
         'Cumples los requisitos para la prestación. Cuantía estimada: 1.000,00 € anuales (83,33 € mensuales).'
       );
-    } else if (edadNum >= 18 && discapacidadNum >= 65 && residencia) {
+    } else if (edadNum >= 18 && discapacidadNum >= 65 && residenciaValida) {
       setResultado(
         'Cumples los requisitos para la prestación. Cuantía estimada: 5.647,20 € anuales (470,60 € mensuales).'
       );
@@ -36,6 +40,7 @@ const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
       setResultado('No cumples con los requisitos para esta prestación.');
     }
   };
+
   React.useEffect(() => {
     Alert.alert(
       'Aviso importante',
@@ -43,6 +48,7 @@ const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
       [{ text: 'Entendido' }]
     );
   }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Simulador Prestación por Hijo con Discapacidad</Text>
@@ -65,12 +71,11 @@ const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>¿Resides legalmente en España? (Sí: 1, No: 0)</Text>
+      <Text>¿Resides legalmente en España? (S para Sí, N para No):</Text>
       <TextInput
-        value={residencia !== null ? (residencia ? '1' : '0') : ''}
-        onChangeText={(text) => setResidencia(text === '1')}
-        keyboardType="numeric"
-        placeholder="Ingresa 1 o 0"
+        value={residencia}
+        onChangeText={setResidencia}
+        placeholder="Ingresa S o N"
         style={styles.input}
       />
 
@@ -89,7 +94,17 @@ const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
 
       <Button title="Simular" onPress={handleSimulacion} />
 
-      {resultado && <Text style={styles.result}>{resultado}</Text>}
+      {resultado && (
+        <>
+          <Text style={styles.result}>{resultado}</Text>
+          <TouchableOpacity
+            onPress={() => navegacion.navigate('Home' as never)}
+            style={styles.boton}
+          >
+            <Text style={styles.letra}>VOLVER</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
@@ -120,6 +135,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#28a745',
+  },
+  boton: {
+    backgroundColor: '#c13855',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: '40%',
+    marginTop: 20,
+    height: 40,
+  },
+  letra: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 

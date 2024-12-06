@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ScrollView, Alert,TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const SimuladorAyudasAlquiler: React.FC = () => {
   const [ingresos, setIngresos] = useState<string>('');
@@ -8,7 +9,8 @@ const SimuladorAyudasAlquiler: React.FC = () => {
   const [rentaAlquiler, setRentaAlquiler] = useState<string>('');
   const [edad, setEdad] = useState<string>('');
   const [resultado, setResultado] = useState<string>('');
-
+  const navegacion = useNavigation();
+  
   const handleSimulacion = () => {
     const ingresosNum = parseFloat(ingresos);
     const rentaAlquilerNum = parseFloat(rentaAlquiler);
@@ -114,7 +116,18 @@ const SimuladorAyudasAlquiler: React.FC = () => {
 
       <Button title="Simular" onPress={handleSimulacion} />
 
-      {resultado && <Text style={styles.result}>{resultado}</Text>}
+    
+      {resultado && (
+        <>
+          <Text style={styles.result}>{resultado}</Text>
+          <TouchableOpacity
+            onPress={() => navegacion.navigate('Home' as never)}
+            style={styles.boton}
+          >
+            <Text style={styles.letra}>VOLVER</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </ScrollView>
   );
 };
@@ -145,7 +158,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#4caf50',
+  },  boton: {
+    backgroundColor: '#c13855', // Color de fondo llamativo
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',     
+    width: '40%', // Ajusta el ancho del botón
+    marginTop: 20,
+    height:40,
+    fontSize:20,
+    fontWeight:'bold',
   },
+  letra:{fontSize:16, color:'white',fontWeight:'bold'}
 });
 
 export default SimuladorAyudasAlquiler;

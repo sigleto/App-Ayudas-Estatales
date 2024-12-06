@@ -30,9 +30,9 @@ const SectionRequisitos = () => (
   <View style={styles.section}>
     <Text style={styles.sectionTitle}>Requisitos</Text>
     <Text style={styles.text}>
-      - Tener un hijo con discapacidad reconocida (mínimo 33%).{"\n"}
+      - Tener un hijo  con discapacidad reconocida mínimo 33% si es menor de 18 años o más del 65% si es mayor de edad.{"\n"}
       - Residir legalmente en España.{"\n"}
-      - No percibir ingresos anuales, de cualquier naturaleza, superiores a los{" "}
+      - No recibir otra prestación de naturaleza similar.
       <Text
         style={styles.link}
         onPress={() =>

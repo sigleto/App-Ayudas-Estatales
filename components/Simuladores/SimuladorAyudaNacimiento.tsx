@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet,Alert } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet,Alert,TouchableOpacity} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const SimuladorAyudaNacimiento: React.FC = () => {
   const [residencia, setResidencia] = useState<boolean | null>(null);
@@ -7,7 +8,8 @@ const SimuladorAyudaNacimiento: React.FC = () => {
   const [convivencia, setConvivencia] = useState<boolean | null>(null);
   const [otraPrestacion, setOtraPrestacion] = useState<boolean | null>(null);
   const [resultado, setResultado] = useState<string>('');
-
+  const navegacion = useNavigation();
+  
   const handleSimulacion = () => {
     const ingresosNum = parseFloat(ingresos);
     const limiteIngresos = 15000; // Límite aproximado de ingresos anuales
@@ -85,7 +87,18 @@ const SimuladorAyudaNacimiento: React.FC = () => {
 
       <Button title="Simular" onPress={handleSimulacion} />
 
-      {resultado && <Text style={styles.result}>{resultado}</Text>}
+     
+      {resultado && (
+        <>
+          <Text style={styles.result}>{resultado}</Text>
+          <TouchableOpacity
+            onPress={() => navegacion.navigate('Home' as never)}
+            style={styles.boton}
+          >
+            <Text style={styles.letra}>VOLVER</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
@@ -114,7 +127,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#6c757d',
     textAlign: 'center',
+  },  boton: {
+    backgroundColor: '#c13855', // Color de fondo llamativo
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',     
+    width: '40%', // Ajusta el ancho del botón
+    marginTop: 20,
+    height:40,
+    fontSize:20,
+    fontWeight:'bold',
   },
+  letra:{fontSize:16, color:'white',fontWeight:'bold'}
 });
 
 export default SimuladorAyudaNacimiento;

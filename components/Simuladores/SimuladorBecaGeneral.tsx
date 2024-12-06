@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, ScrollView, Alert } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, ScrollView, Alert,TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const SimuladorBecaGeneral: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
@@ -8,7 +9,8 @@ const SimuladorBecaGeneral: React.FC = () => {
   const [ingresos, setIngresos] = useState<string>('');
   const [rendimiento, setRendimiento] = useState<string>(''); // S o N
   const [resultado, setResultado] = useState<string>('');
-
+  const navegacion = useNavigation();
+  
   const handleSimulacion = () => {
     // Convertir valores
     const edadNum = parseInt(edad, 10);
@@ -107,7 +109,18 @@ const SimuladorBecaGeneral: React.FC = () => {
 
       <Button title="Simular" onPress={handleSimulacion} />
 
-      {resultado ? <Text style={styles.result}>{resultado}</Text> : null}
+    
+      {resultado && (
+        <>
+          <Text style={styles.result}>{resultado}</Text>
+          <TouchableOpacity
+            onPress={() => navegacion.navigate('Home' as never)}
+            style={styles.boton}
+          >
+            <Text style={styles.letra}>VOLVER</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </ScrollView>
   );
 };
@@ -138,7 +151,19 @@ const styles = StyleSheet.create({
     color: '#4caf50',
     textAlign: 'center',
     fontWeight: 'bold',
+  },  boton: {
+    backgroundColor: '#c13855', // Color de fondo llamativo
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',     
+    width: '40%', // Ajusta el ancho del botón
+    marginTop: 20,
+    height:40,
+    fontSize:20,
+    fontWeight:'bold',
   },
+  letra:{fontSize:16, color:'white',fontWeight:'bold'}
 });
 
 export default SimuladorBecaGeneral;

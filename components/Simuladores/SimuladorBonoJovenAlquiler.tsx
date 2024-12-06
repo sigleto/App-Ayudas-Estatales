@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, Alert ,TouchableOpacity} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const SimuladorBonoJoven: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
@@ -7,7 +8,8 @@ const SimuladorBonoJoven: React.FC = () => {
   const [alquiler, setAlquiler] = useState<string>('');
   const [rentasTrabajo, setRentasTrabajo] = useState<string>(''); // S o N
   const [resultado, setResultado] = useState<string>('');
-
+  const navegacion = useNavigation();
+  
   const handleSubmit = () => {
     const edadNum = parseInt(edad);
     const ingresosNum = parseFloat(ingresos);
@@ -87,7 +89,18 @@ const SimuladorBonoJoven: React.FC = () => {
 
       <Button title="Verificar" onPress={handleSubmit} />
 
-      {resultado && <Text style={styles.result}>{resultado}</Text>}
+      
+      {resultado && (
+        <>
+          <Text style={styles.result}>{resultado}</Text>
+          <TouchableOpacity
+            onPress={() => navegacion.navigate('Home' as never)}
+            style={styles.boton}
+          >
+            <Text style={styles.letra}>VOLVER</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
@@ -116,7 +129,19 @@ const styles = StyleSheet.create({
     color: '#4caf50',
     textAlign: 'center',
     fontWeight: 'bold',
+  },  boton: {
+    backgroundColor: '#c13855', // Color de fondo llamativo
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',     
+    width: '40%', // Ajusta el ancho del botón
+    marginTop: 20,
+    height:40,
+    fontSize:20,
+    fontWeight:'bold',
   },
+  letra:{fontSize:16, color:'white',fontWeight:'bold'}
 });
 
 export default SimuladorBonoJoven;

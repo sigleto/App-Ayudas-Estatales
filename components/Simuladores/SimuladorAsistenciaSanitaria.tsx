@@ -1,25 +1,33 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet,Alert } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, Alert,TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const SimuladorAsistenciaSanitaria: React.FC = () => {
   const [discapacidad, setDiscapacidad] = useState<string>('');
-  const [seguroSocial, setSeguroSocial] = useState<boolean | null>(null);
+  const [seguroSocial, setSeguroSocial] = useState<string>('');
   const [resultado, setResultado] = useState<string>('');
+  const navegacion = useNavigation();
 
   const handleSimulacion = () => {
     const discapacidadNum = parseInt(discapacidad);
 
-    if (isNaN(discapacidadNum) || seguroSocial === null) {
-      setResultado('Por favor, completa todos los campos.');
+    if (
+      isNaN(discapacidadNum) ||
+      (seguroSocial !== 'S' && seguroSocial !== 'N')
+    ) {
+      setResultado('Por favor, completa todos los campos correctamente.');
       return;
     }
 
-    if (discapacidadNum >= 33 && !seguroSocial) {
-      setResultado('Cumples con los requisitos para recibir asistencia sanitaria.');
+    if (discapacidadNum >= 33 && seguroSocial === 'N') {
+      setResultado(
+        'Cumples con los requisitos para recibir asistencia sanitaria.'
+      );
     } else {
       setResultado('No cumples con los requisitos para esta asistencia.');
     }
   };
+
   React.useEffect(() => {
     Alert.alert(
       'Aviso importante',
@@ -27,6 +35,7 @@ const SimuladorAsistenciaSanitaria: React.FC = () => {
       [{ text: 'Entendido' }]
     );
   }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Simulador Asistencia Sanitaria</Text>
@@ -40,18 +49,28 @@ const SimuladorAsistenciaSanitaria: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>¿Tienes seguro social? (Sí: 1, No: 0)</Text>
+      <Text>¿Tienes seguro social? (S: Sí, N: No)</Text>
       <TextInput
-        value={seguroSocial !== null ? (seguroSocial ? '1' : '0') : ''}
-        onChangeText={(text) => setSeguroSocial(text === '1')}
-        keyboardType="numeric"
-        placeholder="Ingresa 1 o 0"
+        value={seguroSocial}
+        onChangeText={(text) => setSeguroSocial(text.toUpperCase().trim())}
+        maxLength={1}
+        placeholder="Ingresa S o N"
         style={styles.input}
       />
 
       <Button title="Simular" onPress={handleSimulacion} />
 
-      {resultado && <Text style={styles.result}>{resultado}</Text>}
+      {resultado && (
+        <>
+          <Text style={styles.result}>{resultado}</Text>
+          <TouchableOpacity
+            onPress={() => navegacion.navigate('Home' as never)}
+            style={styles.boton}
+          >
+            <Text style={styles.letra}>VOLVER</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
@@ -60,6 +79,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     backgroundColor: '#f2f2f2',
+    flex: 1, // Para expandir el contenedor
   },
   title: {
     fontSize: 24,
@@ -78,9 +98,24 @@ const styles = StyleSheet.create({
   result: {
     marginTop: 20,
     fontSize: 18,
-    color: '#6c757d',
+    fontWeight: 'bold',
     textAlign: 'center',
+    color: '#4caf50',
   },
+  boton: {
+    backgroundColor: '#c13855', // Color de fondo llamativo
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',     
+    width: '40%', // Ajusta el ancho del botón
+    marginTop: 20,
+    height:40,
+    fontSize:20,
+    fontWeight:'bold',
+  },
+  letra:{fontSize:16, color:'white',fontWeight:'bold'}
+  
 });
 
 export default SimuladorAsistenciaSanitaria;

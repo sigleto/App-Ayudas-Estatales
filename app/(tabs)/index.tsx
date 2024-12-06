@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { enableScreens } from 'react-native-screens';
-import { PrincipalStack} from '../../components/navigator';
+import { PrincipalStack,PresentacionStack} from '../../components/navigator';
 import DescargoResponsabilidad from '@/components/DescargoResponsabilidad';
 import PoliticaPrivacidad from '@/components/PoliticaPrivacidad';
 
@@ -44,7 +44,17 @@ const App = () => {
             }}
           />
                           
-
+                          <Drawer.Screen
+            name="Cómo funciona"
+            component={PresentacionStack}
+            options={{
+              drawerIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="information-outline" size={size} color={color} />
+              ),
+              drawerLabel: 'Cómo funciona',
+            }}
+          />
+          
           <Drawer.Screen
             name="DescargoResponsabilidad"
             component={DescargoResponsabilidad}
