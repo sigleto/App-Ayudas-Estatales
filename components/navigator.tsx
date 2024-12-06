@@ -37,10 +37,7 @@ import AyudasSociales from './listado/AyudasSociales';
 import BonoJovenAlquiler from './desgloseAyudas/Sociales/BonoJovenAlquiler';
 import LeyDependencia from './desgloseAyudas/Sociales/LeyDependencia';
 import Presentacion1 from './Presentacion/Presentacion1';
-<<<<<<< HEAD
 import FormularioGeneral from './SimuladorGeneral/FormularioGeneral';
-=======
->>>>>>> 63ca339c67c45a3b1fee7c691024f133bff5fd95
 
 import SimuladorBonoJoven from './Simuladores/SimuladorBonoJovenAlquiler';
 import SimuladorIngresoMinimoVital from './Simuladores/SimuladorIngresoMinimoVital';
@@ -116,7 +113,6 @@ const Stack = createStackNavigator();
 );
 }
 
-<<<<<<< HEAD
     export function FormularioGeneralStack(){
   return (
     <Stack.Navigator
@@ -143,9 +139,6 @@ const Stack = createStackNavigator();
 }
 
     export function PresentacionStack() {
-=======
-export function PresentacionStack() {
->>>>>>> 63ca339c67c45a3b1fee7c691024f133bff5fd95
   return (
     <Stack.Navigator
       initialRouteName="Presentacion1"
@@ -177,15 +170,6 @@ export function PresentacionStack() {
   );
 }
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
->>>>>>> 63ca339c67c45a3b1fee7c691024f133bff5fd95
 export function PrincipalStack(){
   return (
       <Stack.Navigator>

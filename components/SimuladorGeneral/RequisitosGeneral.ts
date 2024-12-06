@@ -59,7 +59,7 @@ export const categories: Categoria[] = [
       {
         name: "Bono alquiler joven",
         simulador: [
-          "SimuladorBonoJovenAlquiler",
+          "SimuladorBonoJoven",
         ],
       },
       {

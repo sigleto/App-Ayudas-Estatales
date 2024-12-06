@@ -127,7 +127,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-<<<<<<< HEAD
   },  boton: {
     backgroundColor: '#c13855', // Color de fondo llamativo
     borderRadius: 5,
@@ -139,9 +138,6 @@ const styles = StyleSheet.create({
     height:40,
     fontSize:20,
     fontWeight:'bold',
-=======
-    color: '#28a745',
->>>>>>> 63ca339c67c45a3b1fee7c691024f133bff5fd95
   },
   letra:{fontSize:16, color:'white',fontWeight:'bold'}
 });
