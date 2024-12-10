@@ -1,7 +1,18 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, Linking } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Linking,Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+// Definición de los tipos para las rutas
+type RootStackParamList = {
+  SimuladorSEPE: undefined;
+  // Agrega aquí otras rutas si las tienes
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const PrestacionContributiva = () => {
+  const navigation = useNavigation<NavigationProp>();
   const openSEPEPortal = () => {
     Linking.openURL('https://www.sepe.es/HomeSepe/prestaciones-desempleo/prestacion-contributiva/prestacion-contributiva-mas-de-un-anyo.html');
   };
@@ -64,9 +75,9 @@ const PrestacionContributiva = () => {
           </Text>
           <Text style={styles.link} onPress={openInfoPDF}>
             • Hoja informativa (PDF)
-          </Text>
-          
+          </Text>          
         </View>
+      
       </View>
     </ScrollView>
   );
@@ -121,6 +132,13 @@ const styles = StyleSheet.create({
   link: {
     color: '#007AFF', // Color azul para el enlace
     textDecorationLine: 'underline', // Subrayado para simular un enlace
+  },
+  
+  content: {
+    fontSize: 20,
+    lineHeight: 26,
+    color: '#6c757d',
+    textAlign: 'justify',
   },
 });
 

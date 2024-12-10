@@ -17,7 +17,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.sigleto.Ayudas",
-      "versionCode": 3,
+      "versionCode": 4,
       "permissions": ["com.google.android.gms.permission.AD_ID"]
       
     },

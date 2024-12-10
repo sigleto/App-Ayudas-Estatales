@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { categories } from "./RequisitosGeneral";
-import {
-  View,Text,TouchableOpacity,StyleSheet,ScrollView, Alert,
-
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import { useNavigation,CommonActions} from '@react-navigation/native';
+import { useNavigation, CommonActions } from '@react-navigation/native';
 import AnuncioBan from "../Anuncios/AnuncioBanner";
-
-
 
 const FormularioGeneral: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<number | undefined>(undefined);
   const [selectedAyuda, setSelectedAyuda] = useState<number | undefined>(undefined);
   const navigation = useNavigation();
- 
+
   const handleSubmit = () => {
     if (selectedCategory !== undefined && selectedAyuda !== undefined) {
       const ayuda = categories[selectedCategory].ayudas[selectedAyuda];
       
-      console.log (ayuda.simulador)
+      console.log(ayuda.simulador);
       navigation.dispatch(
         CommonActions.navigate({
           name: ayuda.simulador[0],
@@ -27,12 +22,10 @@ const FormularioGeneral: React.FC = () => {
         })
       );
     } else {
-      // Manejar el caso cuando no se ha seleccionado una categoría o una ayuda
       Alert.alert('Error', 'Por favor, selecciona una categoría y una ayuda antes de continuar.');
     }
   };
-  
-  
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Solicitud de Ayudas</Text>
@@ -40,32 +33,28 @@ const FormularioGeneral: React.FC = () => {
       <Text style={styles.label}>Categoría:</Text>
       
       <Picker
-  selectedValue={selectedCategory}
-  onValueChange={(value: number) => {
-    console.log("Categoría seleccionada:", value); // Log añadido
-    setSelectedCategory(value);
-    setSelectedAyuda(undefined);
-  }}
-  style={styles.picker}
->
-  <Picker.Item label="Selecciona categoría" value={undefined} />
-  {categories.map((cat, index) => (
-    <Picker.Item key={index} label={cat.category} value={index} />
-  ))}
-</Picker>
-
+        selectedValue={selectedCategory}
+        onValueChange={(value: number) => {
+          setSelectedCategory(value);
+          setSelectedAyuda(undefined);
+        }}
+        style={styles.picker}
+      >
+        <Picker.Item label="Selecciona categoría" value={undefined} />
+        {categories.map((cat, index) => (
+          <Picker.Item key={index} label={cat.category} value={index} />
+        ))}
+      </Picker>
 
       {selectedCategory !== undefined && (
         <>
           <Text style={styles.label}>Ayuda:</Text>
           <Picker
             selectedValue={selectedAyuda}
-            onValueChange={(value: number | undefined) => 
-          { console.log("Categoría seleccionada:", value); 
-                setSelectedAyuda(value)}}
+            onValueChange={(value: number | undefined) => setSelectedAyuda(value)}
             style={styles.picker}
           >
-            <Picker.Item label="Selecciona ayuda" value={undefined}  />
+            <Picker.Item label="Selecciona ayuda" value={undefined} />
             {categories[selectedCategory].ayudas.map((ayuda, index) => (
               <Picker.Item key={index} label={ayuda.name} value={index} />
             ))}
@@ -76,30 +65,53 @@ const FormularioGeneral: React.FC = () => {
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Enviar</Text>
       </TouchableOpacity>
-      <AnuncioBan/>
+
+      <AnuncioBan />
     </ScrollView>
-    
   );
 };
 
 const styles = StyleSheet.create({
-  container: { padding: 40 },
-  title: { fontSize: 24, fontWeight: "bold", marginBottom: 10 },
-  label: { fontSize:20, marginVertical: 5,color:"#c8851e" },
-  picker: { marginBottom:80,marginVertical: 10, height: 50, width: "100%" },
-  button:{  backgroundColor: '#c13855',
-    borderRadius: 5,
+  container: {
+    padding: 20,
+    backgroundColor: '#f7f7f7', // Fondo más suave para el formulario
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: "bold",
+    marginBottom: 15,
+    color: "#c8851e", // Color destacado para el título
+    textAlign: 'center', // Centrado del título
+  },
+  label: {
+    fontSize: 18,
+    marginVertical: 10,
+    color: "#333", // Color oscuro para las etiquetas
+  },
+  picker: {
+    backgroundColor: "#fff", // Fondo blanco para los pickers
+    height: 50,
+    borderRadius: 10,
+    borderColor: "#c8851e", // Borde con color suave
+    borderWidth: 1,
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: '#c13855',
+    borderRadius: 30, // Bordes más redondeados
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-    width: '40%',
-    marginTop: 20,
-    marginBlock:60,
-    height: 40,},
-    buttonText:{
-      fontSize:16, color:'white',fontWeight:'bold'}
-
-
+    width: '50%',
+    marginTop: 30,
+    height: 50,
+    marginBlock:80,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    fontWeight: 'bold',
+  }
 });
 
 export default FormularioGeneral;

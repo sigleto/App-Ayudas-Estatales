@@ -152,4 +152,20 @@ export const categories: Categoria[] = [
       },
     ],
   },
+  {
+    category: "Ayudas culturales",
+    ayudas: [
+      {
+        name: "",
+        simulador: [""],
+      },
+      {
+        name: "Bono cultural para jóvenes",
+        simulador: [
+          "SimuladorBonoCultural",
+        ],
+      },
+    ],
+  },
+ 
 ];
