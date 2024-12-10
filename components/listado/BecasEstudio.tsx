@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import AnuncioBan from '../Anuncios/AnuncioBanner';
 
 type RutasNavegacion = 'BecaGeneral' | 'BecaApoyoEducativo' | 'BecaResidencia';
 type RootStackParamList = {
@@ -63,6 +64,7 @@ const BecasEstudio = () => {
           </Animated.View>
         ))}
       </View>
+      <AnuncioBan/>
     </ScrollView>
   );
 };

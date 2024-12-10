@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated,Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import AnuncioBan from '../Anuncios/AnuncioBanner';
 
-type RutasNavegacion = 'IngresoMinimoVital' | 'BonoJovenAlquiler' | 'LeyDependencia';
+type RutasNavegacion = 'IngresoMinimoVital' | 'LeyDependencia';
 type RootStackParamList = {
   IngresoMinimoVital: undefined;
   BonoJovenAlquiler: undefined;
@@ -21,7 +22,6 @@ const AyudasSociales = () => {
 
   const apartados: Apartado[] = [
     { nombre: 'Ingreso Mínimo Vital', ruta: 'IngresoMinimoVital' },
-    { nombre: 'Bono Alquiler Joven', ruta: 'BonoJovenAlquiler' },
     { nombre: 'Ley de Dependencia', ruta: 'LeyDependencia' },
   ];
 
@@ -63,6 +63,7 @@ const AyudasSociales = () => {
           </Animated.View>
         ))}
       </View>
+      <AnuncioBan/>
     </ScrollView>
   );
 };

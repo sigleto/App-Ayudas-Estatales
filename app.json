@@ -17,7 +17,8 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.sigleto.Ayudas",
-      "versionCode": 2
+      "versionCode": 3,
+      "permissions": ["com.google.android.gms.permission.AD_ID"]
       
     },
     "web": {
@@ -49,5 +50,8 @@
         "projectId": "d8708398-6970-40f8-bf2f-171f51d5e80e"
       }
     }
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-6921150380725872~1785014133"
   }
 }

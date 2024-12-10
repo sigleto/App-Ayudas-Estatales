@@ -57,12 +57,6 @@ export const categories: Categoria[] = [
         ],
       },
       {
-        name: "Bono alquiler joven",
-        simulador: [
-          "SimuladorBonoJoven",
-        ],
-      },
-      {
         name: "Ley de dependencia",
         simulador: [
           "SimuladorLeyDeDependencia",
@@ -89,6 +83,13 @@ export const categories: Categoria[] = [
           "SimuladorPrestacionHijoDiscapacidad",
         ],
       },
+      
+      {
+        name: "Complemento de ayuda a la infancia",
+        simulador: [
+          "SimuladorComplementoAyudaInfancia",
+        ],
+      },
     ],
   },
   {
@@ -107,13 +108,13 @@ export const categories: Categoria[] = [
       {
         name: "Ayuda adquisición para jóvenes",
         simulador: [
-          "SimuladorJovenesAquisicion",
+          "SimuladorAyudaJovenesAdquisicion",
         ],
       },
       {
         name: "Bono alquiler joven",
         simulador: [
-          "SimuladorBonoJovenAlquiler",
+          "SimuladorBonoJoven",
         ],
       },
       {

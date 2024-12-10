@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated,Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import AnuncioBan from '../Anuncios/AnuncioBanner';
 
 type RutasNavegacion = 'PrestacionContributiva' | 'SubsidiosPorDesempleo';
 
@@ -46,7 +47,9 @@ const SubsidiosDesempleo = () => {
   };
 
   return (
+    
     <ScrollView style={styles.container}>
+      
        <Image source={require('../../assets/images/desempleo.png')} style={styles.logo} />
       <Text style={styles.title}>Subsidios por Desempleo</Text>
       <View style={styles.list}>
@@ -65,6 +68,7 @@ const SubsidiosDesempleo = () => {
           </Animated.View>
         ))}
       </View>
+      <AnuncioBan/>
     </ScrollView>
   );
 };

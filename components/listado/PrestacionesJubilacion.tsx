@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import AnuncioBan from '../Anuncios/AnuncioBanner';
 
 const PrestacionesJubilacion = () => {
   const sections = [
@@ -42,6 +43,7 @@ const PrestacionesJubilacion = () => {
           <Text style={styles.content}>{section.content}</Text>
         </View>
       ))}
+      <AnuncioBan/>
     </ScrollView>
   );
 };

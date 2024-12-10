@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AnuncioInt from '../Anuncios/AnuncioIntersticial';
 
 const SimuladorAsistenciaSanitaria: React.FC = () => {
   const [discapacidad, setDiscapacidad] = useState<string>('');
@@ -41,7 +42,9 @@ const SimuladorAsistenciaSanitaria: React.FC = () => {
   }, []);
 
   return (
+    
     <View style={styles.container}>
+      <AnuncioInt/>
       <Text style={styles.title}>Simulador Asistencia Sanitaria</Text>
 
       <Text>Grado de Discapacidad (%):</Text>

@@ -38,6 +38,7 @@ import BonoJovenAlquiler from './desgloseAyudas/Sociales/BonoJovenAlquiler';
 import LeyDependencia from './desgloseAyudas/Sociales/LeyDependencia';
 import Presentacion1 from './Presentacion/Presentacion1';
 import FormularioGeneral from './SimuladorGeneral/FormularioGeneral';
+import ComplementoAyudaInfancia from './desgloseAyudas/PrestacionDescendientes/ComplementoAyudaInfancia';
 
 import SimuladorBonoJoven from './Simuladores/SimuladorBonoJovenAlquiler';
 import SimuladorIngresoMinimoVital from './Simuladores/SimuladorIngresoMinimoVital';
@@ -53,6 +54,8 @@ import SimuladorPrestacionHijoDiscapacidad from './Simuladores/SimuladorPrestaci
 import SimuladorAyudaJovenesAlquiler from './Simuladores/SimuladorAyudaJovenesAlquiler';
 import SimuladorAyudasAlquiler from './Simuladores/SimuladorAyudasAlquiler';
 import SimuladorAyudaJovenesAdquisicion from './Simuladores/SimuladorAyudaJovenesAdquisicion';
+import SimuladorAvalHipoteca from './Simuladores/SimuladorAvalHipoteca';
+import SimuladorComplementoInfancia from './Simuladores/SimuladorComplementoAyudaInfancia';
 
 enableScreens();
 
@@ -94,6 +97,7 @@ const Stack = createStackNavigator();
         <Stack.Screen name="AyudasSociales" component={AyudasSociales}options={{ headerShown: false }} />
         <Stack.Screen name="BonoJovenAlquiler" component={BonoJovenAlquiler}options={{ headerShown: false }} />
         <Stack.Screen name="LeyDependencia" component={LeyDependencia}options={{ headerShown: false }} />
+        <Stack.Screen name="ComplementoAyudaInfancia" component={ComplementoAyudaInfancia}options={{ headerShown: false }} />
        
         <Stack.Screen name="SimuladorBonoJoven" component={SimuladorBonoJoven}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorIngresoMinimoVital" component={SimuladorIngresoMinimoVital}options={{ headerShown: false }} />
@@ -109,6 +113,8 @@ const Stack = createStackNavigator();
         <Stack.Screen name="SimuladorAyudaJovenesAlquiler" component={SimuladorAyudaJovenesAlquiler}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorAyudaJovenesAdquisicion" component={SimuladorAyudaJovenesAdquisicion}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorAyudasAlquiler" component={SimuladorAyudasAlquiler}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorAvalHipoteca" component={SimuladorAvalHipoteca}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorComplementoAyudaInfancia" component={SimuladorComplementoInfancia}options={{ headerShown: false }} />
        </Stack.Navigator>
 );
 }
@@ -134,6 +140,8 @@ const Stack = createStackNavigator();
         <Stack.Screen name="SimuladorAyudaJovenesAlquiler" component={SimuladorAyudaJovenesAlquiler}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorAyudaJovenesAdquisicion" component={SimuladorAyudaJovenesAdquisicion}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorAyudasAlquiler" component={SimuladorAyudasAlquiler}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorComplementoAyudaInfancia" component={SimuladorComplementoInfancia}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorAvalHipoteca" component={SimuladorAvalHipoteca}options={{ headerShown: false }} />
       </Stack.Navigator>
   );
 }

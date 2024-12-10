@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, Alert,TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AnuncioInt from '../Anuncios/AnuncioIntersticial';
 
 const SimuladorLeyDeDependencia: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
@@ -64,6 +65,7 @@ const SimuladorLeyDeDependencia: React.FC = () => {
 
   return (
     <View style={styles.container}>
+        <AnuncioInt/>
       <Text style={styles.title}>Simulador Ley de Dependencia</Text>
 
       <Text>Edad:</Text>

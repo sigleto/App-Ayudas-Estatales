@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert,TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AnuncioInt from '../Anuncios/AnuncioIntersticial';
 
 const SimuladorAyudaJovenesAdquisicion: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
@@ -61,6 +62,7 @@ const SimuladorAyudaJovenesAdquisicion: React.FC = () => {
 
   return (
     <View style={styles.container}>
+        <AnuncioInt/>
       <Text style={styles.title}>Simulador Ayuda a la Adquisición</Text>
 
       <Text>Edad:</Text>

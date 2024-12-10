@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { categories } from "./RequisitosGeneral";
 import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  ScrollView,
-  Alert,
+  View,Text,TouchableOpacity,StyleSheet,ScrollView, Alert,
+
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { useNavigation,CommonActions} from '@react-navigation/native';
-
+import AnuncioBan from "../Anuncios/AnuncioBanner";
 
 
 
@@ -77,8 +73,12 @@ const FormularioGeneral: React.FC = () => {
         </>
       )}
 
-      <Button title="Enviar"  onPress={handleSubmit}/>
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text style={styles.buttonText}>Enviar</Text>
+      </TouchableOpacity>
+      <AnuncioBan/>
     </ScrollView>
+    
   );
 };
 
@@ -87,6 +87,17 @@ const styles = StyleSheet.create({
   title: { fontSize: 24, fontWeight: "bold", marginBottom: 10 },
   label: { fontSize:20, marginVertical: 5,color:"#c8851e" },
   picker: { marginBottom:80,marginVertical: 10, height: 50, width: "100%" },
+  button:{  backgroundColor: '#c13855',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: '40%',
+    marginTop: 20,
+    marginBlock:60,
+    height: 40,},
+    buttonText:{
+      fontSize:16, color:'white',fontWeight:'bold'}
 
 
 });

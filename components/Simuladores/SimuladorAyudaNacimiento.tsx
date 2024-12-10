@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet,Alert,TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AnuncioInt from '../Anuncios/AnuncioIntersticial';
 
 const SimuladorAyudaNacimiento: React.FC = () => {
   const [residencia, setResidencia] = useState<boolean | null>(null);
@@ -50,6 +51,7 @@ const SimuladorAyudaNacimiento: React.FC = () => {
   }, []);
   return (
     <View style={styles.container}>
+        <AnuncioInt/>
       <Text style={styles.title}>Simulador Ayuda por Nacimiento o Adopción</Text>
 
       <Text>¿Resides legalmente en territorio español? (Sí/No)</Text>

@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import AnuncioBan from '../Anuncios/AnuncioBanner';
 
-type RutasNavegacion = 'AyudaNacimientoAdopcion' | 'PrestacionHijoDiscapacidad';
+type RutasNavegacion = 'AyudaNacimientoAdopcion' | 'PrestacionHijoDiscapacidad' | 'ComplementoAyudaInfancia';
 
 type RootStackParamList = {
   AyudaNacimientoAdopcion: undefined;
   PrestacionHijoDiscapacidad: undefined;
+  ComplementoAyudaInfancia: undefined
 };
 
 type NavigationProp = StackNavigationProp<RootStackParamList>;
@@ -23,6 +25,7 @@ const AyudaDescendientes = () => {
   const apartados: Apartado[] = [
     { nombre: 'Ayuda general por nacimiento o adopción', ruta: 'AyudaNacimientoAdopcion' },
     { nombre: 'Prestación por hijo con discapacidad', ruta: 'PrestacionHijoDiscapacidad' },
+    { nombre: 'Complemento de ayuda para la infancia', ruta: 'ComplementoAyudaInfancia' },
   ];
 
   // Estado para controlar el efecto de animación
@@ -63,6 +66,7 @@ const AyudaDescendientes = () => {
           </Animated.View>
         ))}
       </View>
+      <AnuncioBan/>
     </ScrollView>
   );
 };

@@ -1,7 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Linking } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking,Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+// Definición de los tipos para las rutas
+type RootStackParamList = {
+  SimuladorAvalHipoteca: undefined;
+  // Agrega aquí otras rutas si las tienes
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function Aval20PorCiento() {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
@@ -54,6 +65,13 @@ export default function Aval20PorCiento() {
         <Text style={styles.content}>
           Programa de Garantía de Vivienda del Gobierno de España.
         </Text>
+        <Text style={styles.content}>
+          ¿Quieres saber si tienes derecho a la ayuda? Puedes probar nuestro simulador aquí:
+        </Text>
+        <Button 
+          title="Ir al simulador" 
+          onPress={() => navigation.navigate('SimuladorAvalHipoteca')} 
+        />
       </View>
     </ScrollView>
   );

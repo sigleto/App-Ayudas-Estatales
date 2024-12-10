@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-nati
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import AnuncioBan from './Anuncios/AnuncioBanner';
 
 type RutasNavegacion =
   | 'SubsidiosDesempleo'
@@ -61,6 +62,7 @@ export default function ListadoAyudas() {
           </TouchableOpacity>
         ))}
       </View>
+      <AnuncioBan/>
     </ScrollView>
   );
 }
