@@ -41,6 +41,13 @@ import FormularioGeneral from './SimuladorGeneral/FormularioGeneral';
 import ComplementoAyudaInfancia from './desgloseAyudas/PrestacionDescendientes/ComplementoAyudaInfancia';
 import BonoCulturalJoven from './desgloseAyudas/Cultura/BonoCulturalJoven';
 import Cultura from './listado/Cultura';
+import AyudasPAC from './listado/AyudasAgricolas';
+import AyudasDesacopladas from './desgloseAyudas/Agrícolas/AyudasDesacopladas';
+import MedidasDesarrolloRural from './desgloseAyudas/Agrícolas/MedidasDesarrolloRural';
+import MedidasSectoriales from './desgloseAyudas/Agrícolas/MedidasSectoriales';
+
+
+
 
 
 import SimuladorBonoJoven from './Simuladores/SimuladorBonoJovenAlquiler';
@@ -60,6 +67,9 @@ import SimuladorAyudaJovenesAdquisicion from './Simuladores/SimuladorAyudaJovene
 import SimuladorAvalHipoteca from './Simuladores/SimuladorAvalHipoteca';
 import SimuladorComplementoInfancia from './Simuladores/SimuladorComplementoAyudaInfancia';
 import SimuladorBonoCultural from './Simuladores/SimuladorBonoCultural';
+import SimuladorAyudasDesacopladas from './Simuladores/SimuladorAyudasDesacopladas';
+import SimuladorDesarrolloRural from './Simuladores/SimuladorMedidasDesarrolloRural';
+import SimuladorMedidasSectoriales from './Simuladores/SimuladorMedidasSectoriales';
 
 enableScreens();
 
@@ -104,6 +114,11 @@ const Stack = createStackNavigator();
         <Stack.Screen name="ComplementoAyudaInfancia" component={ComplementoAyudaInfancia}options={{ headerShown: false }} />
         <Stack.Screen name="BonoCulturalJoven" component={BonoCulturalJoven}options={{ headerShown: false }} />
         <Stack.Screen name="Cultura" component={Cultura}options={{ headerShown: false }} />
+        <Stack.Screen name="AyudasPAC" component={AyudasPAC}options={{ headerShown: false }} />
+        <Stack.Screen name="AyudasDesacopladas" component={AyudasDesacopladas}options={{ headerShown: false }} />
+        <Stack.Screen name="MedidasDesarrolloRural" component={MedidasDesarrolloRural}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorMedidasSectoriales" component={MedidasSectoriales}options={{ headerShown: false }} />
+
        
         <Stack.Screen name="SimuladorBonoJoven" component={SimuladorBonoJoven}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorIngresoMinimoVital" component={SimuladorIngresoMinimoVital}options={{ headerShown: false }} />
@@ -122,6 +137,9 @@ const Stack = createStackNavigator();
         <Stack.Screen name="SimuladorAvalHipoteca" component={SimuladorAvalHipoteca}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorComplementoAyudaInfancia" component={SimuladorComplementoInfancia}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorBonoCultural" component={SimuladorBonoCultural}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorAyudasDesacopladas" component={SimuladorAyudasDesacopladas}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorDesarrolloRural" component={SimuladorDesarrolloRural}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorMedidasSectoriales" component={SimuladorMedidasSectoriales}options={{ headerShown: false }} />
        </Stack.Navigator>
 );
 }
@@ -150,6 +168,9 @@ const Stack = createStackNavigator();
         <Stack.Screen name="SimuladorComplementoAyudaInfancia" component={SimuladorComplementoInfancia}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorBonoCultural" component={SimuladorBonoCultural}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorAvalHipoteca" component={SimuladorAvalHipoteca}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorAyudasDesacopladas" component={SimuladorAyudasDesacopladas}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorDesarrolloRural" component={SimuladorDesarrolloRural}options={{ headerShown: false }} />
+        <Stack.Screen name="SimuladorMedidasSectoriales" component={SimuladorMedidasSectoriales}options={{ headerShown: false }} />
       </Stack.Navigator>
   );
 }

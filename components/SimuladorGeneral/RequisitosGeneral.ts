@@ -153,6 +153,33 @@ export const categories: Categoria[] = [
     ],
   },
   {
+    category: "Ayudas agrícolas",
+    ayudas: [
+      {
+        name: "",
+        simulador: [""],
+      },
+      {
+        name: "Ayudas Desacopladas",
+        simulador: [
+          "SimuladorAyudasDesacopladas",
+        ],
+      },
+      {
+        name: "Medidas de desarrollo rural",
+        simulador: [
+          "SimuladorDesarrolloRural",
+        ],
+      },
+      {
+        name: "Medidas Sectoriales",
+        simulador: [
+          "SimuladorMedidasSectoriales",
+        ],
+      },
+    ],
+  },
+  {
     category: "Ayudas culturales",
     ayudas: [
       {

@@ -13,7 +13,8 @@ type RutasNavegacion =
   | 'BecasEstudio'
   | 'Emprendedores'
   | 'Discapacidad'
-  | 'Cultura';
+  | 'Cultura'
+  | 'AyudasPAC';
 
 type RootStackParamList = {
   SubsidiosDesempleo: undefined;
@@ -24,6 +25,7 @@ type RootStackParamList = {
   Emprendedores: undefined;
   Discapacidad: undefined;
   Cultura: undefined;
+  AyudasPAC:undefined;
 };
 
 type NavigationProp = StackNavigationProp<RootStackParamList>;
@@ -40,7 +42,8 @@ const ayudas: { id: number; nombre: string; ruta: RutasNavegacion; color: string
   { id: 5, nombre: 'Becas y ayudas al estudio', ruta: 'BecasEstudio', color: '#FF4500', icono: 'school-outline' },
   { id: 6, nombre: 'Ayudas para emprendedores', ruta: 'Emprendedores', color: '#1E90FF', icono: 'lightbulb-on-outline' },
   { id: 7, nombre: 'Ayudas para la discapacidad', ruta: 'Discapacidad', color: '#C71585', icono: 'wheelchair-accessibility' },
-  { id: 8, nombre: 'Ayudas culturales', ruta: 'Cultura', color: '#C71585', icono: 'palette' },
+  { id: 8, nombre: 'Ayudas agrícolas (P.A.C)', ruta: 'AyudasPAC', color: '#C71585', icono: 'tractor' },
+  { id: 9, nombre: 'Ayudas culturales', ruta: 'Cultura', color: '#C71585', icono: 'palette' },
 ];
 
 export default function ListadoAyudas() {
