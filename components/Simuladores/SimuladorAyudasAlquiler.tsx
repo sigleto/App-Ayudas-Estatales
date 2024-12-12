@@ -2,6 +2,21 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView, Alert,TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type RootStackParamList = {
+  Home: undefined;
+  InformeAyudasAlquiler: { 
+    ingresos: string;
+    esFamiliaNumerosa:string;
+    gradoDiscapacidad: string;
+    rentaAlquiler:string;
+    edad:string;
+    resultado: string;
+  };
+};
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
 
 const SimuladorAyudasAlquiler: React.FC = () => {
   const [ingresos, setIngresos] = useState<string>('');
@@ -10,7 +25,7 @@ const SimuladorAyudasAlquiler: React.FC = () => {
   const [rentaAlquiler, setRentaAlquiler] = useState<string>('');
   const [edad, setEdad] = useState<string>('');
   const [resultado, setResultado] = useState<string>('');
-  const navegacion = useNavigation();
+   const navigation = useNavigation<NavigationProp>();
   
   const handleSimulacion = () => {
     const ingresosNum = parseFloat(ingresos);
@@ -118,18 +133,32 @@ const SimuladorAyudasAlquiler: React.FC = () => {
 
       <Button title="Simular" onPress={handleSimulacion} />
 
-    
-      {resultado && (
-        <>
-          <Text style={styles.result}>{resultado}</Text>
-          <TouchableOpacity
-            onPress={() => navegacion.navigate('Home' as never)}
-            style={styles.boton}
-          >
-            <Text style={styles.letra}>VOLVER</Text>
-          </TouchableOpacity>
-        </>
-      )}
+    {resultado && (
+            <>
+              <Text style={styles.result}>{resultado}</Text>
+              {resultado.includes('Cumples con los requisitos') && (
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('InformeAyudasAlquiler', { 
+                    ingresos, 
+                    esFamiliaNumerosa,
+                    gradoDiscapacidad,
+                    rentaAlquiler,
+                    edad, 
+                    resultado 
+                  })}
+                  style={styles.boton}
+                >
+                  <Text style={styles.letra}>DESCARGAR INFORME</Text>
+                </TouchableOpacity>
+              )}
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Home' as never)}
+                style={styles.boton}
+              >
+                <Text style={styles.letra}>VOLVER</Text>
+              </TouchableOpacity>
+            </>
+          )}
     </ScrollView>
   );
 };

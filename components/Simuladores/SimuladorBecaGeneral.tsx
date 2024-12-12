@@ -2,6 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, ScrollView, Alert,TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type RootStackParamList = {
+  Home: undefined;
+  InformeBecaGeneral: { 
+    edad: string;
+  ciudadania: string;
+  matriculado: string;
+  ingresos: string;
+  rendimiento: string;
+  resultado: string;
+  };
+};
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
+
 
 const SimuladorBecaGeneral: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
@@ -10,7 +26,7 @@ const SimuladorBecaGeneral: React.FC = () => {
   const [ingresos, setIngresos] = useState<string>('');
   const [rendimiento, setRendimiento] = useState<string>(''); // S o N
   const [resultado, setResultado] = useState<string>('');
-  const navegacion = useNavigation();
+ const navigation = useNavigation<NavigationProp>();
   
   const handleSimulacion = () => {
     // Convertir valores
@@ -113,16 +129,31 @@ const SimuladorBecaGeneral: React.FC = () => {
 
     
       {resultado && (
-        <>
-          <Text style={styles.result}>{resultado}</Text>
-          <TouchableOpacity
-            onPress={() => navegacion.navigate('Home' as never)}
-            style={styles.boton}
-          >
-            <Text style={styles.letra}>VOLVER</Text>
-          </TouchableOpacity>
-        </>
-      )}
+             <>
+               <Text style={styles.result}>{resultado}</Text>
+               {resultado.includes('Cumples con los requisitos') && (
+                 <TouchableOpacity
+                   onPress={() => navigation.navigate('InformeBecaGeneral', { 
+                     edad,
+                     ciudadania,
+                     matriculado,
+                     rendimiento, 
+                     ingresos,                     
+                     resultado 
+                   })}
+                   style={styles.boton}
+                 >
+                   <Text style={styles.letra}>DESCARGAR INFORME</Text>
+                 </TouchableOpacity>
+               )}
+               <TouchableOpacity
+                 onPress={() => navigation.navigate('Home' as never)}
+                 style={styles.boton}
+               >
+                 <Text style={styles.letra}>VOLVER</Text>
+               </TouchableOpacity>
+             </>
+           )}
     </ScrollView>
   );
 };

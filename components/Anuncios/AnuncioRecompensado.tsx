@@ -5,7 +5,7 @@ interface RewardedInterstitialProps {
   onRewardEarned: (reward: { type: string; amount: number }) => void; // Callback para manejar la recompensa
 }
 
-const RewardedInterstitialAdComponent: React.FC<RewardedInterstitialProps> = ({ onRewardEarned }) => {
+const AnuncioRecompensado: React.FC<RewardedInterstitialProps> = ({ onRewardEarned }) => {
   const adUnitId = __DEV__ ? TestIds.REWARDED_INTERSTITIAL : 'ca-app-pub-6921150380725872/2210160162';
   const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest(adUnitId);
   const [loaded, setLoaded] = useState<boolean>(false);
@@ -46,4 +46,4 @@ const RewardedInterstitialAdComponent: React.FC<RewardedInterstitialProps> = ({ 
   return null;
 };
 
-export default RewardedInterstitialAdComponent;
+export default AnuncioRecompensado;
