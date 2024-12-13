@@ -76,6 +76,12 @@ import InformeIngresoMinimoVital from './Informes/InformeIngresoMinimoVital';
 import InformeBecaGeneral from './Informes/InformeBecaGeneral';
 import InformeAyudasAlquiler from './Informes/InformeAyudasAlquiler';
 import InformeLeyDependencia from './Informes/InformeLeyDependencia';
+import InformeBonoJoven from './Informes/InformeBonoJoven';
+import InformeAyudaAdquisicion from './Informes/InformeAyudaAdquisicion';
+import InformeAvalHipoteca from './Informes/InformeAvalHipoteca';
+import InformeAyudaNacimiento from './Informes/InformeAyudaNacimiento';
+import InformeBecaApoyoEducativo from './Informes/InformeBecaApoyoEducativo';
+
 
 enableScreens();
 
@@ -152,6 +158,11 @@ const Stack = createStackNavigator();
         <Stack.Screen name="InformeBecaGeneral" component={InformeBecaGeneral}options={{ headerShown: false }} />
         <Stack.Screen name="InformeAyudasAlquiler" component={InformeAyudasAlquiler}options={{ headerShown: false }} />
         <Stack.Screen name="InformeLeyDependencia" component={InformeLeyDependencia}options={{ headerShown: false }} />
+        <Stack.Screen name="InformeBonoJoven" component={InformeBonoJoven}options={{ headerShown: false }} />
+        <Stack.Screen name="InformeAyudaAdquisicion" component={InformeAyudaAdquisicion}options={{ headerShown: false }} />
+        <Stack.Screen name="InformeAvalHipoteca" component={InformeAvalHipoteca}options={{ headerShown: false }} />
+        <Stack.Screen name="InformeAyudaNacimiento" component={InformeAyudaNacimiento}options={{ headerShown: false }} />
+        <Stack.Screen name="InformeBecaApoyoEducativo" component={InformeBecaApoyoEducativo}options={{ headerShown: false }} />
        
        
        </Stack.Navigator>
@@ -192,6 +203,12 @@ const Stack = createStackNavigator();
         <Stack.Screen name="InformeBecaGeneral" component={InformeBecaGeneral}options={{ headerShown: false }} />
         <Stack.Screen name="InformeAyudasAlquiler" component={InformeAyudasAlquiler}options={{ headerShown: false }} />
         <Stack.Screen name="InformeLeyDependencia" component={InformeLeyDependencia}options={{ headerShown: false }} />
+        <Stack.Screen name="InformeBonoJoven" component={InformeBonoJoven}options={{ headerShown: false }} />
+        <Stack.Screen name="InformeAyudaAdquisicion" component={InformeAyudaAdquisicion}options={{ headerShown: false }} />
+        <Stack.Screen name="InformeAvalHipoteca" component={InformeAvalHipoteca}options={{ headerShown: false }} />
+        <Stack.Screen name="InformeAyudaNacimiento" component={InformeAyudaNacimiento}options={{ headerShown: false }} />
+        <Stack.Screen name="InformeBecaApoyoEducativo" component={InformeBecaApoyoEducativo}options={{ headerShown: false }} />
+       
         
       </Stack.Navigator>
   );

@@ -2,6 +2,21 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert,TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type RootStackParamList = { 
+  Home: undefined;
+  InformeAyudaAdquisicion: { 
+    edad: string;
+    ingresos: string;
+    precioVivienda: string;
+    esPropietario:string;
+    poblacion:string;
+    resultado: string;
+  };
+};
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
 
 const SimuladorAyudaJovenesAdquisicion: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
@@ -10,7 +25,8 @@ const SimuladorAyudaJovenesAdquisicion: React.FC = () => {
   const [esPropietario, setEsPropietario] = useState<string>(''); // 'S' o 'N'
   const [poblacion, setPoblacion] = useState<string>(''); // población del municipio
   const [resultado, setResultado] = useState<string>('');
-  const navegacion = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
+  
   
   const handleSimulacion = () => {
     const edadNum = parseInt(edad);
@@ -113,16 +129,31 @@ const SimuladorAyudaJovenesAdquisicion: React.FC = () => {
 
      
       {resultado && (
-        <>
-          <Text style={styles.result}>{resultado}</Text>
-          <TouchableOpacity
-            onPress={() => navegacion.navigate('Home' as never)}
-            style={styles.boton}
-          >
-            <Text style={styles.letra}>VOLVER</Text>
-          </TouchableOpacity>
-        </>
-      )}
+             <>
+               <Text style={styles.result}>{resultado}</Text>
+               {resultado.includes('Cumples los requisitos') && (
+                 <TouchableOpacity
+                   onPress={() => navigation.navigate('InformeAyudaAdquisicion', { 
+                     edad, 
+                     ingresos,
+                     precioVivienda,
+                     esPropietario,
+                     poblacion, 
+                     resultado 
+                   })}
+                   style={styles.boton}
+                 >
+                   <Text style={styles.letra}>DESCARGAR INFORME</Text>
+                 </TouchableOpacity>
+               )}
+               <TouchableOpacity
+                 onPress={() => navigation.navigate('Home' as never)}
+                 style={styles.boton}
+               >
+                 <Text style={styles.letra}>VOLVER</Text>
+               </TouchableOpacity>
+             </>
+           )}
     </View>
   );
 };

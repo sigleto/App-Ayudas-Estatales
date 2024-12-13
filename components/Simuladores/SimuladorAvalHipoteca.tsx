@@ -1,6 +1,24 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import AnuncioInt from '../Anuncios/AnuncioIntersticial';
+
+type RootStackParamList = { 
+  Home: undefined;
+  InformeAvalHipoteca: {  
+    edad: string;
+    menoresACargo:string;
+    residente:string;
+    ingresos: string;
+    patrimonio: string;
+    propietario:string;
+    deudas:string;
+    resultado: string;
+  };
+};
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
 
 const SimuladorAvalHipoteca: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
@@ -11,7 +29,7 @@ const SimuladorAvalHipoteca: React.FC = () => {
   const [propietario, setPropietario] = useState<string>('N'); // S o N
   const [deudas, setDeudas] = useState<string>('N'); // S o N
   const [resultado, setResultado] = useState<string>('');
-  const navegacion = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
 
   const handleSubmit = () => {
     const edadNum = parseInt(edad);
@@ -63,7 +81,7 @@ const SimuladorAvalHipoteca: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Simulador Aval del 20% de Hipoteca</Text>
-
+    <AnuncioInt/>
       <Text>Edad:</Text>
       <TextInput
         value={edad}
@@ -129,17 +147,34 @@ const SimuladorAvalHipoteca: React.FC = () => {
 
       <Button title="Verificar" onPress={handleSubmit} />
 
-      {resultado && (
-        <>
-          <Text style={styles.result}>{resultado}</Text>
-          <TouchableOpacity
-            onPress={() => navegacion.navigate('Home' as never)}
-            style={styles.boton}
-          >
-            <Text style={styles.letra}>VOLVER</Text>
-          </TouchableOpacity>
-        </>
-      )}
+     {resultado && (
+             <>
+               <Text style={styles.result}>{resultado}</Text>
+               {resultado.includes('¡Tienes derecho') && (
+                 <TouchableOpacity
+                   onPress={() => navigation.navigate('InformeAvalHipoteca', { 
+                     edad,
+                     menoresACargo,
+                     residente, 
+                     ingresos,
+                     patrimonio,
+                     propietario, 
+                     deudas, 
+                     resultado 
+                   })}
+                   style={styles.boton}
+                 >
+                   <Text style={styles.letra}>DESCARGAR INFORME</Text>
+                 </TouchableOpacity>
+               )}
+               <TouchableOpacity
+                 onPress={() => navigation.navigate('Home' as never)}
+                 style={styles.boton} 
+               >
+                 <Text style={styles.letra}>VOLVER</Text>
+               </TouchableOpacity>
+             </>
+           )}
     </View>
   );
 };

@@ -2,6 +2,19 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet,Alert,TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type RootStackParamList = { 
+  Home: undefined;
+  InformeAyudaNacimiento: {  
+    residencia: string;
+    ingresos: string;
+    convivencia:string;
+    otraPrestacion: string;
+    resultado: string;
+  };
+};
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const SimuladorAyudaNacimiento: React.FC = () => {
   const [residencia, setResidencia] = useState<boolean | null>(null);
@@ -9,7 +22,7 @@ const SimuladorAyudaNacimiento: React.FC = () => {
   const [convivencia, setConvivencia] = useState<boolean | null>(null);
   const [otraPrestacion, setOtraPrestacion] = useState<boolean | null>(null);
   const [resultado, setResultado] = useState<string>('');
-  const navegacion = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   
   const handleSimulacion = () => {
     const ingresosNum = parseFloat(ingresos);
@@ -90,17 +103,31 @@ const SimuladorAyudaNacimiento: React.FC = () => {
       <Button title="Simular" onPress={handleSimulacion} />
 
      
-      {resultado && (
-        <>
-          <Text style={styles.result}>{resultado}</Text>
-          <TouchableOpacity
-            onPress={() => navegacion.navigate('Home' as never)}
-            style={styles.boton}
-          >
-            <Text style={styles.letra}>VOLVER</Text>
-          </TouchableOpacity>
-        </>
-      )}
+    {resultado && (
+            <>
+              <Text style={styles.result}>{resultado}</Text>
+              {resultado.includes('Cumples con los requisitos') && (
+                         <TouchableOpacity
+                           onPress={() => navigation.navigate('InformeAyudaNacimiento', { 
+                            residencia: residencia === true ? 'Sí' : residencia === false ? 'No' : '', 
+                            ingresos,
+                            convivencia: convivencia === true ? 'Sí' : convivencia === false ? 'No' : '', 
+                            otraPrestacion: otraPrestacion === true ? 'Sí' : otraPrestacion === false ? 'No' : '', 
+                            resultado 
+                           })}
+                           style={styles.boton}
+                         >
+                           <Text style={styles.letra}>DESCARGAR INFORME</Text>
+                         </TouchableOpacity>
+                       )}
+                       <TouchableOpacity
+                         onPress={() => navigation.navigate('Home' as never)}
+                         style={styles.boton} 
+                       >
+                         <Text style={styles.letra}>VOLVER</Text>
+                       </TouchableOpacity>
+                     </>
+                   )}
     </View>
   );
 };

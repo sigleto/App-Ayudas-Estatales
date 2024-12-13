@@ -4,10 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-type RootStackParamList = {
+type RootStackParamList = { 
   Home: undefined;
-  InformePensionNoContributiva: { 
-    edad: string;
+  InformePensionNoContributiva: {  
+    edad: string; 
     ingresos: string;
     discapacidad: string;
     resultado: string;
@@ -94,7 +94,7 @@ const SimuladorPensionNoContributiva: React.FC = () => {
           )}
           <TouchableOpacity
             onPress={() => navigation.navigate('Home' as never)}
-            style={styles.boton}
+            style={styles.boton} 
           >
             <Text style={styles.letra}>VOLVER</Text>
           </TouchableOpacity>
