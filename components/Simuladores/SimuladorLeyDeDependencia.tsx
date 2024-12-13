@@ -3,12 +3,23 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, Alert,TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type RootStackParamList = {
+  Home: undefined;
+  InformeLeyDependencia: { 
+    edad: string;
+    gradoDependencia:string;
+    resultado: string;
+  };
+};
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const SimuladorLeyDeDependencia: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
   const [gradoDependencia, setGradoDependencia] = useState<string>('1');
   const [resultado, setResultado] = useState<string>('');
-  const navegacion = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   
   const handleSubmit = () => {
     const edadNum = parseInt(edad);
@@ -87,19 +98,31 @@ const SimuladorLeyDeDependencia: React.FC = () => {
       />
 
       <Button title="Verificar" onPress={handleSubmit} />
-
-      
       {resultado && (
-        <>
-          <Text style={styles.result}>{resultado}</Text>
-          <TouchableOpacity
-            onPress={() => navegacion.navigate('Home' as never)}
-            style={styles.boton}
-          >
-            <Text style={styles.letra}>VOLVER</Text>
-          </TouchableOpacity>
-        </>
-      )}
+              <>
+                <Text style={styles.result}>{resultado}</Text>
+                {resultado.includes('Tienes derecho') && (
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('InformeLeyDependencia', { 
+                      edad, 
+                      gradoDependencia, 
+                      resultado 
+                    })}
+                    style={styles.boton}
+                  >
+                    <Text style={styles.letra}>DESCARGAR INFORME</Text>
+                  </TouchableOpacity>
+                )}
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('Home' as never)}
+                  style={styles.boton}
+                >
+                  <Text style={styles.letra}>VOLVER</Text>
+                </TouchableOpacity>
+              </>
+            )}
+      
+      
     </View>
   );
 };

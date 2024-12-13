@@ -75,6 +75,7 @@ import InformePensionNoContributiva from './Informes/InformePensionNoContributiv
 import InformeIngresoMinimoVital from './Informes/InformeIngresoMinimoVital';
 import InformeBecaGeneral from './Informes/InformeBecaGeneral';
 import InformeAyudasAlquiler from './Informes/InformeAyudasAlquiler';
+import InformeLeyDependencia from './Informes/InformeLeyDependencia';
 
 enableScreens();
 
@@ -150,6 +151,7 @@ const Stack = createStackNavigator();
         <Stack.Screen name="InformeIngresoMinimoVital" component={InformeIngresoMinimoVital}options={{ headerShown: false }} />
         <Stack.Screen name="InformeBecaGeneral" component={InformeBecaGeneral}options={{ headerShown: false }} />
         <Stack.Screen name="InformeAyudasAlquiler" component={InformeAyudasAlquiler}options={{ headerShown: false }} />
+        <Stack.Screen name="InformeLeyDependencia" component={InformeLeyDependencia}options={{ headerShown: false }} />
        
        
        </Stack.Navigator>
@@ -189,7 +191,8 @@ const Stack = createStackNavigator();
         <Stack.Screen name="InformeIngresoMinimoVital" component={InformeIngresoMinimoVital}options={{ headerShown: false }} />
         <Stack.Screen name="InformeBecaGeneral" component={InformeBecaGeneral}options={{ headerShown: false }} />
         <Stack.Screen name="InformeAyudasAlquiler" component={InformeAyudasAlquiler}options={{ headerShown: false }} />
-      
+        <Stack.Screen name="InformeLeyDependencia" component={InformeLeyDependencia}options={{ headerShown: false }} />
+        
       </Stack.Navigator>
   );
 }
