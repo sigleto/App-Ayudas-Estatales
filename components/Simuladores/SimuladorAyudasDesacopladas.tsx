@@ -1,16 +1,32 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type RootStackParamList = { 
+  Home: undefined;
+  InformeAyudasDesacopladas: { 
+    hectareas: string;
+    cultivo: string;
+    sostenibilidad: string;
+    agricultorActivo: string;
+    cumpleNormativa: string;
+    ubicacion: string;
+    resultado: string;
+  };
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const SimuladorAyudasDesacopladas: React.FC = () => {
   const [hectareas, setHectareas] = useState<string>('');
-  const [cultivo, setCultivo] = useState<string>(''); // Por ejemplo: trigo, maíz, etc.
-  const [sostenibilidad, setSostenibilidad] = useState<string>('N'); // S o N
-  const [agricultorActivo, setAgricultorActivo] = useState<string>('N'); // S o N
-  const [cumpleNormativa, setCumpleNormativa] = useState<string>('N'); // S o N
-  const [ubicacion, setUbicacion] = useState<string>(''); // Por ejemplo: montaña, regadío, secano
+  const [cultivo, setCultivo] = useState<string>('');
+  const [sostenibilidad, setSostenibilidad] = useState<string>('N');
+  const [agricultorActivo, setAgricultorActivo] = useState<string>('N');
+  const [cumpleNormativa, setCumpleNormativa] = useState<string>('N');
+  const [ubicacion, setUbicacion] = useState<string>('');
   const [resultado, setResultado] = useState<string>('');
-  const navegacion = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
 
   const handleSubmit = () => {
     const hectareasNum = parseFloat(hectareas);
@@ -132,12 +148,31 @@ const SimuladorAyudasDesacopladas: React.FC = () => {
       {resultado && (
         <>
           <Text style={styles.result}>{resultado}</Text>
-          <TouchableOpacity
-            onPress={() => navegacion.navigate('Home' as never)}
-            style={styles.boton}
-          >
-            <Text style={styles.letra}>VOLVER</Text>
-          </TouchableOpacity>
+          {resultado.includes('¡Puedes solicitar') && (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('InformeAyudasDesacopladas', {
+                  hectareas,
+                  cultivo,
+                  sostenibilidad,
+                  agricultorActivo,
+                  cumpleNormativa,
+                  ubicacion,
+                  resultado
+                })
+              }
+              style={styles.boton}
+            >
+              <Text style={styles.letra}>Generar Informe</Text>
+            </TouchableOpacity>
+            
+          )}
+           <TouchableOpacity
+                           onPress={() => navigation.navigate('Home' as never)}
+                           style={styles.boton}
+                         >
+                           <Text style={styles.letra}>VOLVER</Text>
+                         </TouchableOpacity>
         </>
       )}
     </View>

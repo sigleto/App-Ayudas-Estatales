@@ -50,7 +50,7 @@ import MedidasSectoriales from './desgloseAyudas/Agrícolas/MedidasSectoriales';
 
 
 
-import SimuladorBonoJoven from './Simuladores/SimuladorBonoJovenAlquiler';
+
 import SimuladorIngresoMinimoVital from './Simuladores/SimuladorIngresoMinimoVital';
 import SimuladorLeyDeDependencia from './Simuladores/SimuladorLeyDeDependencia';
 import SimuladorPensionNoContributiva from './Simuladores/SimuladorPensionNoContributiva';
@@ -81,7 +81,8 @@ import InformeAyudaAdquisicion from './Informes/InformeAyudaAdquisicion';
 import InformeAvalHipoteca from './Informes/InformeAvalHipoteca';
 import InformeAyudaNacimiento from './Informes/InformeAyudaNacimiento';
 import InformeBecaApoyoEducativo from './Informes/InformeBecaApoyoEducativo';
-
+import InformeAyudasDesacopladas from './Informes/InformeAyudasDesacopladas';
+import InformeBecaResidencia from './Informes/InformeBecaResidencia';
 
 enableScreens();
 
@@ -132,7 +133,7 @@ const Stack = createStackNavigator();
         
 
        
-        <Stack.Screen name="SimuladorBonoJoven" component={SimuladorBonoJoven}options={{ headerShown: false }} />
+        
         <Stack.Screen name="SimuladorIngresoMinimoVital" component={SimuladorIngresoMinimoVital}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorLeyDeDependencia" component={SimuladorLeyDeDependencia}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorPensionNoContributiva" component={SimuladorPensionNoContributiva}options={{ headerShown: false }} />
@@ -163,6 +164,8 @@ const Stack = createStackNavigator();
         <Stack.Screen name="InformeAvalHipoteca" component={InformeAvalHipoteca}options={{ headerShown: false }} />
         <Stack.Screen name="InformeAyudaNacimiento" component={InformeAyudaNacimiento}options={{ headerShown: false }} />
         <Stack.Screen name="InformeBecaApoyoEducativo" component={InformeBecaApoyoEducativo}options={{ headerShown: false }} />
+        <Stack.Screen name="InformeAyudasDesacopladas" component={InformeAyudasDesacopladas}options={{ headerShown: false }} />
+        <Stack.Screen name="InformeBecaResidencia" component={InformeBecaResidencia}options={{ headerShown: false }} />
        
        
        </Stack.Navigator>
@@ -176,8 +179,7 @@ const Stack = createStackNavigator();
      screenOptions={{ headerShown: false }} >
     
         <Stack.Screen name="FormularioGeneral" component={FormularioGeneral}options={{ headerShown: false }} />
-         <Stack.Screen name="SimuladorBonoJoven" component={SimuladorBonoJoven}options={{ headerShown: false }} />
-        <Stack.Screen name="SimuladorIngresoMinimoVital" component={SimuladorIngresoMinimoVital}options={{ headerShown: false }} />
+         <Stack.Screen name="SimuladorIngresoMinimoVital" component={SimuladorIngresoMinimoVital}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorLeyDeDependencia" component={SimuladorLeyDeDependencia}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorPensionNoContributiva" component={SimuladorPensionNoContributiva}options={{ headerShown: false }} />
         <Stack.Screen name="SimuladorSubsidioMovilidad" component={SimuladorSubsidioMovilidad}options={{ headerShown: false }} />
@@ -208,8 +210,9 @@ const Stack = createStackNavigator();
         <Stack.Screen name="InformeAvalHipoteca" component={InformeAvalHipoteca}options={{ headerShown: false }} />
         <Stack.Screen name="InformeAyudaNacimiento" component={InformeAyudaNacimiento}options={{ headerShown: false }} />
         <Stack.Screen name="InformeBecaApoyoEducativo" component={InformeBecaApoyoEducativo}options={{ headerShown: false }} />
-       
-        
+        <Stack.Screen name="InformeAyudasDesacopladas" component={InformeAyudasDesacopladas}options={{ headerShown: false }} />
+        <Stack.Screen name="InformeBecaResidencia" component={InformeBecaResidencia}options={{ headerShown: false }} />
+
       </Stack.Navigator>
   );
 }

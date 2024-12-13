@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import { useRoute, RouteProp } from '@react-navigation/native';
+import AnuncioRecompensado from '../Anuncios/AnuncioRecompensado'; // Importa el componente del anuncio
 
 // Definición de parámetros de la ruta
 type RouteParams = {
@@ -17,6 +18,12 @@ type RouteParams = {
 const InformeAyudaAdquisicion: React.FC = () => {
   const route = useRoute<RouteProp<Record<string, RouteParams>, string>>();
   const { edad, ingresos, precioVivienda, esPropietario, poblacion, resultado } = route.params || {};
+  const [recompensaGanada, setRecompensaGanada] = useState(false); // Estado para la recompensa
+
+  const manejarRecompensa = (reward: { type: string; amount: number }) => {
+    console.log(`Recompensa obtenida: ${reward.type}, cantidad: ${reward.amount}`);
+    setRecompensaGanada(true);
+  };
 
   const generarPDF = async () => {
     try {
@@ -74,13 +81,17 @@ const InformeAyudaAdquisicion: React.FC = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Informe del Simulador</Text>
       <Text style={styles.resultado}>{resultado}</Text>
-      <TouchableOpacity onPress={generarPDF} style={styles.boton}>
-        <Text style={styles.botonTexto}>Descargar Informe en PDF</Text>
-      </TouchableOpacity>
+      {!recompensaGanada && (
+        <AnuncioRecompensado onRewardEarned={manejarRecompensa} />
+      )}
+      {recompensaGanada && (
+        <TouchableOpacity onPress={generarPDF} style={styles.boton}>
+          <Text style={styles.botonTexto}>Descargar Informe en PDF</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: { padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f8f9fa' },

@@ -5,21 +5,19 @@ import * as Sharing from 'expo-sharing';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import AnuncioRecompensado from '../Anuncios/AnuncioRecompensado'; // Importa el componente del anuncio
 
-// Definición de parámetros de la ruta
 type RouteParams = {
-  edad: string;
-  menoresACargo: string;
-  residente: string;
-  ingresos: string;
-  patrimonio: string;
-  propietario: string;
-  deudas: string;
+  hectareas: string;
+  cultivo: string;
+  sostenibilidad: string;
+  agricultorActivo: string;
+  cumpleNormativa: string;
+  ubicacion: string;
   resultado: string;
 };
 
-const InformeAvalHipoteca: React.FC = () => {
+const InformeAyudasDesacopladas: React.FC = () => {
   const route = useRoute<RouteProp<Record<string, RouteParams>, string>>();
-  const { edad, menoresACargo, residente, ingresos, patrimonio, propietario, deudas, resultado } = route.params || {};
+  const { hectareas, cultivo, sostenibilidad, agricultorActivo, cumpleNormativa, ubicacion, resultado } = route.params || {};
   const [recompensaGanada, setRecompensaGanada] = useState(false); // Estado para la recompensa
 
   const manejarRecompensa = (reward: { type: string; amount: number }) => {
@@ -42,30 +40,29 @@ const InformeAvalHipoteca: React.FC = () => {
         </head>
         <body>
           <h1>Informe de Simulación</h1>
-          <h2>Aval del 20% de Hipoteca</h2>
+          <h2>Ayudas Desacopladas de la PAC</h2>
           <p><strong>Datos proporcionados:</strong></p>
           <ul>
-            <li><strong>Edad:</strong> ${edad}</li>
-            <li><strong>¿Tienes menores a cargo?</strong> ${menoresACargo === 'S' ? 'Sí' : 'No'}</li>
-            <li><strong>¿Residente legal en España desde hace al menos 2 años?</strong> ${residente === 'S' ? 'Sí' : 'No'}</li>
-            <li><strong>Ingresos anuales:</strong> ${ingresos} €</li>
-            <li><strong>Patrimonio neto:</strong> ${patrimonio} €</li>
-            <li><strong>¿Has sido propietario de otra vivienda?</strong> ${propietario === 'S' ? 'Sí' : 'No'}</li>
-            <li><strong>¿Tienes deudas en CIRBE?</strong> ${deudas === 'S' ? 'Sí' : 'No'}</li>
+            <li><strong>Número de hectáreas:</strong> ${hectareas}</li>
+            <li><strong>Tipo de cultivo:</strong> ${cultivo}</li>
+            <li><strong>¿Cumples criterios de sostenibilidad?</strong> ${sostenibilidad === 'S' ? 'Sí' : 'No'}</li>
+            <li><strong>¿Eres agricultor activo registrado?</strong> ${agricultorActivo === 'S' ? 'Sí' : 'No'}</li>
+            <li><strong>¿Cumples la normativa PAC vigente?</strong> ${cumpleNormativa === 'S' ? 'Sí' : 'No'}</li>
+            <li><strong>Ubicación de las tierras:</strong> ${ubicacion}</li>
           </ul>
           <h3>Resultado de la simulación:</h3>
           <p class="highlight">${resultado}</p>
           <h3>Descripción:</h3>
-          <p>El aval del 20% de hipoteca está destinado a jóvenes y familias que cumplen criterios relacionados con la edad, ingresos, patrimonio y otras condiciones. Facilita el acceso a una financiación más favorable.</p>
+          <p>Las ayudas desacopladas de la PAC están diseñadas para apoyar a los agricultores que cumplen criterios relacionados con el tipo de cultivo, sostenibilidad, y ubicación de las tierras, entre otros.</p>
           <h3>Pasos para realizar la solicitud:</h3>
           <ol>
-            <li>Consulta los requisitos detallados en la página oficial del organismo correspondiente.</li>
-            <li>Reúne documentos como identificación oficial, declaración de la renta, y certificaciones patrimoniales.</li>
-            <li>Accede al formulario en línea disponible en la web del organismo.</li>
+            <li>Consulta los requisitos detallados en la página oficial de tu comunidad autónoma.</li>
+            <li>Reúne documentos como certificaciones de hectáreas, justificantes de agricultor activo y cumplimiento normativo.</li>
+            <li>Accede al formulario en línea disponible en la web del organismo correspondiente.</li>
             <li>Completa el formulario, adjunta los documentos requeridos y envíalo.</li>
             <li>Guarda el justificante de la solicitud para futuros seguimientos.</li>
           </ol>
-          <p>Nota: Este informe tiene un propósito informativo y no garantiza la concesión del aval. Verifica siempre con las autoridades competentes.</p>
+          <p>Nota: Este informe tiene un propósito informativo y no garantiza la concesión de las ayudas. Verifica siempre con las autoridades competentes.</p>
         </body>
         </html>
       `;
@@ -105,4 +102,4 @@ const styles = StyleSheet.create({
   botonTexto: { color: 'white', fontSize: 16, fontWeight: 'bold' },
 });
 
-export default InformeAvalHipoteca;
+export default InformeAyudasDesacopladas;

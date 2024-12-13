@@ -1,7 +1,21 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Alert,TouchableOpacity } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type RootStackParamList = {
+  Home: undefined;
+  InformeBecaResidencia: {
+    matriculado: string;
+    residenciaLejana: string;
+    estudiosPresenciales: string;
+    ingresos: string;
+    resultado: string;
+  };
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const SimuladorBecaResidencia: React.FC = () => {
   const [matriculado, setMatriculado] = useState<string>('');
@@ -9,8 +23,8 @@ const SimuladorBecaResidencia: React.FC = () => {
   const [estudiosPresenciales, setEstudiosPresenciales] = useState<string>('');
   const [ingresos, setIngresos] = useState<string>('');
   const [resultado, setResultado] = useState<string>('');
-  const navegacion = useNavigation();
-  
+  const navigation = useNavigation<NavigationProp>();
+
   const handleSimulacion = () => {
     const ingresosNum = parseFloat(ingresos);
     const umbralRenta = 25000; // Umbral de renta familiar aproximado
@@ -52,7 +66,7 @@ const SimuladorBecaResidencia: React.FC = () => {
 
   return (
     <View style={styles.container}>
-        <AnuncioInt/>
+      <AnuncioInt />
       <Text style={styles.title}>Simulador Beca de Residencia</Text>
 
       <Text>¿Estás matriculado en estudios postobligatorios o universitarios? (S/N):</Text>
@@ -93,16 +107,31 @@ const SimuladorBecaResidencia: React.FC = () => {
 
       <Button title="Simular" onPress={handleSimulacion} />
 
-      
       {resultado && (
         <>
           <Text style={styles.result}>{resultado}</Text>
+          {resultado.includes('Cumples con los requisitos') && (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('InformeBecaResidencia', {
+                  matriculado,
+                  residenciaLejana,
+                  estudiosPresenciales,
+                  ingresos,
+                  resultado,
+                })
+              }
+              style={styles.boton}
+            >
+              <Text style={styles.letra}>Generar Informe</Text>
+            </TouchableOpacity>
+          )}
           <TouchableOpacity
-            onPress={() => navegacion.navigate('Home' as never)}
-            style={styles.boton}
-          >
-            <Text style={styles.letra}>VOLVER</Text>
-          </TouchableOpacity>
+                      onPress={() => navigation.navigate('Home' as never)}
+                      style={styles.boton} 
+                    >
+                      <Text style={styles.letra}>VOLVER</Text>
+                    </TouchableOpacity>
         </>
       )}
     </View>
@@ -134,19 +163,22 @@ const styles = StyleSheet.create({
     color: '#4caf50',
     textAlign: 'center',
     fontWeight: 'bold',
-  },  boton: {
+  },
+  boton: {
     backgroundColor: '#c13855', // Color de fondo llamativo
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    alignSelf: 'center',     
+    alignSelf: 'center',
     width: '40%', // Ajusta el ancho del botón
     marginTop: 20,
-    height:40,
-    fontSize:20,
-    fontWeight:'bold',
+    height: 40,
   },
-  letra:{fontSize:16, color:'white',fontWeight:'bold'}
+  letra: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: 'bold',
+  },
 });
 
 export default SimuladorBecaResidencia;
