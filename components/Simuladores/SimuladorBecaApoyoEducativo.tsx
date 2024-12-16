@@ -130,7 +130,7 @@ const SimuladorBecaApoyoEducativo: React.FC = () => {
               }
               style={styles.button}
             >
-              <Text style={styles.buttonText}>DESCARGAR INFORME</Text>
+             <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
             </TouchableOpacity>
           )}
           <TouchableOpacity
@@ -189,6 +189,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
     fontWeight: 'bold',
+  },
+  letras: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign:'center',
   },
 });
 

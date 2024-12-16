@@ -2,13 +2,25 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type RootStackParamList = {
+  Home: undefined;
+  InformeAsistenciaSanitaria: { 
+    discapacidad: string;
+    seguroSocial:string;
+    sistemaSocial:string;
+    resultado: string;
+  };
+};
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const SimuladorAsistenciaSanitaria: React.FC = () => {
   const [discapacidad, setDiscapacidad] = useState<string>('');
   const [seguroSocial, setSeguroSocial] = useState<string>('');
   const [sistemaSocial, setSistemaSocial] = useState<string>('');
   const [resultado, setResultado] = useState<string>('');
-  const navegacion = useNavigation();
+   const navigation = useNavigation<NavigationProp>();
 
   const handleSimulacion = () => {
     const discapacidadNum = parseInt(discapacidad);
@@ -77,16 +89,29 @@ const SimuladorAsistenciaSanitaria: React.FC = () => {
       <Button title="Simular" onPress={handleSimulacion} />
 
       {resultado && (
-        <>
-          <Text style={styles.result}>{resultado}</Text>
-          <TouchableOpacity
-            onPress={() => navegacion.navigate('Home' as never)}
-            style={styles.boton}
-          >
-            <Text style={styles.letra}>VOLVER</Text>
-          </TouchableOpacity>
-        </>
-      )}
+                <>
+                  <Text style={styles.result}>{resultado}</Text>
+                  {resultado.includes('Cumples con los requisitos') && (
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate('InformeAsistenciaSanitaria', { 
+                        discapacidad, 
+                        seguroSocial,
+                        sistemaSocial,
+                        resultado 
+                      })}
+                      style={styles.boton}
+                    >
+                       <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
+                    </TouchableOpacity>
+                  )}
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('Home' as never)}
+                    style={styles.boton}
+                  >
+                    <Text style={styles.letra}>VOLVER</Text>
+                  </TouchableOpacity>
+                </>
+              )}
     </View>
   );
 };
@@ -131,6 +156,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   letra: { fontSize: 16, color: 'white', fontWeight: 'bold' },
+  letras: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign:'center',
+  },
 });
 
 export default SimuladorAsistenciaSanitaria;

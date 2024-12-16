@@ -164,7 +164,7 @@ const SimuladorAvalHipoteca: React.FC = () => {
                    })}
                    style={styles.boton}
                  >
-                   <Text style={styles.letra}>DESCARGAR INFORME</Text>
+                    <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
                  </TouchableOpacity>
                )}
                <TouchableOpacity
@@ -215,6 +215,12 @@ const styles = StyleSheet.create({
     height: 40,
   },
   letra: { fontSize: 16, color: 'white', fontWeight: 'bold' },
+  letras: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign:'center',
+  },
 });
 
 export default SimuladorAvalHipoteca;

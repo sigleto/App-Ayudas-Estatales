@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet,Alert,TouchableOpacity} from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-type RootStackParamList = { 
+type RootStackParamList = {
   Home: undefined;
-  InformeAyudaNacimiento: {  
+  InformeAyudaNacimiento: {
     residencia: string;
     ingresos: string;
-    convivencia:string;
+    convivencia: string;
     otraPrestacion: string;
     resultado: string;
   };
@@ -23,7 +23,7 @@ const SimuladorAyudaNacimiento: React.FC = () => {
   const [otraPrestacion, setOtraPrestacion] = useState<boolean | null>(null);
   const [resultado, setResultado] = useState<string>('');
   const navigation = useNavigation<NavigationProp>();
-  
+
   const handleSimulacion = () => {
     const ingresosNum = parseFloat(ingresos);
     const limiteIngresos = 15000; // Límite aproximado de ingresos anuales
@@ -51,10 +51,11 @@ const SimuladorAyudaNacimiento: React.FC = () => {
   };
 
   const handleBooleanInput = (text: string): boolean | null => {
-    if (text.toLowerCase() === 'sí') return true;
-    if (text.toLowerCase() === 'no') return false;
+    if (text.toLowerCase() === 's') return true;
+    if (text.toLowerCase() === 'n') return false;
     return null;
   };
+
   React.useEffect(() => {
     Alert.alert(
       'Aviso importante',
@@ -62,16 +63,17 @@ const SimuladorAyudaNacimiento: React.FC = () => {
       [{ text: 'Entendido' }]
     );
   }, []);
+
   return (
     <View style={styles.container}>
-        <AnuncioInt/>
+      <AnuncioInt />
       <Text style={styles.title}>Simulador Ayuda por Nacimiento o Adopción</Text>
 
-      <Text>¿Resides legalmente en territorio español? (Sí/No)</Text>
+      <Text>¿Resides legalmente en territorio español? (S/N)</Text>
       <TextInput
-        value={residencia !== null ? (residencia ? 'Sí' : 'No') : ''}
+        value={residencia !== null ? (residencia ? 'S' : 'N') : ''}
         onChangeText={(text) => setResidencia(handleBooleanInput(text))}
-        placeholder="Ingresa Sí o No"
+        placeholder="Ingresa S o N"
         style={styles.input}
       />
 
@@ -84,50 +86,51 @@ const SimuladorAyudaNacimiento: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>¿Convives con otra persona que pueda ser beneficiaria? (Sí/No)</Text>
+      <Text>¿Convives con otra persona que pueda ser beneficiaria? (S/N)</Text>
       <TextInput
-        value={convivencia !== null ? (convivencia ? 'Sí' : 'No') : ''}
+        value={convivencia !== null ? (convivencia ? 'S' : 'N') : ''}
         onChangeText={(text) => setConvivencia(handleBooleanInput(text))}
-        placeholder="Ingresa Sí o No"
+        placeholder="Ingresa S o N"
         style={styles.input}
       />
 
-      <Text>¿Tienes derecho a prestaciones similares en otro régimen público? (Sí/No)</Text>
+      <Text>¿Tienes derecho a prestaciones similares en otro régimen público? (S/N)</Text>
       <TextInput
-        value={otraPrestacion !== null ? (otraPrestacion ? 'Sí' : 'No') : ''}
+        value={otraPrestacion !== null ? (otraPrestacion ? 'S' : 'N') : ''}
         onChangeText={(text) => setOtraPrestacion(handleBooleanInput(text))}
-        placeholder="Ingresa Sí o No"
+        placeholder="Ingresa S o N"
         style={styles.input}
       />
 
       <Button title="Simular" onPress={handleSimulacion} />
 
-     
-    {resultado && (
-            <>
-              <Text style={styles.result}>{resultado}</Text>
-              {resultado.includes('Cumples con los requisitos') && (
-                         <TouchableOpacity
-                           onPress={() => navigation.navigate('InformeAyudaNacimiento', { 
-                            residencia: residencia === true ? 'Sí' : residencia === false ? 'No' : '', 
-                            ingresos,
-                            convivencia: convivencia === true ? 'Sí' : convivencia === false ? 'No' : '', 
-                            otraPrestacion: otraPrestacion === true ? 'Sí' : otraPrestacion === false ? 'No' : '', 
-                            resultado 
-                           })}
-                           style={styles.boton}
-                         >
-                           <Text style={styles.letra}>DESCARGAR INFORME</Text>
-                         </TouchableOpacity>
-                       )}
-                       <TouchableOpacity
-                         onPress={() => navigation.navigate('Home' as never)}
-                         style={styles.boton} 
-                       >
-                         <Text style={styles.letra}>VOLVER</Text>
-                       </TouchableOpacity>
-                     </>
-                   )}
+      {resultado && (
+        <>
+          <Text style={styles.result}>{resultado}</Text>
+          {resultado.includes('Cumples con los requisitos') && (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('InformeAyudaNacimiento', {
+                  residencia: residencia === true ? 'S' : residencia === false ? 'N' : '',
+                  ingresos,
+                  convivencia: convivencia === true ? 'S' : convivencia === false ? 'N' : '',
+                  otraPrestacion: otraPrestacion === true ? 'S' : otraPrestacion === false ? 'N' : '',
+                  resultado,
+                })
+              }
+              style={styles.boton}
+            >
+              <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Home' as never)}
+            style={styles.boton}
+          >
+            <Text style={styles.letra}>VOLVER</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
@@ -156,19 +159,30 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-  },  boton: {
-    backgroundColor: '#c13855', // Color de fondo llamativo
+  },
+  boton: {
+    backgroundColor: '#c13855',
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    alignSelf: 'center',     
-    width: '40%', // Ajusta el ancho del botón
+    alignSelf: 'center',
+    width: '40%',
     marginTop: 20,
-    height:40,
-    fontSize:20,
-    fontWeight:'bold',
+    height: 40,
+    fontSize: 20,
+    fontWeight: 'bold',
   },
-  letra:{fontSize:16, color:'white',fontWeight:'bold'}
+  letra: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  letras: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign:'center',
+  },
 });
 
 export default SimuladorAyudaNacimiento;

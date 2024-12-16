@@ -2,6 +2,21 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, ScrollView,Alert,TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type RootStackParamList = {
+  Home: undefined;
+  InformeSubsidioMovilidad: { 
+    edad:string;
+    discapacidad: string;
+    ingresos: string;
+    usaTransporteColectivo: string;
+    puedeSalirDeCasa: string;
+    resultado: string;
+    
+  };
+};
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const SimuladorSubsidioMovilidad: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
@@ -10,7 +25,7 @@ const SimuladorSubsidioMovilidad: React.FC = () => {
   const [usaTransporteColectivo, setUsaTransporteColectivo] = useState<string>('');
   const [puedeSalirDeCasa, setPuedeSalirDeCasa] = useState<string>('');
   const [resultado, setResultado] = useState<string>('');
-  const navegacion = useNavigation();
+ const navigation = useNavigation<NavigationProp>();
   
   const handleSimulacion = () => {
     const edadNum = parseInt(edad);
@@ -122,17 +137,32 @@ const SimuladorSubsidioMovilidad: React.FC = () => {
       <Button title="Simular" onPress={handleSimulacion} />
 
       
-      {resultado && (
-        <>
-          <Text style={styles.result}>{resultado}</Text>
-          <TouchableOpacity
-            onPress={() => navegacion.navigate('Home' as never)}
-            style={styles.boton}
-          >
-            <Text style={styles.letra}>VOLVER</Text>
-          </TouchableOpacity>
-        </>
-      )}
+    {resultado && (
+                <>
+                  <Text style={styles.result}>{resultado}</Text>
+                  {resultado.includes('Cumples con los requisitos') && (
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate('InformeSubsidioMovilidad', { 
+                        edad,
+                        discapacidad,
+                        ingresos,
+                        usaTransporteColectivo,
+                        puedeSalirDeCasa,
+                        resultado,
+                      })}
+                      style={styles.boton}
+                    >
+                       <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
+                    </TouchableOpacity>
+                  )}
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('Home' as never)}
+                    style={styles.boton}
+                  >
+                    <Text style={styles.letra}>VOLVER</Text>
+                  </TouchableOpacity>
+                </>
+              )}
     </ScrollView>
   );
 };
@@ -173,7 +203,13 @@ const styles = StyleSheet.create({
     fontSize:20,
     fontWeight:'bold',
   },
-  letra:{fontSize:16, color:'white',fontWeight:'bold'}
+  letra:{fontSize:16, color:'white',fontWeight:'bold'},
+  letras: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign:'center',
+  },
 });
 
 export default SimuladorSubsidioMovilidad;

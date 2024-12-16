@@ -2,7 +2,19 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert,TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
+type RootStackParamList = { 
+  Home: undefined;
+  InformePrestacionHijoDiscapacidad: {  
+    edad: string; 
+    discapacidad: string;
+    residencia:string;
+    ingresos: string;
+    resultado: string;
+  };
+};
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
@@ -10,7 +22,7 @@ const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
   const [residencia, setResidencia] = useState<string>(''); // 'S' o 'N'
   const [ingresos, setIngresos] = useState<string>('');
   const [resultado, setResultado] = useState<string>('');
-  const navegacion = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
 
   const handleSimulacion = () => {
     const edadNum = parseInt(edad, 10);
@@ -95,18 +107,32 @@ const SimuladorPrestacionHijoDiscapacidad: React.FC = () => {
       )}
 
       <Button title="Simular" onPress={handleSimulacion} />
-
-      {resultado && (
+{resultado && (
         <>
           <Text style={styles.result}>{resultado}</Text>
+          {resultado.includes('Cumples los requisitos') && (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('InformePrestacionHijoDiscapacidad', { 
+                edad,
+                discapacidad,
+                residencia, 
+                ingresos, 
+                resultado 
+              })}
+              style={styles.boton}
+            >
+               <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
+            </TouchableOpacity>
+          )}
           <TouchableOpacity
-            onPress={() => navegacion.navigate('Home' as never)}
-            style={styles.boton}
+            onPress={() => navigation.navigate('Home' as never)}
+            style={styles.boton} 
           >
             <Text style={styles.letra}>VOLVER</Text>
           </TouchableOpacity>
         </>
       )}
+      
     </View>
   );
 };
@@ -152,6 +178,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
     fontWeight: 'bold',
+  },
+  letras: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign:'center',
   },
 });
 

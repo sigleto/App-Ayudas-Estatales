@@ -143,7 +143,7 @@ const SimuladorBecaGeneral: React.FC = () => {
                    })}
                    style={styles.boton}
                  >
-                   <Text style={styles.letra}>DESCARGAR INFORME</Text>
+                  <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
                  </TouchableOpacity>
                )}
                <TouchableOpacity
@@ -196,7 +196,13 @@ const styles = StyleSheet.create({
     fontSize:20,
     fontWeight:'bold',
   },
-  letra:{fontSize:16, color:'white',fontWeight:'bold'}
+  letra:{fontSize:16, color:'white',fontWeight:'bold'},
+  letras: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign:'center',
+  },
 });
 
 export default SimuladorBecaGeneral;
