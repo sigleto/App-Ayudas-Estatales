@@ -18,11 +18,13 @@ const InformeBonoAlquiler: React.FC = () => {
   const { edad, ingresos, alquiler, resultado } = route.params || {};
   const [recompensaGanada, setRecompensaGanada] = useState(false); // Estado para la recompensa
 
+  // Función para manejar la recompensa
   const manejarRecompensa = (reward: { type: string; amount: number }) => {
     console.log(`Recompensa obtenida: ${reward.type}, cantidad: ${reward.amount}`);
     setRecompensaGanada(true);
   };
 
+  // Función para generar el PDF del informe
   const generarPDF = async () => {
     try {
       const contenidoHTML = `
@@ -52,7 +54,7 @@ const InformeBonoAlquiler: React.FC = () => {
           <h3>Pasos para realizar la solicitud:</h3>
           <ol>
             <li>Consulta los requisitos detallados en la página oficial del organismo correspondiente.</li>
-            <li>Reúne documentos como identificación oficial, contrato de alquiler, y declaración de ingresos.</li>
+            <li>Reúne documentos como identificación oficial, contrato de alquiler y declaración de ingresos.</li>
             <li>Accede al formulario en línea disponible en la web del organismo.</li>
             <li>Completa el formulario, adjunta los documentos requeridos y envíalo.</li>
             <li>Guarda el justificante de la solicitud para futuros seguimientos.</li>
@@ -62,6 +64,7 @@ const InformeBonoAlquiler: React.FC = () => {
         </html>
       `;
 
+      // Generar el archivo PDF
       const { uri } = await Print.printToFileAsync({ html: contenidoHTML });
       if (await Sharing.isAvailableAsync()) {
         await Sharing.shareAsync(uri);
@@ -77,9 +80,13 @@ const InformeBonoAlquiler: React.FC = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Informe del Simulador</Text>
       <Text style={styles.resultado}>{resultado}</Text>
+
+      {/* Mostrar anuncio recompensado si no se ha ganado */}
       {!recompensaGanada && (
         <AnuncioRecompensado onRewardEarned={manejarRecompensa} />
       )}
+
+      {/* Botón para descargar el informe si se ha ganado la recompensa */}
       {recompensaGanada && (
         <TouchableOpacity onPress={generarPDF} style={styles.boton}>
           <Text style={styles.botonTexto}>Descargar Informe en PDF</Text>
@@ -89,12 +96,39 @@ const InformeBonoAlquiler: React.FC = () => {
   );
 };
 
+// Estilos del componente
 const styles = StyleSheet.create({
-  container: { padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f8f9fa' },
-  title: { fontSize: 24, fontWeight: 'bold', color: '#0077b6', textAlign: 'center', marginBottom: 20 },
-  resultado: { fontSize: 18, color: '#333', textAlign: 'center', marginVertical: 20 },
-  boton: { backgroundColor: '#0077b6', padding: 15, borderRadius: 5, marginTop: 20 },
-  botonTexto: { color: 'white', fontSize: 16, fontWeight: 'bold' },
+  container: {
+    padding: 20,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f8f9fa',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#0077b6',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  resultado: {
+    fontSize: 18,
+    color: '#333',
+    textAlign: 'center',
+    marginVertical: 20,
+  },
+  boton: {
+    backgroundColor: '#0077b6',
+    padding: 15,
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  botonTexto: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
 
 export default InformeBonoAlquiler;

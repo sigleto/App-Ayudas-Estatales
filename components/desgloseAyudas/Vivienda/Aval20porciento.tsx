@@ -1,18 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Linking,Button } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-// Definición de los tipos para las rutas
 type RootStackParamList = {
   SimuladorAvalHipoteca: undefined;
-  // Agrega aquí otras rutas si las tienes
 };
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function Aval20PorCiento() {
   const navigation = useNavigation<NavigationProp>();
+  
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
@@ -20,7 +19,7 @@ export default function Aval20PorCiento() {
 
         <Text style={styles.subtitle}>Descripción</Text>
         <Text style={styles.content}>
-          Programa diseñado para facilitar el acceso a hipotecas, eliminando la necesidad de aportar el 20% del valor inicial de la vivienda. Esta iniciativa está dirigida principalmente a jóvenes y familias con menores a cargo, permitiendo adquirir una vivienda sin el desembolso inicial que habitualmente se requiere.
+          Programa diseñado para facilitar el acceso a hipotecas, eliminando la necesidad de aportar el 20% del valor inicial de la vivienda. Esta iniciativa está dirigida principalmente a jóvenes menores de 35 años y familias con menores a cargo, permitiendo adquirir una vivienda sin el desembolso inicial que habitualmente se requiere.
         </Text>
 
         <Text style={styles.subtitle}>Requisitos</Text>
@@ -33,8 +32,8 @@ export default function Aval20PorCiento() {
           <Text style={styles.listItem}>• No tener deudas en CIRBE (Central de Información de Riesgos).</Text>
           <Text style={styles.listItem}>• No superar 100.000 € de patrimonio neto por persona.</Text>
           <Text style={styles.listItem}>• Cumplir con los límites de precio por Comunidad Autónoma.</Text>
-          <Text style={styles.listItem}>• Ingresos individuales inferiores a 4,5 veces el IPREM (37.800 € anuales).</Text>
-          <Text style={styles.listItem}>• Ingresos conjuntos (si hay dos adquirentes) no superiores al doble del límite anterior.</Text>
+          <Text style={styles.listItem}>• Ingresos individuales inferiores a 37.800 € anuales (4,5 veces el IPREM).</Text>
+          <Text style={styles.listItem}>• Ingresos conjuntos no superiores al doble del límite anterior si hay dos adquirentes.</Text>
         </View>
 
         <Text style={styles.subtitle}>Importe máximo del préstamo avalado</Text>
@@ -58,16 +57,14 @@ export default function Aval20PorCiento() {
           >
             entidades bancarias participantes
           </Text>
-          , presentando la documentación requerida.
+          , presentando la documentación requerida. El plazo para formalizar los préstamos finaliza el 31 de diciembre de 2025.
         </Text>
 
         <Text style={styles.subtitle}>Normativa</Text>
         <Text style={styles.content}>
-          Programa de Garantía de Vivienda del Gobierno de España.
+          Programa del Ministerio de Vivienda y Agenda Urbana (MIVAU) en colaboración con el ICO.
         </Text>
-        <Text style={styles.content}>
-          ¿Quieres saber si tienes derecho a la ayuda? Puedes probar nuestro simulador aquí:
-        </Text>
+
         <Button 
           title="Ir al simulador" 
           onPress={() => navigation.navigate('SimuladorAvalHipoteca')} 

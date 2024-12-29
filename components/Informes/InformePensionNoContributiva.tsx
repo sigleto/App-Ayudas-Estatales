@@ -24,6 +24,10 @@ const InformePensionNoContributiva: React.FC = () => {
 
   const generarPDF = async () => {
     try {
+      const cumpleEdad = parseInt(edad) >= 18 && parseInt(edad) <= 64;
+      const cumpleIngresos = parseFloat(ingresos) < 7250.60; // Cambiar si se actualiza el límite
+      const cumpleDiscapacidad = parseInt(discapacidad) >= 65;
+
       const contenidoHTML = `
         <html>
         <head>
@@ -32,7 +36,11 @@ const InformePensionNoContributiva: React.FC = () => {
             h1 { color: #2a9d8f; }
             h2, h3 { color: #444; }
             p { line-height: 1.5; }
+            ul { list-style-type: none; padding: 0; }
+            li { margin-bottom: 10px; }
             .highlight { font-weight: bold; color: #c13855; }
+            .check { color: green; font-weight: bold; }
+            .cross { color: red; font-weight: bold; }
           </style>
         </head>
         <body>
@@ -40,9 +48,9 @@ const InformePensionNoContributiva: React.FC = () => {
           <h2>Pensión No Contributiva por Discapacidad</h2>
           <p><strong>Datos proporcionados:</strong></p>
           <ul>
-            <li><strong>Edad:</strong> ${edad}</li>
-            <li><strong>Ingresos anuales:</strong> ${ingresos} €</li>
-            <li><strong>Grado de discapacidad:</strong> ${discapacidad}%</li>
+            <li><strong>Edad:</strong> ${edad} años ${cumpleEdad ? '<span class="check">✔</span>' : '<span class="cross">✘</span>'}</li>
+            <li><strong>Ingresos anuales:</strong> ${ingresos} € ${cumpleIngresos ? '<span class="check">✔</span>' : '<span class="cross">✘</span>'}</li>
+            <li><strong>Grado de discapacidad:</strong> ${discapacidad}% ${cumpleDiscapacidad ? '<span class="check">✔</span>' : '<span class="cross">✘</span>'}</li>
           </ul>
           <h3>Resultado de la simulación:</h3>
           <p class="highlight">${resultado}</p>
@@ -50,11 +58,11 @@ const InformePensionNoContributiva: React.FC = () => {
           <p>La pensión no contributiva está dirigida a personas con bajos ingresos y un grado de discapacidad significativo, cumpliendo ciertos requisitos legales.</p>
           <h3>Pasos para realizar la solicitud:</h3>
           <ol>
-            <li>Reúne los documentos necesarios (DNI, certificado de empadronamiento, etc.).</li>
+            <li>Reúne los documentos necesarios (DNI, certificado de empadronamiento, certificado médico, etc.).</li>
             <li>Acude a la oficina de Servicios Sociales de tu comunidad autónoma o ayuntamiento.</li>
-            <li>Solicita el formulario correspondiente y complétalo.</li>
-            <li>Adjunta todos los documentos requeridos.</li>
-            <li>Presenta la solicitud y espera la resolución.</li>
+            <li>Solicita el formulario correspondiente y complétalo con precisión.</li>
+            <li>Adjunta todos los documentos requeridos según tu situación personal.</li>
+            <li>Presenta la solicitud y espera la resolución oficial.</li>
           </ol>
           <p>Nota: Este informe es meramente informativo y no sustituye la consulta oficial.</p>
         </body>

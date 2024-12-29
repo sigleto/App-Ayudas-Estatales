@@ -1,52 +1,71 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet,Linking } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Linking } from 'react-native';
 
 const PymeInvierte = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}>Programa Pyme Invierte</Text>
+        <Text style={styles.title}>Programa Pyme Invierte 2025</Text>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Descripción</Text>
           <Text style={styles.text}>
-            Apoyo para la internacionalización de pymes mediante inversión productiva en el exterior.
+            Apoyo integral a la inversión e implantación en el exterior de las pymes españolas, facilitando asesoramiento y acceso a financiación.
           </Text>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Requisitos</Text>
+          <Text style={styles.sectionTitle}>Líneas de Apoyo</Text>
           <Text style={styles.text}>
-            - Proyectos con necesidades de financiación superiores a 3 años.{"\n"}
-            - Empresas registradas en España.
+            1. Pyme Invierte Inversiones Productivas{"\n"}
+            2. Pyme Invierte Implantaciones Comerciales
+          </Text>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Beneficiarios</Text>
+          <Text style={styles.text}>
+            - Pymes españolas con proyectos de inversión productiva en el exterior (necesidades de financiación a más de 3 años){"\n"}
+            - Pymes españolas con proyectos de implantación comercial en el exterior
           </Text>
         </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Proceso de Solicitud</Text>
           <Text style={styles.text}>
-            Las solicitudes se presentan en la web del<Text
+            Enviar la solicitud y el plan de negocios a asesoramiento.financiero@icex.es. ICEX y OFECOMES evaluarán la aceptación del asesoramiento según disponibilidad de recursos.
+          </Text>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Financiación</Text>
+          <Text style={styles.text}>
+            COFIDES proporciona acceso a la financiación para los proyectos aprobados.
+          </Text>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Más Información</Text>
+          <Text style={styles.text}>
+            Para detalles adicionales, visite la{' '}
+            <Text
               style={styles.link}
               onPress={() =>
                 Linking.openURL(
                   'https://www.icex.es/es/todos-nuestros-servicios/financiacion-para-la-internacionalizacion/programa-pyme-invierte'
                 )
               }
-            > ICEX
-            </Text>, acompañadas del plan de internacionalización.
-          </Text>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Normativa</Text>
-          <Text style={styles.text}>
-            Gestionado por el Instituto Español de Comercio Exterior (ICEX).
+            >
+              web oficial del ICEX
+            </Text>.
           </Text>
         </View>
       </View>
     </ScrollView>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert,TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -10,13 +10,13 @@ type RootStackParamList = {
     edad: string;
     ingresos: string;
     precioVivienda: string;
-    esPropietario:string;
-    poblacion:string;
+    esPropietario: string;
+    poblacion: string;
     resultado: string;
   };
 };
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const SimuladorAyudaJovenesAdquisicion: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
@@ -27,7 +27,6 @@ const SimuladorAyudaJovenesAdquisicion: React.FC = () => {
   const [resultado, setResultado] = useState<string>('');
   const navigation = useNavigation<NavigationProp>();
   
-  
   const handleSimulacion = () => {
     const edadNum = parseInt(edad);
     const ingresosNum = parseFloat(ingresos);
@@ -35,6 +34,7 @@ const SimuladorAyudaJovenesAdquisicion: React.FC = () => {
     const poblacionNum = parseInt(poblacion);
     const esPropietarioBool = esPropietario.toUpperCase() === 'S';
 
+    // Validaciones de entrada
     if (
       isNaN(edadNum) ||
       isNaN(ingresosNum) ||
@@ -46,15 +46,14 @@ const SimuladorAyudaJovenesAdquisicion: React.FC = () => {
       return;
     }
 
-    const ipremAnual = 600 * 12; // IPREM mensual estimado x 12
-    const limiteIngresos = ipremAnual * 3; // 3 veces el IPREM anual
+    const limiteIngresos = 37800; // Ingresos individuales máximos
 
     // Validación de requisitos
     if (
       edadNum <= 35 &&
       ingresosNum <= limiteIngresos &&
       precioNum <= 120000 &&
-      poblacionNum <= 10000 &&
+      poblacionNum <= 5000 && // Se ha ajustado el límite de población
       !esPropietarioBool
     ) {
       const ayuda = Math.min(10800, precioNum * 0.2); // Ayuda máxima o el 20% del precio
@@ -78,7 +77,7 @@ const SimuladorAyudaJovenesAdquisicion: React.FC = () => {
 
   return (
     <View style={styles.container}>
-        <AnuncioInt/>
+        <AnuncioInt />
       <Text style={styles.title}>Simulador Ayuda a la Adquisición</Text>
 
       <Text>Edad:</Text>
@@ -112,8 +111,9 @@ const SimuladorAyudaJovenesAdquisicion: React.FC = () => {
       <TextInput
         value={esPropietario}
         onChangeText={setEsPropietario}
-        placeholder="Escribe 'S' o 'N'"
+        placeholder="S o N"
         style={styles.input}
+        maxLength={1}
       />
 
       <Text>Población del municipio:</Text>
@@ -127,36 +127,37 @@ const SimuladorAyudaJovenesAdquisicion: React.FC = () => {
 
       <Button title="Simular" onPress={handleSimulacion} />
 
-     
-      {resultado && (
-             <>
-               <Text style={styles.result}>{resultado}</Text>
-               {resultado.includes('Cumples los requisitos') && (
-                 <TouchableOpacity
-                   onPress={() => navigation.navigate('InformeAyudaAdquisicion', { 
-                     edad, 
-                     ingresos,
-                     precioVivienda,
-                     esPropietario,
-                     poblacion, 
-                     resultado 
-                   })}
-                   style={styles.boton}
-                 >
-                    <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
-                 </TouchableOpacity>
-               )}
-               <TouchableOpacity
-                 onPress={() => navigation.navigate('Home' as never)}
-                 style={styles.boton}
-               >
-                 <Text style={styles.letra}>VOLVER</Text>
-               </TouchableOpacity>
-             </>
-           )}
+     {resultado && (
+       <>
+         <Text style={styles.result}>{resultado}</Text>
+         {resultado.includes('Cumples los requisitos') && (
+           <TouchableOpacity
+             onPress={() => navigation.navigate('InformeAyudaAdquisicion', { 
+               edad, 
+               ingresos,
+               precioVivienda,
+               esPropietario,
+               poblacion, 
+               resultado 
+             })}
+             style={styles.boton}
+           >
+             <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
+           </TouchableOpacity>
+         )}
+         <TouchableOpacity
+           onPress={() => navigation.navigate('Home' as never)}
+           style={styles.boton}
+         >
+           <Text style={styles.letra}>VOLVER</Text>
+         </TouchableOpacity>
+       </>
+     )}
     </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {

@@ -34,7 +34,6 @@ import Home from './Home';
 import DescargoResponsabilidad from './DescargoResponsabilidad';
 import PoliticaPrivacidad from './PoliticaPrivacidad';
 import AyudasSociales from './listado/AyudasSociales';
-import BonoJovenAlquiler from './desgloseAyudas/Sociales/BonoJovenAlquiler';
 import LeyDependencia from './desgloseAyudas/Sociales/LeyDependencia';
 import Presentacion1 from './Presentacion/Presentacion1';
 import FormularioGeneral from './SimuladorGeneral/FormularioGeneral';
@@ -125,8 +124,7 @@ const Stack = createStackNavigator();
         <Stack.Screen name="DescargoResponsabilidad" component={DescargoResponsabilidad}options={{ headerShown: false }} />
         <Stack.Screen name="PoliticaPrivacidad" component={PoliticaPrivacidad}options={{ headerShown: false }} />
         <Stack.Screen name="AyudasSociales" component={AyudasSociales}options={{ headerShown: false }} />
-        <Stack.Screen name="BonoJovenAlquiler" component={BonoJovenAlquiler}options={{ headerShown: false }} />
-        <Stack.Screen name="LeyDependencia" component={LeyDependencia}options={{ headerShown: false }} />
+               <Stack.Screen name="LeyDependencia" component={LeyDependencia}options={{ headerShown: false }} />
         <Stack.Screen name="ComplementoAyudaInfancia" component={ComplementoAyudaInfancia}options={{ headerShown: false }} />
         <Stack.Screen name="BonoCulturalJoven" component={BonoCulturalJoven}options={{ headerShown: false }} />
         <Stack.Screen name="Cultura" component={Cultura}options={{ headerShown: false }} />

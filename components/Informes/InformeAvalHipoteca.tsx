@@ -56,12 +56,12 @@ const InformeAvalHipoteca: React.FC = () => {
           <h3>Resultado de la simulación:</h3>
           <p class="highlight">${resultado}</p>
           <h3>Descripción:</h3>
-          <p>El aval del 20% de hipoteca está destinado a jóvenes y familias que cumplen criterios relacionados con la edad, ingresos, patrimonio y otras condiciones. Facilita el acceso a una financiación más favorable.</p>
+          <p>El aval del 20% de hipoteca está destinado a jóvenes menores de 35 años y familias que cumplen criterios relacionados con la edad, ingresos, patrimonio y otras condiciones. Facilita el acceso a una financiación más favorable.</p>
           <h3>Pasos para realizar la solicitud:</h3>
           <ol>
-            <li>Consulta los requisitos detallados en la página oficial del organismo correspondiente.</li>
-            <li>Reúne documentos como identificación oficial, declaración de la renta, y certificaciones patrimoniales.</li>
-            <li>Accede al formulario en línea disponible en la web del organismo.</li>
+            <li>Consulta los requisitos detallados en la página oficial del Ministerio de Vivienda.</li>
+            <li>Reúne documentos como identificación oficial, declaración de la renta y certificaciones patrimoniales.</li>
+            <li>Accede al formulario en línea disponible en la web del organismo correspondiente.</li>
             <li>Completa el formulario, adjunta los documentos requeridos y envíalo.</li>
             <li>Guarda el justificante de la solicitud para futuros seguimientos.</li>
           </ol>
@@ -96,6 +96,8 @@ const InformeAvalHipoteca: React.FC = () => {
     </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: { padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f8f9fa' },

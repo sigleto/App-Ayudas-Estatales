@@ -1,12 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Linking,Button} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-// Definición de los tipos para las rutas
 type RootStackParamList = {
   SimuladorBecaGeneral: undefined;
-  // Agrega aquí otras rutas si las tienes
 };
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -16,37 +14,34 @@ const BecaGeneral: React.FC = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}>Beca General</Text>
+        <Text style={styles.title}>Beca General MEC 2024/2025</Text>
 
         <Text style={styles.subtitle}>Descripción</Text>
         <Text style={styles.content}>
-          La Beca General está dirigida a estudiantes de enseñanzas postobligatorias: 
-          bachillerato, formación profesional, enseñanzas artísticas y deportivas, 
-          idiomas y universitarias.
+          La Beca General del Ministerio de Educación y Formación Profesional está dirigida a estudiantes de enseñanzas postobligatorias: bachillerato, formación profesional, enseñanzas artísticas y deportivas, idiomas y estudios universitarios.
         </Text>
 
-        <Text style={styles.subtitle}>Requisitos</Text>
+        <Text style={styles.subtitle}>Requisitos Generales</Text>
         <Text style={styles.content}>
-          - Ser ciudadano español o tener residencia legal en España.{"\n"}
-          - Estar matriculado en un curso completo o número mínimo de asignaturas.{"\n"}
-          - No superar los umbrales de renta establecidos.{"\n"}
-          - Alcanzar el rendimiento académico mínimo exigido.
+          - Tener nacionalidad española o de un estado miembro de la Unión Europea[1].
+          - No poseer un título igual o superior al de los estudios para los que se solicita la beca[1].
+          - Estar matriculado en un curso completo o en el mínimo de créditos exigidos.
+          - Cumplir con los requisitos económicos y académicos establecidos.
         </Text>
-        <Text style={styles.subtitle}>Cuantías</Text>
-<Text style={styles.content}>
-  <Text style={styles.bold}>Cantidad fija:</Text> Es un importe establecido anualmente en la convocatoria, que se otorga si se cumplen los requisitos generales, económicos y académicos. No se puede recibir junto con la beca básica si se tiene beca ligada a la renta. Los componentes de la beca fija son:
-  {"\n"}{"\n"}
-  - **Básica**: 300 € (350 € en FP de Grado Básico).
-  {"\n"}
-  - **Por renta familiar**: 1.700 €.
-  {"\n"}
-  - **Por cambio de residencia durante el curso**: 2.500 €.
-  {"\n"}
-  - **Por excelencia académica**: 50 € - 125 €.
-  {"\n"}{"\n"}
 
-  <Text style={styles.bold}>Cantidad variable:</Text> Se distribuye entre quienes ya han recibido la cantidad fija, usando una fórmula que considera la nota media y la renta familiar. El mínimo para la cantidad variable es de 60 €, si se solicita para estudios específicos como idiomas, FP de Grado Básico o acceso a la universidad para mayores de 25 años.
-</Text>
+        <Text style={styles.subtitle}>Requisitos Académicos</Text>
+        <Text style={styles.content}>
+          - Para 1º de Bachillerato: Nota mínima de 5 en 4º de ESO[1].
+          - Para 1º de FP de Grado Medio o Básico: Estar matriculado[1].
+          - Para 1º de FP de Grado Superior: Nota mínima de 5 en 2º de Bachillerato, ciclo medio o prueba de acceso[1].
+          - Para Universidad (1º curso de grado): Nota mínima de 5 en el acceso a la universidad[1].
+          - Para Universidad (2º curso o posteriores en enseñanzas técnicas y ciencias): Superar el 65% de los créditos matriculados el año anterior[1].
+        </Text>
+
+        <Text style={styles.subtitle}>Cuantías</Text>
+        <Text style={styles.content}>
+          Las cuantías varían según el tipo de estudios, la renta familiar y otras circunstancias. Incluyen componentes fijos y variables, como beca básica, cuantía ligada a la renta, cuantía ligada a la residencia y cuantía ligada a la excelencia académica[3].
+        </Text>
 
         <Text style={styles.subtitle}>Proceso de Solicitud</Text>
         <Text style={styles.content}>
@@ -54,19 +49,19 @@ const BecaGeneral: React.FC = () => {
             style={styles.link} 
             onPress={() => Linking.openURL('https://sede.educacion.gob.es/portada.html')}>
             Sede Electrónica
-          </Text> del Ministerio de Educación.{"\n"}
-          2. Rellena el formulario en línea con los datos personales y académicos.{"\n"}
-          3. Adjunta la documentación requerida.{"\n"}
-          4. Envía la solicitud antes del 10 de mayo de 2024.
+          </Text> del Ministerio de Educación.
+          2. Rellena el formulario en línea con los datos personales y académicos.
+          3. Adjunta la documentación requerida.
+          4. Envía la solicitud dentro del plazo establecido (generalmente hasta mayo del año correspondiente).
         </Text>
 
         <Text style={styles.subtitle}>Normativa</Text>
         <Text style={styles.content}>
-          Regulado por el Real Decreto 1721/2007 y las convocatorias anuales del Ministerio 
-          de Educación y Formación Profesional.
+          Regulado por el Real Decreto 1721/2007 y las convocatorias anuales del Ministerio de Educación y Formación Profesional.
         </Text>
+
         <Text style={styles.content}>
-          ¿Quieres saber si tienes derecho al bono? Puedes probar nuestro simulador aquí:
+          ¿Quieres saber si tienes derecho a la beca? Prueba nuestro simulador:
         </Text>
         <Button 
           title="Ir al simulador" 
@@ -76,6 +71,8 @@ const BecaGeneral: React.FC = () => {
     </ScrollView>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {

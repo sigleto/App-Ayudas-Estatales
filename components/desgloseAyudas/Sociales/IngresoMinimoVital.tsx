@@ -27,6 +27,7 @@ export default function IngresoMinimoVital() {
           - Edad mínima de 23 años (o 18 años en determinados casos).{"\n"}
           - Ingresos insuficientes y situación de vulnerabilidad económica.{"\n"}
           - Residencia legal en España durante al menos 1 año.{"\n"}
+          - La unidad de convivencia debe estar formada desde hace seis meses.{"\n"}
           Para comprobar si cumple los requisitos, puede acceder a este{' '}
           <Text 
             style={styles.link} 
@@ -37,17 +38,17 @@ export default function IngresoMinimoVital() {
 
         <Text style={styles.subtitle}>Cuantías</Text>
         <Text style={styles.content}>
-          La cuantía del ingreso mínimo vital (IMV) se calcula como la diferencia entre la renta garantizada y los ingresos, siendo al menos 10 € mensuales...
+          La cuantía del ingreso mínimo vital (IMV) se establece en **658,59 euros mensuales** (7.903,07 euros anuales) para un adulto en 2025.
         </Text>
 
         <Text style={styles.subtitle}>Proceso de Solicitud</Text>
         <Text style={styles.content}>
-          La solicitud se realiza en la Seguridad Social mediante su plataforma online o en oficinas físicas...
+          La solicitud se realiza en la Seguridad Social mediante su plataforma online o en oficinas físicas. Puede hacerlo a través de la Sede Electrónica de la Seguridad Social, tanto con certificado electrónico como sin él.
         </Text>
 
         <Text style={styles.subtitle}>Normativa</Text>
         <Text style={styles.content}>
-          Regulado por el Real Decreto-ley 20/2020, de 29 de mayo.
+          Regulado por el Real Decreto-ley 20/2020, de 29 de mayo, y dentro del marco del Plan de Recuperación.
         </Text>
 
         <Button 

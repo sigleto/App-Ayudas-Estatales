@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView,Linking,Button} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
@@ -9,12 +9,13 @@ type RootStackParamList = {
   // Agrega aquí otras rutas si las tienes
 };
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
 const BecaResidencia: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}>Beca de Residencia</Text>
+        <Text style={styles.title}>Beca de Residencia 2025</Text>
 
         <Text style={styles.subtitle}>Descripción</Text>
         <Text style={styles.content}>
@@ -22,13 +23,15 @@ const BecaResidencia: React.FC = () => {
           estudios lejos de su domicilio familiar.
         </Text>
 
-        <Text style={styles.subtitle}>Requisitos</Text>
+        <Text style={styles.subtitle}>Requisitos y Novedades</Text>
         <Text style={styles.content}>
-          - El importe máximo es de 2.500 euros{"\n"}
+          - El importe máximo se mantiene en 2.500 euros{"\n"}
           - Estar matriculado en estudios postobligatorios o universitarios.{"\n"}
           - Residencia habitual alejada del centro de estudios.{"\n"}
-          - Está destinada a estudios presenciales y con matrícula completa{"\n"}
-          - No superar el umbral de renta familiar correspondiente.
+          - Estudios presenciales y con matrícula completa{"\n"}
+          - No superar el umbral de renta familiar (incrementado un 5% respecto a 2024){"\n"}
+          - Nota mínima de acceso: 5 para estudios no universitarios{"\n"}
+          - Para estudiantes con discapacidad: grado mínimo reducido al 25%
         </Text>
 
         <Text style={styles.subtitle}>Proceso de Solicitud</Text>
@@ -42,14 +45,22 @@ const BecaResidencia: React.FC = () => {
           3. Completar antes de la fecha límite.
         </Text>
 
+        <Text style={styles.subtitle}>Cambios Importantes</Text>
+        <Text style={styles.content}>
+          - Se excluyen del cómputo patrimonial los gastos de alquiler de vivienda habitual.{"\n"}
+          - Reducción gradual de la cuantía variable, aumentando las cuantías fijas.{"\n"}
+          - Nota de acceso a becas universitarias se reducirá gradualmente a 5.
+        </Text>
+
         <Text style={styles.subtitle}>Normativa</Text>
         <Text style={styles.content}>
           Incluida en las disposiciones generales de las becas estatales, regulada 
-          por la Orden EFP/XYZ/2024.
+          por la Orden EFP/XYZ/2025.
         </Text>
+
         <Text style={styles.subtitle}>Simulador</Text>
         <Text style={styles.content}>
-          ¿Quieres saber si tienes derecho al bono? Puedes probar nuestro simulador aquí:
+          ¿Quieres saber si tienes derecho a la beca? Prueba nuestro simulador actualizado:
         </Text>
         <Button 
           title="Ir al simulador" 
@@ -59,6 +70,7 @@ const BecaResidencia: React.FC = () => {
     </ScrollView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

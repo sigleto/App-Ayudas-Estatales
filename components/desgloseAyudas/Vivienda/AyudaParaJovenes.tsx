@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Linking,Button } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
@@ -7,13 +7,13 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 type RootStackParamList = {
   SimuladorAyudaJovenesAlquiler: undefined;
   SimuladorAyudaJovenesAdquisicion: undefined;
-  // Agrega aquí otras rutas si las tienes
 };
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function AyudasParaJovenes() {
   const navigation = useNavigation<NavigationProp>();
+  
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
@@ -34,7 +34,7 @@ export default function AyudasParaJovenes() {
           {'\n'}- Vivienda habitual y permanente
           {'\n'}- Acreditar rentas del trabajo
           {'\n'}- Ingresos en la unidad de convivencia inferiores a:
-          {'\n'}  - 3IPREM de forma general
+          {'\n'}  - 3IPREM de forma general (aprox. 24.318 € anuales)
           {'\n'} - 4IPREM si se trata de familias numerosas generales y personas con discapacidad
           {'\n'} - 5IPREM familias numerosas especiales y personas con determinados grados de discapacidad
           {'\n'}- Alquiler mensual máximo de 600 euros
@@ -43,19 +43,19 @@ export default function AyudasParaJovenes() {
           {'\n\n'}<Text style={styles.bold}>Ayuda a la adquisición:</Text>
           {'\n'}- Vivienda habitual y permanente
           {'\n'}- Ingresos en la unidad de convivencia inferiores a:
-          {'\n'}  - 3IPREM de forma general
+          {'\n'}  - 3IPREM de forma general (aprox. 24.318 € anuales)
           {'\n'}  - 4IPREM si se trata de familias numerosas generales y personas con discapacidad
           {'\n'}  - 5IPREM familias numerosas especiales y personas con determinados grados de discapacidad
-          {'\n'}- Precio de adquisición inferior a 120.000€
+          {'\n'}- Precio de adquisición inferior a **120.000 €**.
         </Text>
 
         {/* Sección: Cuantías */}
         <Text style={styles.subtitle}>Cuantías</Text>
         <Text style={styles.content}>
           <Text style={styles.bold}>Ayuda al alquiler:</Text>
-          {'\n'}- 250 euros al mes          
+          {'\n'}- Hasta **250 euros al mes**          
           {'\n\n'}<Text style={styles.bold}>Ayuda a la adquisición:</Text>
-          {'\n'}- Hasta 10.800 euros con un límite del 20% del precio de adquisición (inferior a 100.000 euros).
+          {'\n'}- Hasta **10.800 euros** con un límite del **20%** del precio de adquisición (inferior a **100.000 euros**).
         </Text>
 
         {/* Sección: Proceso de Solicitud */}
@@ -76,21 +76,22 @@ export default function AyudasParaJovenes() {
         <Text style={styles.content}>
           Plan Estatal de Vivienda 2022-2025 (BOE-A-2021-19809).
         </Text>
-        <Text style={styles.content}>
-          ¿Quieres saber si tienes derecho al bono? Puedes probar nuestro simulador aquí:
-        </Text>
+        
+        {/* Botones para navegar a los simuladores */}
         <Button 
           title="Ir al simulador alquiler" 
           onPress={() => navigation.navigate('SimuladorAyudaJovenesAlquiler')} 
         />
+        
         <Button 
-          title="Ir al simulador adquisicion" 
+          title="Ir al simulador adquisición" 
           onPress={() => navigation.navigate('SimuladorAyudaJovenesAdquisicion')} 
         />
       </View>
     </ScrollView>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

@@ -4,22 +4,38 @@ import { ScrollView, View, Text, StyleSheet, Linking } from 'react-native';
 const KitDigital = () => (
   <ScrollView style={styles.container}>
     <View style={styles.card}>
-      <Text style={styles.title}>Kit Digital</Text>
+      <Text style={styles.title}>Kit Digital 2025</Text>
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Descripción</Text>
         <Text style={styles.text}>
-          Subvenciones para la digitalización de pymes y autónomos, enfocadas en herramientas tecnológicas.
+          Subvenciones para la digitalización de pymes, autónomos y medianas empresas, enfocadas en herramientas tecnológicas avanzadas, incluyendo soluciones de Inteligencia Artificial.
         </Text>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Requisitos</Text>
-        <Text style={styles.text}>• Ser una pequeña empresa, microempresa o autónomo.</Text>
-        <Text style={styles.text}>• Cumplir los límites financieros y efectivos que definen las categorías de empresas.</Text>
-        <Text style={styles.text}>• Estar en situación de alta y tener la antigüedad mínima que se establece por convocatoria.</Text>
-        <Text style={styles.text}>• No tener consideración de empresa en crisis.</Text>
-        <Text style={styles.text}>• Estar al corriente de las obligaciones tributarias y frente a la Seguridad Social.</Text>
+        <Text style={styles.sectionTitle}>Segmentos y Ayudas</Text>
+        <Text style={styles.text}>• Segmento I (10-49 empleados): Hasta 12.000€</Text>
+        <Text style={styles.text}>• Segmento II (3-9 empleados): Hasta 6.000€</Text>
+        <Text style={styles.text}>• Segmento III (0-2 empleados): Hasta 2.000€</Text>
+        <Text style={styles.text}>• Segmento IV (50-99 empleados): Hasta 25.000€</Text>
+        <Text style={styles.text}>• Segmento V (100-249 empleados): Hasta 29.000€</Text>
+      </View>
+
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Requisitos Principales</Text>
+        <Text style={styles.text}>• Ser pyme, micropyme o autónomo</Text>
+        <Text style={styles.text}>• Cumplir los límites financieros y efectivos de cada categoría</Text>
+        <Text style={styles.text}>• Antigüedad mínima de 6 meses</Text>
+        <Text style={styles.text}>• No tener consideración de empresa en crisis</Text>
+        <Text style={styles.text}>• Estar al corriente de obligaciones tributarias y con la Seguridad Social</Text>
+      </View>
+
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Plazos</Text>
+        <Text style={styles.text}>• Segmento III: Hasta el 31 de octubre de 2025</Text>
+        <Text style={styles.text}>• Segmentos I y II: Hasta el 31 de diciembre de 2024</Text>
+        <Text style={styles.text}>• Segmentos IV y V: Hasta el 30 de junio de 2025</Text>
       </View>
 
       <View style={styles.section}>
@@ -28,35 +44,31 @@ const KitDigital = () => (
           La solicitud se realiza a través de la plataforma{' '}
           <Text
             style={styles.link}
-            onPress={() =>
-              Linking.openURL('https://www.acelerapyme.gob.es/user/login')
-            }
+            onPress={() => Linking.openURL('https://www.acelerapyme.gob.es/')}
           >
             Acelera Pyme
-          </Text>, presentando la documentación requerida. Aquí tienes una{' '}
-          <Text
-            style={styles.link}
-            onPress={() =>
-              Linking.openURL(
-                'https://www.acelerapyme.gob.es/sites/acelerapyme/files/2022-08/Kit_Digital_Gui%CC%81a_pymes.pdf'
-              )
-            }
-          >
-            guía rápida
-          </Text>{' '}
-          con todos los detalles.
+          </Text>
+          . Se requiere registro previo y presentación de la documentación necesaria.
         </Text>
+      </View>
+
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Novedades</Text>
+        <Text style={styles.text}>• Inclusión de soluciones de Inteligencia Artificial</Text>
+        <Text style={styles.text}>• Posibilidad de sustituir soluciones existentes por otras más avanzadas</Text>
+        <Text style={styles.text}>• Ampliación a medianas empresas (Segmentos IV y V)</Text>
       </View>
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Normativa</Text>
         <Text style={styles.text}>
-          Enmarcado en el Plan de Recuperación, Transformación y Resiliencia de España.
+          Enmarcado en el Plan de Recuperación, Transformación y Resiliencia de España, financiado por los fondos Next Generation EU.
         </Text>
       </View>
     </View>
   </ScrollView>
 );
+
 
 const styles = StyleSheet.create({
   container: {

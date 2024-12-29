@@ -1,6 +1,5 @@
-// SimuladorLeyDeDependencia.tsx
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Alert,TouchableOpacity } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -9,10 +8,11 @@ type RootStackParamList = {
   Home: undefined;
   InformeLeyDependencia: { 
     edad: string;
-    gradoDependencia:string;
+    gradoDependencia: string;
     resultado: string;
   };
 };
+
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const SimuladorLeyDeDependencia: React.FC = () => {
@@ -50,7 +50,7 @@ const SimuladorLeyDeDependencia: React.FC = () => {
         mensaje = 'Grado II: Dependencia severa';
         break;
       case 3: // Grado III: Gran dependencia
-        prestaciones = 455;
+        prestaciones = 747.25; // Actualizado para 2025
         mensaje = 'Grado III: Gran dependencia';
         break;
       default:
@@ -76,7 +76,7 @@ const SimuladorLeyDeDependencia: React.FC = () => {
 
   return (
     <View style={styles.container}>
-        <AnuncioInt/>
+      <AnuncioInt />
       <Text style={styles.title}>Simulador Ley de Dependencia</Text>
 
       <Text>Edad:</Text>
@@ -98,34 +98,35 @@ const SimuladorLeyDeDependencia: React.FC = () => {
       />
 
       <Button title="Verificar" onPress={handleSubmit} />
+      
       {resultado && (
-              <>
-                <Text style={styles.result}>{resultado}</Text>
-                {resultado.includes('Tienes derecho') && (
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate('InformeLeyDependencia', { 
-                      edad, 
-                      gradoDependencia, 
-                      resultado 
-                    })}
-                    style={styles.boton}
-                  >
-                      <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
-                  </TouchableOpacity>
-                )}
-                <TouchableOpacity
-                  onPress={() => navigation.navigate('Home' as never)}
-                  style={styles.boton}
-                >
-                  <Text style={styles.letra}>VOLVER</Text>
-                </TouchableOpacity>
-              </>
-            )}
-      
-      
+        <>
+          <Text style={styles.result}>{resultado}</Text>
+          {resultado.includes('Tienes derecho') && (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('InformeLeyDependencia', { 
+                edad, 
+                gradoDependencia, 
+                resultado 
+              })}
+              style={styles.boton}
+            >
+              <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Home' as never)}
+            style={styles.boton}
+          >
+            <Text style={styles.letra}>VOLVER</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {

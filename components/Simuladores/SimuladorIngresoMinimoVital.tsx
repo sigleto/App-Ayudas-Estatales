@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet,Alert,TouchableOpacity } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -9,11 +9,12 @@ type RootStackParamList = {
   InformeIngresoMinimoVital: { 
     edad: string;
     ingresos: string;
-    personas:string;
+    personas: string;
     discapacidad: string;
     resultado: string;
   };
 };
+
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const SimuladorIngresoMinimoVital: React.FC = () => {
@@ -36,7 +37,14 @@ const SimuladorIngresoMinimoVital: React.FC = () => {
     }
 
     // Cálculo del Ingreso Mínimo Vital
-    const rentaGarantizada = 604.21 + (personasNum - 1) * 185.1 + (discapacidadNum >= 65 ? 22 / 100 * 604.21 : 0);
+    const rentaGarantizadaBase = 658.59; // Cuantía base para 2025
+    const rentaGarantizadaPorPersona = 185.1; // Incremento por cada persona adicional
+    const discapacidadIncremento = (discapacidadNum >= 65 ? rentaGarantizadaBase * 0.22 : 0); // Incremento por discapacidad
+
+    // Cálculo de la renta garantizada total
+    const rentaGarantizada = rentaGarantizadaBase + (personasNum - 1) * rentaGarantizadaPorPersona + discapacidadIncremento;
+    
+    // Cálculo del IMV
     const imv = rentaGarantizada - ingresosNum;
 
     if (edadNum >= 23 && ingresosNum <= rentaGarantizada && imv >= 10) {
@@ -45,6 +53,7 @@ const SimuladorIngresoMinimoVital: React.FC = () => {
       setResultado('No tienes derecho al Ingreso Mínimo Vital.');
     }
   };
+
   React.useEffect(() => {
     Alert.alert(
       'Aviso importante',
@@ -52,9 +61,10 @@ const SimuladorIngresoMinimoVital: React.FC = () => {
       [{ text: 'Entendido' }]
     );
   }, []);
+
   return (
     <View style={styles.container}>
-        <AnuncioInt/>
+      <AnuncioInt />
       <Text style={styles.title}>Simulador Ingreso Mínimo Vital</Text>
 
       <Text>Edad:</Text>
@@ -94,34 +104,36 @@ const SimuladorIngresoMinimoVital: React.FC = () => {
       />
 
       <Button title="Verificar" onPress={handleSubmit} />
-     {resultado && (
-             <>
-               <Text style={styles.result}>{resultado}</Text>
-               {resultado.includes('Tienes derecho') && (
-                 <TouchableOpacity
-                   onPress={() => navigation.navigate('InformeIngresoMinimoVital', { 
-                     edad, 
-                     ingresos,
-                     personas, 
-                     discapacidad, 
-                     resultado 
-                   })}
-                   style={styles.boton}
-                 >
-                   <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
-                 </TouchableOpacity>
-               )}
-               <TouchableOpacity
-                 onPress={() => navigation.navigate('Home' as never)}
-                 style={styles.boton}
-               >
-                 <Text style={styles.letra}>VOLVER</Text>
-               </TouchableOpacity>
-             </>
-           )}
+      
+      {resultado && (
+        <>
+          <Text style={styles.result}>{resultado}</Text>
+          {resultado.includes('Tienes derecho') && (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('InformeIngresoMinimoVital', { 
+                edad, 
+                ingresos,
+                personas, 
+                discapacidad, 
+                resultado 
+              })}
+              style={styles.boton}
+            >
+              <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Home' as never)}
+            style={styles.boton}
+          >
+            <Text style={styles.letra}>VOLVER</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

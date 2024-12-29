@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView,Linking, Button } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
@@ -28,25 +28,28 @@ export default function PensionNoContributiva() {
           - Edad: entre 18 y 64 años.{"\n"}
           - Residencia legal en España durante al menos 5 años.{"\n"}
           - Estar afectado de un grado de discapacidad igual o superior al 65%.{"\n"}
-          - Ingresos familiares por debajo de los límites establecidos (Existe carencia cuando las rentas o ingresos personales de que se disponga, en cómputo anual, para 2024, sean inferiores a 7.250,60 € anuales.)
+          - Ingresos familiares por debajo de los límites establecidos (Existe carencia cuando las rentas o ingresos personales de que se disponga, en cómputo anual, para 2025, sean inferiores a 7.905,80 € anuales.)
         </Text>
-        <Text style={styles.subtitle}>Cuantias</Text>
+
+        <Text style={styles.subtitle}>Cuantías</Text>
         <Text style={styles.content}>        
-        la cuantía de las pensiones de invalidez y jubilación de la Seguridad Social en su modalidad no contributiva, quedando el importe anual para el año 2024 en 7.250,60 € anuales, que se abonan en 12 mensualidades más dos pagas extraordinarias al año.{"\n"}
+        La cuantía de las pensiones de invalidez y jubilación de la Seguridad Social en su modalidad no contributiva para el año 2025 es de 7.905,80 € anuales, que se abonan en 12 mensualidades más dos pagas extraordinarias al año.{"\n"}
 
         La cuantía individual actualizada para cada pensionista se establece a partir del citado importe y en función del número de beneficiarios que vivan en el mismo domicilio, de sus rentas personales y/o de las de su unidad económica de convivencia, no pudiendo ser la cuantía inferior a la mínima del 25% de la establecida.{"\n"}
 
-        Los pensionistas de pensión no contributiva de invalidez cuyo grado de discapacidad sea igual o superior al 75% y acrediten la necesidad del concurso de otra persona para realizar los actos esenciales de la vida, percibirán además un complemento del 50% de los 7.250,60 € anuales, por lo que el importe de ese complemento queda fijado en 3.625,30 € anuales.{"\n"}
-        Cuantías básicas para 2024
+        Los pensionistas de pensión no contributiva de invalidez cuyo grado de discapacidad sea igual o superior al 75% y acrediten la necesidad del concurso de otra persona para realizar los actos esenciales de la vida, percibirán además un complemento del 50% de los 7.905,80 € anuales, por lo que el importe de ese complemento queda fijado en 3.952,90 € anuales.{"\n"}
+
+Cuantías básicas para 2025:
 Cuantía	Anual	Mensual
-Íntegra	7.250,60 €	517,90 €
-Mínima 25%	1.812,65 €	129,48 €
+Íntegra	7.905,80 €	564,70 €
+Mínima 25%	1.976,45 €	141,18 €
 Íntegra más
-Incremento 50%	10.875,90 €	776,85 €
+Incremento 50%	11.858,70 €	847,03 €
         </Text>
+
         <Text style={styles.subtitle}>Proceso de Solicitud</Text>
         <Text style={styles.content}>
-          La solicitud se realiza en las oficinas del IMSERSO o de los servicios sociales de cada  <Text 
+          La solicitud se realiza en las oficinas del IMSERSO o de los servicios sociales de cada <Text 
             style={styles.link} 
             onPress={() => Linking.openURL('https://imserso.es/pnc-prestaciones-subvenciones/donde-solicitar-pension-no-contributiva-pnc')}>
             comunidad autónoma
@@ -57,6 +60,7 @@ Incremento 50%	10.875,90 €	776,85 €
         <Text style={styles.content}>
           Regulada por el Real Decreto Legislativo 1/2013, de 29 de noviembre.
         </Text>
+
         <Text style={styles.subtitle}>Simulador</Text>
         <Text style={styles.content}>
           ¿Quieres saber si tienes derecho al bono? Puedes probar nuestro simulador aquí:
@@ -69,6 +73,7 @@ Incremento 50%	10.875,90 €	776,85 €
     </ScrollView>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

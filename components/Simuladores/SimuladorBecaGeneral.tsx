@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, ScrollView, Alert,TouchableOpacity } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -8,77 +8,85 @@ type RootStackParamList = {
   Home: undefined;
   InformeBecaGeneral: { 
     edad: string;
-  ciudadania: string;
-  matriculado: string;
-  ingresos: string;
-  rendimiento: string;
-  resultado: string;
+    ciudadania: string;
+    nivelEstudios: string;
+    notaMedia: string;
+    ingresos: string;
+    resultado: string;
   };
 };
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
-
-
 const SimuladorBecaGeneral: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
-  const [ciudadania, setCiudadania] = useState<string>(''); // S o N
-  const [matriculado, setMatriculado] = useState<string>(''); // S o N
+  const [ciudadania, setCiudadania] = useState<string>('');
+  const [nivelEstudios, setNivelEstudios] = useState<string>('');
+  const [notaMedia, setNotaMedia] = useState<string>('');
   const [ingresos, setIngresos] = useState<string>('');
-  const [rendimiento, setRendimiento] = useState<string>(''); // S o N
   const [resultado, setResultado] = useState<string>('');
- const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation<NavigationProp>();
   
   const handleSimulacion = () => {
-    // Convertir valores
     const edadNum = parseInt(edad, 10);
     const ingresosNum = parseFloat(ingresos);
+    const notaMediaNum = parseFloat(notaMedia);
 
-    // Validaciones iniciales
-    if (!edad || !ciudadania || !matriculado || !ingresos || !rendimiento) {
+    if (!edad || !ciudadania || !nivelEstudios || !notaMedia || !ingresos) {
       setResultado('Por favor, completa todos los campos.');
       return;
     }
 
-    if (isNaN(edadNum) || isNaN(ingresosNum)) {
-      setResultado('Asegúrate de ingresar valores numéricos válidos para edad e ingresos.');
+    if (isNaN(edadNum) || isNaN(ingresosNum) || isNaN(notaMediaNum)) {
+      setResultado('Asegúrate de ingresar valores numéricos válidos.');
       return;
     }
 
-    if (!['S', 'N'].includes(ciudadania.toUpperCase()) ||
-        !['S', 'N'].includes(matriculado.toUpperCase()) ||
-        !['S', 'N'].includes(rendimiento.toUpperCase())) {
-      setResultado('Las respuestas deben ser S o N en las preguntas de ciudadanía, matrícula y rendimiento.');
+    if (!['S', 'N'].includes(ciudadania.toUpperCase())) {
+      setResultado('La respuesta de ciudadanía debe ser S o N.');
       return;
     }
 
-    // Lógica de la beca
-    const umbralRenta = 20000;
-    const cumpleRequisitos =
-      edadNum >= 16 &&
-      ciudadania.toUpperCase() === 'S' &&
-      matriculado.toUpperCase() === 'S' &&
-      ingresosNum <= umbralRenta &&
-      rendimiento.toUpperCase() === 'S';
+    // Lógica de la beca actualizada
+    const umbralRenta = 40000; // Este valor es un ejemplo, ajústalo según los umbrales oficiales
+    let cumpleRequisitos = false;
+
+    if (ciudadania.toUpperCase() === 'S' && ingresosNum <= umbralRenta) {
+      switch (nivelEstudios) {
+        case 'bachillerato':
+          cumpleRequisitos = notaMediaNum >= 5;
+          break;
+        case 'fpBasico':
+        case 'fpMedio':
+          cumpleRequisitos = true; // Solo necesita estar matriculado
+          break;
+        case 'fpSuperior':
+        case 'universidad':
+          cumpleRequisitos = notaMediaNum >= 5;
+          break;
+        default:
+          cumpleRequisitos = false;
+      }
+    }
 
     setResultado(
       cumpleRequisitos
-        ? 'Cumples con los requisitos para solicitar la Beca General.'
-        : 'No cumples con los requisitos para esta beca.'
+        ? 'Cumples con los requisitos básicos para solicitar la Beca General MEC 2024/2025.'
+        : 'No cumples con los requisitos básicos para esta beca.'
     );
   };
 
   useEffect(() => {
     Alert.alert(
       'Aviso importante',
-      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.',
+      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. El resultado obtenido no es vinculante ni garantiza la concesión de la ayuda. Para información oficial, consulta con el organismo competente o las fuentes oficiales.',
       [{ text: 'Entendido' }]
     );
   }, []);
 
   return (
     <ScrollView style={styles.container}>
-        <AnuncioInt/>
-      <Text style={styles.title}>Simulador Beca General</Text>
+      <AnuncioInt/>
+      <Text style={styles.title}>Simulador Beca General MEC 2024/2025</Text>
 
       <Text>Edad del estudiante (años):</Text>
       <TextInput
@@ -89,7 +97,7 @@ const SimuladorBecaGeneral: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>¿Es ciudadano español o tiene residencia legal? (S/N):</Text>
+      <Text>¿Tienes nacionalidad española o de un estado miembro de la UE? (S/N):</Text>
       <TextInput
         value={ciudadania}
         onChangeText={setCiudadania}
@@ -98,65 +106,65 @@ const SimuladorBecaGeneral: React.FC = () => {
         maxLength={1}
       />
 
-      <Text>¿Está matriculado en un curso completo o mínimo de asignaturas? (S/N):</Text>
+      <Text>Nivel de estudios:</Text>
       <TextInput
-        value={matriculado}
-        onChangeText={setMatriculado}
-        placeholder="Ingresa S o N"
+        value={nivelEstudios}
+        onChangeText={setNivelEstudios}
+        placeholder="bachillerato, fpBasico, fpMedio, fpSuperior, universidad"
         style={styles.input}
-        maxLength={1}
       />
 
-      <Text>Ingresos familiares (€):</Text>
+      <Text>Nota media del curso anterior:</Text>
+      <TextInput
+        value={notaMedia}
+        onChangeText={setNotaMedia}
+        keyboardType="numeric"
+        placeholder="Ingresa la nota media (ej. 7.5)"
+        style={styles.input}
+      />
+
+      <Text>Ingresos familiares anuales (€):</Text>
       <TextInput
         value={ingresos}
         onChangeText={setIngresos}
         keyboardType="numeric"
-        placeholder="Ingresa los ingresos familiares"
+        placeholder="Ingresa los ingresos familiares anuales"
         style={styles.input}
-      />
-
-      <Text>¿Cumple con el rendimiento académico mínimo exigido? (S/N):</Text>
-      <TextInput
-        value={rendimiento}
-        onChangeText={setRendimiento}
-        placeholder="Ingresa S o N"
-        style={styles.input}
-        maxLength={1}
       />
 
       <Button title="Simular" onPress={handleSimulacion} />
 
-    
       {resultado && (
-             <>
-               <Text style={styles.result}>{resultado}</Text>
-               {resultado.includes('Cumples con los requisitos') && (
-                 <TouchableOpacity
-                   onPress={() => navigation.navigate('InformeBecaGeneral', { 
-                     edad,
-                     ciudadania,
-                     matriculado,
-                     rendimiento, 
-                     ingresos,                     
-                     resultado 
-                   })}
-                   style={styles.boton}
-                 >
-                  <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
-                 </TouchableOpacity>
-               )}
-               <TouchableOpacity
-                 onPress={() => navigation.navigate('Home' as never)}
-                 style={styles.boton}
-               >
-                 <Text style={styles.letra}>VOLVER</Text>
-               </TouchableOpacity>
-             </>
-           )}
+        <>
+          <Text style={styles.result}>{resultado}</Text>
+          {resultado.includes('Cumples con los requisitos') && (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('InformeBecaGeneral', { 
+                edad,
+                ciudadania,
+                nivelEstudios,
+                notaMedia,
+                ingresos,                     
+                resultado 
+              })}
+              style={styles.boton}
+            >
+              <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Home' as never)}
+            style={styles.boton}
+          >
+            <Text style={styles.letra}>VOLVER</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </ScrollView>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {

@@ -50,11 +50,11 @@ const InformeIngresoMinimoVital: React.FC = () => {
           <h3>Resultado de la simulación:</h3>
           <p class="highlight">${resultado}</p>
           <h3>Descripción:</h3>
-          <p>El Ingreso Mínimo Vital (IMV) es una ayuda destinada a garantizar un nivel mínimo de ingresos para las personas en situación de vulnerabilidad económica, calculado en función de los ingresos y el número de miembros de la unidad de convivencia.</p>
+          <p>El Ingreso Mínimo Vital (IMV) es una ayuda destinada a garantizar un nivel mínimo de ingresos para las personas en situación de vulnerabilidad económica. En 2025, la cuantía base es de **658,59 euros** mensuales para un adulto.</p>
           <h3>Pasos para realizar la solicitud:</h3>
           <ol>
             <li>Consulta los requisitos y documentación en la página oficial de la Seguridad Social.</li>
-            <li>Reúne los documentos necesarios, como DNI, certificado de empadronamiento, y justificantes de ingresos.</li>
+            <li>Reúne los documentos necesarios, como DNI, certificado de empadronamiento y justificantes de ingresos.</li>
             <li>Accede a la plataforma en línea o acude a una oficina de la Seguridad Social para completar el formulario de solicitud.</li>
             <li>Adjunta los documentos requeridos y envía la solicitud.</li>
             <li>Espera la resolución oficial.</li>
@@ -90,6 +90,9 @@ const InformeIngresoMinimoVital: React.FC = () => {
     </View>
   );
 };
+
+
+
 
 const styles = StyleSheet.create({
   container: { padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f8f9fa' },

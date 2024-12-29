@@ -1,55 +1,68 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView,Button } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Button,Linking} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-// Definición de los tipos para las rutas
 type RootStackParamList = {
   SimuladorAyudasDesacopladas: undefined;
-  // Agrega aquí otras rutas si las tienes
 };
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
-
 
 const AyudasDesacopladas: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}>Ayudas Desacopladas</Text>
+        <Text style={styles.title}>Ayudas Desacopladas 2025</Text>
 
         <Text style={styles.subtitle}>Descripción</Text>
         <Text style={styles.content}>
-          Las ayudas desacopladas son pagos directos independientes de la producción, diseñados para apoyar la renta de los agricultores mientras se promueven prácticas sostenibles.
+          Las ayudas desacopladas son pagos directos que apoyan la renta de los agricultores y fomentan prácticas agrícolas sostenibles, adaptadas a los nuevos objetivos de la PAC para 2025.
         </Text>
 
-        <Text style={styles.subtitle}>Tipos</Text>
+        <Text style={styles.subtitle}>Tipos de Ayudas</Text>
         <Text style={styles.content}>
-          • Ayuda Básica a la Renta para la Sostenibilidad: Pago por hectáreas elegibles.{"\n"}
-          • Ayuda Redistributiva: Complemento para explotaciones pequeñas y medianas.{"\n"}
-          • Ayuda a Jóvenes Agricultores: Apoyo adicional para menores de 40 años.{"\n"}
-          • Ecorregímenes: Pagos por prácticas agrícolas sostenibles.
+          • Ayuda Básica a la Renta para la Sostenibilidad (ABRS): Pago por hectáreas elegibles con nuevos criterios de sostenibilidad.{"\n"}
+          • Pago Redistributivo: Apoyo reforzado para pequeñas y medianas explotaciones.{"\n"}
+          • Ayuda Complementaria a Jóvenes Agricultores: Apoyo ampliado para agricultores menores de 40 años.{"\n"}
+          • Ecorregímenes Plus: Pagos mejorados por prácticas agrícolas y ganaderas sostenibles y regenerativas.
         </Text>
 
-        <Text style={styles.subtitle}>Requisitos</Text>
+        <Text style={styles.subtitle}>Requisitos Actualizados</Text>
         <Text style={styles.content}>
-          • Ser agricultor activo.{"\n"}
-          • Cumplir con la condicionalidad reforzada en normas ambientales y bienestar animal.{"\n"}
-          • Disponer de derechos de ayuda asignados por hectáreas.
+          • Cumplir con la definición revisada de agricultor activo.{"\n"}
+          • Adherirse a la condicionalidad reforzada con énfasis en biodiversidad y cambio climático.{"\n"}
+          • Implementar prácticas de agricultura de precisión y reducción de emisiones.{"\n"}
+          • Participar en programas de formación continua en sostenibilidad agrícola.
         </Text>
-        <Text style={styles.subtitle}>Proceso de Solicitud</Text>
+
+        <Text style={styles.subtitle}>Proceso de Solicitud 2025</Text>
         <Text style={styles.content}>
-          • Dónde: A través de las oficinas de agricultura de tu Comunidad Autónoma.{"\n"}
-          • Cómo: Completa la solicitud única en la plataforma oficial del Fondo Español de Garantía Agraria (FEGA).{"\n"}
-          • Plazos: Las solicitudes suelen abrirse entre febrero y mayo de cada año.
+          • Dónde: A través del <Text
+                      style={styles.link}
+                      onPress={() =>
+                        Linking.openURL('https://sede.administracion.gob.es/PAG_Sede/HomeSede.html')
+                      }>
+                      nuevo portal digital unificado de la PAC.
+                    </Text>{"\n"}
+          • Cómo: Solicitud electrónica con asistencia virtual y verificación automática de requisitos.{"\n"}
+          • Plazos: Solicitudes abiertas de enero a abril, con posibilidad de modificación hasta mayo.
         </Text>
-        <Text style={styles.subtitle}>Simulador</Text>
+
+        <Text style={styles.subtitle}>Novedades 2025</Text>
         <Text style={styles.content}>
-          ¿Quieres saber si tienes derecho al bono? Puedes probar nuestro simulador aquí:
+          • Introducción de un sistema de puntos para evaluar la sostenibilidad de las explotaciones.{"\n"}
+          • Bonificaciones adicionales por prácticas de agricultura regenerativa.{"\n"}
+          • Integración con sistemas de monitoreo satelital para verificación de prácticas agrícolas.
+        </Text>
+
+        <Text style={styles.subtitle}>Simulador Actualizado</Text>
+        <Text style={styles.content}>
+          Descubre tu elegibilidad y estima tus ayudas con nuestro simulador actualizado para 2025:
         </Text>
         <Button 
-          title="Ir al simulador" 
+          title="Acceder al Simulador 2025" 
           onPress={() => navigation.navigate('SimuladorAyudasDesacopladas')} 
         />
       </View>
@@ -86,6 +99,10 @@ const styles = StyleSheet.create({
     color: '#2c3e50',
     textAlign: 'justify',
     lineHeight: 24,
+  },
+  link: {
+    color: '#2a9d8f',
+    textDecorationLine: 'underline',
   },
 });
 

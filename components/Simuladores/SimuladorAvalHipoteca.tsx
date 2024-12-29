@@ -8,17 +8,17 @@ type RootStackParamList = {
   Home: undefined;
   InformeAvalHipoteca: {  
     edad: string;
-    menoresACargo:string;
-    residente:string;
+    menoresACargo: string;
+    residente: string;
     ingresos: string;
     patrimonio: string;
-    propietario:string;
-    deudas:string;
+    propietario: string;
+    deudas: string;
     resultado: string;
   };
 };
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const SimuladorAvalHipoteca: React.FC = () => {
   const [edad, setEdad] = useState<string>('');
@@ -53,10 +53,10 @@ const SimuladorAvalHipoteca: React.FC = () => {
     // Criterios de elegibilidad
     const menorDe36OConMenores = edadNum < 36 || menoresACargo.toUpperCase() === 'S';
     const residenteLegal = residente.toUpperCase() === 'S';
-    const ingresosRequeridos = ingresosNum <= 37800;
-    const patrimonioRequerido = patrimonioNum <= 100000;
-    const noPropietarioPrevio = propietario.toUpperCase() === 'N';
-    const sinDeudasCIRBE = deudas.toUpperCase() === 'N';
+    const ingresosRequeridos = ingresosNum <= 37800; // Ingresos individuales
+    const patrimonioRequerido = patrimonioNum <= 100000; // Patrimonio neto
+    const noPropietarioPrevio = propietario.toUpperCase() === 'N'; // No haber sido propietario
+    const sinDeudasCIRBE = deudas.toUpperCase() === 'N'; // Sin deudas en CIRBE
 
     if (menorDe36OConMenores &&
         residenteLegal &&
@@ -81,7 +81,8 @@ const SimuladorAvalHipoteca: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Simulador Aval del 20% de Hipoteca</Text>
-    <AnuncioInt/>
+      <AnuncioInt />
+      
       <Text>Edad:</Text>
       <TextInput
         value={edad}
@@ -148,36 +149,38 @@ const SimuladorAvalHipoteca: React.FC = () => {
       <Button title="Verificar" onPress={handleSubmit} />
 
      {resultado && (
-             <>
-               <Text style={styles.result}>{resultado}</Text>
-               {resultado.includes('¡Tienes derecho') && (
-                 <TouchableOpacity
-                   onPress={() => navigation.navigate('InformeAvalHipoteca', { 
-                     edad,
-                     menoresACargo,
-                     residente, 
-                     ingresos,
-                     patrimonio,
-                     propietario, 
-                     deudas, 
-                     resultado 
-                   })}
-                   style={styles.boton}
-                 >
-                    <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
-                 </TouchableOpacity>
-               )}
-               <TouchableOpacity
-                 onPress={() => navigation.navigate('Home' as never)}
-                 style={styles.boton} 
-               >
-                 <Text style={styles.letra}>VOLVER</Text>
-               </TouchableOpacity>
-             </>
-           )}
+       <>
+         <Text style={styles.result}>{resultado}</Text>
+         {resultado.includes('¡Tienes derecho') && (
+           <TouchableOpacity
+             onPress={() => navigation.navigate('InformeAvalHipoteca', { 
+               edad,
+               menoresACargo,
+               residente, 
+               ingresos,
+               patrimonio,
+               propietario, 
+               deudas, 
+               resultado 
+             })}
+             style={styles.boton}
+           >
+             <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
+           </TouchableOpacity>
+         )}
+         <TouchableOpacity
+           onPress={() => navigation.navigate('Home' as never)}
+           style={styles.boton} 
+         >
+           <Text style={styles.letra}>VOLVER</Text>
+         </TouchableOpacity>
+       </>
+     )}
     </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {

@@ -1,15 +1,14 @@
-// LeyDependencia.tsx
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; // Necesario para la navegación
+import { useNavigation } from '@react-navigation/native'; 
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
 
 type RootStackParamList = {
   SimuladorLeyDeDependencia: undefined;
 };
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
 export default function LeyDependencia() {
   const navigation = useNavigation<NavigationProp>();
 
@@ -20,7 +19,7 @@ export default function LeyDependencia() {
 
         <Text style={styles.subtitle}>Descripción</Text>
         <Text style={styles.content}>
-          Ley que garantiza la atención a personas en situación de dependencia, asegurando el acceso a servicios y prestaciones de cuidado personal.
+          Ley que garantiza la atención a personas en situación de dependencia, asegurando el acceso a servicios y prestaciones de cuidado personal. Se han incrementado las horas mensuales de ayuda a domicilio y se han mejorado las prestaciones económicas.
         </Text>
 
         <Text style={styles.subtitle}>Requisitos</Text>
@@ -31,7 +30,6 @@ export default function LeyDependencia() {
           {"    "}• Grado I: Dependencia moderada (25-49 puntos){"\n"}
           {"    "}• Grado II: Dependencia severa (50-74 puntos){"\n"}
           {"    "}• Grado III: Gran dependencia (75-100 puntos){"\n"}
-          {"\n"}
           Aplica desde los 3 años y evalúa niveles según autonomía e intensidad del cuidado requerido.
         </Text>
 
@@ -40,11 +38,11 @@ export default function LeyDependencia() {
           <Text style={styles.bold}>Cuidados en el entorno familiar:</Text>{"\n"}
           {"    "}• Grado I: hasta 180 €/mes{"\n"}
           {"    "}• Grado II: hasta 315 €/mes{"\n"}
-          {"    "}• Grado III: hasta 455 €/mes{"\n"}
+          {"    "}• Grado III: hasta 747,25 €/mes{"\n"}
           {"\n"}
           <Text style={styles.bold}>Asistencia personal:</Text>{"\n"}
           {"    "}• Grado I: hasta 313,50 €/mes{"\n"}
-          {"    "}• Grados II y III: hasta 742,25 €/mes{"\n"}
+          {"    "}• Grados II y III: hasta 747,25 €/mes{"\n"}
           {"\n"}
           <Text style={styles.bold}>Servicios específicos:</Text>{"\n"}
           {"    "}• Grado I: hasta 313,50 €/mes{"\n"}
@@ -54,12 +52,12 @@ export default function LeyDependencia() {
 
         <Text style={styles.subtitle}>Proceso de Solicitud</Text>
         <Text style={styles.content}>
-          La solicitud debe realizarse ante los servicios sociales de la comunidad autónoma correspondiente, donde se evaluará la situación de dependencia.
+          La solicitud debe realizarse ante los servicios sociales de la comunidad autónoma correspondiente, donde se evaluará la situación de dependencia. También se puede realizar en línea.
         </Text>
 
         <Text style={styles.subtitle}>Normativa</Text>
         <Text style={styles.content}>
-          Ley 39/2006, de 14 de diciembre, de Promoción de la Autonomía Personal y Atención a las Personas en Situación de Dependencia.
+          Ley 39/2006, de 14 de diciembre, de Promoción de la Autonomía Personal y Atención a las Personas en Situación de Dependencia. Actualizaciones recientes incluyen el Real Decreto-ley 2/2024.
         </Text>
 
         {/* Botón para navegar al simulador */}
@@ -68,6 +66,8 @@ export default function LeyDependencia() {
     </ScrollView>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   container: {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
@@ -12,6 +12,10 @@ type RootStackParamList = {
     agricultorActivo: string;
     cumpleNormativa: string;
     ubicacion: string;
+    puntosSostenibilidad: string;
+    practicasRegenerativas: string;
+    formacionContinua: string;
+    agriculturaPrecision: string;
     resultado: string;
   };
 };
@@ -25,11 +29,16 @@ const SimuladorAyudasDesacopladas: React.FC = () => {
   const [agricultorActivo, setAgricultorActivo] = useState<string>('N');
   const [cumpleNormativa, setCumpleNormativa] = useState<string>('N');
   const [ubicacion, setUbicacion] = useState<string>('');
+  const [puntosSostenibilidad, setPuntosSostenibilidad] = useState<string>('');
+  const [practicasRegenerativas, setPracticasRegenerativas] = useState<string>('N');
+  const [formacionContinua, setFormacionContinua] = useState<string>('N');
+  const [agriculturaPrecision, setAgriculturaPrecision] = useState<string>('N');
   const [resultado, setResultado] = useState<string>('');
   const navigation = useNavigation<NavigationProp>();
 
   const handleSubmit = () => {
     const hectareasNum = parseFloat(hectareas);
+    const puntosNum = parseInt(puntosSostenibilidad);
 
     // Validaciones de entrada
     if (
@@ -38,28 +47,27 @@ const SimuladorAyudasDesacopladas: React.FC = () => {
       !sostenibilidad ||
       !agricultorActivo ||
       !cumpleNormativa ||
-      !ubicacion
+      !ubicacion ||
+      isNaN(puntosNum) ||
+      !practicasRegenerativas ||
+      !formacionContinua ||
+      !agriculturaPrecision
     ) {
       setResultado('Por favor, completa todos los campos correctamente.');
       return;
     }
 
-    if (
-      !['S', 'N'].includes(sostenibilidad.toUpperCase()) ||
-      !['S', 'N'].includes(agricultorActivo.toUpperCase()) ||
-      !['S', 'N'].includes(cumpleNormativa.toUpperCase())
-    ) {
-      setResultado('Las respuestas deben ser S o N.');
-      return;
-    }
-
-    // Criterios de elegibilidad
+    // Criterios de elegibilidad actualizados para 2025
     const tieneHectareas = hectareasNum > 0;
-    const cumpleCultivo = ['trigo', 'maíz', 'cebada', 'girasol'].includes(cultivo.toLowerCase());
+    const cumpleCultivo = ['trigo', 'maíz', 'cebada', 'girasol', 'legumbres', 'hortalizas'].includes(cultivo.toLowerCase());
     const criteriosSostenibilidad = sostenibilidad.toUpperCase() === 'S';
     const esAgricultorActivo = agricultorActivo.toUpperCase() === 'S';
     const respetaNormativa = cumpleNormativa.toUpperCase() === 'S';
-    const esUbicacionValida = ['montaña', 'regadío', 'secano'].includes(ubicacion.toLowerCase());
+    const esUbicacionValida = ['montaña', 'regadío', 'secano', 'zona desfavorecida'].includes(ubicacion.toLowerCase());
+    const cumplePuntosSostenibilidad = puntosNum >= 7;
+    const aplicaPracticasRegenerativas = practicasRegenerativas.toUpperCase() === 'S';
+    const realizaFormacionContinua = formacionContinua.toUpperCase() === 'S';
+    const usaAgriculturaPrecision = agriculturaPrecision.toUpperCase() === 'S';
 
     if (
       tieneHectareas &&
@@ -67,29 +75,32 @@ const SimuladorAyudasDesacopladas: React.FC = () => {
       criteriosSostenibilidad &&
       esAgricultorActivo &&
       respetaNormativa &&
-      esUbicacionValida
+      esUbicacionValida &&
+      cumplePuntosSostenibilidad &&
+      aplicaPracticasRegenerativas &&
+      realizaFormacionContinua &&
+      usaAgriculturaPrecision
     ) {
       setResultado(
-        '¡Puedes solicitar las ayudas desacopladas de la PAC! Asegúrate de presentar la solicitud en tu comunidad autónoma.'
+        '¡Cumples los requisitos para solicitar las ayudas desacopladas de la PAC 2025! Asegúrate de presentar la solicitud a través del nuevo portal digital unificado.'
       );
     } else {
       setResultado(
-        'No cumples todos los requisitos para las ayudas desacopladas de la PAC. Por favor, revisa los criterios o consulta con tu comunidad autónoma.'
+        'No cumples todos los requisitos actualizados para las ayudas desacopladas de la PAC 2025. Por favor, revisa los nuevos criterios o consulta con tu comunidad autónoma.'
       );
     }
   };
-
   React.useEffect(() => {
     Alert.alert(
       'Aviso importante',
-      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos específicos aplicables. Consulta siempre con tu comunidad autónoma.',
+      'Este simulador es una herramienta orientativa actualizada para 2025. Consulta siempre la información oficial más reciente.',
       [{ text: 'Entendido' }]
     );
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Simulador Ayudas Desacopladas de la PAC</Text>
+    <ScrollView style={styles.container}>
+      <Text style={styles.title}>Simulador Ayudas Desacopladas de la PAC 2025</Text>
 
       <Text>Número de hectáreas:</Text>
       <TextInput
@@ -100,7 +111,7 @@ const SimuladorAyudasDesacopladas: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>Tipo de cultivo (trigo, maíz, etc.):</Text>
+      <Text>Tipo de cultivo (trigo, maíz, legumbres, etc.):</Text>
       <TextInput
         value={cultivo}
         onChangeText={setCultivo}
@@ -135,7 +146,7 @@ const SimuladorAyudasDesacopladas: React.FC = () => {
         maxLength={1}
       />
 
-      <Text>Ubicación de las tierras (montaña, regadío, secano):</Text>
+      <Text>Ubicación de las tierras (montaña, regadío, secano, zona desfavorecida):</Text>
       <TextInput
         value={ubicacion}
         onChangeText={setUbicacion}
@@ -143,12 +154,48 @@ const SimuladorAyudasDesacopladas: React.FC = () => {
         style={styles.input}
       />
 
-      <Button title="Verificar" onPress={handleSubmit} />
+      <Text>Puntos de sostenibilidad (0-10):</Text>
+      <TextInput
+        value={puntosSostenibilidad}
+        onChangeText={setPuntosSostenibilidad}
+        keyboardType="numeric"
+        placeholder="Ingresa los puntos de sostenibilidad"
+        style={styles.input}
+      />
+
+      <Text>¿Aplicas prácticas de agricultura regenerativa? (S/N):</Text>
+      <TextInput
+        value={practicasRegenerativas}
+        onChangeText={setPracticasRegenerativas}
+        placeholder="S o N"
+        style={styles.input}
+        maxLength={1}
+      />
+
+      <Text>¿Participas en programas de formación continua? (S/N):</Text>
+      <TextInput
+        value={formacionContinua}
+        onChangeText={setFormacionContinua}
+        placeholder="S o N"
+        style={styles.input}
+        maxLength={1}
+      />
+
+      <Text>¿Implementas técnicas de agricultura de precisión? (S/N):</Text>
+      <TextInput
+        value={agriculturaPrecision}
+        onChangeText={setAgriculturaPrecision}
+        placeholder="S o N"
+        style={styles.input}
+        maxLength={1}
+      />
+
+      <Button title="Verificar Elegibilidad 2025" onPress={handleSubmit} />
 
       {resultado && (
         <>
           <Text style={styles.result}>{resultado}</Text>
-          {resultado.includes('¡Puedes solicitar') && (
+          {resultado.includes('¡Cumples los requisitos') && (
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate('InformeAyudasDesacopladas', {
@@ -158,26 +205,31 @@ const SimuladorAyudasDesacopladas: React.FC = () => {
                   agricultorActivo,
                   cumpleNormativa,
                   ubicacion,
+                  puntosSostenibilidad,
+                  practicasRegenerativas,
+                  formacionContinua,
+                  agriculturaPrecision,
                   resultado
                 })
               }
               style={styles.boton}
             >
-               <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
+               <Text style={styles.letras}>GENERAR INFORME DETALLADO 2025</Text>
             </TouchableOpacity>
-            
           )}
            <TouchableOpacity
-                           onPress={() => navigation.navigate('Home' as never)}
-                           style={styles.boton}
-                         >
-                           <Text style={styles.letra}>VOLVER</Text>
-                         </TouchableOpacity>
+             onPress={() => navigation.navigate('Home' as never)}
+             style={styles.boton}
+           >
+             <Text style={styles.letra}>VOLVER</Text>
+           </TouchableOpacity>
         </>
       )}
-    </View>
+    </ScrollView>
   );
 };
+
+// Los estilos se mantienen igual que en tu código original
 
 const styles = StyleSheet.create({
   container: {

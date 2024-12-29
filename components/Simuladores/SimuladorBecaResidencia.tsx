@@ -11,6 +11,8 @@ type RootStackParamList = {
     residenciaLejana: string;
     estudiosPresenciales: string;
     ingresos: string;
+    discapacidad: string;
+    tipoEstudios: string;
     resultado: string;
   };
 };
@@ -22,22 +24,27 @@ const SimuladorBecaResidencia: React.FC = () => {
   const [residenciaLejana, setResidenciaLejana] = useState<string>('');
   const [estudiosPresenciales, setEstudiosPresenciales] = useState<string>('');
   const [ingresos, setIngresos] = useState<string>('');
+  const [discapacidad, setDiscapacidad] = useState<string>('');
+  const [tipoEstudios, setTipoEstudios] = useState<string>('');
   const [resultado, setResultado] = useState<string>('');
   const navigation = useNavigation<NavigationProp>();
 
   const handleSimulacion = () => {
     const ingresosNum = parseFloat(ingresos);
-    const umbralRenta = 25000; // Umbral de renta familiar aproximado
+    const umbralRenta = 26250; // Umbral de renta familiar incrementado un 5%
 
     // Validar que las respuestas sean solo 'S' o 'N'
     const esMatriculado = matriculado.toUpperCase() === 'S';
     const esResidenciaLejana = residenciaLejana.toUpperCase() === 'S';
     const esEstudiosPresenciales = estudiosPresenciales.toUpperCase() === 'S';
+    const tieneDiscapacidad = discapacidad.toUpperCase() === 'S';
 
     if (
       !['S', 'N'].includes(matriculado.toUpperCase()) ||
       !['S', 'N'].includes(residenciaLejana.toUpperCase()) ||
       !['S', 'N'].includes(estudiosPresenciales.toUpperCase()) ||
+      !['S', 'N'].includes(discapacidad.toUpperCase()) ||
+      !['UNIVERSITARIOS', 'NO UNIVERSITARIOS'].includes(tipoEstudios.toUpperCase()) ||
       isNaN(ingresosNum)
     ) {
       setResultado('Por favor, completa todos los campos correctamente.');
@@ -48,9 +55,11 @@ const SimuladorBecaResidencia: React.FC = () => {
       esMatriculado &&
       esResidenciaLejana &&
       esEstudiosPresenciales &&
-      ingresosNum <= umbralRenta
+      ingresosNum <= umbralRenta &&
+      (tieneDiscapacidad || tipoEstudios.toUpperCase() === 'UNIVERSITARIOS' || 
+       (tipoEstudios.toUpperCase() === 'NO UNIVERSITARIOS' && ingresosNum <= umbralRenta * 0.9))
     ) {
-      setResultado('Cumples con los requisitos para solicitar la Beca de Residencia.');
+      setResultado('Cumples con los requisitos para solicitar la Beca de Residencia 2025.');
     } else {
       setResultado('No cumples con los requisitos para esta beca.');
     }
@@ -59,7 +68,7 @@ const SimuladorBecaResidencia: React.FC = () => {
   React.useEffect(() => {
     Alert.alert(
       'Aviso importante',
-      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.',
+      'Este simulador es una herramienta orientativa para la Beca de Residencia 2025 y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. El resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.',
       [{ text: 'Entendido' }]
     );
   }, []);
@@ -67,13 +76,13 @@ const SimuladorBecaResidencia: React.FC = () => {
   return (
     <View style={styles.container}>
       <AnuncioInt />
-      <Text style={styles.title}>Simulador Beca de Residencia</Text>
+      <Text style={styles.title}>Simulador Beca de Residencia 2025</Text>
 
       <Text>¿Estás matriculado en estudios postobligatorios o universitarios? (S/N):</Text>
       <TextInput
         value={matriculado}
         onChangeText={setMatriculado}
-        maxLength={1} // Solo permite un carácter
+        maxLength={1}
         placeholder="Ingresa S o N"
         style={styles.input}
       />
@@ -82,7 +91,7 @@ const SimuladorBecaResidencia: React.FC = () => {
       <TextInput
         value={residenciaLejana}
         onChangeText={setResidenciaLejana}
-        maxLength={1} // Solo permite un carácter
+        maxLength={1}
         placeholder="Ingresa S o N"
         style={styles.input}
       />
@@ -91,8 +100,25 @@ const SimuladorBecaResidencia: React.FC = () => {
       <TextInput
         value={estudiosPresenciales}
         onChangeText={setEstudiosPresenciales}
-        maxLength={1} // Solo permite un carácter
+        maxLength={1}
         placeholder="Ingresa S o N"
+        style={styles.input}
+      />
+
+      <Text>¿Tienes alguna discapacidad reconocida? (S/N):</Text>
+      <TextInput
+        value={discapacidad}
+        onChangeText={setDiscapacidad}
+        maxLength={1}
+        placeholder="Ingresa S o N"
+        style={styles.input}
+      />
+
+      <Text>Tipo de estudios (Universitarios/No Universitarios):</Text>
+      <TextInput
+        value={tipoEstudios}
+        onChangeText={setTipoEstudios}
+        placeholder="Ingresa Universitarios o No Universitarios"
         style={styles.input}
       />
 
@@ -118,6 +144,8 @@ const SimuladorBecaResidencia: React.FC = () => {
                   residenciaLejana,
                   estudiosPresenciales,
                   ingresos,
+                  discapacidad,
+                  tipoEstudios,
                   resultado,
                 })
               }
@@ -127,16 +155,19 @@ const SimuladorBecaResidencia: React.FC = () => {
             </TouchableOpacity>
           )}
           <TouchableOpacity
-                      onPress={() => navigation.navigate('Home' as never)}
-                      style={styles.boton} 
-                    >
-                      <Text style={styles.letra}>VOLVER</Text>
-                    </TouchableOpacity>
+            onPress={() => navigation.navigate('Home' as never)}
+            style={styles.boton} 
+          >
+            <Text style={styles.letra}>VOLVER</Text>
+          </TouchableOpacity>
         </>
       )}
     </View>
   );
 };
+
+
+
 
 const styles = StyleSheet.create({
   container: {

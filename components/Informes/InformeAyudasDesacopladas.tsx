@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import { useRoute, RouteProp } from '@react-navigation/native';
-import AnuncioRecompensado from '../Anuncios/AnuncioRecompensado'; // Importa el componente del anuncio
+import AnuncioRecompensado from '../Anuncios/AnuncioRecompensado';
 
 type RouteParams = {
   hectareas: string;
@@ -12,13 +12,29 @@ type RouteParams = {
   agricultorActivo: string;
   cumpleNormativa: string;
   ubicacion: string;
+  puntosSostenibilidad: string;
+  practicasRegenerativas: string;
+  formacionContinua: string;
+  agriculturaPrecision: string;
   resultado: string;
 };
 
 const InformeAyudasDesacopladas: React.FC = () => {
   const route = useRoute<RouteProp<Record<string, RouteParams>, string>>();
-  const { hectareas, cultivo, sostenibilidad, agricultorActivo, cumpleNormativa, ubicacion, resultado } = route.params || {};
-  const [recompensaGanada, setRecompensaGanada] = useState(false); // Estado para la recompensa
+  const { 
+    hectareas, 
+    cultivo, 
+    sostenibilidad, 
+    agricultorActivo, 
+    cumpleNormativa, 
+    ubicacion, 
+    puntosSostenibilidad,
+    practicasRegenerativas,
+    formacionContinua,
+    agriculturaPrecision,
+    resultado 
+  } = route.params || {};
+  const [recompensaGanada, setRecompensaGanada] = useState(false);
 
   const manejarRecompensa = (reward: { type: string; amount: number }) => {
     console.log(`Recompensa obtenida: ${reward.type}, cantidad: ${reward.amount}`);
@@ -39,7 +55,7 @@ const InformeAyudasDesacopladas: React.FC = () => {
           </style>
         </head>
         <body>
-          <h1>Informe de Simulación</h1>
+          <h1>Informe de Simulación 2025</h1>
           <h2>Ayudas Desacopladas de la PAC</h2>
           <p><strong>Datos proporcionados:</strong></p>
           <ul>
@@ -49,20 +65,24 @@ const InformeAyudasDesacopladas: React.FC = () => {
             <li><strong>¿Eres agricultor activo registrado?</strong> ${agricultorActivo === 'S' ? 'Sí' : 'No'}</li>
             <li><strong>¿Cumples la normativa PAC vigente?</strong> ${cumpleNormativa === 'S' ? 'Sí' : 'No'}</li>
             <li><strong>Ubicación de las tierras:</strong> ${ubicacion}</li>
+            <li><strong>Puntos de sostenibilidad:</strong> ${puntosSostenibilidad}</li>
+            <li><strong>¿Aplicas prácticas regenerativas?</strong> ${practicasRegenerativas === 'S' ? 'Sí' : 'No'}</li>
+            <li><strong>¿Participas en formación continua?</strong> ${formacionContinua === 'S' ? 'Sí' : 'No'}</li>
+            <li><strong>¿Usas agricultura de precisión?</strong> ${agriculturaPrecision === 'S' ? 'Sí' : 'No'}</li>
           </ul>
           <h3>Resultado de la simulación:</h3>
           <p class="highlight">${resultado}</p>
           <h3>Descripción:</h3>
-          <p>Las ayudas desacopladas de la PAC están diseñadas para apoyar a los agricultores que cumplen criterios relacionados con el tipo de cultivo, sostenibilidad, y ubicación de las tierras, entre otros.</p>
+          <p>Las ayudas desacopladas de la PAC 2025 están diseñadas para apoyar a los agricultores que cumplen criterios relacionados con el tipo de cultivo, sostenibilidad, prácticas regenerativas, formación continua y uso de tecnologías de precisión.</p>
           <h3>Pasos para realizar la solicitud:</h3>
           <ol>
-            <li>Consulta los requisitos detallados en la página oficial de tu comunidad autónoma.</li>
-            <li>Reúne documentos como certificaciones de hectáreas, justificantes de agricultor activo y cumplimiento normativo.</li>
-            <li>Accede al formulario en línea disponible en la web del organismo correspondiente.</li>
+            <li>Consulta los requisitos detallados en el nuevo portal digital unificado de la PAC.</li>
+            <li>Reúne documentos como certificaciones de hectáreas, justificantes de agricultor activo, cumplimiento normativo y evidencias de prácticas sostenibles.</li>
+            <li>Accede al formulario en línea disponible en el portal digital unificado.</li>
             <li>Completa el formulario, adjunta los documentos requeridos y envíalo.</li>
-            <li>Guarda el justificante de la solicitud para futuros seguimientos.</li>
+            <li>Guarda el justificante digital de la solicitud para futuros seguimientos.</li>
           </ol>
-          <p>Nota: Este informe tiene un propósito informativo y no garantiza la concesión de las ayudas. Verifica siempre con las autoridades competentes.</p>
+          <p>Nota: Este informe tiene un propósito informativo y no garantiza la concesión de las ayudas. Verifica siempre con las autoridades competentes y consulta las últimas actualizaciones para 2025.</p>
         </body>
         </html>
       `;
@@ -80,7 +100,7 @@ const InformeAyudasDesacopladas: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Informe del Simulador</Text>
+      <Text style={styles.title}>Informe del Simulador 2025</Text>
       <Text style={styles.resultado}>{resultado}</Text>
       {!recompensaGanada && (
         <AnuncioRecompensado onRewardEarned={manejarRecompensa} />

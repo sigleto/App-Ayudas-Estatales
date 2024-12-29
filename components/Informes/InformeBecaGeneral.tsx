@@ -3,21 +3,21 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import { useRoute, RouteProp } from '@react-navigation/native';
-import AnuncioRecompensado from '../Anuncios/AnuncioRecompensado'; // Importa el componente del anuncio
+import AnuncioRecompensado from '../Anuncios/AnuncioRecompensado';
 
 type RouteParams = {
   edad: string;
   ciudadania: string;
-  matriculado: string;
+  nivelEstudios: string;
+  notaMedia: string;
   ingresos: string;
-  rendimiento: string;
   resultado: string;
 };
 
 const InformeBecaGeneral: React.FC = () => {
   const route = useRoute<RouteProp<Record<string, RouteParams>, string>>();
-  const { edad, ciudadania, matriculado, ingresos, rendimiento, resultado } = route.params || {};
-  const [recompensaGanada, setRecompensaGanada] = useState(false); // Estado para la recompensa
+  const { edad, ciudadania, nivelEstudios, notaMedia, ingresos, resultado } = route.params || {};
+  const [recompensaGanada, setRecompensaGanada] = useState(false);
 
   const manejarRecompensa = (reward: { type: string; amount: number }) => {
     console.log(`Recompensa obtenida: ${reward.type}, cantidad: ${reward.amount}`);
@@ -39,28 +39,34 @@ const InformeBecaGeneral: React.FC = () => {
         </head>
         <body>
           <h1>Informe de Simulación</h1>
-          <h2>Beca General</h2>
+          <h2>Beca General MEC 2024/2025</h2>
           <p><strong>Datos proporcionados:</strong></p>
           <ul>
             <li><strong>Edad:</strong> ${edad}</li>
-            <li><strong>Ciudadanía:</strong> ${ciudadania === 'S' ? 'Sí' : 'No'}</li>
-            <li><strong>Matriculado en curso completo:</strong> ${matriculado === 'S' ? 'Sí' : 'No'}</li>
-            <li><strong>Ingresos familiares:</strong> ${ingresos} €</li>
-            <li><strong>Rendimiento académico:</strong> ${rendimiento === 'S' ? 'Cumple' : 'No cumple'}</li>
+            <li><strong>Ciudadanía española o de la UE:</strong> ${ciudadania === 'S' ? 'Sí' : 'No'}</li>
+            <li><strong>Nivel de estudios:</strong> ${nivelEstudios}</li>
+            <li><strong>Nota media:</strong> ${notaMedia}</li>
+            <li><strong>Ingresos familiares anuales:</strong> ${ingresos} €</li>
           </ul>
           <h3>Resultado de la simulación:</h3>
           <p class="highlight">${resultado}</p>
           <h3>Descripción:</h3>
-          <p>La Beca General está destinada a estudiantes que cumplan una serie de requisitos académicos, económicos y personales, y tiene como objetivo facilitar el acceso a la educación superior.</p>
+          <p>La Beca General MEC 2024/2025 está destinada a estudiantes de enseñanzas postobligatorias que cumplan una serie de requisitos académicos, económicos y personales, con el objetivo de facilitar el acceso a la educación superior.</p>
+          <h3>Requisitos generales:</h3>
+          <ul>
+            <li>Tener nacionalidad española o de un estado miembro de la Unión Europea.</li>
+            <li>No poseer un título igual o superior al de los estudios para los que se solicita la beca.</li>
+            <li>Cumplir con los requisitos económicos y académicos establecidos.</li>
+          </ul>
           <h3>Pasos para realizar la solicitud:</h3>
           <ol>
-            <li>Consulta los requisitos y plazos en la página oficial del Ministerio de Educación.</li>
-            <li>Reúne los documentos necesarios, como DNI, matrícula universitaria y declaración de la renta familiar.</li>
+            <li>Consulta los requisitos específicos y plazos en la página oficial del Ministerio de Educación.</li>
+            <li>Reúne los documentos necesarios (DNI, matrícula, declaración de la renta familiar, etc.).</li>
             <li>Accede al formulario en línea a través de la Sede Electrónica del Ministerio.</li>
             <li>Rellena el formulario y adjunta los documentos requeridos.</li>
             <li>Envía la solicitud y guarda el resguardo para futuras consultas.</li>
           </ol>
-          <p>Nota: Este informe es meramente informativo y no sustituye la consulta oficial.</p>
+          <p>Nota: Este informe es meramente informativo y no sustituye la consulta oficial. Los requisitos y condiciones pueden variar, por lo que se recomienda verificar la información en fuentes oficiales.</p>
         </body>
         </html>
       `;

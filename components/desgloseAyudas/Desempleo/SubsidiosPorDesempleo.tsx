@@ -26,6 +26,8 @@ const SubsidiosPorDesempleo = () => {
             - No superar el umbral de renta establecido (75% del SMI).{"\n"}
             - Estar inscrito como demandante de empleo.{"\n"}
             - Cumplir condiciones específicas según el tipo de subsidio:
+              {"\n"}  * No se requiere un mes de espera para solicitar el subsidio. {"\n"}
+              * El subsidio no se reduce proporcionalmente por jornadas laborales parciales.
           </Text>
 
           <TouchableOpacity onPress={() => openLink('https://www.sepe.es/HomeSepe/prestaciones-desempleo/subsidio-desempleo/subsidio-agotamiento-prestacion-contributiva.html')}>
@@ -58,10 +60,26 @@ const SubsidiosPorDesempleo = () => {
         </View>
 
         <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Cuantías de los Subsidios</Text>
+          <Text style={styles.text}>
+            - Primeros 180 días: 570 euros (95% del IPREM).{"\n"}
+            - Del día 181 al 360: 540 euros (90% del IPREM).{"\n"}
+            - A partir del día 361: 480 euros (80% del IPREM).
+          </Text>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Complemento de Apoyo al Empleo (CAE)</Text>
+          <Text style={styles.text}>
+            El CAE complementa los ingresos cuando se compatibiliza un subsidio por desempleo con un empleo a tiempo parcial. Las cuantías varían según la jornada laboral y decrecen con el tiempo.
+          </Text>
+        </View>
+
+        <View style={styles.section}>
           <Text style={styles.sectionTitle}>Proceso de solicitud</Text>
           <Text style={styles.text}>
             - Inscribirse como demandante de empleo en el Servicio Público de Empleo Estatal (SEPE).{"\n"}
-            - Presentar la solicitud de subsidio en la sede electrónica del SEPE o de forma presencial con cita previa.{"\n"}
+            - Presentar la solicitud de subsidio en la sede electrónica del SEPE o de forma presencial con cita previa. {"\n"}
             - Aportar la documentación requerida: DNI, justificantes de ingresos y, si corresponde, libro de familia.
           </Text>
         </View>
@@ -69,14 +87,18 @@ const SubsidiosPorDesempleo = () => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Normativa</Text>
           <Text style={styles.text}>
-            - Real Decreto Legislativo 8/2015, por el que se aprueba el texto refundido de la Ley General de la Seguridad Social.{"\n"}
-            - Orden ESS/393/2018 que regula los procedimientos de solicitud y concesión.
+            - Real Decreto Legislativo 8/2015, por el que se aprueba el texto refundido de la Ley General de la Seguridad Social. {"\n"}
+            - Orden ESS/393/2018 que regula los procedimientos de solicitud y concesión. {"\n"}
+            - Cambios introducidos en noviembre de 2024: eliminación de la parcialidad y del mes de espera.
           </Text>
         </View>
       </View>
     </ScrollView>
   );
 };
+
+
+
 
 const styles = StyleSheet.create({
   container: {

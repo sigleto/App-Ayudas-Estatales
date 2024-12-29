@@ -18,6 +18,7 @@ type RouteParams = {
 const InformeAyudaAdquisicion: React.FC = () => {
   const route = useRoute<RouteProp<Record<string, RouteParams>, string>>();
   const { edad, ingresos, precioVivienda, esPropietario, poblacion, resultado } = route.params || {};
+  
   const [recompensaGanada, setRecompensaGanada] = useState(false); // Estado para la recompensa
 
   const manejarRecompensa = (reward: { type: string; amount: number }) => {
@@ -52,7 +53,7 @@ const InformeAyudaAdquisicion: React.FC = () => {
           <h3>Resultado de la simulación:</h3>
           <p class="highlight">${resultado}</p>
           <h3>Descripción:</h3>
-          <p>La ayuda a la adquisición de vivienda está destinada a jóvenes que cumplen requisitos relacionados con la edad, ingresos y el precio de la vivienda. Busca facilitar el acceso a la vivienda propia en municipios pequeños.</p>
+          <p>La ayuda a la adquisición de vivienda está destinada a jóvenes que cumplen requisitos relacionados con la edad, ingresos y el precio de la vivienda. En este programa se busca facilitar el acceso a una vivienda propia en municipios pequeños.</p>
           <h3>Pasos para realizar la solicitud:</h3>
           <ol>
             <li>Verifica los requisitos y plazos en la página oficial del organismo competente.</li>
@@ -81,9 +82,11 @@ const InformeAyudaAdquisicion: React.FC = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Informe del Simulador</Text>
       <Text style={styles.resultado}>{resultado}</Text>
+
       {!recompensaGanada && (
         <AnuncioRecompensado onRewardEarned={manejarRecompensa} />
       )}
+      
       {recompensaGanada && (
         <TouchableOpacity onPress={generarPDF} style={styles.boton}>
           <Text style={styles.botonTexto}>Descargar Informe en PDF</Text>
@@ -92,6 +95,8 @@ const InformeAyudaAdquisicion: React.FC = () => {
     </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: { padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f8f9fa' },
