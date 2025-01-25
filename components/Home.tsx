@@ -1,21 +1,22 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, Linking } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import React from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 // Definir el tipo para las rutas de navegación
 type RootDrawerParamList = {
   Home: undefined;
   ListadoAyudas: undefined;
-  FormularioGeneral:undefined;
-  
+  FormularioGeneral: undefined;
 };
 
-type HomeScreenNavigationProp = DrawerNavigationProp<RootDrawerParamList, 'Home'|'FormularioGeneral'>;
+type HomeScreenNavigationProp = DrawerNavigationProp<
+  RootDrawerParamList,
+  "Home" | "FormularioGeneral"
+>;
 
 const Home: React.FC = () => {
-  
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   const openMenu = (): void => {
@@ -24,34 +25,48 @@ const Home: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <MaterialCommunityIcons 
-        name="menu" 
-        size={30}
+      <MaterialCommunityIcons
+        name="menu"
+        size={32}
         style={styles.menuIcon}
         onPress={openMenu}
       />
-      <Image source={require('../assets/images/LogoJuan.png')} style={styles.logo} />
-      <Image source={require('../assets/images/icono.png')} style={styles.burocraciaImage} />
+      <Image
+        source={require("../assets/images/LogoJuan.png")}
+        style={styles.logo}
+      />
+      <Image
+        source={require("../assets/images/icono.png")}
+        style={styles.burocraciaImage}
+      />
+
       <Text style={styles.titulo}>Bienvenido a Ayudas Públicas</Text>
       <Text style={styles.descripcion}>
-      Encuentra ayudas públicas para vivienda, discapacidad, empleo y más, con información clara y accesible
+        Encuentra ayudas públicas para vivienda, discapacidad, empleo y más, con
+        información clara y accesible.
       </Text>
 
       <Text style={styles.descargo}>
-        ** Esta aplicación no está afiliada ni representa a ninguna entidad gubernamental. ** 
+        ** Esta aplicación no está afiliada ni representa a ninguna entidad
+        gubernamental. **
       </Text>
 
-      <TouchableOpacity onPress={() => navigation.navigate('ListadoAyudas')}>
-        <Text style={styles.organismos}>ACCEDE A LAS DISTINTAS AYUDAS</Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("ListadoAyudas")}
+        style={styles.boton}
+      >
+        <Text style={styles.botonTexto}>ACCEDE A LAS DISTINTAS AYUDAS</Text>
       </TouchableOpacity>
-      
-      <TouchableOpacity onPress={() => navigation.navigate('FormularioGeneral')}>
-        <Text style={styles.organismos}>SIMULADOR GENERAL</Text>
+
+      <TouchableOpacity
+        onPress={() => navigation.navigate("FormularioGeneral")}
+        style={styles.boton}
+      >
+        <Text style={styles.botonTexto}>SIMULADOR GENERAL</Text>
       </TouchableOpacity>
-      
-   
+
       <View style={styles.privacidadContainer}>
-        {/* Aquí podrías agregar un enlace a la política de privacidad o cualquier otro aviso */}
+        {/* Espacio para política de privacidad o avisos */}
       </View>
     </View>
   );
@@ -60,63 +75,73 @@ const Home: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 16,
-    marginBottom: 10,
-  },
-  logo: {
-    width: '75%',
-    height: '20%',
-    marginTop: 55,
-  },
-  burocraciaImage: {
-    width: '75%',
-    height: '20%',
-  },
-  titulo: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginTop: 20,
-  },
-  descripcion: {
-    textAlign: 'center',
-    marginTop: 18,
-    fontSize: 18,
-    color: '#063931',
-  },
-  descargo: {
-    textAlign: 'center',
-    marginTop: 12,
-    fontSize: 14,
-    fontStyle: 'italic',
-    color: 'red',
-    paddingHorizontal: 10,
-  },
-  organismos: {
-    marginTop: 18,
-    marginBottom: 16,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderWidth: 1,
-    borderColor: "#007AFF",
-    borderRadius: 8,
-    backgroundColor: "#8baaf7",
-    fontWeight: 'bold',
-    textAlign: 'center',
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
+    backgroundColor: "#f5f7fa", // Fondo suave
   },
   menuIcon: {
-    position: 'absolute',
-    top: 60,
+    position: "absolute",
+    top: 50,
     left: 20,
-    fontSize: 40,
-    zIndex: 1,
+    color: "#007AFF",
+  },
+  logo: {
+    width: "60%",
+    height: 100,
+    resizeMode: "contain",
+    marginBottom: 10,
+  },
+  burocraciaImage: {
+    width: "60%",
+    height: 100,
+    resizeMode: "contain",
+    marginBottom: 20,
+  },
+  titulo: {
+    fontSize: 26,
+    fontWeight: "bold",
+    color: "#333",
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  descripcion: {
+    fontSize: 18,
+    color: "#555",
+    textAlign: "center",
+    paddingHorizontal: 20,
+    lineHeight: 24,
+    marginBottom: 15,
+  },
+  descargo: {
+    fontSize: 14,
+    fontStyle: "italic",
+    color: "#d9534f",
+    textAlign: "center",
+    paddingHorizontal: 20,
+    marginBottom: 20,
+  },
+  boton: {
+    backgroundColor: "#007AFF",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginVertical: 10,
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 3, // Sombra en Android
+  },
+  botonTexto: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#fff",
+    textAlign: "center",
   },
   privacidadContainer: {
     position: "absolute",
-    bottom: 0,
-    right: 0,
-    padding: 8,
+    bottom: 20,
+    right: 20,
   },
 });
 

@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import AnuncioInt from '../Anuncios/AnuncioIntersticial';
+import React, { useState } from "react";
+import {
+  Share,
+  View,
+  TextInput,
+  Button,
+  Text,
+  StyleSheet,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import AnuncioInt from "../Anuncios/AnuncioIntersticial";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { MaterialCommunityIcons } from "@expo/vector-icons"; //
 
-type RootStackParamList = { 
+type RootStackParamList = {
   Home: undefined;
-  InformeAvalHipoteca: {  
+  InformeAvalHipoteca: {
     edad: string;
     menoresACargo: string;
     residente: string;
@@ -21,14 +31,14 @@ type RootStackParamList = {
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const SimuladorAvalHipoteca: React.FC = () => {
-  const [edad, setEdad] = useState<string>('');
-  const [menoresACargo, setMenoresACargo] = useState<string>('N'); // S o N
-  const [residente, setResidente] = useState<string>('N'); // S o N
-  const [ingresos, setIngresos] = useState<string>('');
-  const [patrimonio, setPatrimonio] = useState<string>('');
-  const [propietario, setPropietario] = useState<string>('N'); // S o N
-  const [deudas, setDeudas] = useState<string>('N'); // S o N
-  const [resultado, setResultado] = useState<string>('');
+  const [edad, setEdad] = useState<string>("");
+  const [menoresACargo, setMenoresACargo] = useState<string>("N"); // S o N
+  const [residente, setResidente] = useState<string>("N"); // S o N
+  const [ingresos, setIngresos] = useState<string>("");
+  const [patrimonio, setPatrimonio] = useState<string>("");
+  const [propietario, setPropietario] = useState<string>("N"); // S o N
+  const [deudas, setDeudas] = useState<string>("N"); // S o N
+  const [resultado, setResultado] = useState<string>("");
   const navigation = useNavigation<NavigationProp>();
 
   const handleSubmit = () => {
@@ -37,52 +47,85 @@ const SimuladorAvalHipoteca: React.FC = () => {
     const patrimonioNum = parseFloat(patrimonio);
 
     // Validaciones de entrada
-    if (isNaN(edadNum) || isNaN(ingresosNum) || isNaN(patrimonioNum) || !menoresACargo || !residente || !propietario || !deudas) {
-      setResultado('Por favor, ingresa todos los datos correctamente.');
+    if (
+      isNaN(edadNum) ||
+      isNaN(ingresosNum) ||
+      isNaN(patrimonioNum) ||
+      !menoresACargo ||
+      !residente ||
+      !propietario ||
+      !deudas
+    ) {
+      setResultado("Por favor, ingresa todos los datos correctamente.");
       return;
     }
 
-    if (!['S', 'N'].includes(menoresACargo.toUpperCase()) ||
-        !['S', 'N'].includes(residente.toUpperCase()) ||
-        !['S', 'N'].includes(propietario.toUpperCase()) ||
-        !['S', 'N'].includes(deudas.toUpperCase())) {
-      setResultado('Las respuestas deben ser S o N.');
+    if (
+      !["S", "N"].includes(menoresACargo.toUpperCase()) ||
+      !["S", "N"].includes(residente.toUpperCase()) ||
+      !["S", "N"].includes(propietario.toUpperCase()) ||
+      !["S", "N"].includes(deudas.toUpperCase())
+    ) {
+      setResultado("Las respuestas deben ser S o N.");
       return;
     }
 
     // Criterios de elegibilidad
-    const menorDe36OConMenores = edadNum < 36 || menoresACargo.toUpperCase() === 'S';
-    const residenteLegal = residente.toUpperCase() === 'S';
+    const menorDe36OConMenores =
+      edadNum < 36 || menoresACargo.toUpperCase() === "S";
+    const residenteLegal = residente.toUpperCase() === "S";
     const ingresosRequeridos = ingresosNum <= 37800; // Ingresos individuales
     const patrimonioRequerido = patrimonioNum <= 100000; // Patrimonio neto
-    const noPropietarioPrevio = propietario.toUpperCase() === 'N'; // No haber sido propietario
-    const sinDeudasCIRBE = deudas.toUpperCase() === 'N'; // Sin deudas en CIRBE
+    const noPropietarioPrevio = propietario.toUpperCase() === "N"; // No haber sido propietario
+    const sinDeudasCIRBE = deudas.toUpperCase() === "N"; // Sin deudas en CIRBE
 
-    if (menorDe36OConMenores &&
-        residenteLegal &&
-        ingresosRequeridos &&
-        patrimonioRequerido &&
-        noPropietarioPrevio &&
-        sinDeudasCIRBE) {
-      setResultado('¡Tienes derecho al aval del 20% de hipoteca!');
+    if (
+      menorDe36OConMenores &&
+      residenteLegal &&
+      ingresosRequeridos &&
+      patrimonioRequerido &&
+      noPropietarioPrevio &&
+      sinDeudasCIRBE
+    ) {
+      setResultado("¡Tienes derecho al aval del 20% de hipoteca!");
     } else {
-      setResultado('No cumples con los requisitos para el aval del 20% de hipoteca.');
+      setResultado(
+        "No cumples con los requisitos para el aval del 20% de hipoteca."
+      );
     }
   };
 
   React.useEffect(() => {
     Alert.alert(
-      'Aviso importante',
-      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no garantiza la concesión del aval. Consulta siempre con el organismo competente.',
-      [{ text: 'Entendido' }]
+      "Aviso importante",
+      "Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no garantiza la concesión del aval. Consulta siempre con el organismo competente.",
+      [{ text: "Entendido" }]
     );
   }, []);
 
+  const shareApp = async () => {
+    try {
+      await Share.share({
+        message:
+          "Descarga la app Ayudas Públicas 2025 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
+      });
+    } catch (error) {
+      console.error("Error al compartir", error);
+    }
+  };
+
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={shareApp} style={styles.shareIcon}>
+        <MaterialCommunityIcons
+          name="share-variant"
+          size={24}
+          color="#007BFF"
+        />
+      </TouchableOpacity>
       <Text style={styles.title}>Simulador Aval del 20% de Hipoteca</Text>
       <AnuncioInt />
-      
+
       <Text>Edad:</Text>
       <TextInput
         value={edad}
@@ -101,7 +144,9 @@ const SimuladorAvalHipoteca: React.FC = () => {
         maxLength={1}
       />
 
-      <Text>¿Resides legalmente en España desde hace al menos 2 años? (S/N):</Text>
+      <Text>
+        ¿Resides legalmente en España desde hace al menos 2 años? (S/N):
+      </Text>
       <TextInput
         value={residente}
         onChangeText={setResidente}
@@ -148,51 +193,52 @@ const SimuladorAvalHipoteca: React.FC = () => {
 
       <Button title="Verificar" onPress={handleSubmit} />
 
-     {resultado && (
-       <>
-         <Text style={styles.result}>{resultado}</Text>
-         {resultado.includes('¡Tienes derecho') && (
-           <TouchableOpacity
-             onPress={() => navigation.navigate('InformeAvalHipoteca', { 
-               edad,
-               menoresACargo,
-               residente, 
-               ingresos,
-               patrimonio,
-               propietario, 
-               deudas, 
-               resultado 
-             })}
-             style={styles.boton}
-           >
-             <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
-           </TouchableOpacity>
-         )}
-         <TouchableOpacity
-           onPress={() => navigation.navigate('Home' as never)}
-           style={styles.boton} 
-         >
-           <Text style={styles.letra}>VOLVER</Text>
-         </TouchableOpacity>
-       </>
-     )}
+      {resultado && (
+        <>
+          <Text style={styles.result}>{resultado}</Text>
+          {resultado.includes("¡Tienes derecho") && (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("InformeAvalHipoteca", {
+                  edad,
+                  menoresACargo,
+                  residente,
+                  ingresos,
+                  patrimonio,
+                  propietario,
+                  deudas,
+                  resultado,
+                })
+              }
+              style={styles.boton}
+            >
+              <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Home" as never)}
+            style={styles.boton}
+          >
+            <Text style={styles.letra}>VOLVER</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
 
-
-
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: '#f0f4c3',
+    backgroundColor: "#f0f4c3",
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#6a1b9a',
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#6a1b9a",
     marginBottom: 20,
+    marginTop: 50,
   },
   input: {
     borderBottomWidth: 1,
@@ -203,26 +249,31 @@ const styles = StyleSheet.create({
   result: {
     marginTop: 20,
     fontSize: 18,
-    color: '#388e3c',
-    textAlign: 'center',
-    fontWeight: 'bold',
+    color: "#388e3c",
+    textAlign: "center",
+    fontWeight: "bold",
   },
   boton: {
-    backgroundColor: '#8e24aa',
+    backgroundColor: "#8e24aa",
     borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    width: '40%',
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    width: "40%",
     marginTop: 20,
     height: 40,
   },
-  letra: { fontSize: 16, color: 'white', fontWeight: 'bold' },
+  letra: { fontSize: 16, color: "white", fontWeight: "bold" },
   letras: {
     fontSize: 16,
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign:'center',
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  shareIcon: {
+    position: "absolute",
+    right: 20,
+    top: 10,
   },
 });
 

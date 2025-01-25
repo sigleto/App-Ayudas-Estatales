@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import AnuncioInt from '../Anuncios/AnuncioIntersticial';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React, { useState, useEffect } from "react";
+import {
+  Share,
+  TextInput,
+  Button,
+  Text,
+  StyleSheet,
+  View,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import AnuncioInt from "../Anuncios/AnuncioIntersticial";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { MaterialCommunityIcons } from "@expo/vector-icons"; //
 
 type RootStackParamList = {
   Home: undefined;
@@ -20,13 +30,13 @@ type RootStackParamList = {
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const SimuladorBecaResidencia: React.FC = () => {
-  const [matriculado, setMatriculado] = useState<string>('');
-  const [residenciaLejana, setResidenciaLejana] = useState<string>('');
-  const [estudiosPresenciales, setEstudiosPresenciales] = useState<string>('');
-  const [ingresos, setIngresos] = useState<string>('');
-  const [discapacidad, setDiscapacidad] = useState<string>('');
-  const [tipoEstudios, setTipoEstudios] = useState<string>('');
-  const [resultado, setResultado] = useState<string>('');
+  const [matriculado, setMatriculado] = useState<string>("");
+  const [residenciaLejana, setResidenciaLejana] = useState<string>("");
+  const [estudiosPresenciales, setEstudiosPresenciales] = useState<string>("");
+  const [ingresos, setIngresos] = useState<string>("");
+  const [discapacidad, setDiscapacidad] = useState<string>("");
+  const [tipoEstudios, setTipoEstudios] = useState<string>("");
+  const [resultado, setResultado] = useState<string>("");
   const navigation = useNavigation<NavigationProp>();
 
   const handleSimulacion = () => {
@@ -34,20 +44,22 @@ const SimuladorBecaResidencia: React.FC = () => {
     const umbralRenta = 26250; // Umbral de renta familiar incrementado un 5%
 
     // Validar que las respuestas sean solo 'S' o 'N'
-    const esMatriculado = matriculado.toUpperCase() === 'S';
-    const esResidenciaLejana = residenciaLejana.toUpperCase() === 'S';
-    const esEstudiosPresenciales = estudiosPresenciales.toUpperCase() === 'S';
-    const tieneDiscapacidad = discapacidad.toUpperCase() === 'S';
+    const esMatriculado = matriculado.toUpperCase() === "S";
+    const esResidenciaLejana = residenciaLejana.toUpperCase() === "S";
+    const esEstudiosPresenciales = estudiosPresenciales.toUpperCase() === "S";
+    const tieneDiscapacidad = discapacidad.toUpperCase() === "S";
 
     if (
-      !['S', 'N'].includes(matriculado.toUpperCase()) ||
-      !['S', 'N'].includes(residenciaLejana.toUpperCase()) ||
-      !['S', 'N'].includes(estudiosPresenciales.toUpperCase()) ||
-      !['S', 'N'].includes(discapacidad.toUpperCase()) ||
-      !['UNIVERSITARIOS', 'NO UNIVERSITARIOS'].includes(tipoEstudios.toUpperCase()) ||
+      !["S", "N"].includes(matriculado.toUpperCase()) ||
+      !["S", "N"].includes(residenciaLejana.toUpperCase()) ||
+      !["S", "N"].includes(estudiosPresenciales.toUpperCase()) ||
+      !["S", "N"].includes(discapacidad.toUpperCase()) ||
+      !["UNIVERSITARIOS", "NO UNIVERSITARIOS"].includes(
+        tipoEstudios.toUpperCase()
+      ) ||
       isNaN(ingresosNum)
     ) {
-      setResultado('Por favor, completa todos los campos correctamente.');
+      setResultado("Por favor, completa todos los campos correctamente.");
       return;
     }
 
@@ -56,29 +68,53 @@ const SimuladorBecaResidencia: React.FC = () => {
       esResidenciaLejana &&
       esEstudiosPresenciales &&
       ingresosNum <= umbralRenta &&
-      (tieneDiscapacidad || tipoEstudios.toUpperCase() === 'UNIVERSITARIOS' || 
-       (tipoEstudios.toUpperCase() === 'NO UNIVERSITARIOS' && ingresosNum <= umbralRenta * 0.9))
+      (tieneDiscapacidad ||
+        tipoEstudios.toUpperCase() === "UNIVERSITARIOS" ||
+        (tipoEstudios.toUpperCase() === "NO UNIVERSITARIOS" &&
+          ingresosNum <= umbralRenta * 0.9))
     ) {
-      setResultado('Cumples con los requisitos para solicitar la Beca de Residencia 2025.');
+      setResultado(
+        "Cumples con los requisitos para solicitar la Beca de Residencia 2025."
+      );
     } else {
-      setResultado('No cumples con los requisitos para esta beca.');
+      setResultado("No cumples con los requisitos para esta beca.");
     }
   };
 
   React.useEffect(() => {
     Alert.alert(
-      'Aviso importante',
-      'Este simulador es una herramienta orientativa para la Beca de Residencia 2025 y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. El resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.',
-      [{ text: 'Entendido' }]
+      "Aviso importante",
+      "Este simulador es una herramienta orientativa para la Beca de Residencia 2025 y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. El resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.",
+      [{ text: "Entendido" }]
     );
   }, []);
+
+  const shareApp = async () => {
+    try {
+      await Share.share({
+        message:
+          "Descarga la app Ayudas Públicas 2025 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
+      });
+    } catch (error) {
+      console.error("Error al compartir", error);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <AnuncioInt />
+      <TouchableOpacity onPress={shareApp} style={styles.shareIcon}>
+        <MaterialCommunityIcons
+          name="share-variant"
+          size={24}
+          color="#007BFF"
+        />
+      </TouchableOpacity>
       <Text style={styles.title}>Simulador Beca de Residencia 2025</Text>
 
-      <Text>¿Estás matriculado en estudios postobligatorios o universitarios? (S/N):</Text>
+      <Text>
+        ¿Estás matriculado en estudios postobligatorios o universitarios? (S/N):
+      </Text>
       <TextInput
         value={matriculado}
         onChangeText={setMatriculado}
@@ -87,7 +123,9 @@ const SimuladorBecaResidencia: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>¿Tu residencia habitual está lejos del centro de estudios? (S/N):</Text>
+      <Text>
+        ¿Tu residencia habitual está lejos del centro de estudios? (S/N):
+      </Text>
       <TextInput
         value={residenciaLejana}
         onChangeText={setResidenciaLejana}
@@ -96,7 +134,9 @@ const SimuladorBecaResidencia: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>¿Estás cursando estudios presenciales y con matrícula completa? (S/N):</Text>
+      <Text>
+        ¿Estás cursando estudios presenciales y con matrícula completa? (S/N):
+      </Text>
       <TextInput
         value={estudiosPresenciales}
         onChangeText={setEstudiosPresenciales}
@@ -136,10 +176,10 @@ const SimuladorBecaResidencia: React.FC = () => {
       {resultado && (
         <>
           <Text style={styles.result}>{resultado}</Text>
-          {resultado.includes('Cumples con los requisitos') && (
+          {resultado.includes("Cumples con los requisitos") && (
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate('InformeBecaResidencia', {
+                navigation.navigate("InformeBecaResidencia", {
                   matriculado,
                   residenciaLejana,
                   estudiosPresenciales,
@@ -155,8 +195,8 @@ const SimuladorBecaResidencia: React.FC = () => {
             </TouchableOpacity>
           )}
           <TouchableOpacity
-            onPress={() => navigation.navigate('Home' as never)}
-            style={styles.boton} 
+            onPress={() => navigation.navigate("Home" as never)}
+            style={styles.boton}
           >
             <Text style={styles.letra}>VOLVER</Text>
           </TouchableOpacity>
@@ -166,24 +206,22 @@ const SimuladorBecaResidencia: React.FC = () => {
   );
 };
 
-
-
-
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: '#f2f2f2',
+    backgroundColor: "#f2f2f2",
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
-    color: '#0077b6',
-    textAlign: 'center',
+    color: "#0077b6",
+    textAlign: "center",
+    marginTop: 52,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     marginBottom: 15,
     padding: 10,
     fontSize: 16,
@@ -191,30 +229,35 @@ const styles = StyleSheet.create({
   result: {
     marginTop: 20,
     fontSize: 18,
-    color: '#4caf50',
-    textAlign: 'center',
-    fontWeight: 'bold',
+    color: "#4caf50",
+    textAlign: "center",
+    fontWeight: "bold",
   },
   boton: {
-    backgroundColor: '#c13855', // Color de fondo llamativo
+    backgroundColor: "#c13855", // Color de fondo llamativo
     borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    width: '40%', // Ajusta el ancho del botón
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    width: "40%", // Ajusta el ancho del botón
     marginTop: 20,
     height: 40,
   },
   letra: {
     fontSize: 16,
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   letras: {
     fontSize: 16,
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign:'center',
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  shareIcon: {
+    position: "absolute",
+    right: 20,
+    top: 10,
   },
 });
 

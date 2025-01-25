@@ -1,32 +1,41 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView, Alert,TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import AnuncioInt from '../Anuncios/AnuncioIntersticial';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React, { useState } from "react";
+import {
+  Share,
+  ScrollView,
+  TextInput,
+  Button,
+  Text,
+  StyleSheet,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import AnuncioInt from "../Anuncios/AnuncioIntersticial";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { MaterialCommunityIcons } from "@expo/vector-icons"; //
 
 type RootStackParamList = {
   Home: undefined;
-  InformeAyudasAlquiler: { 
+  InformeAyudasAlquiler: {
     ingresos: string;
-    esFamiliaNumerosa:string;
+    esFamiliaNumerosa: string;
     gradoDiscapacidad: string;
-    rentaAlquiler:string;
-    edad:string;
+    rentaAlquiler: string;
+    edad: string;
     resultado: string;
   };
 };
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
-
 const SimuladorAyudasAlquiler: React.FC = () => {
-  const [ingresos, setIngresos] = useState<string>('');
-  const [esFamiliaNumerosa, setEsFamiliaNumerosa] = useState<string>(''); // Cambiado para 'S' o 'N'
-  const [gradoDiscapacidad, setGradoDiscapacidad] = useState<string>('');
-  const [rentaAlquiler, setRentaAlquiler] = useState<string>('');
-  const [edad, setEdad] = useState<string>('');
-  const [resultado, setResultado] = useState<string>('');
-   const navigation = useNavigation<NavigationProp>();
-  
+  const [ingresos, setIngresos] = useState<string>("");
+  const [esFamiliaNumerosa, setEsFamiliaNumerosa] = useState<string>(""); // Cambiado para 'S' o 'N'
+  const [gradoDiscapacidad, setGradoDiscapacidad] = useState<string>("");
+  const [rentaAlquiler, setRentaAlquiler] = useState<string>("");
+  const [edad, setEdad] = useState<string>("");
+  const [resultado, setResultado] = useState<string>("");
+  const navigation = useNavigation<NavigationProp>();
+
   const handleSimulacion = () => {
     const ingresosNum = parseFloat(ingresos);
     const rentaAlquilerNum = parseFloat(rentaAlquiler);
@@ -37,23 +46,20 @@ const SimuladorAyudasAlquiler: React.FC = () => {
     if (
       isNaN(ingresosNum) ||
       isNaN(rentaAlquilerNum) ||
-      esFamiliaNumerosa === '' ||
+      esFamiliaNumerosa === "" ||
       (gradoDiscapacidad && isNaN(gradoDiscapacidadNum)) ||
       isNaN(edadNum)
     ) {
-      setResultado('Por favor, completa todos los campos correctamente.');
+      setResultado("Por favor, completa todos los campos correctamente.");
       return;
     }
 
     // Convertir la respuesta 'S' o 'N' a booleano
-    const esFamiliaNumerosaBool = esFamiliaNumerosa === 'S';
+    const esFamiliaNumerosaBool = esFamiliaNumerosa === "S";
 
     let limiteIngresos: number;
     if (esFamiliaNumerosaBool) {
-      limiteIngresos =
-        gradoDiscapacidadNum >= 33
-          ? 5 * iprem
-          : 4 * iprem; // Familia numerosa especial o con discapacidad
+      limiteIngresos = gradoDiscapacidadNum >= 33 ? 5 * iprem : 4 * iprem; // Familia numerosa especial o con discapacidad
     } else {
       limiteIngresos = 3 * iprem; // General
     }
@@ -70,21 +76,39 @@ const SimuladorAyudasAlquiler: React.FC = () => {
         )} € al mes.`
       );
     } else {
-      setResultado('No cumples con los requisitos para esta ayuda.');
+      setResultado("No cumples con los requisitos para esta ayuda.");
     }
   };
 
   React.useEffect(() => {
     Alert.alert(
-      'Aviso importante',
-      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.',
-      [{ text: 'Entendido' }]
+      "Aviso importante",
+      "Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.",
+      [{ text: "Entendido" }]
     );
   }, []);
 
+  const shareApp = async () => {
+    try {
+      await Share.share({
+        message:
+          "Descarga la app Ayudas Públicas 2025 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
+      });
+    } catch (error) {
+      console.error("Error al compartir", error);
+    }
+  };
+
   return (
     <ScrollView style={styles.container}>
-        <AnuncioInt/>
+      <AnuncioInt />
+      <TouchableOpacity onPress={shareApp} style={styles.shareIcon}>
+        <MaterialCommunityIcons
+          name="share-variant"
+          size={24}
+          color="#007BFF"
+        />
+      </TouchableOpacity>
       <Text style={styles.title}>Simulador Ayudas al Alquiler</Text>
 
       <Text>Ingresos mensuales (€):</Text>
@@ -133,32 +157,34 @@ const SimuladorAyudasAlquiler: React.FC = () => {
 
       <Button title="Simular" onPress={handleSimulacion} />
 
-    {resultado && (
-            <>
-              <Text style={styles.result}>{resultado}</Text>
-              {resultado.includes('Cumples con los requisitos') && (
-                <TouchableOpacity
-                  onPress={() => navigation.navigate('InformeAyudasAlquiler', { 
-                    ingresos, 
-                    esFamiliaNumerosa,
-                    gradoDiscapacidad,
-                    rentaAlquiler,
-                    edad, 
-                    resultado 
-                  })}
-                  style={styles.boton}
-                >
-                   <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
-                </TouchableOpacity>
-              )}
-              <TouchableOpacity
-                onPress={() => navigation.navigate('Home' as never)}
-                style={styles.boton}
-              >
-                <Text style={styles.letra}>VOLVER</Text>
-              </TouchableOpacity>
-            </>
+      {resultado && (
+        <>
+          <Text style={styles.result}>{resultado}</Text>
+          {resultado.includes("Cumples con los requisitos") && (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("InformeAyudasAlquiler", {
+                  ingresos,
+                  esFamiliaNumerosa,
+                  gradoDiscapacidad,
+                  rentaAlquiler,
+                  edad,
+                  resultado,
+                })
+              }
+              style={styles.boton}
+            >
+              <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
+            </TouchableOpacity>
           )}
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Home" as never)}
+            style={styles.boton}
+          >
+            <Text style={styles.letra}>VOLVER</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </ScrollView>
   );
 };
@@ -166,18 +192,19 @@ const SimuladorAyudasAlquiler: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: "#f9f9f9",
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
-    textAlign: 'center',
-    color: '#0077b6',
+    textAlign: "center",
+    color: "#0077b6",
+    marginTop: 90,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     padding: 10,
     marginVertical: 10,
     fontSize: 16,
@@ -186,27 +213,33 @@ const styles = StyleSheet.create({
   result: {
     marginTop: 20,
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#4caf50',
-  },  boton: {
-    backgroundColor: '#c13855', // Color de fondo llamativo
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',     
-    width: '40%', // Ajusta el ancho del botón
-    marginTop: 20,
-    height:40,
-    fontSize:20,
-    fontWeight:'bold',
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#4caf50",
   },
-  letra:{fontSize:16, color:'white',fontWeight:'bold'},
+  boton: {
+    backgroundColor: "#c13855", // Color de fondo llamativo
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    width: "40%", // Ajusta el ancho del botón
+    marginTop: 20,
+    height: 40,
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  letra: { fontSize: 16, color: "white", fontWeight: "bold" },
   letras: {
     fontSize: 16,
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign:'center',
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  shareIcon: {
+    position: "absolute",
+    right: 20,
+    top: 10,
   },
 });
 

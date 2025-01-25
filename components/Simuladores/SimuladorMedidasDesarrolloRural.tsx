@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from "react";
+import {
+  Share,
+  TextInput,
+  Button,
+  Text,
+  StyleSheet,
+  Alert,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import AnuncioInt from "../Anuncios/AnuncioIntersticial";
+import { MaterialCommunityIcons } from "@expo/vector-icons"; //
 
 const SimuladorDesarrolloRural: React.FC = () => {
-  const [ubicacion, setUbicacion] = useState<string>(''); // Rural, semiurbana
-  const [tipoActividad, setTipoActividad] = useState<string>(''); // Agricultura, ganadería, emprendimiento rural
-  const [empleoGenerado, setEmpleoGenerado] = useState<string>(''); // Número de empleos generados
-  const [impactoAmbiental, setImpactoAmbiental] = useState<string>('N'); // S o N
-  const [infraestructura, setInfraestructura] = useState<string>('N'); // S o N
-  const [innovacion, setInnovacion] = useState<string>('N'); // S o N
-  const [formacion, setFormacion] = useState<string>('N'); // S o N
-  const [resultado, setResultado] = useState<string>('');
+  const [ubicacion, setUbicacion] = useState<string>(""); // Rural, semiurbana
+  const [tipoActividad, setTipoActividad] = useState<string>(""); // Agricultura, ganadería, emprendimiento rural
+  const [empleoGenerado, setEmpleoGenerado] = useState<string>(""); // Número de empleos generados
+  const [impactoAmbiental, setImpactoAmbiental] = useState<string>("N"); // S o N
+  const [infraestructura, setInfraestructura] = useState<string>("N"); // S o N
+  const [innovacion, setInnovacion] = useState<string>("N"); // S o N
+  const [formacion, setFormacion] = useState<string>("N"); // S o N
+  const [resultado, setResultado] = useState<string>("");
   const navegacion = useNavigation();
 
   const handleSubmit = () => {
@@ -26,30 +37,34 @@ const SimuladorDesarrolloRural: React.FC = () => {
       !innovacion ||
       !formacion
     ) {
-      setResultado('Por favor, completa todos los campos correctamente.');
+      setResultado("Por favor, completa todos los campos correctamente.");
       return;
     }
 
     if (
-      !['S', 'N'].includes(impactoAmbiental.toUpperCase()) ||
-      !['S', 'N'].includes(infraestructura.toUpperCase()) ||
-      !['S', 'N'].includes(innovacion.toUpperCase()) ||
-      !['S', 'N'].includes(formacion.toUpperCase())
+      !["S", "N"].includes(impactoAmbiental.toUpperCase()) ||
+      !["S", "N"].includes(infraestructura.toUpperCase()) ||
+      !["S", "N"].includes(innovacion.toUpperCase()) ||
+      !["S", "N"].includes(formacion.toUpperCase())
     ) {
-      setResultado('Las respuestas deben ser S o N.');
+      setResultado("Las respuestas deben ser S o N.");
       return;
     }
 
     // Criterios de elegibilidad
-    const esUbicacionRural = ['rural', 'semiurbana'].includes(ubicacion.toLowerCase());
-    const actividadValida = ['agricultura', 'ganadería', 'emprendimiento rural'].includes(
-      tipoActividad.toLowerCase()
+    const esUbicacionRural = ["rural", "semiurbana"].includes(
+      ubicacion.toLowerCase()
     );
+    const actividadValida = [
+      "agricultura",
+      "ganadería",
+      "emprendimiento rural",
+    ].includes(tipoActividad.toLowerCase());
     const generaEmpleo = empleoNum > 0;
-    const compromisoAmbiental = impactoAmbiental.toUpperCase() === 'S';
-    const mejoraInfraestructuras = infraestructura.toUpperCase() === 'S';
-    const incluyeInnovacion = innovacion.toUpperCase() === 'S';
-    const fomentaFormacion = formacion.toUpperCase() === 'S';
+    const compromisoAmbiental = impactoAmbiental.toUpperCase() === "S";
+    const mejoraInfraestructuras = infraestructura.toUpperCase() === "S";
+    const incluyeInnovacion = innovacion.toUpperCase() === "S";
+    const fomentaFormacion = formacion.toUpperCase() === "S";
 
     if (
       esUbicacionRural &&
@@ -61,26 +76,46 @@ const SimuladorDesarrolloRural: React.FC = () => {
       fomentaFormacion
     ) {
       setResultado(
-        '¡Puedes solicitar medidas de desarrollo rural de la PAC! Consulta con tu comunidad autónoma para conocer los pasos específicos.'
+        "¡Puedes solicitar medidas de desarrollo rural de la PAC! Consulta con tu comunidad autónoma para conocer los pasos específicos."
       );
     } else {
       setResultado(
-        'No cumples todos los requisitos para las medidas de desarrollo rural de la PAC. Por favor, revisa los criterios o consulta con tu comunidad autónoma.'
+        "No cumples todos los requisitos para las medidas de desarrollo rural de la PAC. Por favor, revisa los criterios o consulta con tu comunidad autónoma."
       );
     }
   };
 
   React.useEffect(() => {
     Alert.alert(
-      'Aviso importante',
-      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos específicos aplicables. Consulta siempre con tu comunidad autónoma.',
-      [{ text: 'Entendido' }]
+      "Aviso importante",
+      "Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos específicos aplicables. Consulta siempre con tu comunidad autónoma.",
+      [{ text: "Entendido" }]
     );
   }, []);
 
+  const shareApp = async () => {
+    try {
+      await Share.share({
+        message:
+          "Descarga la app Ayudas Públicas 2025 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
+      });
+    } catch (error) {
+      console.error("Error al compartir", error);
+    }
+  };
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>Simulador Medidas de Desarrollo Rural de la PAC</Text>
+      <AnuncioInt />
+      <TouchableOpacity onPress={shareApp} style={styles.shareIcon}>
+        <MaterialCommunityIcons
+          name="share-variant"
+          size={24}
+          color="#007BFF"
+        />
+      </TouchableOpacity>
+      <Text style={styles.title}>
+        Simulador Medidas de Desarrollo Rural de la PAC
+      </Text>
 
       <Text>Ubicación de tu proyecto (rural/semiurbana):</Text>
       <TextInput
@@ -90,7 +125,9 @@ const SimuladorDesarrolloRural: React.FC = () => {
         style={styles.input}
       />
 
-      <Text>Tipo de actividad (agricultura, ganadería, emprendimiento rural):</Text>
+      <Text>
+        Tipo de actividad (agricultura, ganadería, emprendimiento rural):
+      </Text>
       <TextInput
         value={tipoActividad}
         onChangeText={setTipoActividad}
@@ -149,7 +186,7 @@ const SimuladorDesarrolloRural: React.FC = () => {
         <>
           <Text style={styles.result}>{resultado}</Text>
           <TouchableOpacity
-            onPress={() => navegacion.navigate('Home' as never)}
+            onPress={() => navegacion.navigate("Home" as never)}
             style={styles.boton}
           >
             <Text style={styles.letra}>VOLVER</Text>
@@ -163,14 +200,15 @@ const SimuladorDesarrolloRural: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: '#e3f2fd',
+    backgroundColor: "#e3f2fd",
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#1e88e5',
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#1e88e5",
     marginBottom: 20,
+    marginTop: 118,
   },
   input: {
     borderBottomWidth: 1,
@@ -181,21 +219,26 @@ const styles = StyleSheet.create({
   result: {
     marginTop: 20,
     fontSize: 18,
-    color: '#2e7d32',
-    textAlign: 'center',
-    fontWeight: 'bold',
+    color: "#2e7d32",
+    textAlign: "center",
+    fontWeight: "bold",
   },
   boton: {
-    backgroundColor: '#1565c0',
+    backgroundColor: "#1565c0",
     borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    width: '40%',
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    width: "40%",
     marginTop: 20,
     height: 40,
   },
-  letra: { fontSize: 16, color: 'white', fontWeight: 'bold' },
+  letra: { fontSize: 16, color: "white", fontWeight: "bold" },
+  shareIcon: {
+    position: "absolute",
+    right: 20,
+    top: 10,
+  },
 });
 
 export default SimuladorDesarrolloRural;

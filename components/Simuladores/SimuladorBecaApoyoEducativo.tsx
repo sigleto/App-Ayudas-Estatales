@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
+  Share,
   View,
   TextInput,
   Button,
@@ -11,6 +12,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import AnuncioInt from '../Anuncios/AnuncioIntersticial';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; //
 
 type RootStackParamList = {
   Home: undefined;
@@ -70,10 +72,28 @@ const SimuladorBecaApoyoEducativo: React.FC = () => {
       setResultado('No cumples con los requisitos para esta beca.');
     }
   };
-
+const shareApp = async () => {
+                 try {
+                   await Share.share({
+                     message: 'Descarga la app Ayudas Públicas 2025 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas',
+                   });
+                 } catch (error) {
+                   console.error('Error al compartir', error);
+                 }
+               };
   return (
     <View style={styles.container}>
       <AnuncioInt />
+      <TouchableOpacity 
+                   onPress={shareApp} 
+                   style={styles.shareIcon}
+                  >
+          <MaterialCommunityIcons 
+                      name="share-variant" 
+                      size={24} 
+                    color="#007BFF" 
+           />
+      </TouchableOpacity>  
       <Text style={styles.title}>Simulador Beca Apoyo Educativo</Text>
 
       <Text>Edad del estudiante (años):</Text>
@@ -157,6 +177,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: '#0077b6',
     textAlign: 'center',
+    marginTop:50,
   },
   input: {
     borderWidth: 1,
@@ -195,6 +216,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     textAlign:'center',
+  },
+  shareIcon: {
+    position: 'absolute', 
+    right: 20, 
+    top: 10,
   },
 });
 
