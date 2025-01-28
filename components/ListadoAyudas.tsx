@@ -1,20 +1,27 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import AnuncioBan from './Anuncios/AnuncioBanner';
+import React from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AnuncioBan from "./Anuncios/AnuncioBanner";
 
 type RutasNavegacion =
-  | 'SubsidiosDesempleo'
-  | 'AyudasSociales'
-  | 'AyudasVivienda'
-  | 'AyudaDescendientes'
-  | 'BecasEstudio'
-  | 'Emprendedores'
-  | 'Discapacidad'
-  | 'Cultura'
-  | 'AyudasPAC';
+  | "SubsidiosDesempleo"
+  | "AyudasSociales"
+  | "AyudasVivienda"
+  | "AyudaDescendientes"
+  | "BecasEstudio"
+  | "Emprendedores"
+  | "Discapacidad"
+  | "Cultura"
+  | "AyudasPAC"
+  | "EficienciaEnergetica"; // Nueva ruta
 
 type RootStackParamList = {
   SubsidiosDesempleo: undefined;
@@ -25,25 +32,92 @@ type RootStackParamList = {
   Emprendedores: undefined;
   Discapacidad: undefined;
   Cultura: undefined;
-  AyudasPAC:undefined;
+  AyudasPAC: undefined;
+  EficienciaEnergetica: undefined; // Nueva ruta
 };
 
 type NavigationProp = StackNavigationProp<RootStackParamList>;
 
-type IconName = React.ComponentProps<typeof MaterialCommunityIcons>['name'];
+type IconName = React.ComponentProps<typeof MaterialCommunityIcons>["name"];
 
-
-
-const ayudas: { id: number; nombre: string; ruta: RutasNavegacion; color: string; icono: IconName }[] = [
-  { id: 1, nombre: 'Subsidios por desempleo', ruta: 'SubsidiosDesempleo', color: '#FF6F61', icono: 'briefcase-outline' },
-  { id: 2, nombre: 'Ayudas sociales', ruta: 'AyudasSociales', color: '#FFD700', icono: 'hand-heart' },
-  { id: 3, nombre: 'Ayudas para vivienda', ruta: 'AyudasVivienda', color: '#6A5ACD', icono: 'home-outline' },
-  { id: 4, nombre: 'Ayudas por descendientes', ruta: 'AyudaDescendientes', color: '#32CD32', icono: 'baby-face-outline' },
-  { id: 5, nombre: 'Becas y ayudas al estudio', ruta: 'BecasEstudio', color: '#FF4500', icono: 'school-outline' },
-  { id: 6, nombre: 'Ayudas para emprendedores', ruta: 'Emprendedores', color: '#1E90FF', icono: 'lightbulb-on-outline' },
-  { id: 7, nombre: 'Ayudas para la discapacidad', ruta: 'Discapacidad', color: '#C71585', icono: 'wheelchair-accessibility' },
-  { id: 8, nombre: 'Ayudas agrícolas (P.A.C)', ruta: 'AyudasPAC', color: '#C71585', icono: 'tractor' },
-  { id: 9, nombre: 'Ayudas culturales', ruta: 'Cultura', color: '#C71585', icono: 'palette' },
+const ayudas: {
+  id: number;
+  nombre: string;
+  ruta: RutasNavegacion;
+  color: string;
+  icono: IconName;
+}[] = [
+  {
+    id: 1,
+    nombre: "Subsidios por desempleo",
+    ruta: "SubsidiosDesempleo",
+    color: "#FF6F61",
+    icono: "briefcase-outline",
+  },
+  {
+    id: 2,
+    nombre: "Ayudas sociales",
+    ruta: "AyudasSociales",
+    color: "#FFD700",
+    icono: "hand-heart",
+  },
+  {
+    id: 3,
+    nombre: "Ayudas para vivienda",
+    ruta: "AyudasVivienda",
+    color: "#6A5ACD",
+    icono: "home-outline",
+  },
+  {
+    id: 4,
+    nombre: "Ayudas por descendientes",
+    ruta: "AyudaDescendientes",
+    color: "#32CD32",
+    icono: "baby-face-outline",
+  },
+  {
+    id: 5,
+    nombre: "Becas y ayudas al estudio",
+    ruta: "BecasEstudio",
+    color: "#FF4500",
+    icono: "school-outline",
+  },
+  {
+    id: 6,
+    nombre: "Ayudas para emprendedores",
+    ruta: "Emprendedores",
+    color: "#1E90FF",
+    icono: "lightbulb-on-outline",
+  },
+  {
+    id: 7,
+    nombre: "Ayudas para la discapacidad",
+    ruta: "Discapacidad",
+    color: "#C71585",
+    icono: "wheelchair-accessibility",
+  },
+  {
+    id: 8,
+    nombre: "Eficiencia energética",
+    ruta: "EficienciaEnergetica",
+    color: "#00CED1",
+    icono: "lightning-bolt-outline",
+  },
+  {
+    id: 9,
+    nombre: "Ayudas agrícolas (P.A.C)",
+    ruta: "AyudasPAC",
+    color: "#C71585",
+    icono: "tractor",
+  },
+  {
+    id: 10,
+    nombre: "Ayudas culturales",
+    ruta: "Cultura",
+    color: "#C71585",
+    icono: "palette",
+  },
+  // Nueva ayuda
 ];
 
 export default function ListadoAyudas() {
@@ -63,12 +137,17 @@ export default function ListadoAyudas() {
             style={styles.item}
             onPress={() => navigateToAyuda(ayuda.ruta)}
           >
-            <MaterialCommunityIcons name={ayuda.icono} size={30} color="#FFFFFF" style={styles.icono} />
+            <MaterialCommunityIcons
+              name={ayuda.icono}
+              size={30}
+              color="#FFFFFF"
+              style={styles.icono}
+            />
             <Text style={styles.texto}>{ayuda.nombre}</Text>
           </TouchableOpacity>
         ))}
       </View>
-      <AnuncioBan/>
+      <AnuncioBan />
     </ScrollView>
   );
 }
@@ -76,29 +155,29 @@ export default function ListadoAyudas() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E5F5FE',
+    backgroundColor: "#E5F5FE",
     padding: 20,
   },
   titulo: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
-    textAlign: 'center',
-    color: '#0077B6',
-    textTransform: 'uppercase',
+    textAlign: "center",
+    color: "#0077B6",
+    textTransform: "uppercase",
     letterSpacing: 1.2,
   },
   ayudas: {
     marginTop: 10,
   },
   item: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 20,
     marginVertical: 10,
-    backgroundColor: '#0077B6',
+    backgroundColor: "#0077B6",
     borderRadius: 12,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 5,
@@ -109,9 +188,9 @@ const styles = StyleSheet.create({
   },
   texto: {
     fontSize: 18,
-    fontWeight: '600',
-    color: '#FFFFFF',
-    textAlign: 'left',
-    textTransform: 'capitalize',
+    fontWeight: "600",
+    color: "#FFFFFF",
+    textAlign: "left",
+    textTransform: "capitalize",
   },
 });

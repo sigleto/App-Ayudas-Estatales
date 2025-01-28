@@ -31,15 +31,11 @@ export const categories: Categoria[] = [
       },
       {
         name: "Beca por apoyo educativo especial",
-        simulador: [
-          "SimuladorBecaApoyoEducativo"
-        ],
+        simulador: ["SimuladorBecaApoyoEducativo"],
       },
       {
         name: "Beca por residencia",
-        simulador: [
-          "SimuladorBecaResidencia",
-        ],
+        simulador: ["SimuladorBecaResidencia"],
       },
     ],
   },
@@ -52,15 +48,11 @@ export const categories: Categoria[] = [
       },
       {
         name: "Ingreso Mínimo Vital",
-        simulador: [
-          "SimuladorIngresoMinimoVital",
-        ],
+        simulador: ["SimuladorIngresoMinimoVital"],
       },
       {
         name: "Ley de dependencia",
-        simulador: [
-          "SimuladorLeyDeDependencia",
-        ],
+        simulador: ["SimuladorLeyDeDependencia"],
       },
     ],
   },
@@ -73,22 +65,16 @@ export const categories: Categoria[] = [
       },
       {
         name: "Ayuda por nacimiento o adopción",
-        simulador: [
-          "SimuladorAyudaNacimiento",
-        ],
+        simulador: ["SimuladorAyudaNacimiento"],
       },
       {
         name: "Prestación por hijos con discapacidad",
-        simulador: [
-          "SimuladorPrestacionHijoDiscapacidad",
-        ],
+        simulador: ["SimuladorPrestacionHijoDiscapacidad"],
       },
-      
+
       {
         name: "Complemento de ayuda a la infancia",
-        simulador: [
-          "SimuladorComplementoAyudaInfancia",
-        ],
+        simulador: ["SimuladorComplementoAyudaInfancia"],
       },
     ],
   },
@@ -101,27 +87,19 @@ export const categories: Categoria[] = [
       },
       {
         name: "Ayuda al alquiler",
-        simulador: [
-          "SimuladorAyudasAlquiler",
-        ],
+        simulador: ["SimuladorAyudasAlquiler"],
       },
       {
         name: "Ayuda adquisición para jóvenes",
-        simulador: [
-          "SimuladorAyudaJovenesAdquisicion",
-        ],
+        simulador: ["SimuladorAyudaJovenesAdquisicion"],
       },
       {
         name: "Bono alquiler joven",
-        simulador: [
-          "SimuladorAyudaJovenesAlquiler",
-        ],
+        simulador: ["SimuladorAyudaJovenesAlquiler"],
       },
       {
         name: "Aval del 20% de la hipoteca",
-        simulador: [
-          "SimuladorAvalHipoteca",
-        ],
+        simulador: ["SimuladorAvalHipoteca"],
       },
     ],
   },
@@ -134,21 +112,15 @@ export const categories: Categoria[] = [
       },
       {
         name: "Pensión no contributiva",
-        simulador: [
-          "SimuladorPensionNoContributiva",
-        ],
+        simulador: ["SimuladorPensionNoContributiva"],
       },
       {
         name: "Subsidio de movilidad",
-        simulador: [
-          "SimuladorSubsidioMovilidad",
-        ],
+        simulador: ["SimuladorSubsidioMovilidad"],
       },
       {
         name: "Asistencia Sanitaria",
-        simulador: [
-          "SimuladorAsistenciaSanitaria",
-        ],
+        simulador: ["SimuladorAsistenciaSanitaria"],
       },
     ],
   },
@@ -161,21 +133,15 @@ export const categories: Categoria[] = [
       },
       {
         name: "Ayudas Desacopladas",
-        simulador: [
-          "SimuladorAyudasDesacopladas",
-        ],
+        simulador: ["SimuladorAyudasDesacopladas"],
       },
       {
         name: "Medidas de desarrollo rural",
-        simulador: [
-          "SimuladorDesarrolloRural",
-        ],
+        simulador: ["SimuladorDesarrolloRural"],
       },
       {
         name: "Medidas Sectoriales",
-        simulador: [
-          "SimuladorMedidasSectoriales",
-        ],
+        simulador: ["SimuladorMedidasSectoriales"],
       },
     ],
   },
@@ -188,11 +154,29 @@ export const categories: Categoria[] = [
       },
       {
         name: "Bono cultural para jóvenes",
-        simulador: [
-          "SimuladorBonoCultural",
-        ],
+        simulador: ["SimuladorBonoCultural"],
       },
     ],
   },
- 
+  {
+    category: "Eficiencia Energética",
+    ayudas: [
+      {
+        name: "",
+        simulador: [""],
+      },
+      {
+        name: "Ayuda adquisición vehículos eléctricos",
+        simulador: ["SimuladorMoves"],
+      },
+      {
+        name: "Ayuda energías renovables",
+        simulador: ["SimuladorRenovables"],
+      },
+      {
+        name: "Ayuda rehabilitacion edificios eficiencia energética",
+        simulador: ["SimuladorRehabilitacion"],
+      },
+    ],
+  },
 ];
