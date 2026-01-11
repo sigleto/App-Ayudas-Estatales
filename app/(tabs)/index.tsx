@@ -1,13 +1,13 @@
-import React, { useCallback } from 'react';
-import { Share, Alert, View, Text, TouchableOpacity } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { enableScreens } from 'react-native-screens';
-import { PrincipalStack, PresentacionStack } from '../../components/navigator';
-import DescargoResponsabilidad from '@/components/DescargoResponsabilidad';
-import PoliticaPrivacidad from '@/components/PoliticaPrivacidad';
+import React, { useCallback } from "react";
+import { Share, Alert, View, Text, TouchableOpacity } from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { enableScreens } from "react-native-screens";
+import { PrincipalStack, PresentacionStack } from "../../components/navigator";
+import DescargoResponsabilidad from "@/components/DescargoResponsabilidad";
+import PoliticaPrivacidad from "@/components/PoliticaPrivacidad";
 
 enableScreens();
 
@@ -17,13 +17,13 @@ const shareApp = async () => {
   try {
     const result = await Share.share({
       message:
-        'Descarga la app Ayudas Públicas 2025 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas',
+        "Descarga la app Ayudas Públicas 2026 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
     });
     if (result.action === Share.dismissedAction) {
-      Alert.alert('Compartir cancelado');
+      Alert.alert("Compartir cancelado");
     }
   } catch (error) {
-    Alert.alert('Error', 'Hubo un problema al intentar compartir la app.');
+    Alert.alert("Error", "Hubo un problema al intentar compartir la app.");
   }
 };
 
@@ -33,31 +33,33 @@ const ShareScreen = () => {
   }, []);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <TouchableOpacity 
-      onPress={handleShare} 
-      style={{
-        backgroundColor: '#007AFF', // Color azul llamativo
-        paddingVertical: 12,
-        paddingHorizontal: 25,
-        borderRadius: 10, // Bordes redondeados
-        elevation: 5, // Sombra en Android
-        shadowColor: '#000', // Sombra en iOS
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 4,
-      }}
-    >
-      <Text style={{
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: 'white', // Texto en blanco para contraste
-        textAlign: 'center',
-      }}>
-        📤 Compartir la aplicación
-      </Text>
-    </TouchableOpacity>
-  </View>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <TouchableOpacity
+        onPress={handleShare}
+        style={{
+          backgroundColor: "#007AFF", // Color azul llamativo
+          paddingVertical: 12,
+          paddingHorizontal: 25,
+          borderRadius: 10, // Bordes redondeados
+          elevation: 5, // Sombra en Android
+          shadowColor: "#000", // Sombra en iOS
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.3,
+          shadowRadius: 4,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: "bold",
+            color: "white", // Texto en blanco para contraste
+            textAlign: "center",
+          }}
+        >
+          📤 Compartir la aplicación
+        </Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -69,14 +71,14 @@ const App = () => {
         screenOptions={{
           headerShown: false,
           drawerStyle: {
-            backgroundColor: '#f7f7f7',
+            backgroundColor: "#f7f7f7",
           },
           drawerLabelStyle: {
             fontSize: 18,
             marginLeft: -10,
           },
-          drawerActiveTintColor: '#007AFF',
-          drawerInactiveTintColor: '#333',
+          drawerActiveTintColor: "#007AFF",
+          drawerInactiveTintColor: "#333",
         }}
       >
         <Drawer.Screen
@@ -86,7 +88,7 @@ const App = () => {
             drawerIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="home" size={size} color={color} />
             ),
-            drawerLabel: 'Inicio',
+            drawerLabel: "Inicio",
           }}
         />
         <Drawer.Screen
@@ -94,9 +96,13 @@ const App = () => {
           component={PresentacionStack}
           options={{
             drawerIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="information-outline" size={size} color={color} />
+              <MaterialCommunityIcons
+                name="information-outline"
+                size={size}
+                color={color}
+              />
             ),
-            drawerLabel: 'Cómo funciona',
+            drawerLabel: "Cómo funciona",
           }}
         />
         <Drawer.Screen
@@ -104,9 +110,13 @@ const App = () => {
           component={DescargoResponsabilidad}
           options={{
             drawerIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="shield-alert-outline" size={size} color={color} />
+              <MaterialCommunityIcons
+                name="shield-alert-outline"
+                size={size}
+                color={color}
+              />
             ),
-            drawerLabel: 'Descargo de responsabilidad',
+            drawerLabel: "Descargo de responsabilidad",
           }}
         />
         <Drawer.Screen
@@ -114,9 +124,13 @@ const App = () => {
           component={PoliticaPrivacidad}
           options={{
             drawerIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="file-document-outline" size={size} color={color} />
+              <MaterialCommunityIcons
+                name="file-document-outline"
+                size={size}
+                color={color}
+              />
             ),
-            drawerLabel: 'Política de Privacidad',
+            drawerLabel: "Política de Privacidad",
           }}
         />
         <Drawer.Screen
@@ -124,9 +138,13 @@ const App = () => {
           component={ShareScreen}
           options={{
             drawerIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="share-variant" size={size} color={color} />
+              <MaterialCommunityIcons
+                name="share-variant"
+                size={size}
+                color={color}
+              />
             ),
-            drawerLabel: 'Compartir la App',
+            drawerLabel: "Compartir la App",
           }}
         />
       </Drawer.Navigator>

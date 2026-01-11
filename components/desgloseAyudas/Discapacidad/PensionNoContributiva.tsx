@@ -1,7 +1,14 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Linking, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Linking,
+  Button,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 // Definición de los tipos para las rutas
 type RootStackParamList = {
@@ -20,40 +27,47 @@ export default function PensionNoContributiva() {
 
         <Text style={styles.subtitle}>Descripción</Text>
         <Text style={styles.content}>
-          Prestación económica dirigida a personas con discapacidad igual o superior al 65% que carecen de ingresos suficientes.
+          Prestación económica dirigida a personas con discapacidad igual o
+          superior al 65% que carecen de ingresos suficientes.
         </Text>
 
         <Text style={styles.subtitle}>Requisitos</Text>
         <Text style={styles.content}>
-          - Edad: entre 18 y 64 años.{"\n"}
-          - Residencia legal en España durante al menos 5 años.{"\n"}
-          - Estar afectado de un grado de discapacidad igual o superior al 65%.{"\n"}
-          - Ingresos familiares por debajo de los límites establecidos (Existe carencia cuando las rentas o ingresos personales de que se disponga, en cómputo anual, para 2025, sean inferiores a 7.905,80 € anuales.)
+          - Edad: entre 18 y 64 años.{"\n"}- Residencia legal en España durante
+          al menos 5 años.{"\n"}- Estar afectado de un grado de discapacidad
+          igual o superior al 65%.{"\n"}- Los ingresos familiares deben estar
+          por debajo de los límites establecidos según la normativa vigente del
+          IMSERSO.
         </Text>
 
         <Text style={styles.subtitle}>Cuantías</Text>
-        <Text style={styles.content}>        
-        La cuantía de las pensiones de invalidez y jubilación de la Seguridad Social en su modalidad no contributiva para el año 2025 es de 7.905,80 € anuales, que se abonan en 12 mensualidades más dos pagas extraordinarias al año.{"\n"}
-
-        La cuantía individual actualizada para cada pensionista se establece a partir del citado importe y en función del número de beneficiarios que vivan en el mismo domicilio, de sus rentas personales y/o de las de su unidad económica de convivencia, no pudiendo ser la cuantía inferior a la mínima del 25% de la establecida.{"\n"}
-
-        Los pensionistas de pensión no contributiva de invalidez cuyo grado de discapacidad sea igual o superior al 75% y acrediten la necesidad del concurso de otra persona para realizar los actos esenciales de la vida, percibirán además un complemento del 50% de los 7.905,80 € anuales, por lo que el importe de ese complemento queda fijado en 3.952,90 € anuales.{"\n"}
-
-Cuantías básicas para 2025:
-Cuantía	Anual	Mensual
-Íntegra	7.905,80 €	564,70 €
-Mínima 25%	1.976,45 €	141,18 €
-Íntegra más
-Incremento 50%	11.858,70 €	847,03 €
+        <Text style={styles.content}>
+          Las cuantías de las pensiones de invalidez y jubilación en su
+          modalidad no contributiva se actualizan anualmente según la normativa
+          del IMSERSO y los Presupuestos Generales del Estado. La cuantía
+          individual se establece en función del número de beneficiarios en el
+          domicilio y de sus rentas personales o de la unidad económica de
+          convivencia, sin poder ser inferior al mínimo legal (aproximadamente
+          el 25% de la cuantía básica). Los beneficiarios con grado de
+          discapacidad igual o superior al 75% y que necesiten asistencia de
+          otra persona pueden recibir un complemento adicional.
         </Text>
 
         <Text style={styles.subtitle}>Proceso de Solicitud</Text>
         <Text style={styles.content}>
-          La solicitud se realiza en las oficinas del IMSERSO o de los servicios sociales de cada <Text 
-            style={styles.link} 
-            onPress={() => Linking.openURL('https://imserso.es/pnc-prestaciones-subvenciones/donde-solicitar-pension-no-contributiva-pnc')}>
+          La solicitud se realiza en las oficinas del IMSERSO o de los servicios
+          sociales de cada{" "}
+          <Text
+            style={styles.link}
+            onPress={() =>
+              Linking.openURL(
+                "https://imserso.es/pnc-prestaciones-subvenciones/donde-solicitar-pension-no-contributiva-pnc"
+              )
+            }
+          >
             comunidad autónoma
-          </Text>. Se debe presentar documentación médica y económica.
+          </Text>
+          . Se debe presentar documentación médica y económica.
         </Text>
 
         <Text style={styles.subtitle}>Normativa</Text>
@@ -63,29 +77,29 @@ Incremento 50%	11.858,70 €	847,03 €
 
         <Text style={styles.subtitle}>Simulador</Text>
         <Text style={styles.content}>
-          ¿Quieres saber si tienes derecho al bono? Puedes probar nuestro simulador aquí:
+          ¿Quieres saber si tienes derecho a la pensión no contributiva? Puedes
+          probar nuestro simulador:
         </Text>
-        <Button 
-          title="Ir al simulador" 
-          onPress={() => navigation.navigate('SimuladorPensionNoContributiva')} 
+        <Button
+          title="Ir al simulador"
+          onPress={() => navigation.navigate("SimuladorPensionNoContributiva")}
         />
       </View>
     </ScrollView>
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e8f4f8', // Fondo suave y amigable
+    backgroundColor: "#e8f4f8", // Fondo suave y amigable
   },
   card: {
-    backgroundColor: '#f9f1b9',
+    backgroundColor: "#f9f1b9",
     margin: 20,
     padding: 20,
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
@@ -93,26 +107,26 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#2a9d8f',
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#2a9d8f",
     marginBottom: 10,
   },
   subtitle: {
     fontSize: 22,
-    fontWeight: '600',
-    color: '#1f5ef8',
+    fontWeight: "600",
+    color: "#1f5ef8",
     marginTop: 20,
     marginBottom: 5,
   },
   content: {
     fontSize: 20,
     lineHeight: 26,
-    color: '#6c757d',
-    textAlign: 'justify',
+    color: "#6c757d",
+    textAlign: "justify",
   },
   link: {
-    color: '#2a9d8f',
-    textDecorationLine: 'underline',
+    color: "#2a9d8f",
+    textDecorationLine: "underline",
   },
 });

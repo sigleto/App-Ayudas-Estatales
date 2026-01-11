@@ -26,48 +26,47 @@ const MovesIII: React.FC = () => {
 
         <Text style={styles.subtitle}>Descripción</Text>
         <Text style={styles.content}>
-          El Programa MOVES III es una iniciativa del Gobierno de España que
-          ofrece ayudas directas para la compra de vehículos eléctricos y la
-          instalación de infraestructuras de recarga.
+          El Programa MOVES III es una iniciativa estatal destinada a fomentar
+          la movilidad eléctrica mediante ayudas económicas para la adquisición
+          de vehículos eléctricos y la instalación de infraestructuras de
+          recarga.
         </Text>
 
-        <Text style={styles.subtitle}>¿Quién puede solicitarlo?</Text>
+        <Text style={styles.subtitle}>Personas beneficiarias</Text>
         <Text style={styles.content}>
-          Está dirigido a particulares, autónomos, empresas y administraciones
-          públicas que deseen adquirir un vehículo eléctrico o instalar puntos
-          de recarga.
+          Pueden beneficiarse del programa, conforme a la convocatoria vigente:
+          {"\n"}• Personas físicas.
+          {"\n"}• Autónomos.
+          {"\n"}• Empresas.
+          {"\n"}• Administraciones públicas.
         </Text>
 
-        <Text style={styles.subtitle}>Cuantías</Text>
+        <Text style={styles.subtitle}>Cuantía de las ayudas</Text>
         <Text style={styles.content}>
-          • Hasta 7.000€ por la compra de un vehículo eléctrico.
-        </Text>
-        <Text style={styles.content}>
-          • Hasta 1.300€ para motocicletas eléctricas.
-        </Text>
-        <Text style={styles.content}>
-          • Hasta 80% de ayuda para la instalación de puntos de recarga.
+          El importe de la ayuda varía en función del tipo de vehículo, la
+          existencia o no de achatarramiento, el perfil del solicitante y la
+          comunidad autónoma de residencia. Las cuantías se determinan
+          oficialmente en cada convocatoria o prórroga del programa.
         </Text>
 
-        <Text style={styles.subtitle}>Requisitos</Text>
+        <Text style={styles.subtitle}>Requisitos generales</Text>
         <Text style={styles.content}>
-          • El vehículo debe ser nuevo o con menos de 9 meses de antigüedad.
-        </Text>
-        <Text style={styles.content}>
-          • El beneficiario debe mantener la titularidad durante al menos 2
-          años.
-        </Text>
-        <Text style={styles.content}>
-          • Las instalaciones de recarga deben estar en España.
+          • Cumplir las condiciones establecidas en la convocatoria autonómica
+          correspondiente.{"\n"}• El vehículo o infraestructura de recarga debe
+          cumplir los requisitos técnicos exigidos.{"\n"}• Mantener la
+          titularidad y el uso conforme a lo establecido en la normativa
+          aplicable.
         </Text>
 
         <Text style={styles.subtitle}>Solicitud</Text>
         <Text style={styles.content}>
-          Para solicitar la ayuda, accede a la web oficial y revisa los plazos y
-          condiciones específicas de tu comunidad autónoma.
+          La solicitud se tramita a través de los organismos habilitados por
+          cada comunidad autónoma. Los plazos y condiciones pueden variar en
+          función de la disponibilidad presupuestaria.
         </Text>
+
         <Text style={styles.content}>
-          Más información disponible en
+          Puedes consultar la información oficial del programa en el{" "}
           <Text
             style={styles.link}
             onPress={() =>
@@ -76,16 +75,16 @@ const MovesIII: React.FC = () => {
               )
             }
           >
-            {" "}
-            AQUÍ
+            Instituto para la Diversificación y Ahorro de la Energía (IDAE)
           </Text>
+          .
         </Text>
 
         <Text style={styles.subtitle}>Simulador</Text>
         <Text style={styles.content}>
-          ¿Quieres saber cuánto podrías recibir con el MOVES III? Prueba nuestro
-          simulador:
+          ¿Quieres estimar la ayuda que podrías recibir según tu caso?
         </Text>
+
         <Button
           title="Ir al simulador"
           onPress={() => navigation.navigate("SimuladorMoves")}

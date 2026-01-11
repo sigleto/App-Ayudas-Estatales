@@ -62,7 +62,7 @@ const SimuladorLeyDeDependencia: React.FC = () => {
         mensaje = "Grado II: Dependencia severa";
         break;
       case 3: // Grado III: Gran dependencia
-        prestaciones = 747.25; // Actualizado para 2025
+        prestaciones = 747.25; // Actualizado para 2026
         mensaje = "Grado III: Gran dependencia";
         break;
       default:
@@ -96,7 +96,7 @@ const SimuladorLeyDeDependencia: React.FC = () => {
     try {
       await Share.share({
         message:
-          "Descarga la app Ayudas Públicas 2025 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
+          "Descarga la app Ayudas Públicas 2026 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
       });
     } catch (error) {
       console.error("Error al compartir", error);

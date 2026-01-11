@@ -18,7 +18,7 @@ type RootStackParamList = {
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
-const AyudaRehabilitacionEdificios = () => {
+const AyudaRehabilitacionEdificios: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
 
   const openLink = (url: string) => {
@@ -33,19 +33,19 @@ const AyudaRehabilitacionEdificios = () => {
         </Text>
         <Text style={styles.content}>
           El Programa PREE ofrece ayudas para mejorar la eficiencia energética
-          de edificios residenciales y terciarios. Estas ayudas cubren la mejora
-          de la envolvente térmica, la sustitución de instalaciones térmicas y
-          la renovación de sistemas de iluminación, con el objetivo de reducir
-          el consumo energético y las emisiones de CO₂.
+          de edificios residenciales y terciarios, incluyendo mejoras en la
+          envolvente térmica, sustitución de instalaciones térmicas y renovación
+          de sistemas de iluminación, con el objetivo de reducir el consumo
+          energético y las emisiones de CO₂.
         </Text>
 
         <Text style={styles.subtitle}>Objetivos del Programa</Text>
         <View style={styles.listContainer}>
           {[
-            "Reducir el consumo energético en edificios existentes mediante mejoras en la eficiencia.",
-            "Disminuir las emisiones de gases de efecto invernadero en el sector de la construcción.",
-            "Fomentar la rehabilitación de edificios para mejorar el confort y la calidad de vida de los usuarios.",
-            "Promover el uso de tecnologías sostenibles y energías renovables en la edificación.",
+            "Reducir el consumo energético en edificios existentes mediante mejoras de eficiencia.",
+            "Disminuir las emisiones de gases de efecto invernadero.",
+            "Fomentar la rehabilitación para mejorar confort y calidad de vida.",
+            "Promover el uso de tecnologías sostenibles y energías renovables.",
           ].map((item, index) => (
             <Text key={index} style={styles.listItem}>
               • {item}
@@ -58,17 +58,17 @@ const AyudaRehabilitacionEdificios = () => {
           {
             title: "Envolvente Térmica",
             content:
-              "Mejoras en fachadas, cubiertas y suelos para reducir las pérdidas de calor.",
+              "Mejoras en fachadas, cubiertas y suelos para reducir pérdidas de calor.",
           },
           {
             title: "Instalaciones Térmicas",
             content:
-              "Sustitución de calderas, sistemas de climatización y ventilación por alternativas más eficientes.",
+              "Sustitución de calderas, climatización y ventilación por alternativas más eficientes.",
           },
           {
             title: "Iluminación",
             content:
-              "Renovación de sistemas de iluminación por tecnologías LED y sistemas de control inteligente.",
+              "Renovación de sistemas por tecnologías LED y sistemas de control inteligente.",
           },
         ].map((item, index) => (
           <View key={index} style={styles.gridItem}>
@@ -80,10 +80,9 @@ const AyudaRehabilitacionEdificios = () => {
         <Text style={styles.subtitle}>Requisitos para Solicitar la Ayuda</Text>
         <View style={styles.listContainer}>
           {[
-            "Los edificios deben estar construidos antes de una fecha específica (normalmente, antes de 2007).",
-            "Las actuaciones deben cumplir con los criterios de eficiencia energética establecidos.",
-            "Es necesario presentar un proyecto técnico y justificar la viabilidad de las mejoras.",
-            "Los beneficiarios pueden ser propietarios, comunidades de vecinos o empresas.",
+            "Cumplir con los criterios de eficiencia energética establecidos en la convocatoria vigente.",
+            "Presentar un proyecto técnico que justifique la viabilidad de las mejoras.",
+            "Los beneficiarios pueden ser propietarios, comunidades de vecinos o empresas, según la convocatoria.",
           ].map((item, index) => (
             <Text key={index} style={styles.listItem}>
               • {item}

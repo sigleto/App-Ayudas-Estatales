@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import * as Print from 'expo-print';
-import * as Sharing from 'expo-sharing';
-import { useRoute, RouteProp } from '@react-navigation/native';
-import AnuncioRecompensado from '../Anuncios/AnuncioRecompensado';
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import * as Print from "expo-print";
+import * as Sharing from "expo-sharing";
+import { useRoute, RouteProp } from "@react-navigation/native";
+import AnuncioRecompensado from "../Anuncios/AnuncioRecompensado";
 
 type RouteParams = {
   edad: string;
@@ -16,11 +16,14 @@ type RouteParams = {
 
 const InformeBecaGeneral: React.FC = () => {
   const route = useRoute<RouteProp<Record<string, RouteParams>, string>>();
-  const { edad, ciudadania, nivelEstudios, notaMedia, ingresos, resultado } = route.params || {};
+  const { edad, ciudadania, nivelEstudios, notaMedia, ingresos, resultado } =
+    route.params || {};
   const [recompensaGanada, setRecompensaGanada] = useState(false);
 
   const manejarRecompensa = (reward: { type: string; amount: number }) => {
-    console.log(`Recompensa obtenida: ${reward.type}, cantidad: ${reward.amount}`);
+    console.log(
+      `Recompensa obtenida: ${reward.type}, cantidad: ${reward.amount}`
+    );
     setRecompensaGanada(true);
   };
 
@@ -39,11 +42,13 @@ const InformeBecaGeneral: React.FC = () => {
         </head>
         <body>
           <h1>Informe de Simulación</h1>
-          <h2>Beca General MEC 2024/2025</h2>
+          <h2>Beca General MEC 2024/2026</h2>
           <p><strong>Datos proporcionados:</strong></p>
           <ul>
             <li><strong>Edad:</strong> ${edad}</li>
-            <li><strong>Ciudadanía española o de la UE:</strong> ${ciudadania === 'S' ? 'Sí' : 'No'}</li>
+            <li><strong>Ciudadanía española o de la UE:</strong> ${
+              ciudadania === "S" ? "Sí" : "No"
+            }</li>
             <li><strong>Nivel de estudios:</strong> ${nivelEstudios}</li>
             <li><strong>Nota media:</strong> ${notaMedia}</li>
             <li><strong>Ingresos familiares anuales:</strong> ${ingresos} €</li>
@@ -51,7 +56,7 @@ const InformeBecaGeneral: React.FC = () => {
           <h3>Resultado de la simulación:</h3>
           <p class="highlight">${resultado}</p>
           <h3>Descripción:</h3>
-          <p>La Beca General MEC 2024/2025 está destinada a estudiantes de enseñanzas postobligatorias que cumplan una serie de requisitos académicos, económicos y personales, con el objetivo de facilitar el acceso a la educación superior.</p>
+          <p>La Beca General MEC 2024/2026 está destinada a estudiantes de enseñanzas postobligatorias que cumplan una serie de requisitos académicos, económicos y personales, con el objetivo de facilitar el acceso a la educación superior.</p>
           <h3>Requisitos generales:</h3>
           <ul>
             <li>Tener nacionalidad española o de un estado miembro de la Unión Europea.</li>
@@ -75,10 +80,10 @@ const InformeBecaGeneral: React.FC = () => {
       if (await Sharing.isAvailableAsync()) {
         await Sharing.shareAsync(uri);
       } else {
-        Alert.alert('No se puede compartir el archivo en este dispositivo.');
+        Alert.alert("No se puede compartir el archivo en este dispositivo.");
       }
     } catch (error) {
-      Alert.alert('Error', 'Hubo un problema al generar el informe.');
+      Alert.alert("Error", "Hubo un problema al generar el informe.");
     }
   };
 
@@ -99,11 +104,33 @@ const InformeBecaGeneral: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f8f9fa' },
-  title: { fontSize: 24, fontWeight: 'bold', color: '#2a9d8f', textAlign: 'center', marginBottom: 20 },
-  resultado: { fontSize: 18, color: '#333', textAlign: 'center', marginVertical: 20 },
-  boton: { backgroundColor: '#c13855', padding: 15, borderRadius: 5, marginTop: 20 },
-  botonTexto: { color: 'white', fontSize: 16, fontWeight: 'bold' },
+  container: {
+    padding: 20,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f8f9fa",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#2a9d8f",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  resultado: {
+    fontSize: 18,
+    color: "#333",
+    textAlign: "center",
+    marginVertical: 20,
+  },
+  boton: {
+    backgroundColor: "#c13855",
+    padding: 15,
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  botonTexto: { color: "white", fontSize: 16, fontWeight: "bold" },
 });
 
 export default InformeBecaGeneral;

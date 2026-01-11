@@ -69,7 +69,7 @@ const SimuladorAyudasDesacopladas: React.FC = () => {
       return;
     }
 
-    // Criterios de elegibilidad actualizados para 2025
+    // Criterios de elegibilidad actualizados para 2026
     const tieneHectareas = hectareasNum > 0;
     const cumpleCultivo = [
       "trigo",
@@ -107,18 +107,18 @@ const SimuladorAyudasDesacopladas: React.FC = () => {
       usaAgriculturaPrecision
     ) {
       setResultado(
-        "¡Cumples los requisitos para solicitar las ayudas desacopladas de la PAC 2025! Asegúrate de presentar la solicitud a través del nuevo portal digital unificado."
+        "¡Cumples los requisitos para solicitar las ayudas desacopladas de la PAC 2026! Asegúrate de presentar la solicitud a través del nuevo portal digital unificado."
       );
     } else {
       setResultado(
-        "No cumples todos los requisitos actualizados para las ayudas desacopladas de la PAC 2025. Por favor, revisa los nuevos criterios o consulta con tu comunidad autónoma."
+        "No cumples todos los requisitos actualizados para las ayudas desacopladas de la PAC 2026. Por favor, revisa los nuevos criterios o consulta con tu comunidad autónoma."
       );
     }
   };
   React.useEffect(() => {
     Alert.alert(
       "Aviso importante",
-      "Este simulador es una herramienta orientativa actualizada para 2025. Consulta siempre la información oficial más reciente.",
+      "Este simulador es una herramienta orientativa actualizada para 2026. Consulta siempre la información oficial más reciente.",
       [{ text: "Entendido" }]
     );
   }, []);
@@ -127,7 +127,7 @@ const SimuladorAyudasDesacopladas: React.FC = () => {
     try {
       await Share.share({
         message:
-          "Descarga la app Ayudas Públicas 2025 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
+          "Descarga la app Ayudas Públicas 2026 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
       });
     } catch (error) {
       console.error("Error al compartir", error);
@@ -144,7 +144,7 @@ const SimuladorAyudasDesacopladas: React.FC = () => {
         />
       </TouchableOpacity>
       <Text style={styles.title}>
-        Simulador Ayudas Desacopladas de la PAC 2025
+        Simulador Ayudas Desacopladas de la PAC 2026
       </Text>
 
       <Text>Número de hectáreas:</Text>
@@ -237,7 +237,7 @@ const SimuladorAyudasDesacopladas: React.FC = () => {
         maxLength={1}
       />
 
-      <Button title="Verificar Elegibilidad 2025" onPress={handleSubmit} />
+      <Button title="Verificar Elegibilidad 2026" onPress={handleSubmit} />
 
       {resultado && (
         <>
@@ -261,7 +261,7 @@ const SimuladorAyudasDesacopladas: React.FC = () => {
               }
               style={styles.boton}
             >
-              <Text style={styles.letras}>GENERAR INFORME DETALLADO 2025</Text>
+              <Text style={styles.letras}>GENERAR INFORME DETALLADO 2026</Text>
             </TouchableOpacity>
           )}
           <TouchableOpacity

@@ -80,7 +80,7 @@ const SimuladorBecaGeneral: React.FC = () => {
 
     setResultado(
       cumpleRequisitos
-        ? "Cumples con los requisitos básicos para solicitar la Beca General MEC 2024/2025."
+        ? "Cumples con los requisitos básicos para solicitar la Beca General MEC 2024/2026."
         : "No cumples con los requisitos básicos para esta beca."
     );
   };
@@ -97,7 +97,7 @@ const SimuladorBecaGeneral: React.FC = () => {
     try {
       await Share.share({
         message:
-          "Descarga la app Ayudas Públicas 2025 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
+          "Descarga la app Ayudas Públicas 2026 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
       });
     } catch (error) {
       console.error("Error al compartir", error);
@@ -114,7 +114,7 @@ const SimuladorBecaGeneral: React.FC = () => {
           color="#007BFF"
         />
       </TouchableOpacity>
-      <Text style={styles.title}>Simulador Beca General MEC 2024/2025</Text>
+      <Text style={styles.title}>Simulador Beca General MEC 2024/2026</Text>
 
       <Text>Edad del estudiante (años):</Text>
       <TextInput

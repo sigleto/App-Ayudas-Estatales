@@ -74,7 +74,7 @@ const SimuladorBecaResidencia: React.FC = () => {
           ingresosNum <= umbralRenta * 0.9))
     ) {
       setResultado(
-        "Cumples con los requisitos para solicitar la Beca de Residencia 2025."
+        "Cumples con los requisitos para solicitar la Beca de Residencia 2026."
       );
     } else {
       setResultado("No cumples con los requisitos para esta beca.");
@@ -84,7 +84,7 @@ const SimuladorBecaResidencia: React.FC = () => {
   React.useEffect(() => {
     Alert.alert(
       "Aviso importante",
-      "Este simulador es una herramienta orientativa para la Beca de Residencia 2025 y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. El resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.",
+      "Este simulador es una herramienta orientativa para la Beca de Residencia 2026 y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. El resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, es imprescindible consultar con el organismo competente o acudir a las fuentes oficiales correspondientes.",
       [{ text: "Entendido" }]
     );
   }, []);
@@ -93,7 +93,7 @@ const SimuladorBecaResidencia: React.FC = () => {
     try {
       await Share.share({
         message:
-          "Descarga la app Ayudas Públicas 2025 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
+          "Descarga la app Ayudas Públicas 2026 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
       });
     } catch (error) {
       console.error("Error al compartir", error);
@@ -110,7 +110,7 @@ const SimuladorBecaResidencia: React.FC = () => {
           color="#007BFF"
         />
       </TouchableOpacity>
-      <Text style={styles.title}>Simulador Beca de Residencia 2025</Text>
+      <Text style={styles.title}>Simulador Beca de Residencia 2026</Text>
 
       <Text>
         ¿Estás matriculado en estudios postobligatorios o universitarios? (S/N):

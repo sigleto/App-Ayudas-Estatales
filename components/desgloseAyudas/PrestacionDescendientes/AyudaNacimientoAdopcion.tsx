@@ -1,7 +1,14 @@
-import React from 'react';
-import { ScrollView, View, Text, StyleSheet, Linking,Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React from "react";
+import {
+  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+  Linking,
+  Button,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 // Definición de los tipos para las rutas
 type RootStackParamList = {
@@ -13,17 +20,21 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const AyudaNacimientoAdopcion = () => {
   const navigation = useNavigation<NavigationProp>();
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
         {/* Título principal */}
-        <Text style={styles.title}>Ayuda por Nacimiento o Adopción</Text>
+        <Text style={styles.title}>Ayuda por Nacimiento o Adopción 2026</Text>
 
         {/* Sección: Descripción */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Descripción</Text>
           <Text style={styles.text}>
-            Esta ayuda supone una prestación económica por nacimiento o adopción de hijo, en supuestos de familias numerosas, monoparentales y en los casos de madres o padres con discapacidad.
+            Prestación económica en pago único por nacimiento o adopción de
+            hijo, dirigida a familias numerosas, monoparentales y progenitores
+            con discapacidad. Esta ayuda se mantiene vigente en 2026 dentro del
+            sistema de prestaciones familiares de la Seguridad Social.
           </Text>
         </View>
 
@@ -31,10 +42,11 @@ const AyudaNacimientoAdopcion = () => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Requisitos</Text>
           <Text style={styles.text}>
-            - Residan legalmente en territorio español.{"\n"}
-            - No perciban ingresos anuales, de cualquier naturaleza, superiores a los límites establecidos anualmente en la correspondiente Ley de Presupuestos Generales del Estado.{"\n"}
-            - En los supuestos de convivencia, si la suma de los ingresos de los progenitores o adoptantes superase los límites establecidos, no se reconocerá la condición de beneficiario a ninguno de ellos.{"\n"}
-            - No tengan derecho a prestaciones de esta misma naturaleza en cualquier otro régimen público de protección social.
+            - Residir legalmente en España.{"\n"}- No superar los límites de
+            ingresos fijados anualmente en los Presupuestos Generales del Estado
+            para 2026.{"\n"}- Si ambos progenitores conviven, se sumarán sus
+            ingresos para calcular el límite.{"\n"}- No tener derecho a
+            prestaciones equivalentes en otro régimen público.
           </Text>
         </View>
 
@@ -42,7 +54,9 @@ const AyudaNacimientoAdopcion = () => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Cuantía</Text>
           <Text style={styles.text}>
-            La prestación se abona en un pago único, cuya cuantía asciende a 1.000,00 euros, siempre que los ingresos del beneficiario no rebasen el límite establecido.
+            La cuantía continúa siendo de **1.000 euros en pago único** para
+            2026, siempre que los ingresos no superen el umbral establecido en
+            la normativa vigente.
           </Text>
         </View>
 
@@ -50,18 +64,19 @@ const AyudaNacimientoAdopcion = () => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Proceso de Solicitud</Text>
           <Text style={styles.text}>
-            El procedimiento se iniciará previa presentación ante el INSS de la correspondiente{" "}
+            El trámite se realiza mediante la presentación de la{" "}
             <Text
               style={styles.link}
               onPress={() =>
                 Linking.openURL(
-                  'https://www.seg-social.es/wps/portal/wss/internet/Pensionistas/Servicios/34887/40968/41091/bin41083#BIN41083'
+                  "https://www.seg-social.es/wps/portal/wss/internet/Pensionistas/Servicios/34887/40968/41091/bin41083"
                 )
               }
             >
-              solicitud
+              solicitud oficial del INSS
             </Text>
-            , aportando los documentos necesarios para la acreditación de las circunstancias determinantes del derecho.
+            , junto con la documentación acreditativa (libro de familia,
+            resolución de adopción, certificado de empadronamiento, etc.).
           </Text>
         </View>
 
@@ -69,15 +84,20 @@ const AyudaNacimientoAdopcion = () => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Normativa</Text>
           <Text style={styles.text}>
-            Esta prestación está regulada por la Ley del Impuesto sobre la Renta de las Personas Físicas (IRPF). La normativa específica puede variar según actualizaciones legislativas.
-          </Text>          
+            Prestación prevista en la Ley del IRPF y desarrollada por la
+            normativa de la Seguridad Social. Los límites de ingresos se
+            actualizan cada año a través de la Ley de Presupuestos Generales del
+            Estado 2026.
+          </Text>
         </View>
+
         <Text style={styles.content}>
-          ¿Quieres saber si tienes derecho al bono? Puedes probar nuestro simulador aquí:
+          ¿Quieres saber si cumples los requisitos? Prueba el simulador:
         </Text>
-        <Button 
-          title="Ir al simulador" 
-          onPress={() => navigation.navigate('SimuladorAyudaNacimiento')} 
+
+        <Button
+          title="Ir al simulador"
+          onPress={() => navigation.navigate("SimuladorAyudaNacimiento")}
         />
       </View>
     </ScrollView>
@@ -88,14 +108,14 @@ const AyudaNacimientoAdopcion = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e8f4f8',
+    backgroundColor: "#e8f4f8",
   },
   card: {
-    backgroundColor: '#f9f1b9',
+    backgroundColor: "#f9f1b9",
     margin: 20,
     padding: 20,
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
@@ -103,9 +123,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#2a9d8f',
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#2a9d8f",
     marginBottom: 16,
   },
   section: {
@@ -113,25 +133,25 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 22,
-    fontWeight: '600',
-    color: '#1f5ef8',
+    fontWeight: "600",
+    color: "#1f5ef8",
     marginBottom: 8,
   },
   text: {
     fontSize: 20,
     lineHeight: 26,
-    color: '#6c757d',
-    textAlign: 'justify',
+    color: "#6c757d",
+    textAlign: "justify",
   },
   link: {
-    color: '#007BFF',
-    textDecorationLine: 'underline',
+    color: "#007BFF",
+    textDecorationLine: "underline",
   },
   content: {
     fontSize: 20,
     lineHeight: 26,
-    color: '#6c757d',
-    textAlign: 'justify',
+    color: "#6c757d",
+    textAlign: "justify",
   },
 });
 

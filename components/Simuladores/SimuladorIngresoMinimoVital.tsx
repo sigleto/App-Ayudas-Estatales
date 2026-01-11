@@ -52,7 +52,7 @@ const SimuladorIngresoMinimoVital: React.FC = () => {
     }
 
     // Cálculo del Ingreso Mínimo Vital
-    const rentaGarantizadaBase = 658.59; // Cuantía base para 2025
+    const rentaGarantizadaBase = 658.59; // Cuantía base para 2026
     const rentaGarantizadaPorPersona = 185.1; // Incremento por cada persona adicional
     const discapacidadIncremento =
       discapacidadNum >= 65 ? rentaGarantizadaBase * 0.22 : 0; // Incremento por discapacidad
@@ -88,7 +88,7 @@ const SimuladorIngresoMinimoVital: React.FC = () => {
     try {
       await Share.share({
         message:
-          "Descarga la app Ayudas Públicas 2025 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
+          "Descarga la app Ayudas Públicas 2026 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
       });
     } catch (error) {
       console.error("Error al compartir", error);

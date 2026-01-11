@@ -1,72 +1,95 @@
-import React from 'react';
-import { ScrollView, View, Text, StyleSheet, Linking } from 'react-native';
+import React from "react";
+import { ScrollView, View, Text, StyleSheet, Linking } from "react-native";
 
 const EnisaEmprendedores = () => {
   const openGuide = () => {
     Linking.openURL(
-      'https://cdn.enisa.es/EcommerceProduct/A26A3E77A791B4425D993E31DF6B70B6/ATTACHMENT/EF3ED5EACB22250177894E31C245A4AE/03badae274b297612d3da5679fcdb0183b6237a5.pdf'
+      "https://www.enisa.es/es/financia-tu-empresa/lineas-de-financiacion/d/emprendedores"
     );
   };
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}>Programa Enisa para Emprendedores</Text>
+        <Text style={styles.title}>Línea ENISA – Emprendedores (2026)</Text>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Descripción</Text>
           <Text style={styles.text}>
-            Financiación mediante préstamos participativos para startups y pymes con modelos de negocio innovadores.
+            Préstamos participativos dirigidos a startups y pymes de reciente
+            constitución que necesiten financiación para acometer inversiones en
+            las fases iniciales de su proyecto empresarial. La línea
+            Emprendedores forma parte de las líneas permanentes gestionadas por
+            ENISA dentro del mecanismo FEPYME.
           </Text>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Requisitos</Text>
+          <Text style={styles.sectionTitle}>Requisitos principales</Text>
           <Text style={styles.text}>
-            - Ser una pyme, conforme a la definición de la Unión Europea.{'\n'}
-            - Tener personalidad jurídica propia, como sociedad mercantil, independiente de la de los socios o partícipes de la empresa.{'\n'}
-            - La sociedad deberá haber sido constituida, como máximo, durante los 24 meses anteriores a la solicitud.{'\n'}
-            - Desarrollar la actividad principal y tener el domicilio social en el territorio nacional.{'\n'}
-            - El modelo de negocio será innovador, novedoso o con claras ventajas competitivas.{'\n'}
-            - Cofinanciar las necesidades financieras asociadas al proyecto empresarial.{'\n'}
-            - Los fondos propios han de ser, como mínimo, equivalentes a la cuantía del préstamo.{'\n'}
-            - El proyecto empresarial deberá mostrar una estructura financiera equilibrada y profesionalidad en la gestión, mostrando viabilidad técnica y económica.{'\n'}
-            - Las cuentas del último ejercicio cerrado habrán de estar depositadas en el Registro Mercantil o en otro registro público que proceda.{'\n'}
-            - Quedan excluidos los sectores inmobiliario y financiero.
+            - Ser una pyme conforme a la definición de la UE. {"\n"}- Tener
+            personalidad jurídica propia. {"\n"}- Haber sido constituida en los
+            últimos 24 meses. {"\n"}- Desarrollar la actividad principal y tener
+            domicilio social en España. {"\n"}- Modelo de negocio innovador o
+            con clara ventaja competitiva. {"\n"}- Cofinanciar las necesidades
+            financieras del proyecto. {"\n"}- Fondos propios equivalentes al
+            préstamo solicitado. {"\n"}- Estructura financiera equilibrada y
+            viabilidad técnica y económica. {"\n"}- Cuentas del último ejercicio
+            depositadas en el registro público correspondiente. {"\n"}- No ser
+            de los sectores inmobiliario o financiero.
           </Text>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Proceso de Solicitud</Text>
+          <Text style={styles.sectionTitle}>Importe y condiciones</Text>
           <Text style={styles.text}>
-            La solicitud se realiza a través de la web de ENISA, adjuntando el plan de negocio y la documentación financiera. Aquí puedes descargar{' '}
+            • Importe: desde 25.000 € hasta 300.000 € aproximadamente (según
+            evaluación). {"\n"}• Plazo de amortización y períodos de carencia
+            flexibles adaptados al proyecto. {"\n"}• Préstamos participativos
+            sin necesidad de avales o garantías adicionales al plan de negocio y
+            gestión profesional.
+          </Text>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Proceso de solicitud</Text>
+          <Text style={styles.text}>
+            La solicitud se realiza de forma online en la web oficial de ENISA,
+            dentro de la sección de financiación de empresas, adjuntando plan de
+            negocio y documentación económica y legal requerida. Puedes ver toda
+            la información actualizada en la web oficial:{" "}
             <Text style={styles.link} onPress={openGuide}>
-              la guía para la solicitud
-            </Text>.
+              Página oficial de ENISA – Línea Emprendedores
+            </Text>
+            .
           </Text>
         </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Normativa</Text>
           <Text style={styles.text}>
-            Regulado bajo las bases del Ministerio de Industria, Comercio y Turismo.
+            Regulado por las bases del Ministerio de Industria y Turismo y
+            gestionado por ENISA dentro de su marco de préstamos participativos.
+            La disponibilidad de fondos en 2026 se enmarca en el mecanismo
+            FEPYME de financiación continua.
           </Text>
         </View>
       </View>
     </ScrollView>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e8f4f8', // Fondo suave
+    backgroundColor: "#e8f4f8",
   },
   card: {
-    backgroundColor: '#f9f1b9',
+    backgroundColor: "#f9f1b9",
     margin: 20,
     padding: 20,
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
@@ -74,9 +97,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#2a9d8f',
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#2a9d8f",
     marginBottom: 16,
   },
   section: {
@@ -84,21 +107,20 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 22,
-    fontWeight: '600',
-    color: '#1f5ef8',
+    fontWeight: "600",
+    color: "#1f5ef8",
     marginBottom: 8,
   },
   text: {
     fontSize: 20,
     lineHeight: 26,
-    color: '#6c757d',
-    textAlign: 'justify',
-  }, 
+    color: "#6c757d",
+    textAlign: "justify",
+  },
   link: {
-    color: '#007BFF',
-    textDecorationLine: 'underline',
+    color: "#007BFF",
+    textDecorationLine: "underline",
   },
 });
 
 export default EnisaEmprendedores;
-

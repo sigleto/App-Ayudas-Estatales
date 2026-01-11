@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Share,
   View,
@@ -8,11 +8,11 @@ import {
   StyleSheet,
   Alert,
   TouchableOpacity,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import AnuncioInt from '../Anuncios/AnuncioIntersticial';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; //
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import AnuncioInt from "../Anuncios/AnuncioIntersticial";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { MaterialCommunityIcons } from "@expo/vector-icons"; //
 
 type RootStackParamList = {
   Home: undefined;
@@ -27,18 +27,18 @@ type RootStackParamList = {
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const SimuladorBecaApoyoEducativo: React.FC = () => {
-  const [edad, setEdad] = useState<string>('');
-  const [escolarizado, setEscolarizado] = useState<string>('');
-  const [certificado, setCertificado] = useState<string>('');
-  const [ingresos, setIngresos] = useState<string>('');
-  const [resultado, setResultado] = useState<string>('');
+  const [edad, setEdad] = useState<string>("");
+  const [escolarizado, setEscolarizado] = useState<string>("");
+  const [certificado, setCertificado] = useState<string>("");
+  const [ingresos, setIngresos] = useState<string>("");
+  const [resultado, setResultado] = useState<string>("");
   const navigation = useNavigation<NavigationProp>();
 
   useEffect(() => {
     Alert.alert(
-      'Aviso importante',
-      'Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, consulta con el organismo competente o las fuentes oficiales.',
-      [{ text: 'Entendido' }]
+      "Aviso importante",
+      "Este simulador es una herramienta orientativa y no contempla necesariamente todos los requisitos o condiciones específicos aplicables a cada caso particular. Por tanto, el resultado obtenido no es vinculante ni garantiza la concesión de la ayuda.\n\nPara obtener información oficial y confirmar tu situación, consulta con el organismo competente o las fuentes oficiales.",
+      [{ text: "Entendido" }]
     );
   }, []);
 
@@ -46,16 +46,16 @@ const SimuladorBecaApoyoEducativo: React.FC = () => {
     const edadNum = parseInt(edad);
     const ingresosNum = parseFloat(ingresos);
 
-    const esEscolarizado = escolarizado.toUpperCase() === 'S';
-    const esCertificado = certificado.toUpperCase() === 'S';
+    const esEscolarizado = escolarizado.toUpperCase() === "S";
+    const esCertificado = certificado.toUpperCase() === "S";
 
     if (
       isNaN(edadNum) ||
-      !['S', 'N'].includes(escolarizado.toUpperCase()) ||
-      !['S', 'N'].includes(certificado.toUpperCase()) ||
+      !["S", "N"].includes(escolarizado.toUpperCase()) ||
+      !["S", "N"].includes(certificado.toUpperCase()) ||
       isNaN(ingresosNum)
     ) {
-      setResultado('Por favor, completa todos los campos correctamente.');
+      setResultado("Por favor, completa todos los campos correctamente.");
       return;
     }
 
@@ -67,33 +67,31 @@ const SimuladorBecaApoyoEducativo: React.FC = () => {
       esCertificado &&
       ingresosNum <= umbralRenta
     ) {
-      setResultado('Cumples con los requisitos para solicitar la beca.');
+      setResultado("Cumples con los requisitos para solicitar la beca.");
     } else {
-      setResultado('No cumples con los requisitos para esta beca.');
+      setResultado("No cumples con los requisitos para esta beca.");
     }
   };
-const shareApp = async () => {
-                 try {
-                   await Share.share({
-                     message: 'Descarga la app Ayudas Públicas 2025 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas',
-                   });
-                 } catch (error) {
-                   console.error('Error al compartir', error);
-                 }
-               };
+  const shareApp = async () => {
+    try {
+      await Share.share({
+        message:
+          "Descarga la app Ayudas Públicas 2026 y descubre todas las ayudas disponibles. ¡Haz clic aquí para descargarla! https://play.google.com/store/apps/details?id=com.sigleto.Ayudas",
+      });
+    } catch (error) {
+      console.error("Error al compartir", error);
+    }
+  };
   return (
     <View style={styles.container}>
       <AnuncioInt />
-      <TouchableOpacity 
-                   onPress={shareApp} 
-                   style={styles.shareIcon}
-                  >
-          <MaterialCommunityIcons 
-                      name="share-variant" 
-                      size={24} 
-                    color="#007BFF" 
-           />
-      </TouchableOpacity>  
+      <TouchableOpacity onPress={shareApp} style={styles.shareIcon}>
+        <MaterialCommunityIcons
+          name="share-variant"
+          size={24}
+          color="#007BFF"
+        />
+      </TouchableOpacity>
       <Text style={styles.title}>Simulador Beca Apoyo Educativo</Text>
 
       <Text>Edad del estudiante (años):</Text>
@@ -137,10 +135,10 @@ const shareApp = async () => {
       {resultado && (
         <View style={styles.resultContainer}>
           <Text style={styles.result}>{resultado}</Text>
-          {resultado.includes('Cumples con los requisitos') && (
+          {resultado.includes("Cumples con los requisitos") && (
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate('InformeBecaApoyoEducativo', {
+                navigation.navigate("InformeBecaApoyoEducativo", {
                   edad,
                   escolarizado,
                   certificado,
@@ -150,11 +148,11 @@ const shareApp = async () => {
               }
               style={styles.button}
             >
-             <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
+              <Text style={styles.letras}>GENERAR INFORME DETALLADO</Text>
             </TouchableOpacity>
           )}
           <TouchableOpacity
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => navigation.navigate("Home")}
             style={styles.button}
           >
             <Text style={styles.buttonText}>VOLVER</Text>
@@ -168,20 +166,20 @@ const shareApp = async () => {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: '#f2f2f2',
+    backgroundColor: "#f2f2f2",
     flex: 1,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
-    color: '#0077b6',
-    textAlign: 'center',
-    marginTop:50,
+    color: "#0077b6",
+    textAlign: "center",
+    marginTop: 50,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     marginBottom: 15,
     padding: 10,
     fontSize: 16,
@@ -189,37 +187,37 @@ const styles = StyleSheet.create({
   },
   resultContainer: {
     marginTop: 20,
-    alignItems: 'center',
+    alignItems: "center",
   },
   result: {
     fontSize: 18,
-    color: '#4caf50',
-    textAlign: 'center',
-    fontWeight: 'bold',
+    color: "#4caf50",
+    textAlign: "center",
+    fontWeight: "bold",
   },
   button: {
-    backgroundColor: '#c13855',
+    backgroundColor: "#c13855",
     borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '60%',
+    alignItems: "center",
+    justifyContent: "center",
+    width: "60%",
     marginTop: 20,
     padding: 10,
   },
   buttonText: {
     fontSize: 16,
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   letras: {
     fontSize: 16,
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign:'center',
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
   },
   shareIcon: {
-    position: 'absolute', 
-    right: 20, 
+    position: "absolute",
+    right: 20,
     top: 10,
   },
 });
