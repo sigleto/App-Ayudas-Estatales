@@ -21,7 +21,7 @@ type RutasNavegacion =
   | "Discapacidad"
   | "Cultura"
   | "AyudasPAC"
-  | "EficienciaEnergetica"; // Nueva ruta
+  | "EficienciaEnergetica";
 
 type RootStackParamList = {
   SubsidiosDesempleo: undefined;
@@ -33,7 +33,7 @@ type RootStackParamList = {
   Discapacidad: undefined;
   Cultura: undefined;
   AyudasPAC: undefined;
-  EficienciaEnergetica: undefined; // Nueva ruta
+  EficienciaEnergetica: undefined;
 };
 
 type NavigationProp = StackNavigationProp<RootStackParamList>;
@@ -117,7 +117,6 @@ const ayudas: {
     color: "#C71585",
     icono: "palette",
   },
-  // Nueva ayuda
 ];
 
 export default function ListadoAyudas() {
@@ -128,36 +127,40 @@ export default function ListadoAyudas() {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.titulo}>¿En qué ayuda estás interesado?</Text>
-      <View style={styles.ayudas}>
-        {ayudas.map((ayuda) => (
-          <TouchableOpacity
-            key={ayuda.id}
-            style={styles.item}
-            onPress={() => navigateToAyuda(ayuda.ruta)}
-          >
-            <MaterialCommunityIcons
-              name={ayuda.icono}
-              size={30}
-              color="#FFFFFF"
-              style={styles.icono}
-            />
-            <Text style={styles.texto}>{ayuda.nombre}</Text>
-          </TouchableOpacity>
-        ))}
+    <View style={styles.container}>
+      {/* Lista scrollable */}
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <Text style={styles.titulo}>¿En qué ayuda estás interesado?</Text>
+        <View style={styles.ayudas}>
+          {ayudas.map((ayuda) => (
+            <TouchableOpacity
+              key={ayuda.id}
+              style={styles.item}
+              onPress={() => navigateToAyuda(ayuda.ruta)}
+            >
+              <MaterialCommunityIcons
+                name={ayuda.icono}
+                size={30}
+                color="#FFFFFF"
+                style={styles.icono}
+              />
+              <Text style={styles.texto}>{ayuda.nombre}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
+
+      {/* Banner siempre visible */}
+      <View style={styles.bannerContainer}>
+        <AnuncioBan />
       </View>
-      <AnuncioBan />
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#E5F5FE",
-    padding: 20,
-  },
+  container: { flex: 1, backgroundColor: "#E5F5FE" },
+  scrollContent: { padding: 20, paddingBottom: 20 },
   titulo: {
     fontSize: 24,
     fontWeight: "bold",
@@ -167,9 +170,7 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     letterSpacing: 1.2,
   },
-  ayudas: {
-    marginTop: 10,
-  },
+  ayudas: { marginTop: 10 },
   item: {
     flexDirection: "row",
     alignItems: "center",
@@ -183,14 +184,17 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 6,
   },
-  icono: {
-    marginRight: 15,
-  },
+  icono: { marginRight: 15 },
   texto: {
     fontSize: 18,
     fontWeight: "600",
     color: "#FFFFFF",
     textAlign: "left",
     textTransform: "capitalize",
+  },
+  bannerContainer: {
+    width: "100%",
+    padding: 10,
+    backgroundColor: "#fff", // opcional, para separar visualmente el banner
   },
 });

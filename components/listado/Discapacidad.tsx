@@ -1,119 +1,128 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import AnuncioBan from '../Anuncios/AnuncioBanner';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  Animated,
+  Image,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import AnuncioBan from "../Anuncios/AnuncioBanner";
 
-type RutasNavegacion =  'PensionNoContributiva' | 'SubsidiosEspecificos';
+type RutasNavegacion = "PensionNoContributiva" | "SubsidiosEspecificos";
+
 type RootStackParamList = {
- 
-  
   PensionNoContributiva: undefined;
   SubsidiosEspecificos: undefined;
 };
+
 type NavigationProp = StackNavigationProp<RootStackParamList>;
 
-type Apartado = {
-  nombre: string;
-  ruta: RutasNavegacion;
-};
+type Apartado = { nombre: string; ruta: RutasNavegacion };
 
 const Discapacidad = () => {
   const navigation = useNavigation<NavigationProp>();
 
   const apartados: Apartado[] = [
-  
-    { nombre: 'Pensión no contributiva por discapacidad', ruta: 'PensionNoContributiva' },
-    { nombre: 'Subsidios Específicos', ruta: 'SubsidiosEspecificos' },
+    {
+      nombre: "Pensión no contributiva por discapacidad",
+      ruta: "PensionNoContributiva",
+    },
+    { nombre: "Subsidios Específicos", ruta: "SubsidiosEspecificos" },
   ];
 
-  // Estado para controlar el efecto de animación
   const [scale] = useState(new Animated.Value(1));
 
-  // Función para aplicar la animación
   const handlePressIn = () => {
-    Animated.spring(scale, {
-      toValue: 1.05,
-      useNativeDriver: true,
-    }).start();
+    Animated.spring(scale, { toValue: 1.05, useNativeDriver: true }).start();
   };
 
   const handlePressOut = () => {
-    Animated.spring(scale, {
-      toValue: 1,
-      useNativeDriver: true,
-    }).start();
+    Animated.spring(scale, { toValue: 1, useNativeDriver: true }).start();
   };
 
   return (
-    <ScrollView style={styles.container}>
-       <Image source={require('../../assets/images/Discapacidad.png')} style={styles.logo} />
-      <Text style={styles.title}>Prestaciones económicas por discapacidad</Text>
-      <View style={styles.list}>
-        {apartados.map((apartado) => (
-          <Animated.View
-            key={apartado.ruta}
-            style={[styles.item, { transform: [{ scale }] }]}
-          >
-            <TouchableOpacity
-              onPressIn={handlePressIn}
-              onPressOut={handlePressOut}
-              onPress={() => navigation.navigate(apartado.ruta)}
+    <View style={styles.container}>
+      {/* Scroll para logo y lista */}
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <Image
+          source={require("../../assets/images/Discapacidad.png")}
+          style={styles.logo}
+        />
+        <Text style={styles.title}>
+          Prestaciones económicas por discapacidad
+        </Text>
+
+        <View style={styles.list}>
+          {apartados.map((apartado) => (
+            <Animated.View
+              key={apartado.ruta}
+              style={[styles.item, { transform: [{ scale }] }]}
             >
-              <Text style={styles.itemText}>{apartado.nombre}</Text>
-            </TouchableOpacity>
-          </Animated.View>
-        ))}
+              <TouchableOpacity
+                onPressIn={handlePressIn}
+                onPressOut={handlePressOut}
+                onPress={() => navigation.navigate(apartado.ruta)}
+              >
+                <Text style={styles.itemText}>{apartado.nombre}</Text>
+              </TouchableOpacity>
+            </Animated.View>
+          ))}
+        </View>
+      </ScrollView>
+
+      {/* Banner siempre visible */}
+      <View style={styles.bannerContainer}>
+        <AnuncioBan />
       </View>
-      <AnuncioBan/>
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F0F8FF',
-    padding: 16,
-  },
+  container: { flex: 1, backgroundColor: "#F0F8FF" },
+  scrollContent: { padding: 16, paddingBottom: 16 },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
-    color: '#1E3A8A',
-    textAlign: 'center',
+    fontWeight: "bold",
+    color: "#1E3A8A",
+    textAlign: "center",
     marginBottom: 24,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     letterSpacing: 1.5,
   },
-  list: {
-    marginTop: 16,
-  },
+  list: { marginTop: 16 },
   item: {
     padding: 18,
     marginVertical: 10,
-    backgroundColor: '#4CAF50',
+    backgroundColor: "#4CAF50",
     borderRadius: 12,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
     shadowRadius: 5,
     elevation: 8,
-    alignItems: 'center',
+    alignItems: "center",
   },
   itemText: {
     fontSize: 20,
-    fontWeight: '600',
-    color: '#FFFFFF',
-    textAlign: 'center',
-    textTransform: 'capitalize',
+    fontWeight: "600",
+    color: "#FFFFFF",
+    textAlign: "center",
+    textTransform: "capitalize",
   },
   logo: {
-    width: '70%',
-    height: '35%',
+    width: "70%",
+    height: 150,
     marginTop: 55,
-    marginLeft:'16%',
-    marginBottom:20,
+    marginLeft: "16%",
+    marginBottom: 20,
+    resizeMode: "contain",
   },
+  bannerContainer: { width: "100%", padding: 10, backgroundColor: "#fff" },
 });
 
 export default Discapacidad;

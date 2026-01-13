@@ -22,10 +22,7 @@ type RootStackParamList = {
 
 type NavigationProp = StackNavigationProp<RootStackParamList>;
 
-type Apartado = {
-  nombre: string;
-  ruta: RutasNavegacion;
-};
+type Apartado = { nombre: string; ruta: RutasNavegacion };
 
 const EficienciaEnergetica = () => {
   const navigation = useNavigation<NavigationProp>();
@@ -39,58 +36,55 @@ const EficienciaEnergetica = () => {
     { nombre: "Ayuda Renovables", ruta: "AyudaRenovables" },
   ];
 
-  // Estado para controlar el efecto de animación
   const [scale] = useState(new Animated.Value(1));
 
-  // Función para aplicar la animación
   const handlePressIn = () => {
-    Animated.spring(scale, {
-      toValue: 1.05,
-      useNativeDriver: true,
-    }).start();
+    Animated.spring(scale, { toValue: 1.05, useNativeDriver: true }).start();
   };
 
   const handlePressOut = () => {
-    Animated.spring(scale, {
-      toValue: 1,
-      useNativeDriver: true,
-    }).start();
+    Animated.spring(scale, { toValue: 1, useNativeDriver: true }).start();
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <Image
-        source={require("../../assets/images/EficienciaEnergetica.jpg")}
-        style={styles.logo}
-      />
-      <Text style={styles.title}>Eficiencia Energética</Text>
-      <View style={styles.list}>
-        {apartados.map((apartado) => (
-          <Animated.View
-            key={apartado.ruta}
-            style={[styles.item, { transform: [{ scale }] }]}
-          >
-            <TouchableOpacity
-              onPressIn={handlePressIn}
-              onPressOut={handlePressOut}
-              onPress={() => navigation.navigate(apartado.ruta)}
+    <View style={styles.container}>
+      {/* Scroll solo para logo y lista */}
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <Image
+          source={require("../../assets/images/EficienciaEnergetica.jpg")}
+          style={styles.logo}
+        />
+        <Text style={styles.title}>Eficiencia Energética</Text>
+
+        <View style={styles.list}>
+          {apartados.map((apartado) => (
+            <Animated.View
+              key={apartado.ruta}
+              style={[styles.item, { transform: [{ scale }] }]}
             >
-              <Text style={styles.itemText}>{apartado.nombre}</Text>
-            </TouchableOpacity>
-          </Animated.View>
-        ))}
+              <TouchableOpacity
+                onPressIn={handlePressIn}
+                onPressOut={handlePressOut}
+                onPress={() => navigation.navigate(apartado.ruta)}
+              >
+                <Text style={styles.itemText}>{apartado.nombre}</Text>
+              </TouchableOpacity>
+            </Animated.View>
+          ))}
+        </View>
+      </ScrollView>
+
+      {/* Banner siempre visible abajo */}
+      <View style={styles.bannerContainer}>
+        <AnuncioBan />
       </View>
-      <AnuncioBan />
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F8F9FA",
-    padding: 16,
-  },
+  container: { flex: 1, backgroundColor: "#F8F9FA" },
+  scrollContent: { padding: 16, paddingBottom: 16 },
   title: {
     fontSize: 28,
     fontWeight: "bold",
@@ -100,9 +94,7 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     letterSpacing: 1.5,
   },
-  list: {
-    marginTop: 16,
-  },
+  list: { marginTop: 16 },
   item: {
     padding: 18,
     marginVertical: 10,
@@ -124,11 +116,13 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: "70%",
-    height: "35%",
+    height: 150,
     marginTop: 55,
     marginLeft: "16%",
     marginBottom: 20,
+    resizeMode: "contain",
   },
+  bannerContainer: { width: "100%", padding: 10, backgroundColor: "#fff" },
 });
 
 export default EficienciaEnergetica;
